@@ -248,6 +248,7 @@ end
 
 -- ############
 -- Set All Blank Rows
+-- Because gras decided blank rows should be "lol" for some reason
 -- ############
 mod.set_blank_rows = function (self, account_id)
 	-- for i in range (1, 13), increment of 1
