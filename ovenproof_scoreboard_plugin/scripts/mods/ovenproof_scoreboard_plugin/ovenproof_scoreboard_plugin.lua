@@ -324,11 +324,22 @@ end
 -- Executions on Game States
 -- ########################
 
+-- Manage blank rows when updating tactical overlay (tab)
+	-- acutlaly this happens every tick lmaoooo
+mod:hook_safe("HudElementTacticalOverlay", "update", function(self, dt, t, ui_renderer, render_settings, input_service)
+	mod:manage_blank_rows()
+	mod:echo("IF YOU SEE THIS YELL AT ME: tactical overlay updated")
+end)
+-- check blank rows after every mission objective completion, to guarantee it happens before game end
+mod:hook_safe("MissionObjectiveBase", "stage_done", function(self)
+	mod:manage_blank_rows()
+	mod:echo("IF YOU SEE THIS YELL AT ME: objective completed")
+end)
 -- Manage blank rows on update
 --	WAIT WHAT THE FUCK THIS RUNS ON EVERY SINGLE GAME TICK???
-function mod.update(main_dt)
-	mod:manage_blank_rows()
-end
+--function mod.update(main_dt)
+--	mod:manage_blank_rows()
+--end
 
 -- ############
 -- Check Setting Changes
