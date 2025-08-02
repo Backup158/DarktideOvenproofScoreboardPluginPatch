@@ -395,6 +395,7 @@ function mod.on_all_mods_loaded()
 		mod:manage_blank_rows()
 		mod:echo("IF YOU SEE THIS YELL AT ME: objective completed")
 	end)]]
+	-- This is where the base mod hooks to initialize timers and such
 	mod:hook(CLASS.StateGameplay, "on_enter", function(func, self, parent, params, creation_context, ...)
 		-- func(self, parent, params, creation_context, ...)
 		mod:manage_blank_rows()
