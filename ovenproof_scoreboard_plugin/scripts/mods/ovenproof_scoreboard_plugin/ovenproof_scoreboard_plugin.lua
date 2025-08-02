@@ -227,6 +227,9 @@ end
 -- ############
 mod.manage_blank_rows = function()
 	if in_match then
+		-- Checking first blank row for existence
+		--	Rows >=10 are the bottom padding
+		--	Rest are separators
 		local row = scoreboard:get_scoreboard_row("blank_1")
 		local players = Managers.player:players() or {}
 
@@ -235,7 +238,9 @@ mod.manage_blank_rows = function()
 				for _, player in pairs (players) do
 					local account_id = player:account_id() or player:name()
 					if account_id then
+						-- If there's no data, make empty data
 						row["data"][account_id] = row["data"][account_id] or {}
+						-- If there's an empty data, set this row to blank
 						if not row["data"][account_id]["text"] then
 							mod:set_blank_rows(account_id)
 						end
