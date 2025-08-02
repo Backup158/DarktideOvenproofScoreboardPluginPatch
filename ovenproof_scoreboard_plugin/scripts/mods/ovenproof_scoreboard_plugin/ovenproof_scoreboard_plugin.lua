@@ -331,7 +331,7 @@ end
 --	Maybe only before each these points?
 --	I have it updating while the tactical overlay is open atm too
 
--- acutlaly this happens every tick lmaoooo
+-- this happens literally every tick lmaoooo
 --[[
 mod:hook_safe("HudElementTacticalOverlay", "update", function(self, dt, t, ui_renderer, render_settings, input_service)
 	mod:manage_blank_rows()
@@ -339,9 +339,9 @@ mod:hook_safe("HudElementTacticalOverlay", "update", function(self, dt, t, ui_re
 end)
 ]]
 -- Update left panel only gets called when you open the tactical overlay with tab
--- 	which is inside update
---	update is called every tick, but this function is only called inside that when the overlay is active
---  
+-- 	this function is inside update
+--	update is called every tick, but this function is only called when the overlay is active
+--  These checks were already accounted for so it should lessen the performance hit
 mod:hook_safe("HudElementTacticalOverlay", "_update_left_panel_elements", function(self, ui_renderer)
 	mod:manage_blank_rows()
 	mod:echo("IF YOU SEE THIS YELL AT ME: tactical overlay updating left panel")
