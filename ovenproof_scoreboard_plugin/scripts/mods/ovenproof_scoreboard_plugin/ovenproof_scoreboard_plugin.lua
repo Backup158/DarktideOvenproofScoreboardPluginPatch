@@ -376,6 +376,7 @@ function mod.on_all_mods_loaded()
 		mod:echo("IF YOU SEE THIS YELL AT ME: tactical overlay updated")
 	end)
 	]]
+	
 	-- ######
 	-- Update left panel only gets called when you open the tactical overlay with tab
 	-- 	this function is inside update
@@ -385,6 +386,7 @@ function mod.on_all_mods_loaded()
 		mod:manage_blank_rows()
 		mod:echo("IF YOU SEE THIS YELL AT ME: tactical overlay updating left panel")
 	end)
+	--[[
 	-- ######
 	-- ######
 	-- check blank rows after every mission objective completion, to guarantee it happens before game end
@@ -392,6 +394,11 @@ function mod.on_all_mods_loaded()
 	mod:hook_safe("MissionObjectiveBase", "stage_done", function(self)
 		mod:manage_blank_rows()
 		mod:echo("IF YOU SEE THIS YELL AT ME: objective completed")
+	end)]]
+	mod:hook(CLASS.StateGameplay, "on_enter", function(func, self, parent, params, creation_context, ...)
+		-- func(self, parent, params, creation_context, ...)
+		mod:manage_blank_rows()
+		mod:echo("IF YOU SEE THIS YELL AT ME: state gameplay on_enter")
 	end)
 
 	-- ############

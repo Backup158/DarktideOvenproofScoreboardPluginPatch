@@ -7,12 +7,11 @@ v1.4.1
     - This really only needed to be done before/while the Scoreboard is being shown
     - Now, I trimmed it down to two main situations:
         1. While the Scoreboard is shown in the Tactical Overlay
-        2. After every mission objective is completed
-            - It needs to happen at least once before game end
-            - The number of objectives varies per mission, so I can't make it happen only after the last objective (Escape)
-        3. Once on match start
+        2. Once on match start
+            - Needs to happen at least once before game end
             - In case you die before completing any objectives
-            - This should be good until end
+            - Rows wouldn't turn blank mid way through the match
+            - maybe just this would be fine
 
 
 # 2025-07-26
