@@ -1,3 +1,20 @@
+# 2025-08-UNRELEASED
+v1.4.1
+
+- Refactored code to manage blank rows on the Scoreboard
+    - What it actually does is make sure that blank values are actually blank, instead of "lol" (which is how it's like in the base scoreboard)
+    - Before, the logic to check if this needed to be done was being executed **literally every game tick**
+    - This really only needed to be done before/while the Scoreboard is being shown
+    - Now, I trimmed it down to two main situations:
+        1. While the Scoreboard is shown in the Tactical Overlay
+        2. After every mission objective is completed
+            - It needs to happen at least once before game end
+            - The number of objectives varies per mission, so I can't make it happen only after the last objective (Escape)
+        3. Once on match start
+            - In case you die before completing any objectives
+            - This should be good until end
+
+
 # 2025-07-26
 v1.4.0
 
