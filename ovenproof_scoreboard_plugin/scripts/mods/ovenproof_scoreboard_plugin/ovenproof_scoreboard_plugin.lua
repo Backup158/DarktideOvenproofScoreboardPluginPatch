@@ -324,11 +324,27 @@ end
 -- Executions on Game States
 -- ########################
 
--- Manage blank rows when updating tactical overlay (tab)
-	-- acutlaly this happens every tick lmaoooo
+-- Manage blank rows on Scoreboard
+--	Needs to be done:
+--		mid game when opening tactical overlay
+--		at least once before the post match view
+--	Maybe only before each these points?
+--	I have it updating while the tactical overlay is open atm too
+
+-- acutlaly this happens every tick lmaoooo
+--[[
 mod:hook_safe("HudElementTacticalOverlay", "update", function(self, dt, t, ui_renderer, render_settings, input_service)
 	mod:manage_blank_rows()
 	mod:echo("IF YOU SEE THIS YELL AT ME: tactical overlay updated")
+end)
+]]
+-- Update left panel only gets called when you open the tactical overlay with tab
+-- 	which is inside update
+--	update is called every tick, but this function is only called inside that when the overlay is active
+--  
+mod:hook_safe("HudElementTacticalOverlay", "_update_left_panel_elements", function(self, ui_renderer)
+	mod:manage_blank_rows()
+	mod:echo("IF YOU SEE THIS YELL AT ME: tactical overlay updating left panel")
 end)
 -- check blank rows after every mission objective completion, to guarantee it happens before game end
 mod:hook_safe("MissionObjectiveBase", "stage_done", function(self)
