@@ -389,10 +389,8 @@ function mod.on_all_mods_loaded()
 	--	update is called every tick, but this function is only called when the overlay is active
 	--  These checks were already accounted for so it should lessen the performance hit
 	mod:hook_safe("HudElementTacticalOverlay", "_update_left_panel_elements", function(self, ui_renderer)
-		if in_match then
-			mod:manage_blank_rows()
-			mod:echo("IF YOU SEE THIS YELL AT ME: tactical overlay updating left panel")
-		end
+		mod:manage_blank_rows()
+		mod:echo("IF YOU SEE THIS YELL AT ME: tactical overlay updating left panel")
 	end)
 	--[[
 	-- ######
@@ -406,10 +404,8 @@ function mod.on_all_mods_loaded()
 	-- This is where the base mod hooks to initialize timers and such
 	mod:hook(CLASS.StateGameplay, "on_enter", function(func, self, parent, params, creation_context, ...)
 		func(self, parent, params, creation_context, ...)
-		if in_match then
-			mod:manage_blank_rows()
-			mod:echo("IF YOU SEE THIS YELL AT ME: state gameplay on_enter")
-		end
+		mod:manage_blank_rows()
+		mod:echo("IF YOU SEE THIS YELL AT ME: state gameplay on_enter")
 	end)
 
 	-- ############
