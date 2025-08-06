@@ -388,24 +388,34 @@ function mod.on_all_mods_loaded()
 	-- 	this function is inside update
 	--	update is called every tick, but this function is only called when the overlay is active
 	--  These checks were already accounted for so it should lessen the performance hit
-	mod:hook_safe("HudElementTacticalOverlay", "_update_left_panel_elements", function(self, ui_renderer)
+	--mod:hook_safe("HudElementTacticalOverlay", "_update_left_panel_elements", function(self, ui_renderer)
+	--	mod:manage_blank_rows()
+	--	mod:echo("IF YOU SEE THIS YELL AT ME: tactical overlay updating left panel")
+	--end)
+	mod:hook_safe(CLASS.HudElementTacticalOverlay, "_draw_widgets", function(func, self, dt, t, input_service, ui_renderer, render_settings, ...)
 		mod:manage_blank_rows()
-		mod:echo("IF YOU SEE THIS YELL AT ME: tactical overlay updating left panel")
+		mod:echo("IF YOU SEE THIS YELL AT ME: tactical overlay widgets")
+		func(self, dt, t, input_service, ui_renderer, render_settings, ...)
+		-- base mod hooks onto this point, after the original function
 	end)
-	--[[
-	-- ######
 	-- ######
 	-- check blank rows after every mission objective completion, to guarantee it happens before game end
 	-- ######
-	mod:hook_safe("MissionObjectiveBase", "stage_done", function(self)
+	--[[mod:hook_safe("MissionObjectiveBase", "stage_done", function(self)
 		mod:manage_blank_rows()
 		mod:echo("IF YOU SEE THIS YELL AT ME: objective completed")
 	end)]]
 	-- This is where the base mod hooks to initialize timers and such
-	mod:hook(CLASS.StateGameplay, "on_enter", function(func, self, parent, params, creation_context, ...)
+	--[[mod:hook(CLASS.StateGameplay, "on_enter", function(func, self, parent, params, creation_context, ...)
 		func(self, parent, params, creation_context, ...)
 		mod:manage_blank_rows()
 		mod:echo("IF YOU SEE THIS YELL AT ME: state gameplay on_enter")
+	end)]]
+	mod:hook_safe(CLASS.EndView, "on_enter", function(self)
+		mod:manage_blank_rows()
+		mod:echo("IF YOU SEE THIS YELL AT ME: entering end view")
+		-- Original Function
+		func(self, ...)
 	end)
 
 	-- ############

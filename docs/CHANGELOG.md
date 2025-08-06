@@ -4,9 +4,9 @@ v1.4.1
 - Refactored code to manage blank rows on the Scoreboard
     - What it actually does is make sure that blank values are actually blank, instead of "lol" (which is how it's like in the base scoreboard)
     - Before, the logic to check if this needed to be done was being executed **literally every game tick**
-    - This really only needed to be done before/while the Scoreboard is being shown
+    - This needs to be done BEFORE the Scoreboard is shown
     - Now, I trimmed it down to two main situations:
-        1. While the Scoreboard is shown in the Tactical Overlay
+        1. Before the Scoreboard is shown in the Tactical Overlay
         2. Once on match start
             - Needs to happen at least once before game end
             - In case you die before completing any objectives
