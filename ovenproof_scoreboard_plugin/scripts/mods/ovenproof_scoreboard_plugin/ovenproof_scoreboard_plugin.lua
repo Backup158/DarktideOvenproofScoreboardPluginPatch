@@ -395,7 +395,7 @@ function mod.on_all_mods_loaded()
 	mod:hook_safe(CLASS.HudElementTacticalOverlay, "_draw_widgets", function(func, self, dt, t, input_service, ui_renderer, render_settings, ...)
 		mod:manage_blank_rows()
 		mod:echo("IF YOU SEE THIS YELL AT ME: tactical overlay widgets")
-		func(self, dt, t, input_service, ui_renderer, render_settings, ...)
+		--func(self, dt, t, input_service, ui_renderer, render_settings, ...)
 		-- base mod hooks onto this point, after the original function
 	end)
 	-- ######
@@ -415,7 +415,7 @@ function mod.on_all_mods_loaded()
 		mod:manage_blank_rows()
 		mod:echo("IF YOU SEE THIS YELL AT ME: entering end view")
 		-- Original Function
-		func(self, ...)
+		--func(self, ...)
 	end)
 
 	-- ############
