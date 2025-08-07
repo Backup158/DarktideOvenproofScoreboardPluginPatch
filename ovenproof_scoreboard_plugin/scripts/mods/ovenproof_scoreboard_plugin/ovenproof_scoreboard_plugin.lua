@@ -227,24 +227,22 @@ end
 -- Manage Blank Rows
 -- ############
 mod.manage_blank_rows = function()
-	if in_match then
-		-- Checking first blank row for existence
-		--	Rows >=10 are the bottom padding
-		--	Rest are separators
-		local row = scoreboard:get_scoreboard_row("blank_1")
-		local players = Managers.player:players() or {}
+	-- Checking first blank row for existence
+	--	Rows >=10 are the bottom padding
+	--	Rest are separators
+	local row = scoreboard:get_scoreboard_row("blank_1")
+	local players = Managers.player:players() or {}
 
-		if row and players then
-			if row["data"] then
-				for _, player in pairs (players) do
-					local account_id = player:account_id() or player:name()
-					if account_id then
-						-- If there's no data, make empty data
-						row["data"][account_id] = row["data"][account_id] or {}
-						-- If there's an empty data, set this row to blank
-						if not row["data"][account_id]["text"] then
-							mod:set_blank_rows(account_id)
-						end
+	if row and players then
+		if row["data"] then
+			for _, player in pairs (players) do
+				local account_id = player:account_id() or player:name()
+				if account_id then
+					-- If there's no data, make empty data
+					row["data"][account_id] = row["data"][account_id] or {}
+					-- If there's an empty data, set this row to blank
+					if not row["data"][account_id]["text"] then
+						mod:set_blank_rows(account_id)
 					end
 				end
 			end
@@ -330,12 +328,6 @@ end
 -- Executions on Game States
 -- ########################
 
--- Manage blank rows on update
---	WAIT WHAT THE FUCK THIS RUNS ON EVERY SINGLE GAME TICK???
---function mod.update(main_dt)
---	mod:manage_blank_rows()
---end
-
 -- ############
 -- Check Setting Changes
 -- ############
@@ -383,21 +375,9 @@ function mod.on_all_mods_loaded()
 		--func(self, dt, t, input_service, ui_renderer, render_settings, ...)
 		-- base mod hooks onto this point, after the original function
 	end)
-	-- Left Panel is updated every tick
-	--mod:hook("HudElementTacticalOverlay", "_update_left_panel_elements", function(self, ui_renderer)
 	-- ######
 	-- Before game end
 	-- ######
-	--[[mod:hook("MissionObjectiveBase", "stage_done", function(self)
-		mod:manage_blank_rows()
-		mod:echo("IF YOU SEE THIS YELL AT ME: objective completed")
-	end)]]
-	-- This is where the base mod hooks to initialize timers and such
-	--[[mod:hook(CLASS.StateGameplay, "on_enter", function(func, self, parent, params, creation_context, ...)
-		func(self, parent, params, creation_context, ...)
-		mod:manage_blank_rows()
-		mod:echo("IF YOU SEE THIS YELL AT ME: state gameplay on_enter")
-	end)]]
 	mod:hook(CLASS.EndView, "on_enter", function(self)
 		mod:manage_blank_rows()
 		mod:echo("IF YOU SEE THIS YELL AT ME: entering end view")
