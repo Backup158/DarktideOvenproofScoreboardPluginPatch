@@ -369,7 +369,7 @@ function mod.on_all_mods_loaded()
 	-- When opening tactical overlay
 	-- 	Runs on opening and every tick while it's open
 	-- ######
-	mod:hook(CLASS.HudElementTacticalOverlay, "_draw_widgets", function(func, self, dt, t, input_service, ui_renderer, render_settings, ...)
+	mod:hook_safe(CLASS.HudElementTacticalOverlay, "_draw_widgets", function(func, self, dt, t, input_service, ui_renderer, render_settings, ...)
 		mod:manage_blank_rows()
 		mod:echo("IF YOU SEE THIS YELL AT ME: tactical overlay widgets")
 		--func(self, dt, t, input_service, ui_renderer, render_settings, ...)
@@ -378,7 +378,7 @@ function mod.on_all_mods_loaded()
 	-- ######
 	-- Before game end
 	-- ######
-	mod:hook(CLASS.EndView, "on_enter", function(self)
+	mod:hook_safe(CLASS.EndView, "on_enter", function(self)
 		mod:manage_blank_rows()
 		mod:echo("IF YOU SEE THIS YELL AT ME: entering end view")
 		-- base mod hooks onto this first, but executes after the original function

@@ -1,15 +1,18 @@
 # 2025-08-UNRELEASED
 v1.4.1
 
-- Refactored code to manage blank rows on the Scoreboard
+- Refactored code to manage blank rows on the Scoreboard, `manage_blank_rows()`
     - What it actually does is make sure that blank values are actually blank, instead of "lol" (which is what the base Scoreboard does)
     - Before, the logic to check if this needed to be done was being executed **literally every game tick**
     - This *needs* to be done:
         - Before the Scoreboard is shown
         - After a new player joins
     - Now, I trimmed it down to two main situations:
-        1. Before the Scoreboard is shown in the Tactical Overlay
+        1. Before (and while) the Scoreboard is shown in the Tactical Overlay
         2. Right at match end, on entering the end view
+    - Removed `in_match` check from `manage_blank_rows()`
+        - The hooks and other checks inside of it account for efficiency
+        - So it can work when entering the end view screen
 
 # 2025-07-26
 v1.4.0
