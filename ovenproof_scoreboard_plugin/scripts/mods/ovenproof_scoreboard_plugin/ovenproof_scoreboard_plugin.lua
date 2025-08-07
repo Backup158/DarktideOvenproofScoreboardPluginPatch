@@ -372,36 +372,23 @@ function mod.on_all_mods_loaded()
 	--	Needs to be done:
 	--		mid game when opening tactical overlay
 	--		at least once before the post match view
-	--	Maybe only before each these points?
-	--	I have it updating while the tactical overlay is open atm too
 	-- ############
-	-- this happens literally every tick lmaoooo
-	--[[
-	mod:hook_safe("HudElementTacticalOverlay", "update", function(self, dt, t, ui_renderer, render_settings, input_service)
-		mod:manage_blank_rows()
-		mod:echo("IF YOU SEE THIS YELL AT ME: tactical overlay updated")
-	end)
-	]]
-	
 	-- ######
-	-- Update left panel only gets called when you open the tactical overlay with tab
-	-- 	this function is inside update
-	--	update is called every tick, but this function is only called when the overlay is active
-	--  These checks were already accounted for so it should lessen the performance hit
-	--mod:hook_safe("HudElementTacticalOverlay", "_update_left_panel_elements", function(self, ui_renderer)
-	--	mod:manage_blank_rows()
-	--	mod:echo("IF YOU SEE THIS YELL AT ME: tactical overlay updating left panel")
-	--end)
-	mod:hook_safe(CLASS.HudElementTacticalOverlay, "_draw_widgets", function(func, self, dt, t, input_service, ui_renderer, render_settings, ...)
+	-- When opening tactical overlay
+	-- 	Runs on opening and every tick while it's open
+	-- ######
+	mod:hook(CLASS.HudElementTacticalOverlay, "_draw_widgets", function(func, self, dt, t, input_service, ui_renderer, render_settings, ...)
 		mod:manage_blank_rows()
 		mod:echo("IF YOU SEE THIS YELL AT ME: tactical overlay widgets")
 		--func(self, dt, t, input_service, ui_renderer, render_settings, ...)
 		-- base mod hooks onto this point, after the original function
 	end)
+	-- Left Panel is updated every tick
+	--mod:hook("HudElementTacticalOverlay", "_update_left_panel_elements", function(self, ui_renderer)
 	-- ######
-	-- check blank rows after every mission objective completion, to guarantee it happens before game end
+	-- Before game end
 	-- ######
-	--[[mod:hook_safe("MissionObjectiveBase", "stage_done", function(self)
+	--[[mod:hook("MissionObjectiveBase", "stage_done", function(self)
 		mod:manage_blank_rows()
 		mod:echo("IF YOU SEE THIS YELL AT ME: objective completed")
 	end)]]
@@ -411,11 +398,10 @@ function mod.on_all_mods_loaded()
 		mod:manage_blank_rows()
 		mod:echo("IF YOU SEE THIS YELL AT ME: state gameplay on_enter")
 	end)]]
-	mod:hook_safe(CLASS.EndView, "on_enter", function(self)
+	mod:hook(CLASS.EndView, "on_enter", function(self)
 		mod:manage_blank_rows()
 		mod:echo("IF YOU SEE THIS YELL AT ME: entering end view")
-		-- Original Function
-		--func(self, ...)
+		-- base mod hooks onto this first, but executes after the original function
 	end)
 
 	-- ############
