@@ -384,7 +384,9 @@ function mod.on_all_mods_loaded()
 	end)
 
 	-- ############
-	-- Interactions Started?
+	-- Interactions Started
+	--	Track ammunition in reserve and total
+	--	Checks reloading
 	-- ############
 	mod:hook(CLASS.InteracteeExtension, "started", function(func, self, interactor_unit, ...)
 
