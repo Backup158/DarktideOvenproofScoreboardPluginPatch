@@ -10,9 +10,17 @@ v1.4.1
     - Now, I trimmed it down to two main situations:
         1. Before (and while) the Scoreboard is shown in the Tactical Overlay
         2. Right at match end, on entering the end view
-    - Removed `in_match` check from `manage_blank_rows()`
-        - The hooks and other checks inside of it account for efficiency
-        - So it can work when entering the end view screen
+    - Removed from `manage_blank_rows()`:
+        - Only run during matches check, `in_match` 
+            - The hooks and other checks inside of it account for only working when there's players
+            - Now it can work when entering the end view screen
+        - Empty text per players check, `not row["data"][account_id]["text"]`
+            - Initialized blank rows
+            - When it ran every tick, it intercepted the scoreboard immediately when a player joined, so this check was to make that only run once that happens instead of writing blank rows every single time
+            - Since blank rows won't be overwritten
+    - Removed `replace_row_value("highest_single_hit", ...)` from `set_blank_rows()`
+        - When it was initializing blank rows, it also set highest damage in a single hit to 0 to initialize
+        - There is already a fallback in the actual counting
 
 # 2025-07-26
 v1.4.0

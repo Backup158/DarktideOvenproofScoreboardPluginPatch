@@ -240,10 +240,11 @@ mod.manage_blank_rows = function()
 				if account_id then
 					-- If there's no data, make empty data
 					row["data"][account_id] = row["data"][account_id] or {}
-					-- If there's an empty data, set this row to blank
-					if not row["data"][account_id]["text"] then
-						mod:set_blank_rows(account_id)
-					end
+					-- If there's no text, set this row to blank
+					--if (not row["data"][account_id]["text"]) or (row["data"][account_id]["text"] == "lol") then
+					--if not row["data"][account_id]["text"] then
+					mod:set_blank_rows(account_id)
+					--end
 				end
 			end
 		end
@@ -251,7 +252,7 @@ mod.manage_blank_rows = function()
 end
 
 -- ############
--- Set All Blank Rows
+-- Set Blank Rows
 -- Because gras decided blank rows should be "lol" for some reason
 -- ############
 mod.set_blank_rows = function (self, account_id)
@@ -259,7 +260,7 @@ mod.set_blank_rows = function (self, account_id)
 	for i = 1,13,1 do
 		mod:replace_row_value("blank_"..i, account_id, "\u{200A}")
 	end
-	mod:replace_row_value("highest_single_hit", account_id, "\u{200A}0\u{200A}")
+	--mod:replace_row_value("highest_single_hit", account_id, "\u{200A}0\u{200A}")
 end
 
 -- ############
