@@ -241,7 +241,6 @@ mod.manage_blank_rows = function()
 					-- If there's no data, make empty data
 					row["data"][account_id] = row["data"][account_id] or {}
 					-- If there's no text, set this row to blank
-					--if (not row["data"][account_id]["text"]) or (row["data"][account_id]["text"] == "lol") then
 					if not row["data"][account_id]["text"] then
 						mod:set_blank_rows(account_id)
 					end
