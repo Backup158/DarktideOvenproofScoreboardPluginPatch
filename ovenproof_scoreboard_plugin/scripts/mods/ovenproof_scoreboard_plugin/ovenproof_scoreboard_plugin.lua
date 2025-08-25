@@ -369,17 +369,19 @@ function mod.on_all_mods_loaded()
 	-- When opening tactical overlay
 	-- 	Runs on opening and every tick while it's open
 	-- ######
-	mod:hook_safe(CLASS.HudElementTacticalOverlay, "_draw_widgets", function(func, self, dt, t, input_service, ui_renderer, render_settings, ...)
+	mod:hook(CLASS.HudElementTacticalOverlay, "_draw_widgets", function(func, self, dt, t, input_service, ui_renderer, render_settings, ...)
 		mod:manage_blank_rows()
 		--mod:echo("IF YOU SEE THIS YELL AT ME: tactical overlay widgets")
+		func(self, dt, t, input_service, ui_renderer, render_settings, ...)
 		-- base mod hooks onto this first, but executes after the original function
 	end)
 	-- ######
 	-- Before game end
 	-- ######
-	mod:hook_safe(CLASS.EndView, "on_enter", function(self)
+	mod:hook(CLASS.EndView, "on_enter", function(func, self)
 		mod:manage_blank_rows()
 		--mod:echo("IF YOU SEE THIS YELL AT ME: entering end view")
+		func(self)
 		-- base mod hooks onto this first, but executes after the original function
 	end)
 
@@ -648,7 +650,7 @@ function mod.on_all_mods_loaded()
 
 					if actual_damage > self._attack_report_tracker[account_id].highest_single_hit then
 						self._attack_report_tracker[account_id].highest_single_hit = actual_damage
-						mod:replace_row_text("highest_single_hit", account_id, math.floor(actual_damage))
+						mod:replace_row_text("highest_single_hit", account_id, math.floor(damage))
 					end
 					
 					if actual_damage == max_health then
