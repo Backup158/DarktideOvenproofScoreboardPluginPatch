@@ -245,12 +245,12 @@ mod.manage_blank_rows = function()
 					if not row["data"][account_id]["text"] then
 						mod:set_blank_rows(account_id)
 					end
-
-					if not row_highest_single["data"][account_id]["text"] then
-						mod:replace_row_value("highest_single_hit", account_id, "\u{200A}0\u{200A}")
-					end
 				end
 			end
+		end
+	elseif row_highest_single and players then
+		if not row_highest_single["data"][account_id]["text"] then
+			mod:replace_row_value("highest_single_hit", account_id, "\u{200A}0\u{200A}")
 		end
 	end
 end
