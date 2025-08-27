@@ -231,6 +231,7 @@ mod.manage_blank_rows = function()
 	--	Rows >=10 are the bottom padding
 	--	Rest are separators
 	local row = scoreboard:get_scoreboard_row("blank_1")
+	local row_highest_single = scoreboard:get_scoreboard_row("highest_single_hit")
 	local players = Managers.player:players() or {}
 
 	if row and players then
@@ -243,6 +244,10 @@ mod.manage_blank_rows = function()
 					-- If there's no text, set this row to blank
 					if not row["data"][account_id]["text"] then
 						mod:set_blank_rows(account_id)
+					end
+
+					if not row_highest_single["data"][account_id]["text"] then
+						mod:replace_row_value("highest_single_hit", account_id, "\u{200A}0\u{200A}")
 					end
 				end
 			end

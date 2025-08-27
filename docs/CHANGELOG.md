@@ -21,6 +21,8 @@ v1.4.1
     - Removed `replace_row_value("highest_single_hit", ...)` from `set_blank_rows()`
         - When it was initializing blank rows, it also set highest damage in a single hit to 0 to initialize
         - There is already a fallback in the actual counting
+        - However, if a player joins without doing any damage, this won't happen
+        - 
 
 # 2025-07-26
 v1.4.0
