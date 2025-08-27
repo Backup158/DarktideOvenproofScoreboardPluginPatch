@@ -234,23 +234,30 @@ mod.manage_blank_rows = function()
 	local row_highest_single = scoreboard:get_scoreboard_row("highest_single_hit")
 	local players = Managers.player:players() or {}
 
-	if row and players then
-		if row["data"] then
-			for _, player in pairs (players) do
-				local account_id = player:account_id() or player:name()
-				if account_id then
-					-- If there's no data, make empty data
-					row["data"][account_id] = row["data"][account_id] or {}
-					-- If there's no text, set this row to blank
-					if not row["data"][account_id]["text"] then
-						mod:set_blank_rows(account_id)
-					end
+	if row and row["data"] then
+		for _, player in pairs (players) do
+			local account_id = player:account_id() or player:name()
+			if account_id then
+				-- If there's no data, make empty data
+				row["data"][account_id] = row["data"][account_id] or {}
+				-- If there's no text, set this row to blank
+				if not row["data"][account_id]["text"] then
+					mod:set_blank_rows(account_id)
 				end
 			end
 		end
-	elseif row_highest_single and players then
-		if not row_highest_single["data"][account_id]["text"] then
-			mod:replace_row_value("highest_single_hit", account_id, "\u{200A}0\u{200A}")
+	end
+	if row_highest_single and row_highest_single["data"] then
+		for _, player in pairs (players) do
+			local account_id = player:account_id() or player:name()
+			if account_id then
+				-- If there's no data, make empty data
+				row_highest_single["data"][account_id] = row_highest_single["data"][account_id] or {}
+				-- If there's no text, set this row to blank
+				if not row_highest_single["data"][account_id]["text"] then
+					mod:replace_row_value("highest_single_hit", account_id, "\u{200A}0\u{200A}")
+				end
+			end
 		end
 	end
 end
