@@ -22,7 +22,9 @@ v1.4.1
         - When it was initializing blank rows, it also set highest damage in a single hit to 0 to initialize
         - There is already a fallback in the actual counting
         - However, if a player joins without doing any damage, this won't happen
-        - 
+        - Moved the check to `manage_blank_rows()`
+            - Has its own check
+            - Before, it wouldn't happen if the first blank row was already handled
 
 # 2025-07-26
 v1.4.0
