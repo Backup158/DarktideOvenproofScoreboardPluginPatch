@@ -14,12 +14,11 @@ local TextUtilities = mod:original_require("scripts/utilities/ui/text")
 -- Optimizations for globals
 -- #######
 local tostring = tostring
-local CLASS = CLASS
 
 -- #######
 -- Mod Locals
 -- #######
-mod.version = "1.4.1"
+mod.version = "1.4.0"
 local debug_messages_enabled = mod:get("enable_debug_messages")
 
 local in_match
@@ -227,35 +226,20 @@ end
 -- Manage Blank Rows
 -- ############
 mod.manage_blank_rows = function()
-	-- Checking first blank row for existence
-	--	Rows >=10 are the bottom padding
-	--	Rest are separators
-	local row = scoreboard:get_scoreboard_row("blank_1")
-	local row_highest_single = scoreboard:get_scoreboard_row("highest_single_hit")
-	local players = Managers.player:players() or {}
+	if in_match then
+		local row = scoreboard:get_scoreboard_row("blank_1")
+		local players = Managers.player:players() or {}
 
-	if row and row["data"] then
-		for _, player in pairs (players) do
-			local account_id = player:account_id() or player:name()
-			if account_id then
-				-- If there's no data, make empty data
-				row["data"][account_id] = row["data"][account_id] or {}
-				-- If there's no text, set this row to blank
-				if not row["data"][account_id]["text"] then
-					mod:set_blank_rows(account_id)
-				end
-			end
-		end
-	end
-	if row_highest_single and row_highest_single["data"] then
-		for _, player in pairs (players) do
-			local account_id = player:account_id() or player:name()
-			if account_id then
-				-- If there's no data, make empty data
-				row_highest_single["data"][account_id] = row_highest_single["data"][account_id] or {}
-				-- If there's no text, set this row to blank
-				if not row_highest_single["data"][account_id]["text"] then
-					mod:replace_row_value("highest_single_hit", account_id, "\u{200A}0\u{200A}")
+		if row and players then
+			if row["data"] then
+				for _, player in pairs (players) do
+					local account_id = player:account_id() or player:name()
+					if account_id then
+						row["data"][account_id] = row["data"][account_id] or {}
+						if not row["data"][account_id]["text"] then
+							mod:set_blank_rows(account_id)
+						end
+					end
 				end
 			end
 		end
@@ -263,15 +247,14 @@ mod.manage_blank_rows = function()
 end
 
 -- ############
--- Set Blank Rows
--- Because gras decided blank rows should be "lol" for some reason
+-- Set All Blank Rows
 -- ############
 mod.set_blank_rows = function (self, account_id)
 	-- for i in range (1, 13), increment of 1
 	for i = 1,13,1 do
 		mod:replace_row_value("blank_"..i, account_id, "\u{200A}")
 	end
-	--mod:replace_row_value("highest_single_hit", account_id, "\u{200A}0\u{200A}")
+	mod:replace_row_value("highest_single_hit", account_id, "\u{200A}0\u{200A}")
 end
 
 -- ############
@@ -340,6 +323,12 @@ end
 -- Executions on Game States
 -- ########################
 
+-- Manage blank rows on update
+--	WAIT WHAT THE FUCK THIS RUNS ON EVERY SINGLE GAME TICK???
+function mod.update(main_dt)
+	mod:manage_blank_rows()
+end
+
 -- ############
 -- Check Setting Changes
 -- ############
@@ -372,35 +361,7 @@ function mod.on_all_mods_loaded()
 	-- ################################################
 
 	-- ############
-	-- Manage blank rows on Scoreboard
-	--	Needs to be done:
-	--		mid game when opening tactical overlay
-	--		at least once before the post match view
-	-- ############
-	-- ######
-	-- When opening tactical overlay
-	-- 	Runs on opening and every tick while it's open
-	-- ######
-	mod:hook(CLASS.HudElementTacticalOverlay, "_draw_widgets", function(func, self, dt, t, input_service, ui_renderer, render_settings, ...)
-		mod:manage_blank_rows()
-		--mod:echo("IF YOU SEE THIS YELL AT ME: tactical overlay widgets")
-		func(self, dt, t, input_service, ui_renderer, render_settings, ...)
-		-- base mod hooks onto this first, but executes after the original function
-	end)
-	-- ######
-	-- Before game end
-	-- ######
-	mod:hook(CLASS.EndView, "on_enter", function(func, self)
-		mod:manage_blank_rows()
-		--mod:echo("IF YOU SEE THIS YELL AT ME: entering end view")
-		func(self)
-		-- base mod hooks onto this first, but executes after the original function
-	end)
-
-	-- ############
-	-- Interactions Started
-	--	Track ammunition in reserve and total
-	--	Checks reloading
+	-- Interactions Started?
 	-- ############
 	mod:hook(CLASS.InteracteeExtension, "started", function(func, self, interactor_unit, ...)
 
