@@ -899,8 +899,8 @@ function mod.on_game_state_changed(status, state_name)
 	-- think this means "entering gameplay" from "hub"
 	if state_name == "GameplayStateRun" and status == "enter" and Managers.state.mission:mission().name ~= "hub_ship" then
 		in_match = true
-		havoc_manager = Managers.state.havoc
-		is_playing_havoc = havoc_manager:is_havoc()
+		havoc_manager = Managers.data_service.havoc
+		is_playing_havoc = Managers.state.difficulty:get_parsed_havoc_data()
 		if is_playing_havoc then
 			-- adding fallback 
 			-- havoc modifier goes from 0.85-0.4, but lower ranks just use 1
