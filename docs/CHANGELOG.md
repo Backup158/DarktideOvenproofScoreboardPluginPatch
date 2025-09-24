@@ -1,5 +1,13 @@
+# 2025-09-23: Bound by Duty
+v1.5.0
+
+- Added Scab Plasma Gunner
+- Fixed Havoc manager location change, causing the error on map change (thanks Wobin and Vatinas)
+
 # 2025-08-UNRELEASED
 v1.4.1
+
+MOVED TO BRANCH BECAUSE IT DIDN'T WORK LOL
 
 - Refactored code to manage blank rows on the Scoreboard, `manage_blank_rows()`
     - What it actually does is make sure that blank values are actually blank, instead of "lol" (which is what the base Scoreboard does)
