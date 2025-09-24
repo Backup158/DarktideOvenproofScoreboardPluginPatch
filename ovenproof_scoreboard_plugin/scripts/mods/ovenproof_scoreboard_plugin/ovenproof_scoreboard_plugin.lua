@@ -62,6 +62,7 @@ mod.ammunition_pickup_modifier = 1
 		"renegade_shocktrooper",
 		"chaos_ogryn_gunner",
 		"renegade_radio_operator",
+		"renegade_plasma_gunner",
 	}
 	mod.specials = {
 		"chaos_poxwalker_bomber",
