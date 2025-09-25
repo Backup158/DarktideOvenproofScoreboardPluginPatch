@@ -1,9 +1,9 @@
 # Mods folder exists in working directory
 if [ -d "mods" ]; then
     # ls to get all, pipe into wc to count
-    THINGS_IN_MODS="$(ls mods | wc -l)"
+    things_in_mods="$(ls mods | wc -l)"
     # there should be one folder (ovenproof_scoreboard_plugin), or it's empty
-    if $THINGS_IN_MODS < 2; then
+    if $things_in_mods < 2; then
         # delete old upload and remake directory
         gio trash "mods"
     else
