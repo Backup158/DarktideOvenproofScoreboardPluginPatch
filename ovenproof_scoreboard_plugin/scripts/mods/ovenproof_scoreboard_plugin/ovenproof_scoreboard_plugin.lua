@@ -23,7 +23,6 @@ local debug_messages_enabled = mod:get("enable_debug_messages")
 
 local in_match
 local is_playing_havoc
-local havoc_manager
 local scoreboard
 -- ammo pickup given as a percentage, such as 0.85
 mod.ammunition_pickup_modifier = 1
@@ -935,12 +934,13 @@ function mod.on_game_state_changed(status, state_name)
 	-- think this means "entering gameplay" from "hub"
 	if state_name == "GameplayStateRun" and status == "enter" and Managers.state.mission:mission().name ~= "hub_ship" then
 		in_match = true
-		havoc_manager = Managers.data_service.havoc
-		is_playing_havoc = Managers.state.difficulty:get_parsed_havoc_data()
-		if is_playing_havoc then
+		local havoc_extension = Managers.state.game_mode:game_mode():extension("havoc")
+		-- is_playing_havoc = Managers.state.difficulty:get_parsed_havoc_data()
+		if havoc_extension then
+			is_playing_havoc = true
 			-- adding fallback 
 			-- havoc modifier goes from 0.85-0.4, but lower ranks just use 1
-			mod.ammunition_pickup_modifier = havoc_manager:get_modifier_value("ammo_pickup_modifier") or 1
+			mod.ammunition_pickup_modifier = havoc_extension:get_modifier_value("ammo_pickup_modifier") or 1
 			mod:info("Havoc ammo modifier: "..tostring(mod.ammunition_pickup_modifier))
 		else
 			mod.ammunition_pickup_modifier = 1 
