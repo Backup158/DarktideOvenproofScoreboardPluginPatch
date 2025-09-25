@@ -7,8 +7,6 @@ v1.5.2
 # 2025-09-24
 v1.5.1
 
-Idk why I didn't adhere to my versioning scheme last time but we'll roll with it
-
 - Fixed Havoc manager location change, causing the error on map change (fr this time??)
 - It got moved to havoc_extension from `Managers.state.game_mode_manager():extension("havoc")`
     - looks like this new one also doubles as the check for if you're on havoc or not
