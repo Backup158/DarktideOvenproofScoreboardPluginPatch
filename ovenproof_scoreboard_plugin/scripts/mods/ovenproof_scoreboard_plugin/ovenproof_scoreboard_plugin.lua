@@ -259,6 +259,15 @@ mod.set_blank_rows = function (self, account_id)
 end
 
 -- ############
+-- Add Damage Taken/Done Ratio
+-- ############
+--[[
+mod.add_damage_taken_done_ratio = function(self, account_id)
+
+end
+]]
+
+-- ############
 -- Replace entire value in scoreboard
 -- ############
 mod.replace_row_value = function(self, row_name, account_id, value)
@@ -360,6 +369,33 @@ function mod.on_all_mods_loaded()
 	-- ################################################
 	-- HOOKS
 	-- ################################################
+	--[[
+	-- ############
+	-- Calculate Ratio
+	--	Needs to be done:
+	--		mid game when opening tactical overlay
+	--		at least once before the post match view
+	-- ############
+	-- ######
+	-- When opening tactical overlay
+	-- 	Runs on opening and every tick while it's open
+	-- ######
+	mod:hook(CLASS.HudElementTacticalOverlay, "_draw_widgets", function(func, self, dt, t, input_service, ui_renderer, render_settings, ...)
+		mod:add_damage_taken_done_ratio()
+		--mod:echo("IF YOU SEE THIS YELL AT ME: tactical overlay widgets")
+		func(self, dt, t, input_service, ui_renderer, render_settings, ...)
+		-- base mod hooks onto this first, but executes after the original function
+	end)
+	-- ######
+	-- Before game end
+	-- ######
+	mod:hook(CLASS.EndView, "on_enter", function(func, self)
+		mod:add_damage_taken_done_ratio()
+		--mod:echo("IF YOU SEE THIS YELL AT ME: entering end view")
+		func(self)
+		-- base mod hooks onto this first, but executes after the original function
+	end)
+	]]
 
 	-- ############
 	-- Interactions Started?
