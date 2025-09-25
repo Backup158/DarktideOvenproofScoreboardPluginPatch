@@ -2,6 +2,7 @@
 v1.5.2
 
 - `game_mode` instead of `game_mode_manager`
+- I had it like this before but decided to change it for no reason :)
 
 # 2025-09-24
 v1.5.1
