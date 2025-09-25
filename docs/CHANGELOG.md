@@ -1,3 +1,11 @@
+# 2025-09-24
+v1.5.1
+
+Idk why I didn't adhere to my versioning scheme last time but we'll roll with it
+
+- Fixed Havoc manager location change, causing the error on map change (fr this time??)
+- It got moved to havoc_extension from `Managers.state.game_mode():extension("havoc")
+
 # 2025-09-23: Bound by Duty
 v1.5.0
 
