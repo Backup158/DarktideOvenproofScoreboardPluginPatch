@@ -18,7 +18,7 @@ local tostring = tostring
 -- #######
 -- Mod Locals
 -- #######
-mod.version = "1.5.1"
+mod.version = "1.5.2"
 local debug_messages_enabled = mod:get("enable_debug_messages")
 
 local in_match
@@ -934,7 +934,7 @@ function mod.on_game_state_changed(status, state_name)
 	-- think this means "entering gameplay" from "hub"
 	if state_name == "GameplayStateRun" and status == "enter" and Managers.state.mission:mission().name ~= "hub_ship" then
 		in_match = true
-		local havoc_extension = Managers.state.game_mode_manager:game_mode():extension("havoc")
+		local havoc_extension = Managers.state.game_mode:game_mode():extension("havoc")
 		-- is_playing_havoc = Managers.state.difficulty:get_parsed_havoc_data()
 		if havoc_extension then
 			is_playing_havoc = true

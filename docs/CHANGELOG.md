@@ -1,3 +1,8 @@
+# 2025-09-25
+v1.5.2
+
+- `game_mode` instead of `game_mode_manager`
+
 # 2025-09-24
 v1.5.1
 
