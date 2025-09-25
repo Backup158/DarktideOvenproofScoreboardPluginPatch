@@ -5,7 +5,7 @@ if [ -d "mods" ]; then
     #   commands for multiline compatibility even though i dont need it here
     things_in_mods="$(ls mods | wc -l)"
     # there should be one folder (ovenproof_scoreboard_plugin), or it's empty
-    if $things_in_mods < 2; then
+    if [ $things_in_mods -lt 2 ]; then
         # delete old upload and remake directory
         gio trash "mods"
     else
