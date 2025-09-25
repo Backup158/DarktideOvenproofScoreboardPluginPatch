@@ -1,6 +1,8 @@
 # Mods folder exists in working directory
 if [ -d "mods" ]; then
     # ls to get all, pipe into wc to count
+    #   store result of command
+    #   commands for multiline compatibility even though i dont need it here
     things_in_mods="$(ls mods | wc -l)"
     # there should be one folder (ovenproof_scoreboard_plugin), or it's empty
     if $things_in_mods < 2; then
