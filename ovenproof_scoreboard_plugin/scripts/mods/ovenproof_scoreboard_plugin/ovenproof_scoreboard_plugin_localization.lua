@@ -84,6 +84,9 @@ local localization = {
     ammo_tracking_group = {
         en = "Ammo Tracking",
     },
+    attack_tracking_group = {
+        en = "Attack Report Tracking",
+    },
     exploration_tier_0 = {
         en = "Exploration",
         ru = "Исследование",
@@ -161,6 +164,12 @@ local localization = {
     },
     track_ammo_crate_in_percentage = {
         en = "Include Ammo Crates in total percentage of Ammo picked up",
+    },
+    explosions_affect_ranged_hitrate = {
+        en = "Explosions affect Ranged Hitrate",
+    },
+    explosions_affect_melee_hitrate = {
+        en = "Explosions affect Manged Hitrate",
     },
     -- ----------------
     -- Reusable labels
