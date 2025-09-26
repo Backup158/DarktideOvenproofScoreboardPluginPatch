@@ -15,8 +15,8 @@ local TextUtilities = mod:original_require("scripts/utilities/ui/text")
 -- #######
 local tostring = tostring
 local string = string
-local string_len = string.len()
-local string_sub = string.sub()
+local string_len = string.len
+local string_sub = string.sub
 
 -- #######
 -- Mod Locals
