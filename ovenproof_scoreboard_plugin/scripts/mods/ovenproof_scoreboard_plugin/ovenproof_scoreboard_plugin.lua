@@ -229,7 +229,7 @@ end
 
 local function need_to_revert_explosion_hitrate(is_damage_type_affecting_hitrate, damage_name)
 	return not is_damage_type_affecting_hitrate 
-			and string_len(damage_name) > 9 -- make sure name is long enough to get a substring without crashing
+			and string_len(damage_name) > 8 -- make sure name is long enough to get a substring without crashing
 			and string_sub(damage_name, -9) == "explosion" -- if it ends in "explosion" such as "bolter_m2_stop_explosion" (there's 2 each)
 end
 
