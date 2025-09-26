@@ -86,7 +86,11 @@ return {
 			{	setting_id 		= "damage_tracking_ggroup",
 				type 			= "group",
 				sub_widgets		= {
-					{	setting_id 		= "explosions_affect_hitrate",
+					{	setting_id 		= "explosions_affect_ranged_hitrate",
+						type 			= "checkbox",
+						default_value 	= true,
+					},
+					{	setting_id 		= "explosions_affect_melee_hitrate",
 						type 			= "checkbox",
 						default_value 	= true,
 					},
