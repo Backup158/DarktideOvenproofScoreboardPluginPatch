@@ -4,6 +4,16 @@ v1.6.0
 - Added toggles for explosions affecting hitrates
     - One for ranged and one for melee, both defaulted to `true` to be consistent with the original settings
     - So it doesn't artificially deflate your crit/weakspot rate
+        - I don't think explosions can crit
+        - There are settings for the server to override explosions to not do crits
+        - in `scripts/extension_systems/weapon/actions/action_melee_explosive` there's a check to set `is_critical_strike = false` every time
+    - Created a helper function to check for it
+        - Checks if user wants this to not happen
+        - Checks if the end of the damage type ends in "explosion"
+            - in `scripts/settings/equipment/weapon_templates/bolt_pistols/settings_templates/boltpistole_damage_profile_templates`
+            - there is an entry `damage_templates.boltpistol_stop_explosion`
+            - this naming scheme is consistent with other bolter explosions
+            - hopefully this doesn't mess up later :)
 
 # 2025-09-25
 v1.5.2
