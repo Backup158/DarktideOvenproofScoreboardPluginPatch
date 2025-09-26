@@ -24,6 +24,7 @@ local debug_messages_enabled = mod:get("enable_debug_messages")
 local in_match
 local is_playing_havoc
 local scoreboard
+local explosions_affect_hitrate
 -- ammo pickup given as a percentage, such as 0.85
 mod.ammunition_pickup_modifier = 1
 
@@ -338,11 +339,16 @@ function mod.update(main_dt)
 	mod:manage_blank_rows()
 end
 
+local function set_locals_for_settings()
+	debug_messages_enabled = mod:get("enable_debug_messages")
+	explosions_affect_hitrate = mod:get("explosions_affect_hitrate")
+end
+
 -- ############
 -- Check Setting Changes
 -- ############
 function mod.on_setting_changed(setting_id)
-	debug_messages_enabled = mod:get("enable_debug_messages")
+	set_locals_for_settings()
 	--[[
 	-- Scoreboard can't be disabled mid-game
 	scoreboard = get_mod("scoreboard")
@@ -357,7 +363,7 @@ end
 -- ** Mod Startup **
 -- ############
 function mod.on_all_mods_loaded()
-	debug_messages_enabled = mod:get("enable_debug_messages")
+	set_locals_for_settings()
 	scoreboard = get_mod("scoreboard")
 	if not scoreboard then
 		mod:error(mod:localize("error_scoreboard_missing"))
