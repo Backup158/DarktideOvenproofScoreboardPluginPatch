@@ -217,6 +217,9 @@ mod.disabled_players = {}
 -- ########################
 -- Helper Functions
 -- ########################
+-- ############
+-- Player from Unit
+-- ############
 local function player_from_unit(unit)
 	local players = Managers.player:players()
 	for _, player in pairs(players) do
@@ -227,6 +230,14 @@ local function player_from_unit(unit)
 	return nil
 end
 
+-- ############
+-- Need to Revert Explosion Hitrate?
+-- DESCRIPTION: Checks if user does not want explosions to affect hitrate, and if the given damage type is an explosion
+-- PARAMETERS:
+--	is_damage_type_affecting_hitrate; boolean; if user wants explosions to affect hitrate
+--	damage_name; string; name of the damage type, such as "bolter_m2_stop_explosion"
+-- RETURN: true if both conditions in description are true
+-- ############
 local function need_to_revert_explosion_hitrate(is_damage_type_affecting_hitrate, damage_name)
 	return not is_damage_type_affecting_hitrate 
 			and string_len(damage_name) > 8 -- make sure name is long enough to get a substring without crashing
