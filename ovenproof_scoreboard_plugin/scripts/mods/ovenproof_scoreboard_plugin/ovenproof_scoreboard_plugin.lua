@@ -14,6 +14,9 @@ local TextUtilities = mod:original_require("scripts/utilities/ui/text")
 -- Optimizations for globals
 -- #######
 local tostring = tostring
+local string = string
+local string_len = string.len()
+local string_sub = string.sub()
 
 -- #######
 -- Mod Locals
@@ -711,6 +714,13 @@ function mod.on_all_mods_loaded()
 						self._ranged_rate[account_id] = self._ranged_rate[account_id] or {}
 						self._ranged_rate[account_id].hits = self._ranged_rate[account_id].hits or 0
 						self._ranged_rate[account_id].hits = self._ranged_rate[account_id].hits +1
+						-- Reverting the hit added if it's an explosion and we set that to not happen
+						if not explosions_affect_hitrate 
+						 and string_len(damage_profile.name) > 9 -- make sure name is long enough to get a substring without crashing
+						 and string_sub(damage_profile.name, -9) == "explosion" -- if it ends in "explosion" such as "bolter_m2_stop_explosion" (there's 2 each)
+						 then
+							self._ranged_rate[account_id].hits = self._ranged_rate[account_id].hits - 1
+						end
 						self._ranged_rate[account_id].weakspots = self._ranged_rate[account_id].weakspots or 0
 						self._ranged_rate[account_id].crits = self._ranged_rate[account_id].crits or 0
 						
