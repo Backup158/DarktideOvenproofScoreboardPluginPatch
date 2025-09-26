@@ -1,3 +1,10 @@
+# 2025-09-26
+v1.6.0
+
+- Added toggles for explosions affecting hitrates
+    - One for ranged and one for melee, both defaulted to `true` to be consistent with the original settings
+    - So it doesn't artificially deflate your crit/weakspot rate
+
 # 2025-09-25
 v1.5.2
 
