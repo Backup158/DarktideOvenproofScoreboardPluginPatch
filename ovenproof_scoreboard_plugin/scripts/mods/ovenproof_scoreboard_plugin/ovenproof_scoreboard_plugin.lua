@@ -742,9 +742,9 @@ function mod.on_all_mods_loaded()
 						--	I'm pretty sure explosions don't crit so this should be fine
 						if need_to_revert_explosion_hitrate(explosions_affect_ranged_hitrate, damage_profile.name) then
 							self._ranged_rate[account_id].hits = self._ranged_rate[account_id].hits - 1
-							mod:echo(damage_profile.name.." is an explosion and hitrate was reverted")
-							mod:echo("weakspot: "..tostring(hit_weakspot))
-							mod:echo("crit: "..tostring(is_critical_strike))
+							--mod:echo(damage_profile.name.." is an explosion and hitrate was reverted")
+							--mod:echo("weakspot: "..tostring(hit_weakspot))
+							--mod:echo("crit: "..tostring(is_critical_strike))
 						end
 						self._ranged_rate[account_id].weakspots = self._ranged_rate[account_id].weakspots or 0
 						self._ranged_rate[account_id].crits = self._ranged_rate[account_id].crits or 0
