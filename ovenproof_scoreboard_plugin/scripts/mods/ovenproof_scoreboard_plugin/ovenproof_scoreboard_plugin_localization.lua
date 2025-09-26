@@ -169,7 +169,7 @@ local localization = {
         en = "Explosions affect Ranged Hitrate",
     },
     explosions_affect_melee_hitrate = {
-        en = "Explosions affect Manged Hitrate",
+        en = "Explosions affect Melee Hitrate",
     },
     -- ----------------
     -- Reusable labels
