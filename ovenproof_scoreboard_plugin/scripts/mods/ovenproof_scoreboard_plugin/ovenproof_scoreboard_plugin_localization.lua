@@ -33,7 +33,7 @@ local localization = {
     -- Core
     -- ----------------
     mod_title = {
-        en = "OvenProof's scoreboard",
+        en = "OvenProof's Scoreboard",
         ru = "Таблица результатов - плагин OvenProof'а",
         ["zh-cn"] = "OvenProof 的记分板",
         ["zh-tw"] = "OvenProof 的記分板",
