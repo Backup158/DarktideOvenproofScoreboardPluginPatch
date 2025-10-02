@@ -18,6 +18,7 @@ local pairs = pairs
 local math = math
 local math_max = math.max
 local math_ceil = math.ceil
+local math_floor = math.floor
 local math_round = math.round
 
 local tonumber = tonumber
@@ -706,7 +707,7 @@ function mod.on_all_mods_loaded()
 
 					if actual_damage > self._attack_report_tracker[account_id].highest_single_hit then
 						self._attack_report_tracker[account_id].highest_single_hit = actual_damage
-						mod:replace_row_text("highest_single_hit", account_id, math.floor(damage))
+						mod:replace_row_text("highest_single_hit", account_id, math_floor(damage))
 					end
 					
 					if actual_damage == max_health then
