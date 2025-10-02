@@ -1,3 +1,9 @@
+# 2025-10-01
+v1.6.1
+
+- Fixed typo for explosions affecting melee hitrate in localization
+- Some localizations Sai added
+
 # 2025-09-26
 v1.6.0
 
