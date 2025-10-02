@@ -13,10 +13,21 @@ local TextUtilities = mod:original_require("scripts/utilities/ui/text")
 -- #######
 -- Optimizations for globals
 -- #######
+local pairs = pairs
+
+local math = math
+local math_max = math.max
+local math_ceil = math.ceil
+local math_round = math.round
+
+local tonumber = tonumber
 local tostring = tostring
 local string = string
 local string_len = string.len
 local string_sub = string.sub
+
+local table = table
+local table_array_contains = table.array_contains
 
 -- #######
 -- Mod Locals
@@ -308,7 +319,7 @@ mod.replace_row_value = function(self, row_name, account_id, value)
 	if row then
 		local validation = row.validation
 		if tonumber(value) then
-			local value = value and math.max(0, value) or 0
+			local value = value and math_max(0, value) or 0
 			row.data = row.data or {}
 			row.data[account_id] = row.data[account_id] or {}			
 			row.data[account_id].value = value
@@ -497,9 +508,9 @@ function mod.on_all_mods_loaded()
 						-- Calculating amount picked up
 						--		Ammo pickups are rounded up by the game
 						-- 		mod.mmunition_pickup_modifier to account for Havoc modifiers. set by state change check
-						local pickup = math.ceil(base_pickup_from_source * mod.ammunition_pickup_modifier * max_ammo_reserve)
+						local pickup = math_ceil(base_pickup_from_source * mod.ammunition_pickup_modifier * max_ammo_reserve)
 
-						local wasted = math.max(pickup - ammo_missing, 0)
+						local wasted = math_max(pickup - ammo_missing, 0)
 						local pickup_pct = 100 * (pickup / max_ammo_combined)
 						local wasted_pct = 100 * (wasted / max_ammo_reserve)
 						
@@ -509,7 +520,7 @@ function mod.on_all_mods_loaded()
 							scoreboard:update_stat("ammo_wasted_percent", account_id, wasted_pct)
 							if mod:get("ammo_messages") then
 								local pickup_text = TextUtilities.apply_color_to_text(mod:localize("message_"..ammo), color)
-								local displayed_waste = math.max(1, math.round(wasted_pct))
+								local displayed_waste = math_max(1, math_round(wasted_pct))
 								local wasted_text = TextUtilities.apply_color_to_text(tostring(displayed_waste).."%", color)
 								local message = ""
 								if wasted == 0 then
@@ -531,14 +542,14 @@ function mod.on_all_mods_loaded()
 							if mod:get("ammo_messages") then
 								-- Text formatting
 								-- 		Formatting for percentage of ammo picked up
-								local text_ammo_taken = TextUtilities.apply_color_to_text(tostring(math.round(pickup_pct)).."%", color)
+								local text_ammo_taken = TextUtilities.apply_color_to_text(tostring(math_round(pickup_pct)).."%", color)
 								-- 		Formatting for Ammo Crate name
 								local text_crate = TextUtilities.apply_color_to_text(mod:localize("message_ammo_crate_text"), color)
 								local message = ""
 								-- Only prints waste message if that's enabled, and if there was actually waste found
 								local count_waste_for_crates = setting_is_enabled_and_check_if_havoc_only("track_ammo_crate_waste", is_playing_havoc)
 								if count_waste_for_crates and (not (wasted == 0)) then
-									local displayed_waste = math.max(1, math.round(wasted_pct))
+									local displayed_waste = math_max(1, math_round(wasted_pct))
 									local wasted_text = TextUtilities.apply_color_to_text(tostring(displayed_waste).."%", color)
 									message = mod:localize("message_ammo_crate_waste", text_ammo_taken, text_crate, wasted_text)
 								else
@@ -591,11 +602,11 @@ function mod.on_all_mods_loaded()
 				self._player_state_tracker[account_id].state = self._player_state_tracker[account_id].state or {}
 				
 				if self._player_state_tracker[account_id].state ~= player_state then
-					if not table.array_contains(mod.states_disabled, self._player_state_tracker[account_id].state) and not table.array_contains(mod.states_disabled, player_state) then
+					if not table_array_contains(mod.states_disabled, self._player_state_tracker[account_id].state) and not table_array_contains(mod.states_disabled, player_state) then
 						mod.disabled_players[account_id] = nil
 					end
 					self._player_state_tracker[account_id].state = player_state
-					if table.array_contains(mod.states_disabled, player_state) then
+					if table_array_contains(mod.states_disabled, player_state) then
 						scoreboard:update_stat("total_times_disabled", account_id, 1)
 					elseif player_state == "knocked_down" then
 						scoreboard:update_stat("total_times_downed", account_id, 1)
@@ -670,7 +681,7 @@ function mod.on_all_mods_loaded()
 						scoreboard:update_stat("total_kills", account_id, 1)
 
 						-- killed a disabler while an ally was disabled
-						if table.array_contains(mod.disablers, breed_or_nil.name) then
+						if table_array_contains(mod.disablers, breed_or_nil.name) then
 							for k,v in pairs(mod.disabled_players) do
 								if v == attacked_unit then
 									scoreboard:update_stat("total_operatives_helped", account_id, 1)
@@ -709,7 +720,7 @@ function mod.on_all_mods_loaded()
 					--	Melee
 					-- ------------
 					-- manual exception for companion, due to shared damage profile
-					if table.array_contains(mod.melee_attack_types, attack_type) or (table.array_contains(mod.melee_damage_profiles, damage_profile.name) and not table.array_contains(mod.companion_attack_types, attack_type)) then
+					if table_array_contains(mod.melee_attack_types, attack_type) or (table_array_contains(mod.melee_damage_profiles, damage_profile.name) and not table_array_contains(mod.companion_attack_types, attack_type)) then
 						self._melee_rate = (self._melee_rate or {})
 						self._melee_rate[account_id] = self._melee_rate[account_id] or {}
 						self._melee_rate[account_id].hits = self._melee_rate[account_id].hits or 0
@@ -741,7 +752,7 @@ function mod.on_all_mods_loaded()
 					-- ------------
 					--	Ranged
 					-- ------------
-					elseif table.array_contains(mod.ranged_attack_types, attack_type) or table.array_contains(mod.ranged_damage_profiles, damage_profile.name) then
+					elseif table_array_contains(mod.ranged_attack_types, attack_type) or table_array_contains(mod.ranged_damage_profiles, damage_profile.name) then
 						self._ranged_rate = self._ranged_rate or {}
 						self._ranged_rate[account_id] = self._ranged_rate[account_id] or {}
 						self._ranged_rate[account_id].hits = self._ranged_rate[account_id].hits or 0
@@ -776,7 +787,7 @@ function mod.on_all_mods_loaded()
 					-- ------------
 					--	Companion
 					-- ------------
-					elseif table.array_contains(mod.companion_attack_types, attack_type) or table.array_contains(mod.companion_damage_profiles, damage_profile.name) then
+					elseif table_array_contains(mod.companion_attack_types, attack_type) or table_array_contains(mod.companion_damage_profiles, damage_profile.name) then
 						-- Crit and Weakspot rates don't matter
 						--[[
 						self._companion_rate = self._companion_rate or {}
@@ -812,7 +823,7 @@ function mod.on_all_mods_loaded()
 					-- ------------
 					--	Bleed
 					-- ------------
-					elseif table.array_contains(mod.bleeding_damage_profiles, damage_profile.name) then
+					elseif table_array_contains(mod.bleeding_damage_profiles, damage_profile.name) then
 						self._bleeding_rate = self._bleeding_rate or {}
 						self._bleeding_rate[account_id] = self._bleeding_rate[account_id] or {}
 						self._bleeding_rate[account_id].hits = self._bleeding_rate[account_id].hits or 0
@@ -833,7 +844,7 @@ function mod.on_all_mods_loaded()
 					-- ------------
 					--	Burning
 					-- ------------
-					elseif table.array_contains(mod.burning_damage_profiles, damage_profile.name) then
+					elseif table_array_contains(mod.burning_damage_profiles, damage_profile.name) then
 						self._burning_rate = (self._burning_rate or {})
 						self._burning_rate[account_id] = (self._burning_rate[account_id] or {})
 						self._burning_rate[account_id].hits = (self._burning_rate[account_id].hits or 0) + 1
@@ -853,7 +864,7 @@ function mod.on_all_mods_loaded()
 					-- ------------
 					--	Warp
 					-- ------------
-					elseif table.array_contains(mod.warpfire_damage_profiles, damage_profile.name) then
+					elseif table_array_contains(mod.warpfire_damage_profiles, damage_profile.name) then
 						self._warpfire_rate = (self._warpfire_rate or {})
 						self._warpfire_rate[account_id] = (self._warpfire_rate[account_id] or {})
 						self._warpfire_rate[account_id].hits = (self._warpfire_rate[account_id].hits or 0) + 1
@@ -873,7 +884,7 @@ function mod.on_all_mods_loaded()
 					-- ------------
 					-- 	Environmental
 					-- ------------
-					elseif table.array_contains(mod.environmental_damage_profiles, damage_profile.name) then
+					elseif table_array_contains(mod.environmental_damage_profiles, damage_profile.name) then
 						self._environmental_rate = (self._environmental_rate or {})
 						self._environmental_rate[account_id] = (self._environmental_rate[account_id] or {})
 						self._environmental_rate[account_id].hits = (self._environmental_rate[account_id].hits or 0) + 1
@@ -903,49 +914,49 @@ function mod.on_all_mods_loaded()
 					-- Categorizing which enemy was damaged
 					-- TODO maybe this could be a switch
 					-- ------------------------
-					if table.array_contains(mod.melee_lessers, breed_or_nil.name) then
+					if table_array_contains(mod.melee_lessers, breed_or_nil.name) then
 						scoreboard:update_stat("total_lesser_damage", account_id, actual_damage)
 						scoreboard:update_stat("melee_lesser_damage", account_id, actual_damage)
 						if attack_result == "died" then
 							scoreboard:update_stat("total_lesser_kills", account_id, 1)
 							scoreboard:update_stat("melee_lesser_kills", account_id, 1)
 						end
-					elseif table.array_contains(mod.ranged_lessers, breed_or_nil.name) then
+					elseif table_array_contains(mod.ranged_lessers, breed_or_nil.name) then
 						scoreboard:update_stat("total_lesser_damage", account_id, actual_damage)
 						scoreboard:update_stat("ranged_lesser_damage", account_id, actual_damage)
 						if attack_result == "died" then
 							scoreboard:update_stat("total_lesser_kills", account_id, 1)
 							scoreboard:update_stat("ranged_lesser_kills", account_id, 1)
 						end
-					elseif table.array_contains(mod.melee_elites, breed_or_nil.name) then
+					elseif table_array_contains(mod.melee_elites, breed_or_nil.name) then
 						scoreboard:update_stat("total_elite_damage", account_id, actual_damage)
 						scoreboard:update_stat("melee_elite_damage", account_id, actual_damage)
 						if attack_result == "died" then
 							scoreboard:update_stat("total_elite_kills", account_id, 1)
 							scoreboard:update_stat("melee_elite_kills", account_id, 1)
 						end
-					elseif table.array_contains(mod.ranged_elites, breed_or_nil.name) then
+					elseif table_array_contains(mod.ranged_elites, breed_or_nil.name) then
 						scoreboard:update_stat("total_elite_damage", account_id, actual_damage)
 						scoreboard:update_stat("ranged_elite_damage", account_id, actual_damage)
 						if attack_result == "died" then
 							scoreboard:update_stat("total_elite_kills", account_id, 1)
 							scoreboard:update_stat("ranged_elite_kills", account_id, 1)
 						end
-					elseif table.array_contains(mod.specials, breed_or_nil.name) then
+					elseif table_array_contains(mod.specials, breed_or_nil.name) then
 						scoreboard:update_stat("total_special_damage", account_id, actual_damage)
 						scoreboard:update_stat("damage_special_damage", account_id, actual_damage)
 						if attack_result == "died" then
 							scoreboard:update_stat("total_special_kills", account_id, 1)
 							scoreboard:update_stat("damage_special_kills", account_id, 1)
 						end
-					elseif table.array_contains(mod.disablers, breed_or_nil.name) then
+					elseif table_array_contains(mod.disablers, breed_or_nil.name) then
 						scoreboard:update_stat("total_special_damage", account_id, actual_damage)
 						scoreboard:update_stat("disabler_special_damage", account_id, actual_damage)
 						if attack_result == "died" then
 							scoreboard:update_stat("total_special_kills", account_id, 1)
 							scoreboard:update_stat("disabler_special_kills", account_id, 1)
 						end
-					elseif table.array_contains(mod.bosses, breed_or_nil.name) then
+					elseif table_array_contains(mod.bosses, breed_or_nil.name) then
 						scoreboard:update_stat("total_boss_damage", account_id, actual_damage)
 						scoreboard:update_stat("boss_damage", account_id, actual_damage)
 						if attack_result == "died" then
