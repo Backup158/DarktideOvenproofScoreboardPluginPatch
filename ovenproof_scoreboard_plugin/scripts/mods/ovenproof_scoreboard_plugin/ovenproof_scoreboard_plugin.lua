@@ -218,6 +218,18 @@ mod.disabled_players = {}
 -- Helper Functions
 -- ########################
 -- ############
+-- Echo or Info Message Based on Debug
+-- if debug mode is active, display on screen so user can easily report
+-- ############
+local function echo_or_info_message_based_on_debug(message)
+	if debug_messages_enabled then
+		mod:echo(message)
+	else
+		mod:info(message)
+	end
+end
+
+-- ############
 -- Player from Unit
 -- ############
 local function player_from_unit(unit)
@@ -537,11 +549,7 @@ function mod.on_all_mods_loaded()
 							end
 						else
 							local uncategorized_ammo_pickup_message = "Uncategorized ammo pickup! It is: "..tostring(ammo)
-							if debug_messages_enabled then
-								mod:echo(uncategorized_ammo_pickup_message)
-							else
-								mod:info(uncategorized_ammo_pickup_message)
-							end
+							echo_or_info_message_based_on_debug(uncategorized_ammo_pickup_message)
 						end
 					end
 				end
@@ -888,11 +896,7 @@ function mod.on_all_mods_loaded()
 					else
 						--Print damage profile and attack type of out of scope attacks
 						local error_string = "Player: "..player:name()..", Damage profile: " .. damage_profile.name .. ", attack type: " .. tostring(attack_type)..", damage: "..actual_damage
-						if debug_messages_enabled then
-							mod:echo(error_string)
-						else
-							mod:info(error_string)
-						end
+						echo_or_info_message_based_on_debug(error_string)
 					end	
 
 					-- ------------------------
