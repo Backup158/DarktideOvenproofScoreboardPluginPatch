@@ -5,6 +5,9 @@ v1.7.0
     - Uncategorized types, error message
         - put into function
         - less copy pasted code
+    - Local references for global functions
+        - for less overhead
+        - these get called a looot
 
 # 2025-10-01
 v1.6.1
