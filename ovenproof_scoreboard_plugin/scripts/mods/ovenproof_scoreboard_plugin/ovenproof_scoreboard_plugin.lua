@@ -29,6 +29,7 @@ local string_sub = string.sub
 
 local table = table
 local table_array_contains = table.array_contains
+-- TODO what about color text?
 
 -- #######
 -- Mod Locals
