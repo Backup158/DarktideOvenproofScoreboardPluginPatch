@@ -1,3 +1,11 @@
+# 2025-10-NYAAAA
+v1.7.0
+
+- Refactored (devs only)
+    - Uncategorized types, error message
+        - put into function
+        - less copy pasted code
+
 # 2025-10-01
 v1.6.1
 
