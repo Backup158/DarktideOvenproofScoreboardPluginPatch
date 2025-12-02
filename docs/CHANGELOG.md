@@ -1,6 +1,10 @@
-# 2025-10-NYAAAA
+# 2025-12-02
 v1.7.0
 
+No Man's Land - Hive Scum
+
+- Fixed crash from ammo values
+    - `current_ammunition_clip` and `max_ammunition_clip` are now table returns
 - Refactored (devs only)
     - Uncategorized types, error message
         - put into function
