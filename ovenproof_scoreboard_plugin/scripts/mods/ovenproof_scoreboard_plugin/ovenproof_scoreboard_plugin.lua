@@ -174,6 +174,9 @@ mod.ammunition_pickup_modifier = 1
 		"psyker_smite_kill",
 	}
 	]]
+	mod.toxin_damage_profiles = {
+		"toxin_variant_3",	
+	}
 	mod.environmental_damage_profiles = {
 		"barrel_explosion",
 		"barrel_explosion_close",
