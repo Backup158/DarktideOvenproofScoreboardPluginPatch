@@ -887,6 +887,27 @@ function mod.on_all_mods_loaded()
 						
 						--mod:replace_row_value("warpfire_cr", account_id, self._warpfire_rate[account_id].cr)
 					-- ------------
+					--	Toxin
+					-- ------------
+					elseif table_array_contains(mod.toxin_damage_profiles, damage_profile.name) then
+						self._toxin_rate = self._toxin_rate or {}
+						self._toxin_rate[account_id] = self._toxin_rate[account_id] or {}
+						self._toxin_rate[account_id].hits = self._toxin_rate[account_id].hits or 0
+						self._toxin_rate[account_id].hits = self._toxin_rate[account_id].hits + 1
+						self._toxin_rate[account_id].crits = self._toxin_rate[account_id].crits or 0
+						
+						scoreboard:update_stat("total_toxin_damage", account_id, actual_damage)
+						--if is_critical_strike then
+						--	self._toxin_rate[account_id].crits = self._toxin_rate[account_id].crits + 1
+						--end
+						if attack_result == "died" then
+							scoreboard:update_stat("total_toxin_kills", account_id, 1)
+						end
+						
+						--self._toxin_rate[account_id].cr = self._toxin_rate[account_id].crits / self._toxin_rate[account_id].hits * 100
+						
+						--mod:replace_row_value("toxin_cr", account_id, self._toxin_rate[account_id].cr)
+					-- ------------
 					-- 	Environmental
 					-- ------------
 					elseif table_array_contains(mod.environmental_damage_profiles, damage_profile.name) then
@@ -1526,6 +1547,7 @@ mod.scoreboard_rows = {
 		parent = "total_bleeding",
 		setting = "offense_tier_1",
 	},
+	-- Burning
 	{name = "total_burning",
 		text = "row_total_burning",
 		validation = "ASC",
@@ -1553,6 +1575,7 @@ mod.scoreboard_rows = {
 		parent = "total_burning",
 		setting = "offense_tier_1",
 	},
+	-- Warpfire
 	{name = "total_warpfire",
 		text = "row_total_warpfire",
 		validation = "ASC",
@@ -1580,6 +1603,35 @@ mod.scoreboard_rows = {
 		parent = "total_warpfire",
 		setting = "offense_tier_1",
 	},
+	-- Toxin (Hive Scum)
+	{name = "total_toxin",
+		text = "row_total_toxin",
+		validation = "ASC",
+		iteration = "ADD",
+		summary = {
+			"total_toxin_kills",
+			"total_toxin_damage",
+		},
+		group = "group_1",
+		setting = "offense_tier_1",
+	},
+	{name = "total_toxin_kills",
+		text = "row_kills",
+		validation = "ASC",
+		iteration = "ADD",
+		group = "group_1",
+		parent = "total_toxin",
+		setting = "offense_tier_1",
+	},
+	{name = "total_toxin_damage",
+		text = "row_damage",
+		validation = "ASC",
+		iteration = "ADD",
+		group = "group_1",
+		parent = "total_toxin",
+		setting = "offense_tier_1",
+	},
+	-- Environmental
 	{name = "total_environmental",
 		text = "row_total_environmental",
 		validation = "ASC",
