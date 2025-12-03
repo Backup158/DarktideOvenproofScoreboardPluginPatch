@@ -5,6 +5,7 @@ No Man's Land - Hive Scum
 
 - Fixed crash from ammo values
     - `current_ammunition_clip` and `max_ammunition_clip` are now table returns
+- Added Toxin damage row
 - Refactored (devs only)
     - Uncategorized types, error message
         - put into function
