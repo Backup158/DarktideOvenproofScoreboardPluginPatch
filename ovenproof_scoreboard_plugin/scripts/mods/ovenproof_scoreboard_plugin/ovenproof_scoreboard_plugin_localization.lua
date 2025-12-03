@@ -462,6 +462,7 @@ local localization = {
         en = "Companion",
     },
     ]]
+    -- backup: do toxins even crit? i dont think i need to coutn this
     row_total_dot_rates_1 = {
         en = {left = "Critical Rate", right = "[ Bleeding | Burning ]",},
         ru = {left = "Крит. удары", right = "[Кровотечение/Горение]",},
@@ -531,7 +532,7 @@ local localization = {
         ["zh-tw"] = { left = "總遠程", right = "[ 擊殺 | 傷害 ]",},
         ["pt-br"] = {left = "Total Distância", right = "[Abates | Dano]",},
     },
-    -- idk if these are accurate
+    -- backup: idk if these localizations are accurate
     row_total_companion = {
         en = {left = "Total Companion", right = "[ Kills | Damage ]",},
         ru = {left = "Полный компаньон", right = "[Убийств/Урона]",},
@@ -559,6 +560,15 @@ local localization = {
         ["zh-cn"] = {left = "总灵魂之火", right = "[ 击杀 | 伤害 ]",},
         ["zh-tw"] = { left = "總靈魂之火", right = "[ 擊殺 | 傷害 ]",},
         ["pt-br"] = {left = "Total Warpfire", right = "[Abates | Dano]",},
+    },
+    row_total_toxin = {
+        en = {left = "Total Toxin", right = "[ Kills | Damage ]",},
+        --[[
+        ru = {left = "Всего от Горения", right = "[Убийств/Урона]",},
+        ["zh-cn"] = {left = "总燃烧", right = "[ 击杀 | 伤害 ]",},
+        ["zh-tw"] = { left = "總燃燒", right = "[ 擊殺 | 傷害 ]",},
+        ["pt-br"] = {left = "Total Queima", right = "[Abates | Dano]",},
+        ]]
     },
     row_total_environmental = {
         en = {left = "Total Environmental", right = "[ Kills | Damage ]",},
