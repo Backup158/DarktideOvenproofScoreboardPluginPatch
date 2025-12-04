@@ -471,7 +471,7 @@ local localization = {
         en = "Companion",
     },
     ]]
-    -- backup: do toxins even crit? i dont think i need to coutn this
+    -- @backup158: do toxins even crit? i dont think i need to count this
     row_total_dot_rates_1 = {
         en = {left = "Critical Rate", right = "[ Bleeding | Burning ]",},
         ru = {left = "Крит. удары", right = "[Кровотечение/Горение]",},
@@ -541,7 +541,7 @@ local localization = {
         ["zh-tw"] = { left = "總遠程", right = right_hand_localizations.kill_damage["zh-tw"],},
         ["pt-br"] = {left = "Total Distância", right = right_hand_localizations.kill_damage["pt-br"]},
     },
-    -- backup: idk if these localizations are accurate
+    -- @backup158: idk if these localizations are accurate
     row_total_companion = {
         en = {left = "Total Companion", right = right_hand_localizations.kill_damage["en"],},
         ru = {left = "Полный компаньон", right = right_hand_localizations.kill_damage["ru"],},
@@ -687,7 +687,7 @@ local localization = {
         ["pt-br"] = "Maior Dano de Um Único Golpe",
     },
     -- Rows: Blank
-    -- btw you don't need to add localizations to these. it defaults to english if you don't have one (and they're all the same so it's fine)
+    --  @backup158: btw you don't need to add localizations to these. it defaults to english if you don't have one (and they're all the same so it's fine)
     row_blank = {
         en = " ",
         ru = " ",
