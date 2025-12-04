@@ -134,6 +134,7 @@ mod.ammunition_pickup_modifier = 1
 		"default_chain_lighting_interval",
 		"psyker_smite_kill",
 		"psyker_heavy_swings_shock", -- Psyker Smite on heavies and Remote Detonation on dog?
+		"missile_launcher_knockback", -- Hives Cum backblast
 	}
 	-- Dog damage doesn't count as melee/ranged for penances
 	--	but the shock bomb collar counts for puncture, which is covered by "explosion" being in ranged_attack_types
