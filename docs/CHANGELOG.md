@@ -14,6 +14,7 @@ No Man's Land - Hive Scum
     - Local references for global functions
         - for less overhead
         - these get called a looot
+    - Reused localizations are now stored in variables
 
 # 2025-10-01
 v1.6.1

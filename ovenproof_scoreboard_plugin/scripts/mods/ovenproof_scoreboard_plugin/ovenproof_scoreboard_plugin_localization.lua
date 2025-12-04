@@ -570,14 +570,13 @@ local localization = {
         ["zh-tw"] = { left = "總靈魂之火", right = right_hand_localizations.kill_damage["zh-tw"],},
         ["pt-br"] = {left = "Total Warpfire", right = right_hand_localizations.kill_damage["pt-br"]},
     },
+    -- @backup158: localizers, please verify these. i copied them from dictionary translations lol
     row_total_toxin = {
         en = {left = "Total Toxin", right = right_hand_localizations.kill_damage["en"],},
-        --[[
-        ru = {left = "Всего от Горения", right = right_hand_localizations.kill_damage["ru"],},
-        ["zh-cn"] = {left = "总燃烧", right = right_hand_localizations.kill_damage["zh-cn"],},
-        ["zh-tw"] = { left = "總燃燒", right = right_hand_localizations.kill_damage["zh-tw"],},
-        ["pt-br"] = {left = "Total Queima", right = right_hand_localizations.kill_damage["pt-br"]},
-        ]]
+        ru = {left = "Всего от Токсин", right = right_hand_localizations.kill_damage["ru"],},
+        ["zh-cn"] = {left = "总毒素", right = right_hand_localizations.kill_damage["zh-cn"],},
+        --["zh-tw"] = { left = "總燃燒", right = right_hand_localizations.kill_damage["zh-tw"],},
+        ["pt-br"] = {left = "Total Toxina", right = right_hand_localizations.kill_damage["pt-br"]},
     },
     row_total_environmental = {
         en = {left = "Total Environmental", right = right_hand_localizations.kill_damage["en"],},
