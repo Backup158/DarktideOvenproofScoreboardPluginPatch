@@ -46,182 +46,39 @@ local scoreboard
 mod.ammunition_pickup_modifier = 1
 
 -- ########################
--- Data tables
+-- Data
 -- ########################
--- ------------
--- Enemy Breeds
--- ------------
-	mod.melee_lessers = {
-		"chaos_newly_infected",
-		"chaos_poxwalker",
-		"cultist_melee",
-		"renegade_melee",
-		"chaos_armored_infected",
-		"chaos_mutated_poxwalker",
-		"chaos_lesser_mutated_poxwalker",
-	}
-	mod.ranged_lessers = {
-		"cultist_assault",
-		"renegade_assault",
-		"renegade_rifleman",
-	}
-	mod.melee_elites = {
-		"cultist_berzerker",
-		"renegade_berzerker",
-		"renegade_executor",
-		"chaos_ogryn_bulwark",
-		"chaos_ogryn_executor",
-	}
-	mod.ranged_elites = {
-		"cultist_gunner",
-		"renegade_gunner",
-		"cultist_shocktrooper",
-		"renegade_shocktrooper",
-		"chaos_ogryn_gunner",
-		"renegade_radio_operator",
-		"renegade_plasma_gunner",
-	}
-	mod.specials = {
-		"chaos_poxwalker_bomber",
-		"renegade_grenadier",
-		"cultist_grenadier",
-		"renegade_sniper",
-		"renegade_flamer",
-		"cultist_flamer",
-	}
-	mod.disablers = {
-		"chaos_hound",
-		"chaos_hound_mutator",
-		"cultist_mutant",
-		"cultist_mutant_mutator",
-		"renegade_netgunner",
-	}
-	mod.bosses = {
-		"chaos_beast_of_nurgle",
-		"chaos_daemonhost",
-		"chaos_spawn",
-		"chaos_plague_ogryn",
-		"chaos_plague_ogryn_sprayer",
-		"renegade_captain",
-		"renegade_twin_captain",
-		"renegade_twin_captain_two",
-		"cultist_captain",
-		"chaos_mutator_daemonhost",
-	}
--- ------------
--- Damage Types
--- ------------
-	mod.melee_attack_types ={
-		"melee",
-		"push",
-		-- "buff", -- regular Shock Maul and Arbites power maul stun intervals. also covers warp and bleed
-	}
-	mod.melee_damage_profiles ={
-		-- "shockmaul_stun_interval_damage", -- shock maul electrocution and Arbites dog shocks
-		"powermaul_p2_stun_interval",
-		"powermaul_p2_stun_interval_basic",
-		"powermaul_shield_block_special",
-		
-	}
-	mod.ranged_attack_types ={
-		"ranged",
-		"explosion",
-		"shout",
-	}
-	mod.ranged_damage_profiles ={
-		"shock_grenade_stun_interval",
-		"psyker_protectorate_spread_chain_lightning_interval",
-		"default_chain_lighting_interval",
-		"psyker_smite_kill",
-		"psyker_heavy_swings_shock", -- Psyker Smite on heavies and Remote Detonation on dog?
-		"missile_launcher_knockback", -- Hives Cum backblast
-	}
-	-- Dog damage doesn't count as melee/ranged for penances
-	--	but the shock bomb collar counts for puncture, which is covered by "explosion" being in ranged_attack_types
-	mod.companion_attack_types ={
-		"companion_dog", -- covers the breed_pounce types
-	}
-	mod.companion_damage_profiles ={
-		"adamant_companion_initial_pounce", -- never seen it come up but it's in the code
-		-- "adamant_companion_human_pounce",
-		-- "adamant_companion_ogryn_pounce",
-		-- "adamant_companion_monster_pounce",
-		"shockmaul_stun_interval_damage", -- shock maul electrocution and Arbites dog shocks
-	}
+local scoreboard_rows = mod:io_dofile("ovenproof_scoreboard_plugin/scripts/mods/ovenproof_scoreboard_plugin/scoreboard_rows")
 
-	mod.bleeding_damage_profiles ={
-		"bleeding",
-		"psyker_stun", -- Mortis Trials psyker bleed
-	}
-	mod.burning_damage_profiles ={
-		"burning",
-		"flame_grenade_liquid_area_fire_burning",
-		"liquid_area_fire_burning_barrel",
-		"liquid_area_fire_burning",
-		--"flamer_assault", -- Flaming shots from PBB. this just uses "burning"
-	}
-	mod.warpfire_damage_profiles ={
-		"warpfire",
-	}
-	--[[
-	mod.electrocution_damage_profiles = {
-		"shockmaul_stun_interval_damage",
-		"powermaul_p2_stun_interval",
-		"powermaul_p2_stun_interval_basic",
-		"powermaul_shield_block_special",
-		"shock_grenade_stun_interval",
-		"psyker_protectorate_spread_chain_lightning_interval",
-		"default_chain_lighting_interval",
-		"psyker_smite_kill",
-	}
-	]]
-	mod.toxin_damage_profiles = {
-		"toxin_variant_3",	
-	}
-	mod.environmental_damage_profiles = {
-		"barrel_explosion",
-		"barrel_explosion_close",
-		"fire_barrel_explosion",
-		"fire_barrel_explosion_close",
-		"kill_volume_and_off_navmesh",
-		"kill_volume_with_gibbing",
-		"default",
-		"poxwalker_explosion",
-		"poxwalker_explosion_close",
-	}
--- ------------
--- Other Stats
--- ------------
-	mod.states_disabled = {
-		-- NB: Disabled some of these due to personal preference
-		"ledge_hanging",
-		-- "warp_grabbed",
-		"grabbed",
-		"consumed",
-		"netted",
-		--"mutant_charged",
-		"pounced"
-	}
-	mod.forge_material = {
-		loc_pickup_small_metal = "small_metal",
-		loc_pickup_large_metal = "large_metal",
-		loc_pickup_small_platinum = "small_platinum",
-		loc_pickup_large_platinum = "large_platinum",
-	}
-	mod.ammunition = {
-		loc_pickup_consumable_small_clip_01 = "small_clip",
-		loc_pickup_consumable_large_clip_01 = "large_clip",
-		loc_pickup_deployable_ammo_crate_01 = "crate",
-		loc_pickup_consumable_small_grenade_01 = "grenades",
-	}
-	-- scripts/settings/pickup/pickups/consumable large_clip_pickup and small_clip_pickup
-	mod.ammunition_percentage = {
-		small_clip = 0.15,
-		-- small_clip = SmallClipPickup.ammunition_percentage,
-		large_clip = 0.5,
-		-- large_clip = LargeClipPickup.ammunition_percentage,
-		crate = 1,
-	}
+local data_tables = mod:io_dofile("ovenproof_scoreboard_plugin/scripts/mods/ovenproof_scoreboard_plugin/data_tables")
+
+local mod_melee_lessers = mod.melee_lessers
+local mod_ranged_lessers = mod.ranged_lessers
+local mod_melee_elites = mod.melee_elites
+local mod_ranged_elites = mod.ranged_elites
+local mod_melee_lessers = mod.melee_lessers
+local mod_specials = mod.specials
+local mod_disablers = mod.disablers
+local mod_bosses = mod.disablers
+local mod_skip = mod.skip
+
+local mod_melee_attack_types = mod.melee_attack_types
+local mod_melee_damage_profiles = mod.melee_damage_profiles
+local mod_ranged_attack_types = mod.ranged_attack_types
+local mod_ranged_damage_profiles = mod.ranged_damage_profiles
+local mod_companion_attack_types = mod.companion_attack_types
+local mod_companion_damage_profiles = mod.companion_damage_profiles
+local mod_bleeding_damage_profiles = mod.bleeding_damage_profiles
+local mod_burning_damage_profiles = mod.burning_damage_profiles
+local mod_warpfire_damage_profiles = mod.warpfire_damage_profiles
+local mod_electrocution_damage_profiles = mod.electrocution_damage_profiles
+local mod_toxin_damage_profiles = mod.toxin_damage_profiles
+local mod_environmental_damage_profiles = mod.environmental_damage_profiles
+
+local mod_states_disabled = mod.states_disabled
+local mod_forge_material = mod.forge_material
+local mod_ammunition = mod.ammunition
+local mod_ammunition_percentage = mod.ammunition_percentage
 
 -- Setup tables for tracking later
 -- 		to count ammo wasted
@@ -495,7 +352,7 @@ function mod.on_all_mods_loaded()
 							Managers.event:trigger("event_combat_feed_kill", unit, message)
 						end
 					elseif type == "ammunition" then
-						local ammo = mod.ammunition[self._override_contexts.ammunition.description]
+						local ammo = mod_ammunition[self._override_contexts.ammunition.description]
 						-- Get components
 						local unit_data_extension = ScriptUnit.extension(unit, "unit_data_system")
 						local wieldable_component = unit_data_extension:read_component("slot_secondary")
@@ -608,11 +465,11 @@ function mod.on_all_mods_loaded()
 				self._player_state_tracker[account_id].state = self._player_state_tracker[account_id].state or {}
 				
 				if self._player_state_tracker[account_id].state ~= player_state then
-					if not table_array_contains(mod.states_disabled, self._player_state_tracker[account_id].state) and not table_array_contains(mod.states_disabled, player_state) then
+					if not table_array_contains(mod_states_disabled, self._player_state_tracker[account_id].state) and not table_array_contains(mod_states_disabled, player_state) then
 						mod.disabled_players[account_id] = nil
 					end
 					self._player_state_tracker[account_id].state = player_state
-					if table_array_contains(mod.states_disabled, player_state) then
+					if table_array_contains(mod_states_disabled, player_state) then
 						scoreboard:update_stat("total_times_disabled", account_id, 1)
 					elseif player_state == "knocked_down" then
 						scoreboard:update_stat("total_times_downed", account_id, 1)
@@ -687,7 +544,7 @@ function mod.on_all_mods_loaded()
 						scoreboard:update_stat("total_kills", account_id, 1)
 
 						-- killed a disabler while an ally was disabled
-						if table_array_contains(mod.disablers, breed_or_nil.name) then
+						if table_array_contains(mod_disablers, breed_or_nil.name) then
 							for k,v in pairs(mod.disabled_players) do
 								if v == attacked_unit then
 									scoreboard:update_stat("total_operatives_helped", account_id, 1)
@@ -726,7 +583,7 @@ function mod.on_all_mods_loaded()
 					--	Melee
 					-- ------------
 					-- manual exception for companion, due to shared damage profile
-					if table_array_contains(mod.melee_attack_types, attack_type) or (table_array_contains(mod.melee_damage_profiles, damage_profile.name) and not table_array_contains(mod.companion_attack_types, attack_type)) then
+					if table_array_contains(mod_melee_attack_types, attack_type) or (table_array_contains(mod_melee_damage_profiles, damage_profile.name) and not table_array_contains(mod_companion_attack_types, attack_type)) then
 						self._melee_rate = (self._melee_rate or {})
 						self._melee_rate[account_id] = self._melee_rate[account_id] or {}
 						self._melee_rate[account_id].hits = self._melee_rate[account_id].hits or 0
@@ -758,7 +615,7 @@ function mod.on_all_mods_loaded()
 					-- ------------
 					--	Ranged
 					-- ------------
-					elseif table_array_contains(mod.ranged_attack_types, attack_type) or table_array_contains(mod.ranged_damage_profiles, damage_profile.name) then
+					elseif table_array_contains(mod_ranged_attack_types, attack_type) or table_array_contains(mod_ranged_damage_profiles, damage_profile.name) then
 						self._ranged_rate = self._ranged_rate or {}
 						self._ranged_rate[account_id] = self._ranged_rate[account_id] or {}
 						self._ranged_rate[account_id].hits = self._ranged_rate[account_id].hits or 0
@@ -793,7 +650,7 @@ function mod.on_all_mods_loaded()
 					-- ------------
 					--	Companion
 					-- ------------
-					elseif table_array_contains(mod.companion_attack_types, attack_type) or table_array_contains(mod.companion_damage_profiles, damage_profile.name) then
+					elseif table_array_contains(mod_companion_attack_types, attack_type) or table_array_contains(mod_companion_damage_profiles, damage_profile.name) then
 						-- Crit and Weakspot rates don't matter
 						--[[
 						self._companion_rate = self._companion_rate or {}
@@ -829,7 +686,7 @@ function mod.on_all_mods_loaded()
 					-- ------------
 					--	Bleed
 					-- ------------
-					elseif table_array_contains(mod.bleeding_damage_profiles, damage_profile.name) then
+					elseif table_array_contains(mod_bleeding_damage_profiles, damage_profile.name) then
 						self._bleeding_rate = self._bleeding_rate or {}
 						self._bleeding_rate[account_id] = self._bleeding_rate[account_id] or {}
 						self._bleeding_rate[account_id].hits = self._bleeding_rate[account_id].hits or 0
@@ -850,7 +707,7 @@ function mod.on_all_mods_loaded()
 					-- ------------
 					--	Burning
 					-- ------------
-					elseif table_array_contains(mod.burning_damage_profiles, damage_profile.name) then
+					elseif table_array_contains(mod_burning_damage_profiles, damage_profile.name) then
 						self._burning_rate = (self._burning_rate or {})
 						self._burning_rate[account_id] = (self._burning_rate[account_id] or {})
 						self._burning_rate[account_id].hits = (self._burning_rate[account_id].hits or 0) + 1
@@ -870,7 +727,7 @@ function mod.on_all_mods_loaded()
 					-- ------------
 					--	Warp
 					-- ------------
-					elseif table_array_contains(mod.warpfire_damage_profiles, damage_profile.name) then
+					elseif table_array_contains(mod_warpfire_damage_profiles, damage_profile.name) then
 						self._warpfire_rate = (self._warpfire_rate or {})
 						self._warpfire_rate[account_id] = (self._warpfire_rate[account_id] or {})
 						self._warpfire_rate[account_id].hits = (self._warpfire_rate[account_id].hits or 0) + 1
@@ -890,7 +747,7 @@ function mod.on_all_mods_loaded()
 					-- ------------
 					--	Toxin
 					-- ------------
-					elseif table_array_contains(mod.toxin_damage_profiles, damage_profile.name) then
+					elseif table_array_contains(mod_toxin_damage_profiles, damage_profile.name) then
 						self._toxin_rate = self._toxin_rate or {}
 						self._toxin_rate[account_id] = self._toxin_rate[account_id] or {}
 						self._toxin_rate[account_id].hits = self._toxin_rate[account_id].hits or 0
@@ -911,7 +768,7 @@ function mod.on_all_mods_loaded()
 					-- ------------
 					-- 	Environmental
 					-- ------------
-					elseif table_array_contains(mod.environmental_damage_profiles, damage_profile.name) then
+					elseif table_array_contains(mod_environmental_damage_profiles, damage_profile.name) then
 						self._environmental_rate = (self._environmental_rate or {})
 						self._environmental_rate[account_id] = (self._environmental_rate[account_id] or {})
 						self._environmental_rate[account_id].hits = (self._environmental_rate[account_id].hits or 0) + 1
@@ -941,49 +798,49 @@ function mod.on_all_mods_loaded()
 					-- Categorizing which enemy was damaged
 					-- TODO maybe this could be a switch
 					-- ------------------------
-					if table_array_contains(mod.melee_lessers, breed_or_nil.name) then
+					if table_array_contains(mod_melee_lessers, breed_or_nil.name) then
 						scoreboard:update_stat("total_lesser_damage", account_id, actual_damage)
 						scoreboard:update_stat("melee_lesser_damage", account_id, actual_damage)
 						if attack_result == "died" then
 							scoreboard:update_stat("total_lesser_kills", account_id, 1)
 							scoreboard:update_stat("melee_lesser_kills", account_id, 1)
 						end
-					elseif table_array_contains(mod.ranged_lessers, breed_or_nil.name) then
+					elseif table_array_contains(mod_ranged_lessers, breed_or_nil.name) then
 						scoreboard:update_stat("total_lesser_damage", account_id, actual_damage)
 						scoreboard:update_stat("ranged_lesser_damage", account_id, actual_damage)
 						if attack_result == "died" then
 							scoreboard:update_stat("total_lesser_kills", account_id, 1)
 							scoreboard:update_stat("ranged_lesser_kills", account_id, 1)
 						end
-					elseif table_array_contains(mod.melee_elites, breed_or_nil.name) then
+					elseif table_array_contains(mod_melee_elites, breed_or_nil.name) then
 						scoreboard:update_stat("total_elite_damage", account_id, actual_damage)
 						scoreboard:update_stat("melee_elite_damage", account_id, actual_damage)
 						if attack_result == "died" then
 							scoreboard:update_stat("total_elite_kills", account_id, 1)
 							scoreboard:update_stat("melee_elite_kills", account_id, 1)
 						end
-					elseif table_array_contains(mod.ranged_elites, breed_or_nil.name) then
+					elseif table_array_contains(mod_ranged_elites, breed_or_nil.name) then
 						scoreboard:update_stat("total_elite_damage", account_id, actual_damage)
 						scoreboard:update_stat("ranged_elite_damage", account_id, actual_damage)
 						if attack_result == "died" then
 							scoreboard:update_stat("total_elite_kills", account_id, 1)
 							scoreboard:update_stat("ranged_elite_kills", account_id, 1)
 						end
-					elseif table_array_contains(mod.specials, breed_or_nil.name) then
+					elseif table_array_contains(mod_specials, breed_or_nil.name) then
 						scoreboard:update_stat("total_special_damage", account_id, actual_damage)
 						scoreboard:update_stat("damage_special_damage", account_id, actual_damage)
 						if attack_result == "died" then
 							scoreboard:update_stat("total_special_kills", account_id, 1)
 							scoreboard:update_stat("damage_special_kills", account_id, 1)
 						end
-					elseif table_array_contains(mod.disablers, breed_or_nil.name) then
+					elseif table_array_contains(mod_disablers, breed_or_nil.name) then
 						scoreboard:update_stat("total_special_damage", account_id, actual_damage)
 						scoreboard:update_stat("disabler_special_damage", account_id, actual_damage)
 						if attack_result == "died" then
 							scoreboard:update_stat("total_special_kills", account_id, 1)
 							scoreboard:update_stat("disabler_special_kills", account_id, 1)
 						end
-					elseif table_array_contains(mod.bosses, breed_or_nil.name) then
+					elseif table_array_contains(mod_bosses, breed_or_nil.name) then
 						scoreboard:update_stat("total_boss_damage", account_id, actual_damage)
 						scoreboard:update_stat("boss_damage", account_id, actual_damage)
 						if attack_result == "died" then
@@ -992,11 +849,14 @@ function mod.on_all_mods_loaded()
 						end
 					-- ------------
 					-- 	Error Catching
+					--	Actually this isn't worth
 					-- ------------
 					else
-						-- Prints name of out of scope enemies
-						local error_string = "Breed: "..tostring(breed_or_nil.name)
-						echo_or_info_message_based_on_debug(error_string)
+						if not (breed_or_nil.name == "chaos_mutator_ritualist") then --"cultist_rituatlist"
+							-- Prints name of out of scope enemies
+							local error_string = "Breed: "..tostring(breed_or_nil.name)
+							echo_or_info_message_based_on_debug(error_string)
+						end
 					end
 				elseif target_is_player then
 					scoreboard:update_stat("friendly_damage", account_id, damage)
@@ -1041,1010 +901,3 @@ function mod.on_game_state_changed(status, state_name)
 	end
 end
 
--- ########################
--- Row Categorization
--- ########################
-mod.scoreboard_rows = {
---Rows exploration_tier_0
-	{name = "total_material_pickups",
-		text = "row_total_material_pickups",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		setting = "exploration_tier_0",
-	},
-	{name = "ammo_1",
-		text = "row_ammo_1",
-		group = "group_1",
-		validation = "DESC",
-		iteration = "ADD",
-		summary = {
-			"ammo_percent",
-			"ammo_wasted_percent",
-		},
-		setting = "exploration_tier_0",
-	},
-	{name = "ammo_percent",
-		text = "row_ammo_percent",
-		group = "group_1",
-		validation = "DESC",
-		iteration = "ADD",
-		parent = "ammo_1",
-		setting = "exploration_tier_0",
-	},
-	{name = "ammo_wasted_percent",
-		text = "row_ammo_wasted",
-		group = "group_1",
-		validation = "DESC",
-		iteration = "ADD",
-		parent = "ammo_1",
-		setting = "exploration_tier_0",
-	},
-	{name = "ammo_2",
-		text = "row_ammo_2",
-		group = "group_1",
-		validation = "DESC",
-		iteration = "ADD",
-		summary = {
-			"ammo_grenades",
-			"ammo_crates",
-		},
-		setting = "exploration_tier_0",
-	},
-	{name = "ammo_grenades",
-		text = "row_ammo_grenades",
-		validation = "DESC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "ammo_2",
-		setting = "exploration_tier_0",
-	},
-	{name = "ammo_crates",
-		text = "row_ammo_crates",
-		validation = "DESC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "ammo_2",
-		setting = "exploration_tier_0",
-	},
-	{name = "blank_1",
-		text = "row_blank",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		setting = "exploration_tier_0",
-		is_text = true,
-	},
---Rows defense_tier_0
-	{name = "total_health",
-		text = "row_total_health",
-		validation = "DESC",
-		iteration = "ADD",
-		summary = {
-			"total_damage_taken",
-			"total_health_stations",
-		},
-		group = "group_1",
-		setting = "defense_tier_0",
-	},
-	{name = "total_damage_taken",
-		text = "row_total_damage_taken",
-		validation = "DESC",
-		iteration = "DIFF",
-		group = "group_1",
-		parent = "total_health",
-		setting = "defense_tier_0",
-	},
-	{name = "total_health_stations",
-		text = "row_total_health_stations",
-		validation = "DESC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "total_health",
-		setting = "defense_tier_0",
-	},
-	{name = "total_friendly",
-		text = "row_total_friendly",
-		validation = "DESC",
-		iteration = "ADD",
-		summary = {
-			"friendly_damage",
-			"friendly_shots_blocked",
-		},
-		group = "group_1",
-		setting = "defense_tier_0",
-	},
-	{name = "friendly_damage",
-		text = "row_friendly_damage",
-		validation = "DESC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "total_friendly",
-		setting = "defense_tier_0",
-	},
-	{name = "friendly_shots_blocked",
-		text = "row_friendly_shots_blocked",
-		validation = "DESC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "total_friendly",
-		setting = "defense_tier_0",
-	},
-	{name = "blank_2",
-		text = "row_blank",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		setting = "defense_tier_0",
-		is_text = true,
-	},
-	{name = "total_disabled_helped",
-		text = "row_total_disabled_helped",
-		validation = "DESC",
-		iteration = "ADD",
-		summary = {
-			"total_times_disabled",
-			"total_operatives_helped",
-		},
-		group = "group_1",
-		setting = "defense_tier_0",
-	},
-	{name = "total_times_disabled",
-		text = "row_total_times_disabled",
-		validation = "DESC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "total_disabled_helped",
-		setting = "defense_tier_0",
-	},
-	{name = "total_operatives_helped",
-		text = "row_total_operatives_helped",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "total_disabled_helped",
-		setting = "defense_tier_0",
-	},
-	{name = "total_downed_revived",
-		text = "row_total_downed_revived",
-		validation = "ASC",
-		iteration = "ADD",
-		summary = {
-			"total_times_downed",
-			"total_operatives_revived",
-		},
-		group = "group_1",
-		setting = "defense_tier_0",
-	},
-	{name = "total_times_downed",
-		text = "row_total_times_downed",
-		validation = "DESC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "total_downed_revived",
-		setting = "defense_tier_0",
-	},
-	{name = "total_operatives_revived",
-		text = "row_total_operatives_revived",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "total_downed_revived",
-		setting = "defense_tier_0",
-	},
-	{name = "total_killed_rescued",
-		text = "row_total_killed_rescued",
-		validation = "DESC",
-		iteration = "ADD",
-		summary = {
-			"total_times_killed",
-			"total_operatives_rescued",
-		},
-		group = "group_1",
-		setting = "defense_tier_0",
-	},
-	{name = "total_times_killed",
-		text = "row_total_times_killed",
-		validation = "DESC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "total_killed_rescued",
-		setting = "defense_tier_0",
-	},
-	{name = "total_operatives_rescued",
-		text = "row_total_operatives_rescued",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "total_killed_rescued",
-		setting = "defense_tier_0",
-	},
-	{name = "blank_3",
-		text = "row_blank",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		setting = "defense_tier_0",
-		is_text = true,
-	},
---Rows offense_rates
-	{name = "total_weakspot_rates",
-		text = "row_total_weakspot_rates",
-		validation = "ASC",
-		iteration = "ADD",
-		summary = {
-			"melee_wr",
-			"ranged_wr",
-			-- "companion_wr", -- Don't think dogs can headshot
-		},
-		group = "group_1",
-		setting = "offense_rates",
-	},
-	{name = "melee_wr",
-		text = "row_melee_weakspot_rate",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "total_weakspot_rates",
-		setting = "offense_rates",
-	},
-	{name = "ranged_wr",
-		text = "row_ranged_weakspot_rate",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "total_weakspot_rates",
-		setting = "offense_rates",
-	},
-	--[[
-	{name = "companion_wr",
-		text = "row_companion_weakspot_rate",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "total_weakspot_rates",
-		setting = "offense_rates",
-	},
-	]]
-	{name = "total_critical_rates",
-		text = "row_total_critical_rates",
-		validation = "ASC",
-		iteration = "ADD",
-		summary = {
-			"melee_cr",
-			"ranged_cr",
-			-- "companion_cr", -- Don't think dogs can crit
-		},
-		group = "group_1",
-		setting = "offense_rates",
-	},
-	{name = "melee_cr",
-		text = "row_melee_critical_rate",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "total_critical_rates",
-		setting = "offense_rates",
-	},
-	{name = "ranged_cr",
-		text = "row_ranged_critical_rate",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "total_critical_rates",
-		setting = "offense_rates",
-	},
-	--[[
-	{name = "companion_cr",
-		text = "row_companion_critical_rate",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "total_critical_rates",
-		setting = "offense_rates",
-	},
-	]]
-	--[[{name = "total_dot_rates_1",
-		text = "row_total_dot_rates_1",
-		validation = "ASC",
-		iteration = "ADD",
-		summary = {
-			"bleeding_cr",
-			"burning_cr",
-		},
-		group = "group_1",
-		setting = "offense_rates",
-	},
-	{name = "bleeding_cr",
-		text = "row_bleeding_critical_rate",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "total_dot_rates_1",
-		setting = "offense_rates",
-	},
-	{name = "burning_cr",
-		text = "row_burning_critical_rate",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "total_dot_rates_1",
-		setting = "offense_rates",
-	},
-	{name = "total_dot_rates_2",
-		text = "row_total_dot_rates_2",
-		validation = "ASC",
-		iteration = "ADD",
-		summary = {
-			"warpfire_cr",
-			"environmental_cr",
-		},
-		group = "group_1",
-		setting = "offense_rates",
-	},
-	{name = "warpfire_cr",
-		text = "row_warpfire_critical_rate",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "total_dot_rates_2",
-		setting = "offense_rates",
-	},
-	{name = "environmental_cr",
-		text = "row_environmental_critical_rate",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "total_dot_rates_2",
-		setting = "offense_rates",
-	},--]]
-	{name = "blank_4",
-		text = "row_blank",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		setting = "offense_rates",
-		is_text = true,
-	},
---Rows offense_tier_0
-	{name = "total",
-		text = "row_total",
-		validation = "ASC",
-		iteration = "ADD",
-		summary = {
-			"total_kills",
-			"total_damage",
-		},
-		group = "group_1",
-		setting = "offense_tier_0",
-	},
-	{name = "total_kills",
-		text = "row_kills",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "total",
-		setting = "offense_tier_0",
-	},
-	{name = "total_damage",
-		text = "row_damage",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "total",
-		setting = "offense_tier_0",
-	},
-	{name = "blank_5",
-		text = "row_blank",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		setting = "offense_tier_0",
-		is_text = true,
-	},
---Rows offense_tier_1
-	-- Melee Totals
-	{name = "total_melee",
-		text = "row_total_melee",
-		validation = "ASC",
-		iteration = "ADD",
-		summary = {
-			"total_melee_kills",
-			"total_melee_damage",
-		},
-		group = "group_1",
-		setting = "offense_tier_1",
-	},
-	{name = "total_melee_kills",
-		text = "row_kills",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "total_melee",
-		setting = "offense_tier_1",
-	},
-	{name = "total_melee_damage",
-		text = "row_damage",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "total_melee",
-		setting = "offense_tier_1",
-	},
-	-- Ranged Totals
-	{name = "total_ranged",
-		text = "row_total_ranged",
-		validation = "ASC",
-		iteration = "ADD",
-		summary = {
-			"total_ranged_kills",
-			"total_ranged_damage",
-		},
-		group = "group_1",
-		setting = "offense_tier_1",
-	},
-	{name = "total_ranged_kills",
-		text = "row_kills",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "total_ranged",
-		setting = "offense_tier_1",
-	},
-	{name = "total_ranged_damage",
-		text = "row_damage",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "total_ranged",
-		setting = "offense_tier_1",
-	},
-	-- Companion Totals
-	{name = "total_companion",
-		text = "row_total_companion",
-		validation = "ASC",
-		iteration = "ADD",
-		summary = {
-			"total_companion_kills",
-			"total_companion_damage",
-		},
-		group = "group_1",
-		setting = "offense_tier_1",
-	},
-	{name = "total_companion_kills",
-		text = "row_kills",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "total_companion",
-		setting = "offense_tier_1",
-	},
-	{name = "total_companion_damage",
-		text = "row_damage",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "total_companion",
-		setting = "offense_tier_1",
-	},
-	-- Bleeding Totals
-	{name = "total_bleeding",
-		text = "row_total_bleeding",
-		validation = "ASC",
-		iteration = "ADD",
-		summary = {
-			"total_bleeding_kills",
-			"total_bleeding_damage",
-		},
-		group = "group_1",
-		setting = "offense_tier_1",
-	},
-	{name = "total_bleeding_kills",
-		text = "row_kills",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "total_bleeding",
-		setting = "offense_tier_1",
-	},
-	{name = "total_bleeding_damage",
-		text = "row_damage",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "total_bleeding",
-		setting = "offense_tier_1",
-	},
-	-- Burning
-	{name = "total_burning",
-		text = "row_total_burning",
-		validation = "ASC",
-		iteration = "ADD",
-		summary = {
-			"total_burning_kills",
-			"total_burning_damage",
-		},
-		group = "group_1",
-		setting = "offense_tier_1",
-	},
-	{name = "total_burning_kills",
-		text = "row_kills",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "total_burning",
-		setting = "offense_tier_1",
-	},
-	{name = "total_burning_damage",
-		text = "row_damage",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "total_burning",
-		setting = "offense_tier_1",
-	},
-	-- Warpfire
-	{name = "total_warpfire",
-		text = "row_total_warpfire",
-		validation = "ASC",
-		iteration = "ADD",
-		summary = {
-			"total_warpfire_kills",
-			"total_warpfire_damage",
-		},
-		group = "group_1",
-		setting = "offense_tier_1",
-	},
-	{name = "total_warpfire_kills",
-		text = "row_kills",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "total_warpfire",
-		setting = "offense_tier_1",
-	},
-	{name = "total_warpfire_damage",
-		text = "row_damage",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "total_warpfire",
-		setting = "offense_tier_1",
-	},
-	-- Toxin (Hive Scum)
-	{name = "total_toxin",
-		text = "row_total_toxin",
-		validation = "ASC",
-		iteration = "ADD",
-		summary = {
-			"total_toxin_kills",
-			"total_toxin_damage",
-		},
-		group = "group_1",
-		setting = "offense_tier_1",
-	},
-	{name = "total_toxin_kills",
-		text = "row_kills",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "total_toxin",
-		setting = "offense_tier_1",
-	},
-	{name = "total_toxin_damage",
-		text = "row_damage",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "total_toxin",
-		setting = "offense_tier_1",
-	},
-	-- Environmental
-	{name = "total_environmental",
-		text = "row_total_environmental",
-		validation = "ASC",
-		iteration = "ADD",
-		summary = {
-			"total_environmental_kills",
-			"total_environmental_damage",
-		},
-		group = "group_1",
-		setting = "offense_tier_1",
-	},
-	{name = "total_environmental_kills",
-		text = "row_kills",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "total_environmental",
-		setting = "offense_tier_1",
-	},
-	{name = "total_environmental_damage",
-		text = "row_damage",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "total_environmental",
-		setting = "offense_tier_1",
-	},
-	{name = "blank_6",
-		text = "row_blank",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		setting = "offense_tier_1",
-		is_text = true,
-	},
---Rows offense_tier_2
-	{name = "total_lesser",
-		text = "row_total_lesser",
-		validation = "ASC",
-		iteration = "ADD",
-		summary = {
-			"total_lesser_kills",
-			"total_lesser_damage",
-		},
-		group = "group_1",
-		setting = "offense_tier_2",
-	},
-	{name = "total_lesser_kills",
-		text = "row_kills",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "total_lesser",
-		setting = "offense_tier_2",
-	},
-	{name = "total_lesser_damage",
-		text = "row_damage",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "total_lesser",
-		setting = "offense_tier_2",
-	},
-	{name = "total_elite",
-		text = "row_total_elite",
-		validation = "ASC",
-		iteration = "ADD",
-		summary = {
-			"total_elite_kills",
-			"total_elite_damage",
-		},
-		group = "group_1",
-		setting = "offense_tier_2",
-	},
-	{name = "total_elite_kills",
-		text = "row_kills",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "total_elite",
-		setting = "offense_tier_2",
-	},
-	{name = "total_elite_damage",
-		text = "row_damage",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "total_elite",
-		setting = "offense_tier_2",
-	},
-	{name = "total_special",
-		text = "row_total_special",
-		validation = "ASC",
-		iteration = "ADD",
-		summary = {
-			"total_special_kills",
-			"total_special_damage",
-		},
-		group = "group_1",
-		setting = "offense_tier_2",
-	},
-	{name = "total_special_kills",
-		text = "row_kills",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "total_special",
-		setting = "offense_tier_2",
-	},
-	{name = "total_special_damage",
-		text = "row_damage",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "total_special",
-		setting = "offense_tier_2",
-	},
-	{name = "total_boss",
-		text = "row_total_boss",
-		validation = "ASC",
-		iteration = "ADD",
-		summary = {
-			"total_boss_kills",
-			"total_boss_damage",
-		},
-		group = "group_1",
-		setting = "offense_tier_2",
-	},
-	{name = "total_boss_kills",
-		text = "row_kills",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "total_boss",
-		setting = "offense_tier_2",
-	},
-	{name = "total_boss_damage",
-		text = "row_damage",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "total_boss",
-		setting = "offense_tier_2",
-	},
-	{name = "blank_7",
-		text = "row_blank",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		setting = "offense_tier_2",
-		is_text = true,
-	},
---Rows offense_tier_3
-	{name = "melee_lesser",
-		text = "row_melee_lesser",
-		validation = "ASC",
-		iteration = "ADD",
-		summary = {
-			"melee_lesser_kills",
-			"melee_lesser_damage",
-		},
-		group = "group_1",
-		setting = "offense_tier_3",
-	},
-	{name = "melee_lesser_kills",
-		text = "row_kills",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "melee_lesser",
-		setting = "offense_tier_3",
-	},
-	{name = "melee_lesser_damage",
-		text = "row_damage",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "melee_lesser",
-		setting = "offense_tier_3",
-	},
-	{name = "ranged_lesser",
-		text = "row_ranged_lesser",
-		validation = "ASC",
-		iteration = "ADD",
-		summary = {
-			"ranged_lesser_kills",
-			"ranged_lesser_damage",
-		},
-		group = "group_1",
-		setting = "offense_tier_3",
-	},
-	{name = "ranged_lesser_kills",
-		text = "row_kills",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "ranged_lesser",
-		setting = "offense_tier_3",
-	},
-	{name = "ranged_lesser_damage",
-		text = "row_damage",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "ranged_lesser",
-		setting = "offense_tier_3",
-	},
-	{name = "melee_elite",
-		text = "row_melee_elite",
-		validation = "ASC",
-		iteration = "ADD",
-		summary = {
-			"melee_elite_kills",
-			"melee_elite_damage",
-		},
-		group = "group_1",
-		setting = "offense_tier_3",
-	},
-	{name = "melee_elite_kills",
-		text = "row_kills",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "melee_elite",
-		setting = "offense_tier_3",
-	},
-	{name = "melee_elite_damage",
-		text = "row_damage",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "melee_elite",
-		setting = "offense_tier_3",
-	},
-	{name = "ranged_elite",
-		text = "row_ranged_elite",
-		validation = "ASC",
-		iteration = "ADD",
-		summary = {
-			"ranged_elite_kills",
-			"ranged_elite_damage",
-		},
-		group = "group_1",
-		setting = "offense_tier_3",
-	},
-	{name = "ranged_elite_kills",
-		text = "row_kills",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "ranged_elite",
-		setting = "offense_tier_3",
-	},
-	{name = "ranged_elite_damage",
-		text = "row_damage",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "ranged_elite",
-		setting = "offense_tier_3",
-	},
-	{name = "damage_special",
-		text = "row_damage_special",
-		validation = "ASC",
-		iteration = "ADD",
-		summary = {
-			"damage_special_kills",
-			"damage_special_damage",
-		},
-		group = "group_1",
-		setting = "offense_tier_3",
-	},
-	{name = "damage_special_kills",
-		text = "row_kills",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "damage_special",
-		setting = "offense_tier_3",
-	},
-	{name = "damage_special_damage",
-		text = "row_damage",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "damage_special",
-		setting = "offense_tier_3",
-	},
-	{name = "disabler_special",
-		text = "row_disabler_special",
-		validation = "ASC",
-		iteration = "ADD",
-		summary = {
-			"disabler_special_kills",
-			"disabler_special_damage",
-		},
-		group = "group_1",
-		setting = "offense_tier_3",
-	},
-	{name = "disabler_special_kills",
-		text = "row_kills",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "disabler_special",
-		setting = "offense_tier_3",
-	},
-	{name = "disabler_special_damage",
-		text = "row_damage",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "disabler_special",
-		setting = "offense_tier_3",
-	},
-	{name = "boss",
-		text = "row_boss",
-		validation = "ASC",
-		iteration = "ADD",
-		summary = {
-			"boss_kills",
-			"boss_damage",
-		},
-		group = "group_1",
-		setting = "offense_tier_3",
-	},
-	{name = "boss_kills",
-		text = "row_kills",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "boss",
-		setting = "offense_tier_3",
-	},
-	{name = "boss_damage",
-		text = "row_damage",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "boss",
-		setting = "offense_tier_3",
-	},
-	{name = "blank_8",
-		text = "row_blank",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		setting = "offense_tier_3",
-		is_text = true,
-	},
---Rows fun_stuff_01
-	{name = "one_shots",
-		text = "row_one_shots",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		setting = "fun_stuff_01",
-	},
-	{name = "highest_single_hit",
-		text = "row_highest_single_hit",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		setting = "fun_stuff_01",
-		is_text = true,
-	},
-	{name = "blank_9",
-		text = "row_blank",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		setting = "fun_stuff_01",
-		is_text = true,
-	},
---Rows blanks
-	{name = "blank_10",
-		text = "row_blank",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		setting = "bottom_padding",
-		is_text = true,
-	},
-	{name = "blank_11",
-		text = "row_blank",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		setting = "bottom_padding",
-		is_text = true,
-	},
-	{name = "blank_12",
-		text = "row_blank",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		setting = "bottom_padding",
-		is_text = true,
-	},
-	{name = "blank_13",
-		text = "row_blank",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		setting = "bottom_padding",
-		is_text = true,
-	},
-}
