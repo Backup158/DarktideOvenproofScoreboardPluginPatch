@@ -82,11 +82,11 @@ local mod_ammunition_percentage = mod.ammunition_percentage
 
 -- Setup tables for tracking later
 -- 		to count ammo wasted
-mod.current_ammo = {}
+local tracked_current_ammo_for_players = {}
 -- 		to see who's interacting
-mod.interaction_units = {}
+local tracked_interaction_units_for_players = {}
 --		to see who's disabled (and for when they get freed)
-mod.disabled_players = {}
+local tracked_disabled_players_for_players = {}
 
 -- ########################
 -- Helper Functions
@@ -316,12 +316,12 @@ function mod.on_all_mods_loaded()
 	-- ############
 	mod:hook(CLASS.InteracteeExtension, "started", function(func, self, interactor_unit, ...)
 
-		mod.interaction_units[self._unit] = interactor_unit
+		tracked_interaction_units_for_players[self._unit] = interactor_unit
 
 		-- Ammunition
 		local unit_data_extension = ScriptUnit.extension(interactor_unit, "unit_data_system")
 		local wieldable_component = unit_data_extension:read_component("slot_secondary")
-		mod.current_ammo[interactor_unit] = wieldable_component.current_ammunition_reserve
+		tracked_current_ammo_for_players[interactor_unit] = wieldable_component.current_ammunition_reserve
 
 		func(self, interactor_unit, ...)
 	end)
@@ -360,7 +360,7 @@ function mod.on_all_mods_loaded()
 						-- Get ammo numbers
 						local current_ammo_clip = wieldable_component.current_ammunition_clip[1]
 						local max_ammo_clip = wieldable_component.max_ammunition_clip[1]
-						local current_ammo_reserve = mod.current_ammo[unit]
+						local current_ammo_reserve = tracked_current_ammo_for_players[unit]
 						local max_ammo_reserve = wieldable_component.max_ammunition_reserve
 						-- Calculate relevant ammo values relative to the "combined" ammo reserve, i.e. base reserve + clip
 						local current_ammo_combined = current_ammo_clip + current_ammo_reserve
@@ -457,7 +457,7 @@ function mod.on_all_mods_loaded()
 					local disabling_unit = disabled_character_state_component.disabling_unit
 					
 					if is_disabled and disabling_unit then
-						mod.disabled_players[account_id] = disabling_unit
+						tracked_disabled_players_for_players[account_id] = disabling_unit
 					end
 				end
 
@@ -467,7 +467,7 @@ function mod.on_all_mods_loaded()
 				
 				if self._player_state_tracker[account_id].state ~= player_state then
 					if not table_array_contains(mod_states_disabled, self._player_state_tracker[account_id].state) and not table_array_contains(mod_states_disabled, player_state) then
-						mod.disabled_players[account_id] = nil
+						tracked_disabled_players_for_players[account_id] = nil
 					end
 					self._player_state_tracker[account_id].state = player_state
 					if table_array_contains(mod_states_disabled, player_state) then
@@ -546,10 +546,10 @@ function mod.on_all_mods_loaded()
 
 						-- killed a disabler while an ally was disabled
 						if table_array_contains(mod_disablers, breed_or_nil.name) then
-							for k,v in pairs(mod.disabled_players) do
+							for k,v in pairs(tracked_disabled_players_for_players) do
 								if v == attacked_unit then
 									scoreboard:update_stat("total_operatives_helped", account_id, 1)
-									mod.disabled_players[k] = nil
+									tracked_disabled_players_for_players[k] = nil
 								end
 							end
 						end
