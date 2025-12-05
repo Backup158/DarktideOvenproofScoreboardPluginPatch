@@ -849,14 +849,14 @@ function mod.on_all_mods_loaded()
 						end
 					-- ------------
 					-- 	Error Catching
-					--	Actually this isn't worth
 					-- ------------
+					elseif table_array_contains(mod_skip, breed_or_nil.name) then
+						-- do nothing
+						-- this is so ugly but idc :D
 					else
-						if not (breed_or_nil.name == "chaos_mutator_ritualist") then --"cultist_rituatlist"
-							-- Prints name of out of scope enemies
-							local error_string = "Breed: "..tostring(breed_or_nil.name)
-							echo_or_info_message_based_on_debug(error_string)
-						end
+						-- Prints name of out of scope enemies
+						local error_string = "Breed: "..tostring(breed_or_nil.name)
+						echo_or_info_message_based_on_debug(error_string)
 					end
 				elseif target_is_player then
 					scoreboard:update_stat("friendly_damage", account_id, damage)
