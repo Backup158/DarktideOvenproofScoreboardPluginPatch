@@ -62,7 +62,7 @@ mod.bosses = {
 }
 mod.skip = {
     "chaos_mutator_ritualist",
-    "cultist_rituatlist",
+    "cultist_ritualist",
 }
 -- ------------
 -- Damage Types
