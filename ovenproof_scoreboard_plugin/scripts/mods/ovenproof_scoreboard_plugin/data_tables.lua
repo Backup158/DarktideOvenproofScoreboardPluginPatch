@@ -70,14 +70,13 @@ mod.skip = {
 mod.melee_attack_types ={
     "melee",
     "push",
-    -- "buff", -- regular Shock Maul and Arbites power maul stun intervals. also covers warp and bleed
+    -- "buff", -- regular Shock Maul and Arbites power maul stun intervals. also covers warp and bleed so don't use lol
 }
 mod.melee_damage_profiles ={
-    -- "shockmaul_stun_interval_damage", -- shock maul electrocution and Arbites dog shocks
+    -- "shockmaul_stun_interval_damage", -- shock maul electrocution and Arbites dog shocks. dog shock is more important imo so I put it there
     "powermaul_p2_stun_interval",
     "powermaul_p2_stun_interval_basic",
     "powermaul_shield_block_special",
-    
 }
 mod.ranged_attack_types ={
     "ranged",
@@ -114,7 +113,7 @@ mod.burning_damage_profiles ={
     "flame_grenade_liquid_area_fire_burning",
     "liquid_area_fire_burning_barrel",
     "liquid_area_fire_burning",
-    --"flamer_assault", -- Flaming shots from PBB. this just uses "burning"
+    --"flamer_assault", -- Flaming shots from PBB. False bug report: this just uses "burning"
 }
 mod.warpfire_damage_profiles ={
     "warpfire",
