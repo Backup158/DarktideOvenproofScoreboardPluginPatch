@@ -52,14 +52,15 @@ local scoreboard_rows = mod:io_dofile("ovenproof_scoreboard_plugin/scripts/mods/
 
 local data_tables = mod:io_dofile("ovenproof_scoreboard_plugin/scripts/mods/ovenproof_scoreboard_plugin/data_tables")
 
-local mod_melee_lessers = mod.melee_lessers
-local mod_ranged_lessers = mod.ranged_lessers
-local mod_melee_elites = mod.melee_elites
-local mod_ranged_elites = mod.ranged_elites
-local mod_specials = mod.specials
-local mod_disablers = mod.disablers
-local mod_bosses = mod.disablers
-local mod_skip = mod.skip
+local mod_enemy_groups = {}
+local mod_enemy_groups.melee_lessers = mod.melee_lessers
+local mod_enemy_groups.ranged_lessers = mod.ranged_lessers
+local mod_enemy_groups.melee_elites = mod.melee_elites
+local mod_enemy_groups.ranged_elites = mod.ranged_elites
+local mod_enemy_groups.specials = mod.specials
+local mod_enemy_groups.disablers = mod.disablers
+local mod_enemy_groups.bosses = mod.disablers
+local mod_enemy_groups.skip = mod.skip
 
 local mod_melee_attack_types = mod.melee_attack_types
 local mod_melee_damage_profiles = mod.melee_damage_profiles
