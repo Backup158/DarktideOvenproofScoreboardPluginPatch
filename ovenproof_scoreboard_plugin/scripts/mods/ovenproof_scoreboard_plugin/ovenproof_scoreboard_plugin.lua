@@ -990,6 +990,13 @@ function mod.on_all_mods_loaded()
 							scoreboard:update_stat("total_boss_kills", account_id, 1)
 							scoreboard:update_stat("boss_kills", account_id, 1)
 						end
+					-- ------------
+					-- 	Error Catching
+					-- ------------
+					else
+						-- Prints name of out of scope enemies
+						local error_string = "Breed: "..tostring(breed_or_nil.name)
+						echo_or_info_message_based_on_debug(error_string)
 					end
 				elseif target_is_player then
 					scoreboard:update_stat("friendly_damage", account_id, damage)
