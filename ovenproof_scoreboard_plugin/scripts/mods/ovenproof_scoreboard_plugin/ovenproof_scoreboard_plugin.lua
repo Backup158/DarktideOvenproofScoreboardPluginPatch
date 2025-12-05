@@ -52,15 +52,14 @@ local scoreboard_rows = mod:io_dofile("ovenproof_scoreboard_plugin/scripts/mods/
 
 local data_tables = mod:io_dofile("ovenproof_scoreboard_plugin/scripts/mods/ovenproof_scoreboard_plugin/data_tables")
 
-local mod_enemy_groups = {}
-local mod_enemy_groups.melee_lessers = mod.melee_lessers
-local mod_enemy_groups.ranged_lessers = mod.ranged_lessers
-local mod_enemy_groups.melee_elites = mod.melee_elites
-local mod_enemy_groups.ranged_elites = mod.ranged_elites
-local mod_enemy_groups.specials = mod.specials
-local mod_enemy_groups.disablers = mod.disablers
-local mod_enemy_groups.bosses = mod.disablers
-local mod_enemy_groups.skip = mod.skip
+local mod_melee_lessers = mod.melee_lessers
+local mod_ranged_lessers = mod.ranged_lessers
+local mod_melee_elites = mod.melee_elites
+local mod_ranged_elites = mod.ranged_elites
+local mod_specials = mod.specials
+local mod_disablers = mod.disablers
+local mod_bosses = mod.disablers
+local mod_skip = mod.skip
 
 local mod_melee_attack_types = mod.melee_attack_types
 local mod_melee_damage_profiles = mod.melee_damage_profiles
@@ -797,8 +796,24 @@ function mod.on_all_mods_loaded()
 
 					-- ------------------------
 					-- Categorizing which enemy was damaged
-					-- TODO maybe this could be a switch
 					-- ------------------------
+					--[[
+					-- TODO maybe this could be a switch
+					-- 	eh that doesn't really work since you can't match the case exactly
+					-- 	and looping would require string operations, which is worse for performance for no real gain
+					for group_name, group_table_data in pairs(mod_enemy_groups) do
+						local group_name_total = string_sub(group_name, "melee_", "")
+
+						if table_array_contains(group_table_data, breed_or_nil.name) then
+							scoreboard:update_stat("total_lesser_damage", account_id, actual_damage)
+							scoreboard:update_stat("melee_lesser_damage", account_id, actual_damage)
+							if attack_result == "died" then
+								scoreboard:update_stat("total_lesser_kills", account_id, 1)
+								scoreboard:update_stat("melee_lesser_kills", account_id, 1)
+							end
+						end
+					end
+					]]
 					if table_array_contains(mod_melee_lessers, breed_or_nil.name) then
 						scoreboard:update_stat("total_lesser_damage", account_id, actual_damage)
 						scoreboard:update_stat("melee_lesser_damage", account_id, actual_damage)
