@@ -56,7 +56,6 @@ local mod_melee_lessers = mod.melee_lessers
 local mod_ranged_lessers = mod.ranged_lessers
 local mod_melee_elites = mod.melee_elites
 local mod_ranged_elites = mod.ranged_elites
-local mod_melee_lessers = mod.melee_lessers
 local mod_specials = mod.specials
 local mod_disablers = mod.disablers
 local mod_bosses = mod.disablers
