@@ -119,7 +119,6 @@ mod.burning_damage_profiles ={
 mod.warpfire_damage_profiles ={
     "warpfire",
 }
---[[
 mod.electrocution_damage_profiles = {
     "shockmaul_stun_interval_damage",
     "powermaul_p2_stun_interval",
@@ -130,7 +129,6 @@ mod.electrocution_damage_profiles = {
     "default_chain_lighting_interval",
     "psyker_smite_kill",
 }
-]]
 mod.toxin_damage_profiles = {
     "toxin_variant_3",	
 }

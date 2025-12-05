@@ -167,6 +167,7 @@ end
 
 -- ############
 -- Add Damage Taken/Done Ratio
+-- this may not be possible since the original mod makes rows only increase or decrease in value
 -- ############
 --[[
 mod.add_damage_taken_done_ratio = function(self, account_id)
