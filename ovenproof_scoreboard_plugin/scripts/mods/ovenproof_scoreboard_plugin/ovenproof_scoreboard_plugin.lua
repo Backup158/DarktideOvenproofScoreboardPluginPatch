@@ -14,6 +14,7 @@ local TextUtilities = mod:original_require("scripts/utilities/ui/text")
 -- Optimizations for globals
 -- #######
 local pairs = pairs
+local type = type
 
 local math = math
 local math_max = math.max
@@ -58,7 +59,7 @@ local mod_melee_elites = mod.melee_elites
 local mod_ranged_elites = mod.ranged_elites
 local mod_specials = mod.specials
 local mod_disablers = mod.disablers
-local mod_bosses = mod.disablers
+local mod_bosses = mod.bosses
 local mod_skip = mod.skip
 
 local mod_melee_attack_types = mod.melee_attack_types
@@ -332,7 +333,7 @@ function mod.on_all_mods_loaded()
 	-- ############
 	mod:hook(CLASS.InteracteeExtension, "stopped", function(func, self, result, ...)
 		if result == interaction_results.success then
-			local type = self:interaction_type() or ""
+			local interaction_type = self:interaction_type() or ""
 			local unit = self._interactor_unit
 			if unit then
 				local player = Managers.player:player_by_unit(unit)
@@ -340,18 +341,18 @@ function mod.on_all_mods_loaded()
 				if player then
 					local account_id = player:account_id() or player:name()
 					local color = Color.citadel_casandora_yellow(255, true)
-					if type == "forge_material" then
+					if interaction_type == "forge_material" then
 						scoreboard:update_stat("total_material_pickups", account_id, 1)
-					elseif type == "health_station" then
+					elseif interaction_type == "health_station" then
 						scoreboard:update_stat("total_health_stations", account_id, 1)
-					elseif type == "grenade" then
+					elseif interaction_type == "grenade" then
 						scoreboard:update_stat("ammo_grenades", account_id, 1)
 						if mod:get("ammo_messages") then
 							local text = TextUtilities.apply_color_to_text(mod:localize("message_grenades_text"), color)
 							local message = mod:localize("message_grenades_body", text)
 							Managers.event:trigger("event_combat_feed_kill", unit, message)
 						end
-					elseif type == "ammunition" then
+					elseif interaction_type == "ammunition" then
 						local ammo = mod_ammunition[self._override_contexts.ammunition.description]
 						-- Get components
 						local unit_data_extension = ScriptUnit.extension(unit, "unit_data_system")
@@ -359,6 +360,20 @@ function mod.on_all_mods_loaded()
 						-- Get ammo numbers
 						local current_ammo_clip = wieldable_component.current_ammunition_clip[1]
 						local max_ammo_clip = wieldable_component.max_ammunition_clip[1]
+						--[[
+						if type(current_ammo_clip) == "table" then
+							mod:echo("uwu current_ammo_clip is a table")
+							table.dump(current_ammo_clip, "uwu current_ammo_clip", 20)
+						else
+							mod:echo("uwu current_ammo_clip: "..tostring(current_ammo_clip))
+						end
+						if type(max_ammo_clip) == "table" then
+							mod:echo("uwu max ammo clip is a table")
+							table.dump(max_ammo_clip, "uwu MAX AMMO CLIP", 20)
+						else
+							mod:echo("uwu max ammo clip: "..tostring(max_ammo_clip))
+						end
+						]]
 						local current_ammo_reserve = tracked_current_ammo_for_players[unit]
 						local max_ammo_reserve = wieldable_component.max_ammunition_reserve
 						-- Calculate relevant ammo values relative to the "combined" ammo reserve, i.e. base reserve + clip
