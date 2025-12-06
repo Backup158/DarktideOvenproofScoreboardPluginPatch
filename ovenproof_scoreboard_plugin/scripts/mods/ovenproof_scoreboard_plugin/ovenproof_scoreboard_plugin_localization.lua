@@ -99,8 +99,17 @@ local localization = {
     defense_tracking_group = {
         en = "Defense Report Tracking",
     },
-    defense_tracking_group = {
-        en = "Defense Report Tracking",
+    disabled_tracking_group = {
+        en = "Track Events as a Disabled State",
+    },
+    disabled_tracking_group_description = {
+        en = "When enabled, entering the described state will count as getting Disabled",
+    },
+    track_warp_grabbed = {
+        en = "Entering Perils of the Warp (Before Exploding)",
+    },
+    track_mutant_charged = {
+        en = "Charged by a Mutant",
     },
     exploration_tier_0 = {
         en = "Exploration",
