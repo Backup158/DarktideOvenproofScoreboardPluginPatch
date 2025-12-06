@@ -482,7 +482,13 @@ function mod.on_all_mods_loaded()
 				self._player_state_tracker[account_id].state = self._player_state_tracker[account_id].state or {}
 				
 				if self._player_state_tracker[account_id].state ~= player_state then
-					if not table_array_contains(mod_states_disabled, self._player_state_tracker[account_id].state) and not table_array_contains(mod_states_disabled, player_state) then
+					if 	(	not table_array_contains(mod_states_disabled, self._player_state_tracker[account_id].state) 
+							and not table_array_contains(mod_states_disabled, player_state) 
+						) and
+						(	not table_array_contains(mod_optional_states_disabled, self._player_state_tracker[account_id].state) 
+							and not table_array_contains(mod_optional_states_disabled, player_state) 
+						)
+					then
 						tracked_disabled_players_for_players[account_id] = nil
 					end
 					self._player_state_tracker[account_id].state = player_state
