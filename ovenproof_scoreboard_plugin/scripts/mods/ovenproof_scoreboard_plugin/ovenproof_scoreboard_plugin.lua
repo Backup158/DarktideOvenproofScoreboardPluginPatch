@@ -40,6 +40,8 @@ local debug_messages_enabled
 local explosions_affect_ranged_hitrate
 local explosions_affect_melee_hitrate
 local track_blitz_damage
+local track_blitz_wr
+local track_blitz_cr
 
 local in_match
 local is_playing_havoc
@@ -253,15 +255,14 @@ function mod.update(main_dt)
 end
 
 local function change_scoreboard_row_visibility(row_name, truth)
-	mod.scoreboard_rows[row_name].visible = truth
-	local kills = row_name.."_kills"
-	local damage = row_name.."_damage"
-	if (mod.scoreboard_rows[kills]) then
-		mod.scoreboard_rows[kills].visible = truth
+	if mod.scoreboard_rows[row_name] then
+		mod.scoreboard_rows[row_name].visible = truth
 	end
-	if (mod.scoreboard_rows[damage]) then
-		mod.scoreboard_rows[damage].visible = truth
-	end
+end
+local function kill_damage_change_scoreboard_row_visibility(row_name, truth)
+	change_scoreboard_row_visibility(row_name, truth)
+	change_scoreboard_row_visibility(row_name.."_kills", truth)
+	change_scoreboard_row_visibility(row_name.."_damage", truth)
 end
 
 local function set_locals_for_settings()
@@ -269,7 +270,7 @@ local function set_locals_for_settings()
 	explosions_affect_ranged_hitrate = mod:get("explosions_affect_ranged_hitrate")
 	explosions_affect_melee_hitrate = mod:get("explosions_affect_melee_hitrate")
 	track_blitz_damage = mod:get("track_blitz_damage")
-	change_scoreboard_row_visibility("total_blitz", track_blitz_damage)
+	kill_damage_change_scoreboard_row_visibility("total_blitz", track_blitz_damage)
 end
 
 -- ############
@@ -660,44 +661,40 @@ function mod.on_all_mods_loaded()
 					-- ------------
 					--	Blitz
 					-- 	Blitzes overlap with ranged damage, so this check must be done first
+					--  Tracks Crit and Weakspot because of Assail and such
 					-- ------------
 					elseif track_blitz_damage 
 					and (table_array_contains(mod_blitz_attack_types, attack_type) 
 						or table_array_contains(mod_blitz_damage_profiles, damage_profile.name)
 				 		) 
 					then
-						-- Crit and Weakspot rates don't matter
-						--[[
 						self._blitz_rate = self._blitz_rate or {}
 						self._blitz_rate[account_id] = self._blitz_rate[account_id] or {}
 						self._blitz_rate[account_id].hits = self._blitz_rate[account_id].hits or 0
 						self._blitz_rate[account_id].hits = self._blitz_rate[account_id].hits +1
-						self._blitz_rate[account_id].weakspots = self._blitz_rate[account_id].weakspots or 0
-						self._blitz_rate[account_id].crits = self._blitz_rate[account_id].crits or 0
-						]]
 						
 						scoreboard:update_stat("total_blitz_damage", account_id, actual_damage)
-						--[[
-						if hit_weakspot then
-							self._blitz_rate[account_id].weakspots = self._blitz_rate[account_id].weakspots + 1
-						end
-						]]
-						--[[
-						if is_critical_strike then
-							self._blitz_rate[account_id].crits = self._blitz_rate[account_id].crits + 1
-						end
-						]]
 						if attack_result == "died" then
 							scoreboard:update_stat("total_blitz_kills", account_id, 1)
 						end
+
+						if track_blitz_wr then
+							self._blitz_rate[account_id].weakspots = self._blitz_rate[account_id].weakspots or 0
+							if hit_weakspot then
+								self._blitz_rate[account_id].weakspots = self._blitz_rate[account_id].weakspots + 1
+							end
+							self._blitz_rate[account_id].wr = self._blitz_rate[account_id].weakspots / self._blitz_rate[account_id].hits * 100
+							mod:replace_row_value("blitz_wr", account_id, self._blitz_rate[account_id].wr)
+						end
 						
-						--[[
-						self._blitz_rate[account_id].cr = self._blitz_rate[account_id].crits / self._blitz_rate[account_id].hits * 100
-						self._blitz_rate[account_id].wr = self._blitz_rate[account_id].weakspots / self._blitz_rate[account_id].hits * 100
-						
-						mod:replace_row_value("blitz_cr", account_id, self._blitz_rate[account_id].cr)
-						mod:replace_row_value("blitz_wr", account_id, self._blitz_rate[account_id].wr)
-						]]
+						if track_blitz_cr then
+							self._blitz_rate[account_id].crits = self._blitz_rate[account_id].crits or 0
+							if is_critical_strike then
+								self._blitz_rate[account_id].crits = self._blitz_rate[account_id].crits + 1
+							end
+							self._blitz_rate[account_id].cr = self._blitz_rate[account_id].crits / self._blitz_rate[account_id].hits * 100
+							mod:replace_row_value("blitz_cr", account_id, self._blitz_rate[account_id].cr)
+						end
 					-- ------------
 					--	Ranged
 					-- ------------
