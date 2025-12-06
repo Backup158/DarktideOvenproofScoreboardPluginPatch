@@ -35,7 +35,7 @@ local table_array_contains = table.array_contains
 -- #######
 -- Mod Locals
 -- #######
-mod.version = "1.7.0"
+mod.version = "1.7.1"
 local debug_messages_enabled
 local explosions_affect_ranged_hitrate
 local explosions_affect_melee_hitrate
