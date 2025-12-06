@@ -1,7 +1,12 @@
 # 2025-12-XXX
 v1.8.0
 
-
+- Added mod options to optionally track other states as disabled
+    - Originally these were disabled by mod author preference
+        - Catapulted (new): when hit by big knockback and you're flinging your arms about
+        - Warp Grabbed: pretty sure this is the Daemonhost
+        - Charged by Mutant
+    - States tracker doesn't seem to run in the Psykhanium/SoloPlay, so this is a pain in the ass to test >_>
 
 # 2025-12-XXX
 v1.7.1
