@@ -157,9 +157,9 @@ mod.states_disabled = {
     --"warp_grabbed",
 }
 mod.optional_states_disabled = {
-    "warp_grabbed", -- Daemonhost execution
-    "mutant_charged",
-    "catapulted", -- YEET (from knockback)
+    [1] = "catapulted", -- YEET (from knockback)
+    [2] = "mutant_charged",
+    [3] = "warp_grabbed", -- Daemonhost execution
     -- @backup158: game also counts hogtied and knocked_down but I'm not even considering those as possibilities for players to want to track
 }
 mod.forge_material = {
