@@ -156,6 +156,10 @@ mod.states_disabled = {
     --"mutant_charged",
     "pounced"
 }
+mod.other_disabled = {
+    "warp_grabbed",
+    "mutant_charged",
+}
 mod.forge_material = {
     loc_pickup_small_metal = "small_metal",
     loc_pickup_large_metal = "large_metal",
