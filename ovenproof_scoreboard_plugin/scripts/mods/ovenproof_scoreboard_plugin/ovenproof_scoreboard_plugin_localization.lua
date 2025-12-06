@@ -459,6 +459,13 @@ local localization = {
         ["zh-tw"] = "遠程",
         ["pt-br"] = "Distância",
     },
+    row_blitz_weakspot_rate = {
+        en = "Blitz",
+        --ru = "",
+        --["zh-cn"] = "",
+        --["zh-tw"] = "",
+        --["pt-br"] = "",
+    },
     --[[
     row_companion_weakspot_rate = {
         en = "Companion",
@@ -484,6 +491,13 @@ local localization = {
         ["zh-cn"] = "远程",
         ["zh-tw"] = "遠程",
         ["pt-br"] = "Distância",
+    },
+    row_blitz_critical_rate = {
+        en = "Blitz",
+        --ru = "",
+        --["zh-cn"] = "",
+        --["zh-tw"] = "",
+        --["pt-br"] = "",
     },
     --[[
     row_companion_critical_rate = {
@@ -559,6 +573,13 @@ local localization = {
         ["zh-cn"] = {left = "总远程", right = right_hand_localizations.kill_damage["zh-cn"],},
         ["zh-tw"] = { left = "總遠程", right = right_hand_localizations.kill_damage["zh-tw"],},
         ["pt-br"] = {left = "Total Distância", right = right_hand_localizations.kill_damage["pt-br"]},
+    },
+    row_total_blitz = {
+        en = {left = "Total Blitz", right = right_hand_localizations.kill_damage["en"],},
+        --ru = {left = "Всего", right = right_hand_localizations.kill_damage["ru"],},
+        --["zh-cn"] = {left = "总", right = right_hand_localizations.kill_damage["zh-cn"],},
+        --["zh-tw"] = { left = "總", right = right_hand_localizations.kill_damage["zh-tw"],},
+        --["pt-br"] = {left = "Total", right = right_hand_localizations.kill_damage["pt-br"]},
     },
     -- @backup158: idk if these localizations are accurate
     row_total_companion = {
