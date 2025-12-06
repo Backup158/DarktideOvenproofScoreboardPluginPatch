@@ -271,6 +271,11 @@ local function set_locals_for_settings()
 	explosions_affect_melee_hitrate = mod:get("explosions_affect_melee_hitrate")
 	track_blitz_damage = mod:get("track_blitz_damage")
 	kill_damage_change_scoreboard_row_visibility("total_blitz", track_blitz_damage)
+
+	track_blitz_wr = mod:get("track_blitz_wr")
+	change_scoreboard_row_visibility("blitz_wr", track_blitz_wr)
+	track_blitz_cr = mod:get("track_blitz_cr")
+	change_scoreboard_row_visibility("blitz_cr", track_blitz_cr)
 end
 
 -- ############
