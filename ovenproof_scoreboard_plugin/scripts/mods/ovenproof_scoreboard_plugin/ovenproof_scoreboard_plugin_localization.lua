@@ -105,11 +105,15 @@ local localization = {
     disabled_tracking_group_description = {
         en = "When enabled, entering the described state will count as getting Disabled",
     },
-    track_warp_grabbed = {
-        en = "Entering Perils of the Warp (Before Exploding)",
+    track_catapulted = {
+        en = "Catapulted by Knockback",
     },
     track_mutant_charged = {
         en = "Charged by a Mutant",
+    },
+    track_warp_grabbed = {
+        --en = "Grabbed by a Daemonhost",
+        en = "Warp Grabbed",
     },
     exploration_tier_0 = {
         en = "Exploration",
