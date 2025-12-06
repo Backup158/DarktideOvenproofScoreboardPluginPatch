@@ -39,6 +39,7 @@ mod.version = "1.7.1"
 local debug_messages_enabled
 local explosions_affect_ranged_hitrate
 local explosions_affect_melee_hitrate
+local track_blitz_damage
 
 local in_match
 local is_playing_havoc
@@ -67,6 +68,8 @@ local mod_melee_attack_types = mod.melee_attack_types
 local mod_melee_damage_profiles = mod.melee_damage_profiles
 local mod_ranged_attack_types = mod.ranged_attack_types
 local mod_ranged_damage_profiles = mod.ranged_damage_profiles
+local mod_blitz_attack_types = mod.blitz_attack_types
+local mod_blitz_damage_profiles = mod.blitz_damage_profiles
 local mod_companion_attack_types = mod.companion_attack_types
 local mod_companion_damage_profiles = mod.companion_damage_profiles
 local mod_bleeding_damage_profiles = mod.bleeding_damage_profiles
@@ -249,10 +252,24 @@ function mod.update(main_dt)
 	mod:manage_blank_rows()
 end
 
+local function change_scoreboard_row_visibility(row_name, truth)
+	mod.scoreboard_rows[row_name].visible = truth
+	local kills = row_name.."_kills"
+	local damage = row_name.."_damage"
+	if (mod.scoreboard_rows[kills]) then
+		mod.scoreboard_rows[kills].visible = truth
+	end
+	if (mod.scoreboard_rows[damage]) then
+		mod.scoreboard_rows[damage].visible = truth
+	end
+end
+
 local function set_locals_for_settings()
 	debug_messages_enabled = mod:get("enable_debug_messages")
 	explosions_affect_ranged_hitrate = mod:get("explosions_affect_ranged_hitrate")
 	explosions_affect_melee_hitrate = mod:get("explosions_affect_melee_hitrate")
+	track_blitz_damage = mod:get("track_blitz_damage")
+	change_scoreboard_row_visibility("total_blitz", track_blitz_damage)
 end
 
 -- ############
@@ -640,6 +657,47 @@ function mod.on_all_mods_loaded()
 						
 						mod:replace_row_value("melee_cr", account_id, self._melee_rate[account_id].cr)
 						mod:replace_row_value("melee_wr", account_id, self._melee_rate[account_id].wr)
+					-- ------------
+					--	Blitz
+					-- 	Blitzes overlap with ranged damage, so this check must be done first
+					-- ------------
+					elseif track_blitz_damage 
+					and (table_array_contains(mod_blitz_attack_types, attack_type) 
+						or table_array_contains(mod_blitz_damage_profiles, damage_profile.name)
+				 		) 
+					then
+						-- Crit and Weakspot rates don't matter
+						--[[
+						self._blitz_rate = self._blitz_rate or {}
+						self._blitz_rate[account_id] = self._blitz_rate[account_id] or {}
+						self._blitz_rate[account_id].hits = self._blitz_rate[account_id].hits or 0
+						self._blitz_rate[account_id].hits = self._blitz_rate[account_id].hits +1
+						self._blitz_rate[account_id].weakspots = self._blitz_rate[account_id].weakspots or 0
+						self._blitz_rate[account_id].crits = self._blitz_rate[account_id].crits or 0
+						]]
+						
+						scoreboard:update_stat("total_blitz_damage", account_id, actual_damage)
+						--[[
+						if hit_weakspot then
+							self._blitz_rate[account_id].weakspots = self._blitz_rate[account_id].weakspots + 1
+						end
+						]]
+						--[[
+						if is_critical_strike then
+							self._blitz_rate[account_id].crits = self._blitz_rate[account_id].crits + 1
+						end
+						]]
+						if attack_result == "died" then
+							scoreboard:update_stat("total_blitz_kills", account_id, 1)
+						end
+						
+						--[[
+						self._blitz_rate[account_id].cr = self._blitz_rate[account_id].crits / self._blitz_rate[account_id].hits * 100
+						self._blitz_rate[account_id].wr = self._blitz_rate[account_id].weakspots / self._blitz_rate[account_id].hits * 100
+						
+						mod:replace_row_value("blitz_cr", account_id, self._blitz_rate[account_id].cr)
+						mod:replace_row_value("blitz_wr", account_id, self._blitz_rate[account_id].wr)
+						]]
 					-- ------------
 					--	Ranged
 					-- ------------

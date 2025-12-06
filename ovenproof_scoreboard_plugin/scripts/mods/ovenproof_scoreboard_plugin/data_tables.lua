@@ -91,6 +91,51 @@ mod.ranged_damage_profiles ={
     "psyker_heavy_swings_shock", -- Psyker Smite on heavies and Remote Detonation on dog?
     "missile_launcher_knockback", -- Hives Cum backblast
 }
+mod.blitz_attack_types ={
+	"psyker_test",
+}
+mod.blitz_damage_profiles ={
+	"psyker_smite_kill",
+	"psyker_protectorate_channel_chain_lightning_activated",
+	"psyker_protectorate_spread_chain_lightning_interval",
+	"psyker_protectorate_chain_lighting",
+	"psyker_protectorate_chain_lighting_fast",
+	"psyker_throwing_knives",
+	"psyker_throwing_knives_aimed",
+	"psyker_throwing_knives_aimed_pierce",
+	"psyker_throwing_knives_psychic_fortress",
+	"zealot_throwing_knives",
+	"psyker_heavy_swings_shock",
+	"whistle_explosion",
+	"close_whistle_explosion",
+	"shock_grenade",
+	"shock_grenade_stun_interval",
+	"adamant_grenade",
+	"adamant_grenade_impact",
+	"close_adamant_grenade",
+	"shock_mine_self_destruct",
+	"krak_grenade",
+	"krak_grenade_impact",
+	"close_krak_grenade",
+	"close_frag_grenade",
+	"frag_grenade",
+	"frag_grenade_impact",
+	"ogryn_grenade",
+	"close_ogryn_grenade",
+	"ogryn_grenade_impact",
+	"ogryn_box_cluster_frag_grenade",
+	"ogryn_box_cluster_close_frag_grenade",
+	"ogryn_grenade_box_impact",
+	"ogryn_grenade_box_cluster_impact",
+	"ogryn_friendly_rock_impact",
+	"broker_flash_grenade",
+	"broker_flash_grenade_impact",
+	"broker_flash_grenade_close",
+	"broker_missile_launcher_explosion_close",
+	"broker_missile_launcher_explosion",
+	"broker_missile_launcher_impact",
+	"missile_launcher_knockback",
+}
 -- Dog damage doesn't count as melee/ranged for penances
 --	but the shock bomb collar counts for puncture, which is covered by "explosion" being in ranged_attack_types
 mod.companion_attack_types ={
