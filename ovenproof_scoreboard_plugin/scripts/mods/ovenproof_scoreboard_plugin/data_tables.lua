@@ -156,7 +156,7 @@ mod.states_disabled = {
     --"mutant_charged",
     "pounced"
 }
-mod.other_disabled = {
+mod.optional_states_disabled = {
     "warp_grabbed",
     "mutant_charged",
 }

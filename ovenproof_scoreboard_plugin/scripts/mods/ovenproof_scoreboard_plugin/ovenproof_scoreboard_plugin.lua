@@ -77,6 +77,7 @@ local mod_toxin_damage_profiles = mod.toxin_damage_profiles
 local mod_environmental_damage_profiles = mod.environmental_damage_profiles
 
 local mod_states_disabled = mod.states_disabled
+local mod_optional_states_disabled = mod.optional_states_disabled
 local mod_forge_material = mod.forge_material
 local mod_ammunition = mod.ammunition
 local mod_ammunition_percentage = mod.ammunition_percentage
@@ -487,6 +488,11 @@ function mod.on_all_mods_loaded()
 					self._player_state_tracker[account_id].state = player_state
 					if table_array_contains(mod_states_disabled, player_state) then
 						scoreboard:update_stat("total_times_disabled", account_id, 1)
+					-- optionally tracks these disabled states, if enabled
+					elseif table_array_contains(mod_optional_states_disabled, player_state) then
+						if mod:get("track_"..player_state) then
+							scoreboard:update_stat("total_times_disabled", account_id, 1)
+						end
 					elseif player_state == "knocked_down" then
 						scoreboard:update_stat("total_times_downed", account_id, 1)
 					elseif player_state == "dead" then

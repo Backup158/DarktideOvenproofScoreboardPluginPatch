@@ -96,6 +96,12 @@ local localization = {
     attack_tracking_group = {
         en = "Attack Report Tracking",
     },
+    defense_tracking_group = {
+        en = "Defense Report Tracking",
+    },
+    defense_tracking_group = {
+        en = "Defense Report Tracking",
+    },
     exploration_tier_0 = {
         en = "Exploration",
         ru = "Исследование",

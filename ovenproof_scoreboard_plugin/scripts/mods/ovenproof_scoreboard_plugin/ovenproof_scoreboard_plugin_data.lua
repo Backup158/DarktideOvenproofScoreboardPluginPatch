@@ -20,7 +20,7 @@ local function create_setting_toggle(setting_id_code, truth)
 	return
 		{	setting_id 		= setting_id_code,
 			type 			= "checkbox",
-			default_value 	= truth or false,
+			default_value 	= truth or false, -- Defaults to false to make the logic work out with OR
 		}
 end
 
@@ -96,6 +96,18 @@ return {
 				sub_widgets		= {
 					create_setting_toggle("explosions_affect_ranged_hitrate", true),
 					create_setting_toggle("explosions_affect_melee_hitrate", true),
+				},
+			},
+			{	setting_id 		= "defense_tracking_group",
+				type 			= "group",
+				sub_widgets		= {
+					{	setting_id 		= "disabled_tracking_group",
+						type 			= "group",
+						sub_widgets		= {
+							create_setting_toggle("track_warp_grabbed", false),
+							create_setting_toggle("track_mutant_charged", false),
+						}
+					},
 				},
 			},
 		}, -- closes all widgets
