@@ -15,6 +15,14 @@ local function create_setting_with_havoc_toggle(setting_id_code)
 			},
 		}
 end
+-- @backup158: because i'm lazy
+local function create_setting_toggle(setting_id_code, truth)
+	return
+		{	setting_id 		= setting_id_code,
+			type 			= "checkbox",
+			default_value 	= truth or false,
+		}
+end
 
 -- Given a specific table to inject into
 --local function insert_widget_table_to_subtable(widget_table, table_address)
@@ -86,14 +94,8 @@ return {
 			{	setting_id 		= "attack_tracking_group",
 				type 			= "group",
 				sub_widgets		= {
-					{	setting_id 		= "explosions_affect_ranged_hitrate",
-						type 			= "checkbox",
-						default_value 	= true,
-					},
-					{	setting_id 		= "explosions_affect_melee_hitrate",
-						type 			= "checkbox",
-						default_value 	= true,
-					},
+					create_setting_toggle("explosions_affect_ranged_hitrate", true),
+					create_setting_toggle("explosions_affect_melee_hitrate", true),
 				},
 			},
 		}, -- closes all widgets
