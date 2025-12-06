@@ -1,4 +1,9 @@
 # 2025-12-XXX
+v1.8.0
+
+
+
+# 2025-12-XXX
 v1.7.1
 
 - Refactored the code to be more clearly split up
