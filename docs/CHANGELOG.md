@@ -7,8 +7,10 @@ v1.8.0
         - Warp Grabbed: pretty sure this is the Daemonhost
         - Charged by Mutant
     - States tracker doesn't seem to run in the Psykhanium/SoloPlay, so this is a pain in the ass to test >_>
+- Added option to have separate Blitz damage tracked (thanks Syllogism!)
+    - 
 
-# 2025-12-XXX
+# 2025-12-05
 v1.7.1
 
 - Refactored the code to be more clearly split up
