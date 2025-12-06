@@ -96,6 +96,15 @@ local localization = {
     attack_tracking_group = {
         en = "Attack Report Tracking",
     },
+    track_blitz_damage = {
+        en = "Track Blitz Damage",
+    },
+    track_blitz_wr = {
+        en = "Track Blitz Weakspot Rate",
+    },
+    track_blitz_cr = {
+        en = "Track Blitz Critical Strike Rate",
+    },
     defense_tracking_group = {
         en = "Defense Report Tracking",
     },
