@@ -156,6 +156,7 @@ mod.states_disabled = {
     --"mutant_charged",
     --"warp_grabbed",
 }
+-- Put into an array to keep the order in the mod options (this is used by the xxx_data.lua)
 mod.optional_states_disabled = {
     [1] = "catapulted", -- YEET (from knockback)
     [2] = "mutant_charged",
