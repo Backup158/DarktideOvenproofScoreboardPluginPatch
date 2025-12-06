@@ -1,5 +1,7 @@
 local mod = get_mod("ovenproof_scoreboard_plugin")
 
+local data_tables = mod:io_dofile("ovenproof_scoreboard_plugin/scripts/mods/ovenproof_scoreboard_plugin/data_tables")
+
 -- Creates a widget with a subwidget to toggle it only for Havoc
 local function create_setting_with_havoc_toggle(setting_id_code)
 	return
@@ -29,7 +31,13 @@ end
 --	table_address[#table_address + 1] = widget_table
 --end
 
-return {
+-- Automatically premaking widgets for tracking optional disabled states
+local optional_states_disabled_widgets = {}
+for _, state in ipairs(mod.optional_states_disabled) do
+	optional_states_disabled_widgets[#optional_states_disabled_widgets + 1] = create_setting_toggle("track_"..state, false)
+end
+
+local localizations = {
 	name = mod:localize("mod_title"),
 	description = mod:localize("mod_description"),
 	is_togglable = false,
@@ -103,13 +111,12 @@ return {
 				sub_widgets		= {
 					{	setting_id 		= "disabled_tracking_group",
 						type 			= "group",
-						sub_widgets		= {
-							create_setting_toggle("track_warp_grabbed", false),
-							create_setting_toggle("track_mutant_charged", false),
-						}
+						sub_widgets		= optional_states_disabled_widgets,
 					},
 				},
 			},
 		}, -- closes all widgets
 	}, -- closes all mod options
 }
+
+return localizations
