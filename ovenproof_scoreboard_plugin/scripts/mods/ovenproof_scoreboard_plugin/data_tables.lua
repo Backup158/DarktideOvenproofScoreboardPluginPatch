@@ -147,18 +147,20 @@ mod.environmental_damage_profiles = {
 -- Other Stats
 -- ------------
 mod.states_disabled = {
-    -- NB: Disabled some of these due to personal preference
-    "ledge_hanging",
-    -- "warp_grabbed",
-    "grabbed", -- Chaos Spawn
     "consumed", -- Beast of Nurgle vore
+    "grabbed", -- Chaos Spawn
+    "ledge_hanging",
     "netted",
-    --"mutant_charged",
     "pounced"
+    -- NB: Disabled some of these due to personal preference
+    --"mutant_charged",
+    --"warp_grabbed",
 }
 mod.optional_states_disabled = {
-    "warp_grabbed",
+    "warp_grabbed", -- Daemonhost execution
     "mutant_charged",
+    "catapulted", -- YEET (from knockback)
+    -- @backup158: game also counts hogtied and knocked_down but I'm not even considering those as possibilities for players to want to track
 }
 mod.forge_material = {
     loc_pickup_small_metal = "small_metal",
