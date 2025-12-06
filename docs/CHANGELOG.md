@@ -1,3 +1,18 @@
+# 2025-12-XXX
+v1.7.1
+
+- Refactored the code to be more clearly split up
+    - data types and scoreboard rows put into their own files
+    - these files are loaded by the main logic before they're used
+    - also made local copies of references to these to avoid the global table lookup every time
+        - mainly for the enemy types and attack types
+        - but it covers the ammo and disabled stuff too
+- Added debug messages for missing enemy breeds
+    - added "skip" section for intentionally not categorized enemies
+        - it's just the two ritualists at the moment
+        - they are internally classified as `ritualist` instead of lessers or whatever, and I don't think it's justified to create a whole new row for this (considering how many there already are)
+    - this is like the damage types report. when there's an unrecognized enemy, it'll print a message saying what it is
+
 # 2025-12-02
 v1.7.0
 
