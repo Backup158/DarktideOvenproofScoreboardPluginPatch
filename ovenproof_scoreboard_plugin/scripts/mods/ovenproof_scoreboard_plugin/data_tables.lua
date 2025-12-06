@@ -150,8 +150,8 @@ mod.states_disabled = {
     -- NB: Disabled some of these due to personal preference
     "ledge_hanging",
     -- "warp_grabbed",
-    "grabbed",
-    "consumed",
+    "grabbed", -- Chaos Spawn
+    "consumed", -- Beast of Nurgle vore
     "netted",
     --"mutant_charged",
     "pounced"
