@@ -44,6 +44,7 @@ local in_match
 local is_playing_havoc
 local scoreboard
 -- ammo pickup given as a percentage, such as 0.85
+-- @backup158: when not global, it had issues being the correct values when changed by havoc
 mod.ammunition_pickup_modifier = 1
 
 -- ########################
