@@ -97,7 +97,7 @@ local localization = {
         en = "Attack Report Tracking",
     },
     track_blitz_damage = {
-        en = "Track Blitz Damage",
+        en = "Track Blitz Damage in its own row",
     },
     track_blitz_wr = {
         en = "Track Blitz Weakspot Rate",
