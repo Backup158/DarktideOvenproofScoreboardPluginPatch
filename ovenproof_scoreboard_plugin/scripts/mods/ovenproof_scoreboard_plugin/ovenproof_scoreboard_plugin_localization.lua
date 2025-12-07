@@ -13,7 +13,8 @@ local table_clone = table.clone
 mod.get_text_size = function(self, input_text)
     return UIRenderer.text_size(ui_renderer_instance, input_text, "proxima_nova_bold", 0.1)
 end
-local max_length = mod:get_text_size("AAAAAAAAAAAAAAAAAAAAAAAAAA  \u{200A}A")
+local get_text_size = mod.get_text_size
+local max_length = get_text_size(self, "AAAAAAAAAAAAAAAAAAAAAAAAAA  \u{200A}A")
 
 mod.create_string = function(string_left, string_right)
     local spacer_symbol = "\u{200A}"
@@ -22,18 +23,19 @@ mod.create_string = function(string_left, string_right)
     local tab_string = ""
     local total_length = 0
 
-    if mod:get_text_size(string_left.."\t "..string_right) < max_length then
+    if get_text_size(self, string_left.."\t "..string_right) < max_length then
         tab_string = "\t "
     end
 
     while total_length < max_length do
         padding_string = padding_string..spacer_symbol
         temp_string = string_left..tab_string..padding_string..string_right
-        total_length = mod:get_text_size(temp_string)
+        total_length = get_text_size(self, temp_string)
     end
 
     return string_left..tab_string..padding_string..string_right
 end
+local create_string = mod.create_string
 
 local right_hand_localizations = {
     kill_damage = {
@@ -804,7 +806,7 @@ for k_loc, v_loc in pairs(localization) do
     for k_lang, v_lang in pairs(languages) do
         if v_loc[v_lang] then
             if v_loc[v_lang].left and v_loc[v_lang].right then
-                v_loc[v_lang] = mod.create_string(v_loc[v_lang].left, v_loc[v_lang].right)
+                v_loc[v_lang] = create_string(v_loc[v_lang].left, v_loc[v_lang].right)
             end
         end
     end
