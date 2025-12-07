@@ -103,8 +103,17 @@ local localization = {
     attack_tracking_group = {
         en = "Attack Report Tracking",
     },
+    attack_tracking_separate_rows = {
+        en = "Track These on Their Own Rows",
+    },
+    attack_tracking_separate_rows_description = {
+        en = "SETTING CHANGES WILL NOT TAKE EFFECT UNTIL THE MAP CHANGES (such as by going from Mourningstar to Psykhanium)\nEnables a row to track these values.",
+    },
     track_blitz_damage = {
-        en = "Track Blitz Damage in its own row",
+        en = "Blitz Damage",
+    },
+    track_blitz_damage_description = {
+        en = "If this setting is disabled, Blitz Damage counts as Ranged Damage.",
     },
     track_blitz_wr = {
         en = "Track Blitz Weakspot Rate",
