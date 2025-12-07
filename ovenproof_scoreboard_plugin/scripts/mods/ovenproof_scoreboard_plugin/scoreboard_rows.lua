@@ -255,7 +255,7 @@ mod.scoreboard_rows = {
 		parent = "total_weakspot_rates",
 		setting = "offense_rates",
 	},
-	["blitz_wr"] = {
+	{
 		name = "blitz_wr",
 		text = "row_blitz_weakspot_rate",
 		validation = "ASC",
@@ -303,7 +303,7 @@ mod.scoreboard_rows = {
 		parent = "total_critical_rates",
 		setting = "offense_rates",
 	},
-	["blitz_cr"] = {
+	{
 		name = "blitz_cr",
 		text = "row_blitz_critical_rate",
 		validation = "ASC",
@@ -479,7 +479,7 @@ mod.scoreboard_rows = {
 		setting = "offense_tier_1",
 	},
 	-- Blitz Totals
-	["total_blitz"] = {
+	{
 		name = "total_blitz",
 		text = "row_total_blitz",
 		validation = "ASC",
@@ -492,7 +492,7 @@ mod.scoreboard_rows = {
 		group = "group_1",
 		setting = "offense_tier_1",
 	},
-	["total_blitz_kills"] = {
+	{
 		name = "total_blitz_kills",
 		text = "row_kills",
 		validation = "ASC",
@@ -502,7 +502,7 @@ mod.scoreboard_rows = {
 		parent = "total_blitz",
 		setting = "offense_tier_1",
 	},
-	["total_blitz_damage"] = {
+	{
 		name = "total_blitz_damage",
 		text = "row_damage",
 		validation = "ASC",

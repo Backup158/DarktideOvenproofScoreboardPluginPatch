@@ -255,8 +255,17 @@ function mod.update(main_dt)
 end
 
 local function change_scoreboard_row_visibility(row_name, truth)
-	if mod.scoreboard_rows[row_name] then
-		mod.scoreboard_rows[row_name].visible = truth
+	if not scoreboard then
+		return
+	end
+	-- @backup158: ok anyone reading this is about to be horrified
+	-- like why tf am i doing this O(N) when I could use a key access for constant time
+	-- scoreboard only runs with arrays for itself and the plugins, and adds the plugins to itself
+	-- adding a key messes up the order sorting, so my rows ended up at the bottom every time
+	for _, row in ipairs(scoreboard.scoreboard_rows) do
+		if row.name == row_name then
+			row.visible = truth
+		end
 	end
 end
 local function kill_damage_change_scoreboard_row_visibility(row_name, truth)
