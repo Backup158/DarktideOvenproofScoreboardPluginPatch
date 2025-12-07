@@ -109,11 +109,25 @@ local localization = {
     attack_tracking_separate_rows_description = {
         en = "SETTING CHANGES WILL NOT TAKE EFFECT UNTIL THE MAP CHANGES (such as by going from Mourningstar to Psykhanium)\nEnables a row to track these values.",
     },
+    separate_companion_damage = {
+        en = "Companion Damage",
+    },
+    separate_companion_damage_description = {
+        en = "Choose which row Companion Damage counts towards. Companion is its own row, which will be hidden if one of the other options is chosen.",
+    },
+    -- @backup158: idk if these localizations are accurate
+    option_companion_companion = {
+        en = "Companion", 
+        ru = "компаньон", 
+        ["zh-cn"] = "伴侣", 
+        ["zh-tw"] = "伴侶", 
+        ["pt-br"] = "Companheiro", 
+    },
     track_blitz_damage = {
         en = "Blitz Damage",
     },
     track_blitz_damage_description = {
-        en = "If this setting is disabled, Blitz Damage counts as Ranged Damage.",
+        en = "If disabled, Blitz Damage counts as Ranged Damage.",
     },
     track_blitz_wr = {
         en = "Track Blitz Weakspot Rate",
@@ -538,12 +552,8 @@ local localization = {
         --["zh-tw"] = "",
         --["pt-br"] = "",
     },
-    --[[
-    row_companion_critical_rate = {
-        en = "Companion",
-    },
-    ]]
     -- @backup158: do toxins even crit? i dont think i need to count this
+    --  I'm pretty sure dogs don't crit so I skipped them
     row_total_dot_rates_1 = {
         en = {left = "Critical Rate", right = "[ Bleeding | Burning ]",},
         ru = {left = "Крит. удары", right = "[Кровотечение/Горение]",},

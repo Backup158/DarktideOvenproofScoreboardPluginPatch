@@ -102,6 +102,16 @@ local localizations = {
 			{	setting_id 		= "attack_tracking_group",
 				type 			= "group",
 				sub_widgets		= {
+					{	setting_id 		= "separate_companion_damage",
+						type 			= "dropdown",
+						default_value	= "companion",
+						options = {
+							{text = "option_companion_companion", value = "companion", },
+							-- reusing localizations
+							{text = "row_melee_weakspot_rate", value = "melee", },
+							{text = "row_ranged_weakspot_rate", value = "ranged", },
+						}
+					},
 					{	setting_id 		= "attack_tracking_separate_rows",
 						type 			= "group",
 						sub_widgets = {
@@ -112,10 +122,6 @@ local localizations = {
 									create_setting_toggle("track_blitz_wr", false),
 									create_setting_toggle("track_blitz_cr", false),
 								}
-							},
-							{	setting_id 		= "separate_companion_damage",
-								type 			= "checkbox",
-								default_value	= true,
 							},
 						}
 					},

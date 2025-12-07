@@ -37,7 +37,7 @@ local table_array_contains = table.array_contains
 -- #######
 mod.version = "1.7.1"
 local debug_messages_enabled
-local separate_companion_damage
+local separate_companion_damage = {}
 local track_blitz_damage
 local track_blitz_wr
 local track_blitz_cr
@@ -338,7 +338,11 @@ local function update_all_scoreboard_row_visibilities()
 	-- Companion
 	-- ------------
 	local separate_companion_damage = mod:get("separate_companion_damage")
-	change_scoreboard_row_visibility("total_companion", separate_companion_damage)
+	if separate_companion_damage == "companion" then
+		change_scoreboard_row_visibility("total_companion", true)
+	else
+		change_scoreboard_row_visibility("total_companion", false)
+	end
 end
 
 local function set_locals_for_settings()
@@ -348,7 +352,9 @@ local function set_locals_for_settings()
 	track_blitz_damage = mod:get("track_blitz_damage")
 	track_blitz_wr = mod:get("track_blitz_wr")
 	track_blitz_cr = mod:get("track_blitz_cr")
-	separate_companion_damage = mod:get("separate_companion_damage")
+	separate_companion_damage.base = mod:get("separate_companion_damage")
+	separate_companion_damage.kills = "total_"..separate_companion_damage.base.."_kills"
+	separate_companion_damage.damage = "total_"..separate_companion_damage.base.."_damage"
 end
 
 -- ############
@@ -814,19 +820,12 @@ function mod.on_all_mods_loaded()
 					-- ------------
 					elseif table_array_contains(mod_companion_attack_types, attack_type) or table_array_contains(mod_companion_damage_profiles, damage_profile.name) then
 						-- Crit and Weakspot rates don't matter
-						if separate_companion_damage then
-							scoreboard:update_stat("total_companion_damage", account_id, actual_damage)
+		
+						-- By default, uses its own companion row, which reads: total_companion_damage and total_companion_kills
+						scoreboard:update_stat(separate_companion_damage.damage, account_id, actual_damage)
 
-							if attack_result == "died" then
-								scoreboard:update_stat("total_companion_kills", account_id, 1)
-							end
-						else
-							-- @backup158: not adding to hitrate since nobody wants the dog to decrease weakspot and crit rates
-							-- 	allowing users to collapse companion damage into ranged damage
-							scoreboard:update_stat("total_ranged_damage", account_id, actual_damage)
-							if attack_result == "died" then
-								scoreboard:update_stat("total_ranged_kills", account_id, 1)
-							end
+						if attack_result == "died" then
+							scoreboard:update_stat(separate_companion_damage.kills, account_id, 1)
 						end
 					-- ------------
 					--	Bleed
