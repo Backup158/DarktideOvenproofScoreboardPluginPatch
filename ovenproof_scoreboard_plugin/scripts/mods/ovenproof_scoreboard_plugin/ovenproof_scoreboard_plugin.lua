@@ -262,7 +262,7 @@ local function change_scoreboard_row_visibility(row_name, truth)
 	-- like why tf am i doing this O(N) when I could use a key access for constant time
 	-- scoreboard only runs with arrays for itself and the plugins, and adds the plugins to itself
 	-- adding a key messes up the order sorting, so my rows ended up at the bottom every time
-	for _, row in ipairs(scoreboard.scoreboard_rows) do
+	for _, row in ipairs(scoreboard.registered_scoreboard_rows) do
 		if row.name == row_name then
 			row.visible = truth
 		end
