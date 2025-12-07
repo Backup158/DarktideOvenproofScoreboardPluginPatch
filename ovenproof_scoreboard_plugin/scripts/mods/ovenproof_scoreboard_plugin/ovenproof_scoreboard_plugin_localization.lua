@@ -125,7 +125,7 @@ local localization = {
         en = "Choose which row Companion Damage counts towards. \"Companion\" is its own row, which will be hidden if one of the other options is chosen.",
     },
     warning_companion_blitz = {
-        en = "You have set Companion Damage to be tracked under Blitz Damage, but you have not enabled the Blitz Damage row. This means Companion Damage will not be visible! It will still count for total damage.\nIf that is intentional, you can disable this warning in the Mod Options.",
+        en = "You have set Companion Damage to be tracked under Blitz Damage, but you have not enabled the Blitz Damage row. This means Companion Damage will not be visible! It will still count towards total damage.\nIf that is intentional, you can disable this warning in the Mod Options.",
     },
     enable_companion_blitz_warning = {
         en = "Enable warning for untracked Companion Damage"
