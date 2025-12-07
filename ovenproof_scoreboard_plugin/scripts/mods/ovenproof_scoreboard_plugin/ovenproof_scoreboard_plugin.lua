@@ -35,7 +35,7 @@ local table_array_contains = table.array_contains
 -- #######
 -- Mod Locals
 -- #######
-mod.version = "1.7.1"
+mod.version = "1.8.1"
 local debug_messages_enabled
 local separate_companion_damage = {}
 local track_blitz_damage

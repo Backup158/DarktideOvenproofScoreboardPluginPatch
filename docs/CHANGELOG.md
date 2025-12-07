@@ -1,4 +1,11 @@
-# 2025-12-XXX
+# 2025-12-07
+v1.8.1
+
+- Added AML support
+    - Load order with Scoreboard doesn't matter
+    - What does matter is that it's present
+
+# 2025-12-07
 v1.8.0
 
 - Added mod options to optionally track other states as disabled
