@@ -9,13 +9,25 @@ v1.8.0
     - States tracker doesn't seem to run in the Psykhanium/SoloPlay, so this is a pain in the ass to test >_>
 - Added option to have separate Blitz damage tracked (thanks Syllogism!)
     - Included options to include them for weakspot rate and crit rate calculations, respectively
-        - These are kind of janky
-        - When disabled, they are still present but invisible, so the two columns are off center
+        - These are kind of janky (my fault)
+        - ## When disabled, they are still present but invisible, so the two columns are off center
         - Can't just remove the rows because reinserting them would not preserve the row order
     - **Do not do this mid-match! Toggle these options before starting a match**
         - This includes the Psykhanium
         - Exit and reenter to test
     - Thanks to Syllogism for doing the legwork in digging through the damage types for blitzes and integrating it into the damage calculations
+- Added option to condense Companion Damage into another row
+    - By default, it's still its own row
+    - Otherwise, it'll be counted towards Melee/Ranged/Blitz
+    - If set to Blitz but there's no visible Blitz row, there will be a warning
+        - This warning can be toggled off in the Mod Options
+        - Warning is in Chat and Notification
+    - Lets you hide the Companion row regardless of the above
+        - So you can have companion damage in its own thing but hidden
+        - In case you want to have Blitz but not Companion
+- Moved some mod options around for organization
+    - explosion hitrate settings are in their own category
+    - this is to keep them separate from the rows warnings
 - (Dev only) Added functions for modifying rows after they've been copied into the base mod
     - Did this so you can change settings without restarting the game or reloading mods
     - Not recommended to totally remove things due to sorting
