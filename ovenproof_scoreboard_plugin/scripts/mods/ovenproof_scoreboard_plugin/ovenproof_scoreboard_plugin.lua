@@ -256,8 +256,10 @@ end
 
 local function change_scoreboard_row_visibility(row_name, truth)
 	if not scoreboard then
+		mod:info("scoreboard missing. attempted to change: "..row_name)
 		return
 	end
+
 	-- @backup158: ok anyone reading this is about to be horrified
 	-- like why tf am i doing this O(N) when I could use a key access for constant time
 	-- scoreboard only runs with arrays for itself and the plugins, and adds the plugins to itself
@@ -279,12 +281,16 @@ local function set_locals_for_settings()
 	explosions_affect_ranged_hitrate = mod:get("explosions_affect_ranged_hitrate")
 	explosions_affect_melee_hitrate = mod:get("explosions_affect_melee_hitrate")
 	track_blitz_damage = mod:get("track_blitz_damage")
-	kill_damage_change_scoreboard_row_visibility("total_blitz", track_blitz_damage)
-
 	track_blitz_wr = mod:get("track_blitz_wr")
-	change_scoreboard_row_visibility("blitz_wr", track_blitz_wr)
 	track_blitz_cr = mod:get("track_blitz_cr")
-	change_scoreboard_row_visibility("blitz_cr", track_blitz_cr)
+
+	update_all_scoreboard_row_visibilities()
+end
+
+local function update_all_scoreboard_row_visibilities()
+	kill_damage_change_scoreboard_row_visibility("total_blitz", mod:get("track_blitz_damage"))
+	change_scoreboard_row_visibility("blitz_wr", mod:get("track_blitz_wr"))
+	change_scoreboard_row_visibility("blitz_cr", mod:get("track_blitz_cr"))
 end
 
 -- ############
@@ -306,12 +312,13 @@ end
 -- ** Mod Startup **
 -- ############
 function mod.on_all_mods_loaded()
-	set_locals_for_settings()
 	scoreboard = get_mod("scoreboard")
 	if not scoreboard then
 		mod:error(mod:localize("error_scoreboard_missing"))
 		return
 	end
+
+	set_locals_for_settings()
 	mod:info("Version "..mod.version.." loaded uwu nya :3")
 
 	-- ################################################
@@ -1012,5 +1019,7 @@ function mod.on_game_state_changed(status, state_name)
 		in_match = false
 		is_playing_havoc = false
 	end
+
+	update_all_scoreboard_row_visibilities()
 end
 
