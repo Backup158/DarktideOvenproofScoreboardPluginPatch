@@ -117,6 +117,7 @@ local localizations = {
 								},
 								sub_widgets = {
 									create_setting_toggle("enable_companion_blitz_warning", true),
+									create_setting_toggle("separate_companion_damage_hide_regardless", false),
 								}
 							},
 							{	setting_id 		= "track_blitz_damage",

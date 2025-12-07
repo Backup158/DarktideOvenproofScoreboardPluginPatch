@@ -133,6 +133,9 @@ local localization = {
     enable_companion_blitz_warning_description = {
         en = "Shows warning when counting Companion Damage as Blitz Damage if there is no row displayed for Blitz Damage."
     },
+    separate_companion_damage_hide_regardless = {
+        en = "Always Hide Companion Damage Row",
+    },
     -- @backup158: idk if these localizations are accurate
     option_companion_companion = {
         en = "Companion", 

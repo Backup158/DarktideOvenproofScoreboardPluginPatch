@@ -338,7 +338,7 @@ local function update_all_scoreboard_row_visibilities()
 	-- Companion
 	-- ------------
 	local separate_companion_damage = mod:get("separate_companion_damage")
-	if separate_companion_damage == "companion" then
+	if separate_companion_damage == "companion" and not mod:get("separate_companion_damage_hide_regardless") then
 		change_scoreboard_row_visibility("total_companion", true)
 	else
 		change_scoreboard_row_visibility("total_companion", false)
