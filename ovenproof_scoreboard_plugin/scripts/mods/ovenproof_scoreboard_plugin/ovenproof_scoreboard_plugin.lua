@@ -280,14 +280,14 @@ local replace_row_with_value = function(row_with_key, row_value, value)
 end
 
 local replace_value_within_row_table = function(row_with_key, row_value, value)
-	for _, i in ipairs(row_with_key) do
+	for _, i in ipairs(row_value) do
 		if i == value then i = nil end
 	end
 end
 
 local add_value_within_row_table = function(row_with_key, row_value, value)
 	if not table_array_contains(row_value, value) then
-		row_with_key[#row_with_key + 1] = value
+		row_value[#row_value + 1] = value
 	end
 end
 
