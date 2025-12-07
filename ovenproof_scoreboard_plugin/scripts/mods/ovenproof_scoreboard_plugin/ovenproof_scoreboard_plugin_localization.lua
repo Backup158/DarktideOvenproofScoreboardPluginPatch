@@ -454,6 +454,13 @@ local localization = {
         ["zh-tw"] = { left = "弱點命中率", right = "[ 近戰 | 遠程 ]",},
         ["pt-br"] = {left = "Ponto Fracos", right = "[Corpo a Corpo | Distância]",},
     },
+    row_total_weakspot_rates_with_blitz = {
+        en = {left = "Weakspot Rate", right = "[ Melee | Ranged | Blitz ]",},
+        --ru = {left = "Уязвимые места", right = "[Ближний/Дальний]",},
+        --["zh-cn"] = {left = "弱点命中率", right = "[ 近战 | 远程 ]",},
+        --["zh-tw"] = { left = "弱點命中率", right = "[ 近戰 | 遠程 ]",},
+        --["pt-br"] = {left = "Ponto Fracos", right = "[Corpo a Corpo | Distância]",},
+    },
     row_melee_weakspot_rate = {
         en = "Melee",
         ru = "Ближний",
@@ -486,6 +493,13 @@ local localization = {
         ["zh-cn"] = {left = "暴击率", right = "[ 近战 | 远程 ]",},
         ["zh-tw"] = { left = "爆擊率", right = "[ 近戰 | 遠程 ]",},
         ["pt-br"] = {left = "Taxa Crítica", right = "[Corpo a Corpo | Distância]",},
+    },
+    row_total_critical_rates_with_blitz = {
+        en = {left = "Critical Rate", right = "[ Melee | Ranged | Blitz ]",},
+        -- ru = {left = "Крит. удары", right = "[Ближний/Дальний]",},
+        -- ["zh-cn"] = {left = "暴击率", right = "[ 近战 | 远程 ]",},
+        -- ["zh-tw"] = { left = "爆擊率", right = "[ 近戰 | 遠程 ]",},
+        -- ["pt-br"] = {left = "Taxa Crítica", right = "[Corpo a Corpo | Distância]",},
     },
     row_melee_critical_rate = {
         en = "Melee",
