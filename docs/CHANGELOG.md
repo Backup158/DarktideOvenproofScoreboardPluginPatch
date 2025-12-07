@@ -28,6 +28,7 @@ v1.8.0
 - Moved some mod options around for organization
     - explosion hitrate settings are in their own category
     - this is to keep them separate from the rows warnings
+- Refactored Localization helper functions to improve performance slightly
 - (Dev only) Added functions for modifying rows after they've been copied into the base mod
     - Did this so you can change settings without restarting the game or reloading mods
     - Not recommended to totally remove things due to sorting
