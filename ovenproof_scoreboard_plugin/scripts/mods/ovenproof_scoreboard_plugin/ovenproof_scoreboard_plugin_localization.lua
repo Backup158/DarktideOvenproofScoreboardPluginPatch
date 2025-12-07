@@ -107,13 +107,13 @@ local localization = {
         en = "Track These on Their Own Rows",
     },
     attack_tracking_separate_rows_description = {
-        en = "SETTING CHANGES WILL NOT TAKE EFFECT UNTIL THE MAP CHANGES (such as by going from Mourningstar to Psykhanium)\nEnables a row to track these values.",
+        en = "ROW VISIBILITY CHANGES WILL NOT TAKE EFFECT UNTIL THE MAP CHANGES (such as by going from Mourningstar to Psykhanium)\nCreates a separate row to track these values.",
     },
     separate_companion_damage = {
         en = "Companion Damage",
     },
     separate_companion_damage_description = {
-        en = "Choose which row Companion Damage counts towards. Companion is its own row, which will be hidden if one of the other options is chosen.",
+        en = "Choose which row Companion Damage counts towards. \"Companion\" is its own row, which will be hidden if one of the other options is chosen.",
     },
     -- @backup158: idk if these localizations are accurate
     option_companion_companion = {
