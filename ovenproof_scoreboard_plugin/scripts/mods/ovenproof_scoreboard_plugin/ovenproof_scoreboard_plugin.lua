@@ -254,7 +254,7 @@ function mod.update(main_dt)
 	mod:manage_blank_rows()
 end
 
-local function replace_registered_scoreboard_value(row_name, key_to_edit, value_to_use)
+local function replace_registered_scoreboard_value(row_name, key_to_edit, function_to_use)
 	if not scoreboard then
 		mod:info("scoreboard missing. attempted to change: "..row_name)
 		return
@@ -266,13 +266,17 @@ local function replace_registered_scoreboard_value(row_name, key_to_edit, value_
 	-- adding a key messes up the order sorting, so my rows ended up at the bottom every time
 	for _, row in ipairs(scoreboard.registered_scoreboard_rows) do
 		if row.name == row_name then
-			row[key_to_edit] = value_to_use
+			function_to_use(row[key_to_edit])
 		end
 	end
 end
 
+local replace_row_with_value = function(row_with_key)
+	row_with_key = truth
+end
+
 local function change_scoreboard_row_visibility(row_name, truth)
-	replace_registered_scoreboard_value(row_name, "visible", truth)
+	replace_registered_scoreboard_value(row_name, "visible", replace_row_with_value())
 end
 
 local function kill_damage_change_scoreboard_row_visibility(row_name, truth)
