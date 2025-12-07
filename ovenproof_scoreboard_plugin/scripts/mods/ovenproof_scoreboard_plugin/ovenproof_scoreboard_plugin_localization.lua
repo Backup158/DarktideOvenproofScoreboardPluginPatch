@@ -1,6 +1,4 @@
 local mod = get_mod("ovenproof_scoreboard_plugin")
-local UIRenderer = mod:original_require("scripts/managers/ui/ui_renderer")
-local ui_renderer_instance = Managers.ui:ui_constant_elements():ui_renderer()
 
 -- ###############################################################################################################
 -- IF ADDING A NEW LOCALIZATION LANGUAGE, CHECK HERE
@@ -8,9 +6,21 @@ local ui_renderer_instance = Managers.ui:ui_constant_elements():ui_renderer()
 local languages = {"en","ru","zh-cn","zh-tw","pt-br",}
 -- ###############################################################################################################
 
+-- ########################
+-- Data
+-- ########################
+local UIRenderer = mod:original_require("scripts/managers/ui/ui_renderer")
+local ui_renderer_instance = Managers.ui:ui_constant_elements():ui_renderer()
+
+-- ############
+-- Performance
+-- ############
 local table = table
 local table_clone = table.clone
 
+-- ########################
+-- Helper Functions
+-- ########################
 -- @backup158: I don't know why this needs the self reference nor why these are globals
 --  but on the very off chance that some other mod uses these globals, I'll just make the local reference below 
 mod.get_text_size = function(self, input_text)
@@ -40,6 +50,9 @@ mod.create_string = function(string_left, string_right)
 end
 local create_string = mod.create_string
 
+-- ########################
+-- Localizations
+-- ########################
 local right_hand_localizations = {
     kill_damage = {
         en = "[ Kills | Damage ]",
