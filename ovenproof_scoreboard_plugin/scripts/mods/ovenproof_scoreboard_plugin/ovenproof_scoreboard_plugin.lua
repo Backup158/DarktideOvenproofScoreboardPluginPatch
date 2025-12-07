@@ -167,9 +167,9 @@ end
 mod.set_blank_rows = function (self, account_id)
 	-- for i in range (1, 13), increment of 1
 	for i = 1,13,1 do
-		mod:replace_row_value("blank_"..i, account_id, "\u{200A}")
+		mod:replace_key_to_edit("blank_"..i, account_id, "\u{200A}")
 	end
-	mod:replace_row_value("highest_single_hit", account_id, "\u{200A}0\u{200A}")
+	mod:replace_key_to_edit("highest_single_hit", account_id, "\u{200A}0\u{200A}")
 end
 
 -- ############
@@ -185,7 +185,7 @@ end
 -- ############
 -- Replace entire value in scoreboard
 -- ############
-mod.replace_row_value = function(self, row_name, account_id, value)
+mod.replace_key_to_edit = function(self, row_name, account_id, value)
 	local row = scoreboard:get_scoreboard_row(row_name)
 	if row then
 		local validation = row.validation
@@ -223,7 +223,7 @@ end
 -- ############
 -- Get a row value from scoreboard
 -- ############
-mod.get_row_value = function(self, row_name, account_id)
+mod.get_key_to_edit = function(self, row_name, account_id)
 	local row = scoreboard:get_scoreboard_row(row_name)
 	return row.data[account_id] and row.data[account_id].score or 0
 end
@@ -270,24 +270,25 @@ local function replace_registered_scoreboard_value(row_name, key_to_edit, functi
 	-- adding a key messes up the order sorting, so my rows ended up at the bottom every time
 	for _, row in ipairs(scoreboard.registered_scoreboard_rows) do
 		if row.name == row_name then
-			function_to_use(row[key_to_edit], row_value, other_parameters)
+			function_to_use(row, key_to_edit, other_parameters)
 		end
 	end
 end
 
-local replace_row_with_value = function(row_with_key, row_value, value)
-	row_with_key = value
+local replace_row_with_value = function(row, key_to_edit, value)
+	row[key_to_edit] = value
 end
 
-local replace_value_within_row_table = function(row_with_key, row_value, value)
-	for _, i in ipairs(row_value) do
+local replace_value_within_row_table = function(row, key_to_edit, value)
+	for _, i in ipairs(row[key_to_edit]) do
 		if i == value then i = nil end
 	end
 end
 
-local add_value_within_row_table = function(row_with_key, row_value, value)
-	if not table_array_contains(row_value, value) then
-		row_value[#row_value + 1] = value
+local add_value_within_row_table = function(row, key_to_edit, value)
+	local table_to_edit = row[key_to_edit]
+	if not table_array_contains(table_to_edit, value) then
+		table_to_edit[#table_to_edit + 1] = value
 	end
 end
 
@@ -720,8 +721,8 @@ function mod.on_all_mods_loaded()
 						self._melee_rate[account_id].cr = self._melee_rate[account_id].crits / self._melee_rate[account_id].hits * 100
 						self._melee_rate[account_id].wr = self._melee_rate[account_id].weakspots / self._melee_rate[account_id].hits * 100
 						
-						mod:replace_row_value("melee_cr", account_id, self._melee_rate[account_id].cr)
-						mod:replace_row_value("melee_wr", account_id, self._melee_rate[account_id].wr)
+						mod:replace_key_to_edit("melee_cr", account_id, self._melee_rate[account_id].cr)
+						mod:replace_key_to_edit("melee_wr", account_id, self._melee_rate[account_id].wr)
 					-- ------------
 					--	Blitz
 					-- 	Blitzes overlap with ranged damage, so this check must be done first
@@ -748,7 +749,7 @@ function mod.on_all_mods_loaded()
 								self._blitz_rate[account_id].weakspots = self._blitz_rate[account_id].weakspots + 1
 							end
 							self._blitz_rate[account_id].wr = self._blitz_rate[account_id].weakspots / self._blitz_rate[account_id].hits * 100
-							mod:replace_row_value("blitz_wr", account_id, self._blitz_rate[account_id].wr)
+							mod:replace_key_to_edit("blitz_wr", account_id, self._blitz_rate[account_id].wr)
 						end
 						
 						if track_blitz_cr then
@@ -757,7 +758,7 @@ function mod.on_all_mods_loaded()
 								self._blitz_rate[account_id].crits = self._blitz_rate[account_id].crits + 1
 							end
 							self._blitz_rate[account_id].cr = self._blitz_rate[account_id].crits / self._blitz_rate[account_id].hits * 100
-							mod:replace_row_value("blitz_cr", account_id, self._blitz_rate[account_id].cr)
+							mod:replace_key_to_edit("blitz_cr", account_id, self._blitz_rate[account_id].cr)
 						end
 					-- ------------
 					--	Ranged
@@ -792,8 +793,8 @@ function mod.on_all_mods_loaded()
 						self._ranged_rate[account_id].cr = self._ranged_rate[account_id].crits / self._ranged_rate[account_id].hits * 100
 						self._ranged_rate[account_id].wr = self._ranged_rate[account_id].weakspots / self._ranged_rate[account_id].hits * 100
 						
-						mod:replace_row_value("ranged_cr", account_id, self._ranged_rate[account_id].cr)
-						mod:replace_row_value("ranged_wr", account_id, self._ranged_rate[account_id].wr)
+						mod:replace_key_to_edit("ranged_cr", account_id, self._ranged_rate[account_id].cr)
+						mod:replace_key_to_edit("ranged_wr", account_id, self._ranged_rate[account_id].wr)
 					-- ------------
 					--	Companion
 					-- ------------
@@ -827,8 +828,8 @@ function mod.on_all_mods_loaded()
 						self._companion_rate[account_id].cr = self._companion_rate[account_id].crits / self._companion_rate[account_id].hits * 100
 						self._companion_rate[account_id].wr = self._companion_rate[account_id].weakspots / self._companion_rate[account_id].hits * 100
 						
-						mod:replace_row_value("companion_cr", account_id, self._companion_rate[account_id].cr)
-						mod:replace_row_value("companion_wr", account_id, self._companion_rate[account_id].wr)
+						mod:replace_key_to_edit("companion_cr", account_id, self._companion_rate[account_id].cr)
+						mod:replace_key_to_edit("companion_wr", account_id, self._companion_rate[account_id].wr)
 						]]
 					-- ------------
 					--	Bleed
@@ -850,7 +851,7 @@ function mod.on_all_mods_loaded()
 						
 						--self._bleeding_rate[account_id].cr = self._bleeding_rate[account_id].crits / self._bleeding_rate[account_id].hits * 100
 						
-						--mod:replace_row_value("bleeding_cr", account_id, self._bleeding_rate[account_id].cr)
+						--mod:replace_key_to_edit("bleeding_cr", account_id, self._bleeding_rate[account_id].cr)
 					-- ------------
 					--	Burning
 					-- ------------
@@ -870,7 +871,7 @@ function mod.on_all_mods_loaded()
 						
 						--self._burning_rate[account_id].cr = self._burning_rate[account_id].crits / self._burning_rate[account_id].hits * 100
 						
-						--mod:replace_row_value("burning_cr", account_id, self._burning_rate[account_id].cr)
+						--mod:replace_key_to_edit("burning_cr", account_id, self._burning_rate[account_id].cr)
 					-- ------------
 					--	Warp
 					-- ------------
@@ -890,7 +891,7 @@ function mod.on_all_mods_loaded()
 						
 						--self._warpfire_rate[account_id].cr = self._warpfire_rate[account_id].crits / self._warpfire_rate[account_id].hits * 100
 						
-						--mod:replace_row_value("warpfire_cr", account_id, self._warpfire_rate[account_id].cr)
+						--mod:replace_key_to_edit("warpfire_cr", account_id, self._warpfire_rate[account_id].cr)
 					-- ------------
 					--	Toxin
 					-- ------------
@@ -911,7 +912,7 @@ function mod.on_all_mods_loaded()
 						
 						--self._toxin_rate[account_id].cr = self._toxin_rate[account_id].crits / self._toxin_rate[account_id].hits * 100
 						
-						--mod:replace_row_value("toxin_cr", account_id, self._toxin_rate[account_id].cr)
+						--mod:replace_key_to_edit("toxin_cr", account_id, self._toxin_rate[account_id].cr)
 					-- ------------
 					-- 	Environmental
 					-- ------------
@@ -931,7 +932,7 @@ function mod.on_all_mods_loaded()
 						
 						--self._environmental_rate[account_id].cr = self._environmental_rate[account_id].crits / self._environmental_rate[account_id].hits * 100
 						
-						--mod:replace_row_value("environmental_cr", account_id, self._environmental_rate[account_id].cr)
+						--mod:replace_key_to_edit("environmental_cr", account_id, self._environmental_rate[account_id].cr)
 					-- ------------
 					-- 	Error Catching
 					-- ------------
