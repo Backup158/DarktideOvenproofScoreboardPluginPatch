@@ -355,6 +355,14 @@ local function set_locals_for_settings()
 	separate_companion_damage.base = mod:get("separate_companion_damage")
 	separate_companion_damage.kills = "total_"..separate_companion_damage.base.."_kills"
 	separate_companion_damage.damage = "total_"..separate_companion_damage.base.."_damage"
+
+	-- Error check for companion damage row
+	if mod:get("enable_companion_blitz_warning")
+	and (separate_companion_damage.base == "blitz")
+	and not track_blitz_damage
+	then
+		mod:warning(mod:localize("warning_companion_blitz"))
+	end
 end
 
 -- ############

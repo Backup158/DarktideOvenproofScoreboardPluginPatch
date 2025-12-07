@@ -113,6 +113,10 @@ local localizations = {
 									-- reusing localizations
 									{text = "row_melee_weakspot_rate", value = "melee", },
 									{text = "row_ranged_weakspot_rate", value = "ranged", },
+									{text = "row_blitz_weakspot_rate", value = "blitz", },
+								},
+								sub_widgets = {
+									create_setting_toggle("enable_companion_blitz_warning", true),
 								}
 							},
 							{	setting_id 		= "track_blitz_damage",
@@ -125,8 +129,13 @@ local localizations = {
 							},
 						}
 					},
-					create_setting_toggle("explosions_affect_ranged_hitrate", true),
-					create_setting_toggle("explosions_affect_melee_hitrate", true),
+					{	setting_id 		= "attack_tracking_hitrate",
+						type 			= "group",
+						sub_widgets = {
+							create_setting_toggle("explosions_affect_ranged_hitrate", true),
+							create_setting_toggle("explosions_affect_melee_hitrate", true),
+						}
+					},
 				},
 			},
 			{	setting_id 		= "defense_tracking_group",

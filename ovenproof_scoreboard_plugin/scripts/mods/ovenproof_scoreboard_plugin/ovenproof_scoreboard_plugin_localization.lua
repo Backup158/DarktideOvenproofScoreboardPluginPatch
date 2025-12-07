@@ -100,11 +100,20 @@ local localization = {
     ammo_tracking_group = {
         en = "Ammo Tracking",
     },
+    track_ammo_crate_waste = {
+        en = "Track Ammo Crate waste",
+    },
+    track_ammo_crate_waste = {
+        en = "Track Ammo Crate waste",
+    },
+    track_ammo_crate_in_percentage = {
+        en = "Include Ammo Crates in total percentage of Ammo picked up",
+    },
     attack_tracking_group = {
         en = "Attack Report Tracking",
     },
     attack_tracking_separate_rows = {
-        en = "Track These on Their Own Rows",
+        en = "Use Separate Rows",
     },
     attack_tracking_separate_rows_description = {
         en = "ROW VISIBILITY CHANGES WILL NOT TAKE EFFECT UNTIL THE MAP CHANGES (such as by going from Mourningstar to Psykhanium)\nCreates a separate row to track these values.",
@@ -114,6 +123,15 @@ local localization = {
     },
     separate_companion_damage_description = {
         en = "Choose which row Companion Damage counts towards. \"Companion\" is its own row, which will be hidden if one of the other options is chosen.",
+    },
+    warning_companion_blitz = {
+        en = "You have set Companion Damage to be tracked under Blitz Damage, but you have not enabled the Blitz Damage row. This means Companion Damage will not be visible! If that is intentional, you can disable this warning in the Mod Options.",
+    },
+    enable_companion_blitz_warning = {
+        en = "Enable warning for untracked Companion Damage"
+    },
+    enable_companion_blitz_warning_description = {
+        en = "Shows warning when counting Companion Damage as Blitz Damage if there is no row displayed for Blitz Damage."
     },
     -- @backup158: idk if these localizations are accurate
     option_companion_companion = {
@@ -134,6 +152,15 @@ local localization = {
     },
     track_blitz_cr = {
         en = "Track Blitz Critical Strike Rate",
+    },
+    attack_tracking_hitrate = {
+        en = "Hitrate Calculations",
+    },
+    explosions_affect_ranged_hitrate = {
+        en = "Explosions affect Ranged Hitrate",
+    },
+    explosions_affect_melee_hitrate = {
+        en = "Explosions affect Melee Hitrate",
     },
     defense_tracking_group = {
         en = "Defense Report Tracking",
@@ -222,21 +249,6 @@ local localization = {
         ["zh-cn"] = "消息 - 弹药/手雷拾取",
         ["zh-tw"] = "訊息 - 彈藥/手雷拾取",
         ["pt-br"] = "Mensagens - Coleta de Munição/Granadas",
-    },
-    track_ammo_crate_waste = {
-        en = "Track Ammo Crate waste",
-    },
-    track_ammo_crate_waste = {
-        en = "Track Ammo Crate waste",
-    },
-    track_ammo_crate_in_percentage = {
-        en = "Include Ammo Crates in total percentage of Ammo picked up",
-    },
-    explosions_affect_ranged_hitrate = {
-        en = "Explosions affect Ranged Hitrate",
-    },
-    explosions_affect_melee_hitrate = {
-        en = "Explosions affect Melee Hitrate",
     },
     -- ----------------
     -- Reusable labels
