@@ -106,13 +106,15 @@ local localizations = {
 						setting_id 		= "attack_tracking_separate_rows",
 						type 			= "group",
 						sub_widgets = {
-							setting_id 		= "track_blitz_damage",
-							type 			= "checkbox",
-							default_value	= false,
-							sub_widgets = {
-								create_setting_toggle("track_blitz_wr", false),
-								create_setting_toggle("track_blitz_cr", false),
-							}
+							{
+								setting_id 		= "track_blitz_damage",
+								type 			= "checkbox",
+								default_value	= false,
+								sub_widgets = {
+									create_setting_toggle("track_blitz_wr", false),
+									create_setting_toggle("track_blitz_cr", false),
+								}
+							},
 						}
 					},
 					create_setting_toggle("explosions_affect_ranged_hitrate", true),
