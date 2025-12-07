@@ -254,7 +254,7 @@ function mod.update(main_dt)
 	mod:manage_blank_rows()
 end
 
-local function replace_registered_scoreboard_value(row_name, key_to_edit, function_to_use)
+local function replace_registered_scoreboard_value(row_name, key_to_edit, function_to_use, other_parameters)
 	if not scoreboard then
 		mod:info("scoreboard missing. attempted to change: "..row_name)
 		return
@@ -266,41 +266,29 @@ local function replace_registered_scoreboard_value(row_name, key_to_edit, functi
 	-- adding a key messes up the order sorting, so my rows ended up at the bottom every time
 	for _, row in ipairs(scoreboard.registered_scoreboard_rows) do
 		if row.name == row_name then
-			function_to_use(row[key_to_edit], row_value)
+			function_to_use(row[key_to_edit], row_value, other_parameters)
 		end
 	end
 end
 
-local replace_row_with_value = function(row_with_key, row_value)
-	row_with_key = truth
+local replace_row_with_value = function(row_with_key, row_value, value)
+	row_with_key = value
 end
 
-local function replace_value_within_row_table(row_with_key, value)
+local replace_value_within_row_table = function(row_with_key, row_value, value)
 	for _, i in ipairs(row_with_key) do
 		if i == value then i = nil end
 	end
 end
-local remove_blitz_wr = function(row_with_key, row_value)
-	replace_value_within_row_table(row_with_key, "blitz_wr")
-end
-local remove_blitz_cr = function(row_with_key, row_value)
-	replace_value_within_row_table(row_with_key, "blitz_cr")
-end
 
-local function add_value_within_row_table(row_with_key, row_value, value)
+local add_value_within_row_table = function(row_with_key, row_value, value)
 	if not table_array_contains(row_value, value) then
 		row_with_key[#row_with_key + 1] = value
 	end
 end
-local add_blitz_wr = function(row_with_key, row_value)
-	add_value_within_row_table(row_with_key, row_value, "blitz_wr")
-end
-local add_blitz_cr = function(row_with_key, row_value)
-	add_value_within_row_table(row_with_key, row_value, "blitz_cr")
-end
 
 local function change_scoreboard_row_visibility(row_name, truth)
-	replace_registered_scoreboard_value(row_name, "visible", replace_row_with_value())
+	replace_registered_scoreboard_value(row_name, "visible", replace_row_with_value(), truth)
 end
 
 local function kill_damage_change_scoreboard_row_visibility(row_name, truth)
@@ -331,14 +319,18 @@ local function update_blitz_tracking_visibilities()
 	change_scoreboard_row_visibility("blitz_wr", blitz_wr)
 	change_scoreboard_row_visibility("blitz_cr", blitz_cr)
 	if not blitz_wr then
-		replace_registered_scoreboard_value("total_weakspot_rates", "summary", remove_blitz_wr())
+		replace_registered_scoreboard_value("total_weakspot_rates", "text", replace_value_within_row_table(), "row_total_weakspot_rates")
+		replace_registered_scoreboard_value("total_weakspot_rates", "summary", replace_value_within_row_table(), "blitz_wr")
 	else
-		replace_registered_scoreboard_value("total_weakspot_rates", "summary", add_blitz_wr())
+		replace_registered_scoreboard_value("total_weakspot_rates", "text", replace_value_within_row_table(), "row_total_weakspot_rates_with_blitz")
+		replace_registered_scoreboard_value("total_weakspot_rates", "summary", add_value_within_row_table(), "blitz_wr")
 	end
 	if not blitz_cr then
-		replace_registered_scoreboard_value("total_critical_rates", "summary", remove_blitz_cr())
+		replace_registered_scoreboard_value("total_critical_rates", "text", replace_value_within_row_table(), "row_total_critical_rates")
+		replace_registered_scoreboard_value("total_critical_rates", "summary", replace_value_within_row_table(), "blitz_cr")
 	else
-		replace_registered_scoreboard_value("total_critical_rates", "summary", add_blitz_cr())
+		replace_registered_scoreboard_value("total_critical_rates", "text", replace_value_within_row_table(), "row_total_critical_rates_with_blitz")
+		replace_registered_scoreboard_value("total_critical_rates", "summary", add_value_within_row_table(), "blitz_cr")
 	end
 end
 
