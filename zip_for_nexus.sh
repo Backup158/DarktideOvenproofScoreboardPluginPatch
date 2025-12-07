@@ -21,3 +21,4 @@ mkdir mods
 cp -r "ovenproof_scoreboard_plugin" "mods/ovenproof_scoreboard_plugin" 
 #   zip it up
 zip -r "ovenproof_scoreboard_plugin_patch.zip" "mods"
+zip -r "ovenproof_scoreboard_plugin_patch-manual.zip" "ovenproof_scoreboard_plugin"
