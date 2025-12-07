@@ -315,6 +315,7 @@ local function update_blitz_tracking_visibilities()
 	change_scoreboard_row_visibility("total_critical_rates", not blitz_cr)
 	change_scoreboard_row_visibility("total_critical_rates_with_blitz", blitz_cr)
 	]]
+	-- @backup158: TODO figure out how to change the kerning. right now the invisible column is still accounted for in terms of spacing, so it gets off center
 	if not blitz_wr then
 		replace_registered_scoreboard_value("total_weakspot_rates", "text", replace_row_with_value, "row_total_weakspot_rates")
 		replace_registered_scoreboard_value("total_weakspot_rates", "summary", replace_value_within_row_table, "blitz_wr")
