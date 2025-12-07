@@ -240,6 +240,8 @@ mod.scoreboard_rows = {
 		group = "group_1",
 		setting = "offense_rates",
 	},
+	--[[
+	-- This causes a display bug
 	{name = "total_weakspot_rates_with_blitz",
 		text = "row_total_weakspot_rates_with_blitz",
 		validation = "ASC",
@@ -254,6 +256,7 @@ mod.scoreboard_rows = {
 		group = "group_1",
 		setting = "offense_rates",
 	},
+	]]
 	{name = "melee_wr",
 		text = "row_melee_weakspot_rate",
 		validation = "ASC",
@@ -303,6 +306,8 @@ mod.scoreboard_rows = {
 		group = "group_1",
 		setting = "offense_rates",
 	},
+	--[[
+	-- This causes a display bug
 	{name = "total_critical_rates_with_blitz",
 		text = "row_total_critical_rates_with_blitz",
 		validation = "ASC",
@@ -317,6 +322,7 @@ mod.scoreboard_rows = {
 		group = "group_1",
 		setting = "offense_rates",
 	},
+	]]
 	{name = "melee_cr",
 		text = "row_melee_critical_rate",
 		validation = "ASC",

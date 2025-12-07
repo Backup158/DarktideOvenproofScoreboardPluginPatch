@@ -309,26 +309,27 @@ local function update_blitz_tracking_visibilities()
 	change_scoreboard_row_visibility("blitz_wr", blitz_wr)
 	change_scoreboard_row_visibility("blitz_cr", blitz_cr)
 
+	--[[
 	change_scoreboard_row_visibility("total_weakspot_rates", not blitz_wr)
 	change_scoreboard_row_visibility("total_weakspot_rates_with_blitz", blitz_wr)
 	change_scoreboard_row_visibility("total_critical_rates", not blitz_cr)
 	change_scoreboard_row_visibility("total_critical_rates_with_blitz", blitz_cr)
-	--[[
-		if not blitz_wr then
-			replace_registered_scoreboard_value("total_weakspot_rates", "text", replace_row_with_value, "row_total_weakspot_rates")
-			replace_registered_scoreboard_value("total_weakspot_rates", "summary", replace_value_within_row_table, "blitz_wr")
-		else
-			replace_registered_scoreboard_value("total_weakspot_rates", "text", replace_row_with_value, "row_total_weakspot_rates_with_blitz")
-			replace_registered_scoreboard_value("total_weakspot_rates", "summary", add_value_within_row_table, "blitz_wr")
-		end
-		if not blitz_cr then
-			replace_registered_scoreboard_value("total_critical_rates", "text", replace_row_with_value, "row_total_critical_rates")
-			replace_registered_scoreboard_value("total_critical_rates", "summary", replace_value_within_row_table, "blitz_cr")
-		else
-			replace_registered_scoreboard_value("total_critical_rates", "text", replace_row_with_value, "row_total_critical_rates_with_blitz")
-			replace_registered_scoreboard_value("total_critical_rates", "summary", add_value_within_row_table, "blitz_cr")
-		end
 	]]
+	if not blitz_wr then
+		replace_registered_scoreboard_value("total_weakspot_rates", "text", replace_row_with_value, "row_total_weakspot_rates")
+		replace_registered_scoreboard_value("total_weakspot_rates", "summary", replace_value_within_row_table, "blitz_wr")
+	else
+		replace_registered_scoreboard_value("total_weakspot_rates", "text", replace_row_with_value, "row_total_weakspot_rates_with_blitz")
+		replace_registered_scoreboard_value("total_weakspot_rates", "summary", add_value_within_row_table, "blitz_wr")
+	end
+	if not blitz_cr then
+		replace_registered_scoreboard_value("total_critical_rates", "text", replace_row_with_value, "row_total_critical_rates")
+		replace_registered_scoreboard_value("total_critical_rates", "summary", replace_value_within_row_table, "blitz_cr")
+	else
+		replace_registered_scoreboard_value("total_critical_rates", "text", replace_row_with_value, "row_total_critical_rates_with_blitz")
+		replace_registered_scoreboard_value("total_critical_rates", "summary", add_value_within_row_table, "blitz_cr")
+	end
+	
 end
 
 local function update_all_scoreboard_row_visibilities()
