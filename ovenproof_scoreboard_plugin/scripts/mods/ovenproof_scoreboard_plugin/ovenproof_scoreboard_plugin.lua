@@ -43,6 +43,8 @@ local track_blitz_wr
 local track_blitz_cr
 local explosions_affect_ranged_hitrate
 local explosions_affect_melee_hitrate
+local grenade_messages
+local ammo_messages
 
 local in_match
 local is_playing_havoc
@@ -355,6 +357,8 @@ local function set_locals_for_settings()
 	separate_companion_damage.base = mod:get("separate_companion_damage")
 	separate_companion_damage.kills = "total_"..separate_companion_damage.base.."_kills"
 	separate_companion_damage.damage = "total_"..separate_companion_damage.base.."_damage"
+	grenade_messages = mod:get("grenade_messages")
+	ammo_messages = mod:get("ammo_messages")
 
 	-- Error check for companion damage row
 	if mod:get("enable_companion_blitz_warning")
@@ -460,7 +464,7 @@ function mod.on_all_mods_loaded()
 						scoreboard:update_stat("total_health_stations", account_id, 1)
 					elseif interaction_type == "grenade" then
 						scoreboard:update_stat("ammo_grenades", account_id, 1)
-						if mod:get("ammo_messages") then
+						if grenade_messages then
 							local text = TextUtilities.apply_color_to_text(mod:localize("message_grenades_text"), color)
 							local message = mod:localize("message_grenades_body", text)
 							Managers.event:trigger("event_combat_feed_kill", unit, message)
@@ -509,7 +513,7 @@ function mod.on_all_mods_loaded()
 						if ammo == "small_clip" or ammo == "large_clip" then
 							scoreboard:update_stat("ammo_percent", account_id, pickup_pct)
 							scoreboard:update_stat("ammo_wasted_percent", account_id, wasted_pct)
-							if mod:get("ammo_messages") then
+							if ammo_messages then
 								local pickup_text = TextUtilities.apply_color_to_text(mod:localize("message_"..ammo), color)
 								local displayed_waste = math_max(1, math_round(wasted_pct))
 								local wasted_text = TextUtilities.apply_color_to_text(tostring(displayed_waste).."%", color)
@@ -530,7 +534,7 @@ function mod.on_all_mods_loaded()
 							if count_crates_to_total_ammo then
 								scoreboard:update_stat("ammo_percent", account_id, pickup_pct)
 							end
-							if mod:get("ammo_messages") then
+							if ammo_messages then
 								-- Text formatting
 								-- 		Formatting for percentage of ammo picked up
 								local text_ammo_taken = TextUtilities.apply_color_to_text(tostring(math_round(pickup_pct)).."%", color)

@@ -265,11 +265,20 @@ local localization = {
         ["zh-tw"] = "底部邊距",
         ["pt-br"] = "Margem Inferior",
     },
+    -- @backup158: I split these messages up, as well as the localizations
+    -- localizers please verify that I used the correct words
+    -- oh and there's no Russian for some reason? it wasn't there when I got here
     ammo_messages = {
-        en = "Messages - Ammo/grenade pickups",
-        ["zh-cn"] = "消息 - 弹药/手雷拾取",
-        ["zh-tw"] = "訊息 - 彈藥/手雷拾取",
-        ["pt-br"] = "Mensagens - Coleta de Munição/Granadas",
+        en = "Messages - Ammo pickups",
+        ["zh-cn"] = "消息 - 弹药拾取",
+        ["zh-tw"] = "訊息 - 彈藥拾取",
+        ["pt-br"] = "Mensagens - Coleta de Munição",
+    },
+    grenade_messages = {
+        en = "Messages - Grenade pickups",
+        ["zh-cn"] = "消息 - 手雷拾取",
+        ["zh-tw"] = "訊息 - 手雷拾取",
+        ["pt-br"] = "Mensagens - Coleta de Granadas",
     },
     -- ----------------
     -- Reusable labels
