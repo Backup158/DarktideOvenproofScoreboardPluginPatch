@@ -37,11 +37,12 @@ local table_array_contains = table.array_contains
 -- #######
 mod.version = "1.7.1"
 local debug_messages_enabled
-local explosions_affect_ranged_hitrate
-local explosions_affect_melee_hitrate
+local separate_companion_damage
 local track_blitz_damage
 local track_blitz_wr
 local track_blitz_cr
+local explosions_affect_ranged_hitrate
+local explosions_affect_melee_hitrate
 
 local in_match
 local is_playing_havoc
@@ -302,13 +303,15 @@ local function kill_damage_change_scoreboard_row_visibility(row_name, truth)
 	change_scoreboard_row_visibility(row_name.."_damage", truth)
 end
 
-local function update_blitz_tracking_visibilities()
+local function update_all_scoreboard_row_visibilities()
+	-- ------------
+	-- Blitz
+	-- ------------
 	kill_damage_change_scoreboard_row_visibility("total_blitz", mod:get("track_blitz_damage"))
 	local blitz_wr = mod:get("track_blitz_wr")
 	local blitz_cr = mod:get("track_blitz_cr")
 	change_scoreboard_row_visibility("blitz_wr", blitz_wr)
 	change_scoreboard_row_visibility("blitz_cr", blitz_cr)
-
 	--[[
 	change_scoreboard_row_visibility("total_weakspot_rates", not blitz_wr)
 	change_scoreboard_row_visibility("total_weakspot_rates_with_blitz", blitz_wr)
@@ -330,11 +333,12 @@ local function update_blitz_tracking_visibilities()
 		replace_registered_scoreboard_value("total_critical_rates", "text", replace_row_with_value, "row_total_critical_rates_with_blitz")
 		replace_registered_scoreboard_value("total_critical_rates", "summary", add_value_within_row_table, "blitz_cr")
 	end
-	
-end
 
-local function update_all_scoreboard_row_visibilities()
-	update_blitz_tracking_visibilities()
+	-- ------------
+	-- Companion
+	-- ------------
+	local separate_companion_damage = mod:get("separate_companion_damage")
+	change_scoreboard_row_visibility("total_companion", separate_companion_damage)
 end
 
 local function set_locals_for_settings()
@@ -344,6 +348,7 @@ local function set_locals_for_settings()
 	track_blitz_damage = mod:get("track_blitz_damage")
 	track_blitz_wr = mod:get("track_blitz_wr")
 	track_blitz_cr = mod:get("track_blitz_cr")
+	separate_companion_damage = mod:get("separate_companion_damage")
 end
 
 -- ############
@@ -809,37 +814,20 @@ function mod.on_all_mods_loaded()
 					-- ------------
 					elseif table_array_contains(mod_companion_attack_types, attack_type) or table_array_contains(mod_companion_damage_profiles, damage_profile.name) then
 						-- Crit and Weakspot rates don't matter
-						--[[
-						self._companion_rate = self._companion_rate or {}
-						self._companion_rate[account_id] = self._companion_rate[account_id] or {}
-						self._companion_rate[account_id].hits = self._companion_rate[account_id].hits or 0
-						self._companion_rate[account_id].hits = self._companion_rate[account_id].hits +1
-						self._companion_rate[account_id].weakspots = self._companion_rate[account_id].weakspots or 0
-						self._companion_rate[account_id].crits = self._companion_rate[account_id].crits or 0
-						]]
-						
-						scoreboard:update_stat("total_companion_damage", account_id, actual_damage)
-						--[[
-						if hit_weakspot then
-							self._companion_rate[account_id].weakspots = self._companion_rate[account_id].weakspots + 1
+						if separate_companion_damage then
+							scoreboard:update_stat("total_companion_damage", account_id, actual_damage)
+
+							if attack_result == "died" then
+								scoreboard:update_stat("total_companion_kills", account_id, 1)
+							end
+						else
+							-- @backup158: not adding to hitrate since nobody wants the dog to decrease weakspot and crit rates
+							-- 	allowing users to collapse companion damage into ranged damage
+							scoreboard:update_stat("total_ranged_damage", account_id, actual_damage)
+							if attack_result == "died" then
+								scoreboard:update_stat("total_ranged_kills", account_id, 1)
+							end
 						end
-						]]
-						--[[
-						if is_critical_strike then
-							self._companion_rate[account_id].crits = self._companion_rate[account_id].crits + 1
-						end
-						]]
-						if attack_result == "died" then
-							scoreboard:update_stat("total_companion_kills", account_id, 1)
-						end
-						
-						--[[
-						self._companion_rate[account_id].cr = self._companion_rate[account_id].crits / self._companion_rate[account_id].hits * 100
-						self._companion_rate[account_id].wr = self._companion_rate[account_id].weakspots / self._companion_rate[account_id].hits * 100
-						
-						mod:replace_key_to_edit("companion_cr", account_id, self._companion_rate[account_id].cr)
-						mod:replace_key_to_edit("companion_wr", account_id, self._companion_rate[account_id].wr)
-						]]
 					-- ------------
 					--	Bleed
 					-- ------------

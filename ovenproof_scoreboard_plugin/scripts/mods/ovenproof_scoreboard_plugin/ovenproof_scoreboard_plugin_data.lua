@@ -113,6 +113,10 @@ local localizations = {
 									create_setting_toggle("track_blitz_cr", false),
 								}
 							},
+							{	setting_id 		= "separate_companion_damage",
+								type 			= "checkbox",
+								default_value	= true,
+							},
 						}
 					},
 					create_setting_toggle("explosions_affect_ranged_hitrate", true),

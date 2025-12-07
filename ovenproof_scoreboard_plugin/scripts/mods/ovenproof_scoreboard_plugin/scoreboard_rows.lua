@@ -283,16 +283,6 @@ mod.scoreboard_rows = {
 		parent = "total_weakspot_rates",
 		setting = "offense_rates",
 	},
-	--[[
-	{name = "companion_wr",
-		text = "row_companion_weakspot_rate",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "total_weakspot_rates",
-		setting = "offense_rates",
-	},
-	]]
 	{name = "total_critical_rates",
 		text = "row_total_critical_rates",
 		validation = "ASC",
@@ -349,16 +339,6 @@ mod.scoreboard_rows = {
 		parent = "total_critical_rates",
 		setting = "offense_rates",
 	},
-	--[[
-	{name = "companion_cr",
-		text = "row_companion_critical_rate",
-		validation = "ASC",
-		iteration = "ADD",
-		group = "group_1",
-		parent = "total_critical_rates",
-		setting = "offense_rates",
-	},
-	]]
 	--[[{name = "total_dot_rates_1",
 		text = "row_total_dot_rates_1",
 		validation = "ASC",
