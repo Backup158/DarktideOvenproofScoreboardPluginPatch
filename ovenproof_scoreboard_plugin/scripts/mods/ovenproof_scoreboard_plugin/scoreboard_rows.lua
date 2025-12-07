@@ -231,9 +231,24 @@ mod.scoreboard_rows = {
 		text = "row_total_weakspot_rates",
 		validation = "ASC",
 		iteration = "ADD",
+		visible = true,
 		summary = {
 			"melee_wr",
 			"ranged_wr",
+			-- "companion_wr", -- Don't think dogs can headshot
+		},
+		group = "group_1",
+		setting = "offense_rates",
+	},
+	{name = "total_weakspot_rates_with_blitz",
+		text = "row_total_weakspot_rates_with_blitz",
+		validation = "ASC",
+		iteration = "ADD",
+		visible = false,
+		summary = {
+			"melee_wr",
+			"ranged_wr",
+			"blitz_wr",
 			-- "companion_wr", -- Don't think dogs can headshot
 		},
 		group = "group_1",
@@ -279,9 +294,24 @@ mod.scoreboard_rows = {
 		text = "row_total_critical_rates",
 		validation = "ASC",
 		iteration = "ADD",
+		visible = true,
 		summary = {
 			"melee_cr",
 			"ranged_cr",
+			-- "companion_cr", -- Don't think dogs can crit
+		},
+		group = "group_1",
+		setting = "offense_rates",
+	},
+	{name = "total_critical_rates_with_blitz",
+		text = "row_total_critical_rates_with_blitz",
+		validation = "ASC",
+		iteration = "ADD",
+		visible = false,
+		summary = {
+			"melee_cr",
+			"ranged_cr",
+			"blitz_cr",
 			-- "companion_cr", -- Don't think dogs can crit
 		},
 		group = "group_1",

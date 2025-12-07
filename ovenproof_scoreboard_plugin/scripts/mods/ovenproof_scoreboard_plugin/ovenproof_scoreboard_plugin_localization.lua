@@ -1,7 +1,14 @@
 local mod = get_mod("ovenproof_scoreboard_plugin")
 local UIRenderer = mod:original_require("scripts/managers/ui/ui_renderer")
 local ui_renderer_instance = Managers.ui:ui_constant_elements():ui_renderer()
+
+-- ###############################################################################################################
+-- IF ADDING A NEW LOCALIZATION LANGUAGE, CHECK HERE
+-- ###############################################################################################################
 local languages = {"en","ru","zh-cn","zh-tw","pt-br",}
+
+local table = table
+local table_clone = table.clone
 
 mod.get_text_size = function(self, input_text)
     return UIRenderer.text_size(ui_renderer_instance, input_text, "proxima_nova_bold", 0.1)
