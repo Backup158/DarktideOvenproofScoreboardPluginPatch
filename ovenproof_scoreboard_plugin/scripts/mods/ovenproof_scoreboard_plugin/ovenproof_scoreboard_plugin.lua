@@ -254,6 +254,10 @@ function mod.update(main_dt)
 	mod:manage_blank_rows()
 end
 
+-- ############
+-- Updating values in the Scoreboard Rows
+-- DESCRIPTION: Goes through rows registered by the scoreboard mod, then modifies a certain value
+-- ############
 local function replace_registered_scoreboard_value(row_name, key_to_edit, function_to_use, other_parameters)
 	if not scoreboard then
 		mod:info("scoreboard missing. attempted to change: "..row_name)
@@ -288,28 +292,13 @@ local add_value_within_row_table = function(row_with_key, row_value, value)
 end
 
 local function change_scoreboard_row_visibility(row_name, truth)
-	replace_registered_scoreboard_value(row_name, "visible", replace_row_with_value(), truth)
+	replace_registered_scoreboard_value(row_name, "visible", replace_row_with_value, truth)
 end
 
 local function kill_damage_change_scoreboard_row_visibility(row_name, truth)
 	change_scoreboard_row_visibility(row_name, truth)
 	change_scoreboard_row_visibility(row_name.."_kills", truth)
 	change_scoreboard_row_visibility(row_name.."_damage", truth)
-end
-
-local function set_locals_for_settings()
-	debug_messages_enabled = mod:get("enable_debug_messages")
-	explosions_affect_ranged_hitrate = mod:get("explosions_affect_ranged_hitrate")
-	explosions_affect_melee_hitrate = mod:get("explosions_affect_melee_hitrate")
-	track_blitz_damage = mod:get("track_blitz_damage")
-	track_blitz_wr = mod:get("track_blitz_wr")
-	track_blitz_cr = mod:get("track_blitz_cr")
-
-	update_all_scoreboard_row_visibilities()
-end
-
-local function update_all_scoreboard_row_visibilities()
-	update_blitz_tracking_visibilities()
 end
 
 local function update_blitz_tracking_visibilities()
@@ -319,19 +308,32 @@ local function update_blitz_tracking_visibilities()
 	change_scoreboard_row_visibility("blitz_wr", blitz_wr)
 	change_scoreboard_row_visibility("blitz_cr", blitz_cr)
 	if not blitz_wr then
-		replace_registered_scoreboard_value("total_weakspot_rates", "text", replace_value_within_row_table(), "row_total_weakspot_rates")
-		replace_registered_scoreboard_value("total_weakspot_rates", "summary", replace_value_within_row_table(), "blitz_wr")
+		replace_registered_scoreboard_value("total_weakspot_rates", "text", replace_value_within_row_table, "row_total_weakspot_rates")
+		replace_registered_scoreboard_value("total_weakspot_rates", "summary", replace_value_within_row_table, "blitz_wr")
 	else
-		replace_registered_scoreboard_value("total_weakspot_rates", "text", replace_value_within_row_table(), "row_total_weakspot_rates_with_blitz")
-		replace_registered_scoreboard_value("total_weakspot_rates", "summary", add_value_within_row_table(), "blitz_wr")
+		replace_registered_scoreboard_value("total_weakspot_rates", "text", replace_value_within_row_table, "row_total_weakspot_rates_with_blitz")
+		replace_registered_scoreboard_value("total_weakspot_rates", "summary", add_value_within_row_table, "blitz_wr")
 	end
 	if not blitz_cr then
-		replace_registered_scoreboard_value("total_critical_rates", "text", replace_value_within_row_table(), "row_total_critical_rates")
-		replace_registered_scoreboard_value("total_critical_rates", "summary", replace_value_within_row_table(), "blitz_cr")
+		replace_registered_scoreboard_value("total_critical_rates", "text", replace_value_within_row_table, "row_total_critical_rates")
+		replace_registered_scoreboard_value("total_critical_rates", "summary", replace_value_within_row_table, "blitz_cr")
 	else
-		replace_registered_scoreboard_value("total_critical_rates", "text", replace_value_within_row_table(), "row_total_critical_rates_with_blitz")
-		replace_registered_scoreboard_value("total_critical_rates", "summary", add_value_within_row_table(), "blitz_cr")
+		replace_registered_scoreboard_value("total_critical_rates", "text", replace_value_within_row_table, "row_total_critical_rates_with_blitz")
+		replace_registered_scoreboard_value("total_critical_rates", "summary", add_value_within_row_table, "blitz_cr")
 	end
+end
+
+local function update_all_scoreboard_row_visibilities()
+	update_blitz_tracking_visibilities()
+end
+
+local function set_locals_for_settings()
+	debug_messages_enabled = mod:get("enable_debug_messages")
+	explosions_affect_ranged_hitrate = mod:get("explosions_affect_ranged_hitrate")
+	explosions_affect_melee_hitrate = mod:get("explosions_affect_melee_hitrate")
+	track_blitz_damage = mod:get("track_blitz_damage")
+	track_blitz_wr = mod:get("track_blitz_wr")
+	track_blitz_cr = mod:get("track_blitz_cr")
 end
 
 -- ############
