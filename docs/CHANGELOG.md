@@ -8,7 +8,17 @@ v1.8.0
         - Charged by Mutant
     - States tracker doesn't seem to run in the Psykhanium/SoloPlay, so this is a pain in the ass to test >_>
 - Added option to have separate Blitz damage tracked (thanks Syllogism!)
-    - 
+    - Included options to include them for weakspot rate and crit rate calculations, respectively
+        - These are kind of janky
+        - When disabled, they are still present but invisible, so the two columns are off center
+        - Can't just remove the rows because reinserting them would not preserve the row order
+    - **Do not do this mid-match! Toggle these options before starting a match**
+        - This includes the Psykhanium
+        - Exit and reenter to test
+    - Thanks to Syllogism for doing the legwork in digging through the damage types for blitzes and integrating it into the damage calculations
+- (Dev only) Added functions for modifying rows after they've been copied into the base mod
+    - Did this so you can change settings without restarting the game or reloading mods
+    - Not recommended to totally remove things due to sorting
 
 # 2025-12-05
 v1.7.1
