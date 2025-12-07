@@ -254,7 +254,7 @@ function mod.update(main_dt)
 	mod:manage_blank_rows()
 end
 
-local function change_scoreboard_row_visibility(row_name, truth)
+local function replace_registered_scoreboard_value(row_name, key_to_edit, value_to_use)
 	if not scoreboard then
 		mod:info("scoreboard missing. attempted to change: "..row_name)
 		return
@@ -266,10 +266,15 @@ local function change_scoreboard_row_visibility(row_name, truth)
 	-- adding a key messes up the order sorting, so my rows ended up at the bottom every time
 	for _, row in ipairs(scoreboard.registered_scoreboard_rows) do
 		if row.name == row_name then
-			row.visible = truth
+			row[key_to_edit] = value_to_use
 		end
 	end
 end
+
+local function change_scoreboard_row_visibility(row_name, truth)
+	replace_registered_scoreboard_value(row_name, "visible", truth)
+end
+
 local function kill_damage_change_scoreboard_row_visibility(row_name, truth)
 	change_scoreboard_row_visibility(row_name, truth)
 	change_scoreboard_row_visibility(row_name.."_kills", truth)
@@ -288,6 +293,10 @@ local function set_locals_for_settings()
 end
 
 local function update_all_scoreboard_row_visibilities()
+	update_blitz_tracking_visibilities()
+end
+
+local function update_blitz_tracking_visibilities()
 	kill_damage_change_scoreboard_row_visibility("total_blitz", mod:get("track_blitz_damage"))
 	change_scoreboard_row_visibility("blitz_wr", mod:get("track_blitz_wr"))
 	change_scoreboard_row_visibility("blitz_cr", mod:get("track_blitz_cr"))
