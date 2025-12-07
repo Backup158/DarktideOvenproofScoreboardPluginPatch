@@ -6,10 +6,13 @@ local ui_renderer_instance = Managers.ui:ui_constant_elements():ui_renderer()
 -- IF ADDING A NEW LOCALIZATION LANGUAGE, CHECK HERE
 -- ###############################################################################################################
 local languages = {"en","ru","zh-cn","zh-tw","pt-br",}
+-- ###############################################################################################################
 
 local table = table
 local table_clone = table.clone
 
+-- @backup158: I don't know why this needs the self reference nor why these are globals
+--  but on the very off chance that some other mod uses these globals, I'll just make the local reference below 
 mod.get_text_size = function(self, input_text)
     return UIRenderer.text_size(ui_renderer_instance, input_text, "proxima_nova_bold", 0.1)
 end
