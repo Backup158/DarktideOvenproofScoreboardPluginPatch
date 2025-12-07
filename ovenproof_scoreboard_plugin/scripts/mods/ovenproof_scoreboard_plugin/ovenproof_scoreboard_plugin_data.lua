@@ -102,12 +102,10 @@ local localizations = {
 			{	setting_id 		= "attack_tracking_group",
 				type 			= "group",
 				sub_widgets		= {
-					{
-						setting_id 		= "attack_tracking_separate_rows",
+					{	setting_id 		= "attack_tracking_separate_rows",
 						type 			= "group",
 						sub_widgets = {
-							{
-								setting_id 		= "track_blitz_damage",
+							{	setting_id 		= "track_blitz_damage",
 								type 			= "checkbox",
 								default_value	= false,
 								sub_widgets = {
