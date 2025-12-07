@@ -1,3 +1,9 @@
+# 2025-12-XXX
+v1.9.0
+
+- Split grenade pickup messages from ammo pickup messages
+- Now there's two settings for pickups (one each for grenades and ammo)
+
 # 2025-12-07
 v1.8.1
 
