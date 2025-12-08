@@ -102,105 +102,135 @@ local localization = {
     -- ----------------
     error_scoreboard_missing = {
         en = "Scoreboard required! This is an add-on plugin to it!",
+        ["zh-tw"] = "需要記分板！這是它的一個附加插件！",
     },
     enable_debug_messages = {
         en = "Enable error messages",
+        ["zh-tw"] = "啟用錯誤訊息",
         ["pt-br"] = "Ativar Mensagens de Erro",
     },
     enable_debug_messages_description = {
         en = "Show messages in chat whenever an uncategorized damage type is used. Please report these!",
+        ["zh-tw"] = "每當使用未分類的傷害類型時，請在聊天中顯示消息。請報告這些！",
         ["pt-br"] = "Exibir mensagens no chat quando um tipo de dano não categorizado for usado. Por favor, reporte esses casos!",
     },
     row_categories_group = {
         en = "Scoreboard Row Categories",
+        ["zh-tw"] = "記分板行分類",
         ["pt-br"] = "Categorias de Linhas do scoreboard",
     },
     ammo_tracking_group = {
         en = "Ammo Tracking",
+        ["zh-tw"] = "彈藥追蹤",
     },
     track_ammo_crate_waste = {
         en = "Track Ammo Crate waste",
+        ["zh-tw"] = "追蹤彈藥箱浪費",
     },
     track_ammo_crate_waste = {
         en = "Track Ammo Crate waste",
+        ["zh-tw"] = "追蹤彈藥箱浪費",
     },
     track_ammo_crate_in_percentage = {
         en = "Include Ammo Crates in total percentage of Ammo picked up",
+        ["zh-tw"] = "將彈藥箱納入撿取彈藥總百分比", 
     },
     attack_tracking_group = {
         en = "Attack Report Tracking",
+        ["zh-tw"] = "攻擊報告追蹤",
     },
     attack_tracking_separate_rows = {
         en = "Use Separate Rows",
+        ["zh-tw"] = "使用獨立行",
     },
     attack_tracking_separate_rows_description = {
         en = "ROW VISIBILITY CHANGES WILL NOT TAKE EFFECT UNTIL THE MAP CHANGES (such as by going from Mourningstar to Psykhanium)\nCreates a separate row to track these values.",
+        ["zh-tw"] = "ROW VISIBILITY 的變更要在地圖更換後才會生效（例如，從Mourningstar到靈能室）\n此選項會建立一個獨立的列，用來追蹤相關的數值。",
     },
     separate_companion_damage = {
         en = "Companion Damage",
+        ["zh-tw"] = "機械戰犬傷害",
     },
     separate_companion_damage_description = {
         en = "Choose which row Companion Damage counts towards. \"Companion\" is its own row, which will be hidden if one of the other options is chosen.",
+        zh = "選擇「機械戰犬傷害」要計入哪一個列。「機械戰犬」本身是一個獨立的列；若選擇其他選項，該列將會被隱藏。",
     },
     warning_companion_blitz = {
         en = "You have set Companion Damage to be tracked under Blitz Damage, but you have not enabled the Blitz Damage row. This means Companion Damage will not be visible! It will still count towards total damage.\nIf that is intentional, you can disable this warning in the Mod Options.",
+        zh = "您已將機械戰犬傷害設定為統計在爆發傷害（Blitz Damage）中，但您尚未啟用爆發傷害列。這表示機械戰犬傷害將無法顯示！但仍會計入總傷害。\n如果這是您預期的行為，您可以在模組選項中停用此警告。",
     },
     enable_companion_blitz_warning = {
-        en = "Enable warning for untracked Companion Damage"
+        en = "Enable warning for untracked Companion Damage",
+        zh = "啟用未追蹤機械戰犬傷害的警告",
     },
     enable_companion_blitz_warning_description = {
-        en = "Shows warning when counting Companion Damage as Blitz Damage if there is no row displayed for Blitz Damage."
+        en = "Shows warning when counting Companion Damage as Blitz Damage if there is no row displayed for Blitz Damage.",
+        zh = "當機械戰犬傷害被計為爆發傷害、但未顯示爆發傷害列時，顯示警告。",
     },
     separate_companion_damage_hide_regardless = {
         en = "Always Hide Companion Damage Row",
+        zh = "永遠隱藏機械戰犬傷害列",
     },
     -- @backup158: idk if these localizations are accurate
     option_companion_companion = {
         en = "Companion", 
         ru = "компаньон", 
         ["zh-cn"] = "伴侣", 
-        ["zh-tw"] = "伴侶", 
+        ["zh-tw"] = "機械戰犬", 
         ["pt-br"] = "Companheiro", 
     },
     track_blitz_damage = {
         en = "Blitz Damage",
+        zh = "閃擊傷害",
     },
     track_blitz_damage_description = {
         en = "If disabled, Blitz Damage counts as Ranged Damage.",
+        zh = "若停用，閃擊傷害將被視為遠程傷害。",
     },
     track_blitz_wr = {
         en = "Track Blitz Weakspot Rate",
+        zh = "追蹤閃擊弱點命中率",
     },
     track_blitz_cr = {
         en = "Track Blitz Critical Strike Rate",
+        zh = "追蹤閃擊暴擊率",
     },
     attack_tracking_hitrate = {
         en = "Hitrate Calculations",
+        zh = "命中率計算",
     },
     explosions_affect_ranged_hitrate = {
         en = "Explosions affect Ranged Hitrate",
+        zh = "爆炸影響遠程命中率",
     },
     explosions_affect_melee_hitrate = {
         en = "Explosions affect Melee Hitrate",
+        zh = "爆炸影響近戰命中率",
     },
     defense_tracking_group = {
         en = "Defense Report Tracking",
+        zh = "防禦報告追蹤",
     },
     disabled_tracking_group = {
         en = "Track Events as a Disabled State",
+        zh = "將事件視為癱瘓狀態",
     },
     disabled_tracking_group_description = {
         en = "When enabled, entering the described state will count as getting Disabled",
+        zh = "啟用後，進入描述的狀態將被視為遭受癱瘓。",
     },
     track_catapulted = {
         en = "Catapulted by Knockback",
+        zh = "被擊退彈飛",
     },
     track_mutant_charged = {
         en = "Charged by a Mutant",
+        zh = "被變種衝撞",
     },
     track_warp_grabbed = {
         --en = "Grabbed by a Daemonhost",
         en = "Warp Grabbed",
+        zh = "惡魔抓取",
     },
     exploration_tier_0 = {
         en = "Exploration",
@@ -551,7 +581,7 @@ local localization = {
         en = "Blitz",
         --ru = "",
         --["zh-cn"] = "",
-        --["zh-tw"] = "",
+        ["zh-tw"] = "閃擊",
         --["pt-br"] = "",
     },
     --[[
@@ -570,7 +600,7 @@ local localization = {
         en = {left = "Critical Rate", right = "[ Melee | Ranged | Blitz ]",},
         -- ru = {left = "Крит. удары", right = "[Ближний/Дальний/]",},
         -- ["zh-cn"] = {left = "暴击率", right = "[ 近战 | 远程 | ]",},
-        -- ["zh-tw"] = { left = "爆擊率", right = "[ 近戰 | 遠程 | ]",},
+        ["zh-tw"] = { left = "爆擊率", right = "[ 近戰  |  遠程  |  閃擊 ]",},
         -- ["pt-br"] = {left = "Taxa Crítica", right = "[Corpo a Corpo | Distância | ]",},
     },
     row_melee_critical_rate = {
@@ -591,7 +621,7 @@ local localization = {
         en = "Blitz",
         --ru = "",
         --["zh-cn"] = "",
-        --["zh-tw"] = "",
+        ["zh-tw"] = "閃擊",
         --["pt-br"] = "",
     },
     -- @backup158: do toxins even crit? i dont think i need to count this
@@ -669,7 +699,7 @@ local localization = {
         en = {left = "Total Blitz", right = right_hand_localizations.kill_damage["en"],},
         --ru = {left = "Всего", right = right_hand_localizations.kill_damage["ru"],},
         --["zh-cn"] = {left = "总", right = right_hand_localizations.kill_damage["zh-cn"],},
-        --["zh-tw"] = { left = "總", right = right_hand_localizations.kill_damage["zh-tw"],},
+        ["zh-tw"] = { left = "總閃擊", right = right_hand_localizations.kill_damage["zh-tw"],},
         --["pt-br"] = {left = "Total", right = right_hand_localizations.kill_damage["pt-br"]},
     },
     -- @backup158: idk if these localizations are accurate
