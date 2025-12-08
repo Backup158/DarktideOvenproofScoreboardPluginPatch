@@ -17,8 +17,9 @@ fi
 
 # no mods folder 
 #   make one then copy patch over to it
-mkdir mods
-cp -r "ovenproof_scoreboard_plugin" "mods/ovenproof_scoreboard_plugin" 
+#mkdir mods
+#cp -r "ovenproof_scoreboard_plugin" "mods/ovenproof_scoreboard_plugin"
 #   zip it up
-zip -r "ovenproof_scoreboard_plugin_patch.zip" "mods"
-zip -r "ovenproof_scoreboard_plugin_patch-manual.zip" "ovenproof_scoreboard_plugin"
+#zip -r "ovenproof_scoreboard_plugin_patch.zip" "mods"
+#zip -r "ovenproof_scoreboard_plugin_patch-manual.zip" "ovenproof_scoreboard_plugin"
+zip -r "ovenproof_scoreboard_plugin_patch.zip" "ovenproof_scoreboard_plugin"
