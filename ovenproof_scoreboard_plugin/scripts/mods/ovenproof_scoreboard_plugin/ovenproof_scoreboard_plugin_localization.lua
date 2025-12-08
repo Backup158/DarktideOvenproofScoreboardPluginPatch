@@ -171,7 +171,7 @@ local localization = {
         en = "Always Hide Companion Damage Row",
         ["zh-tw"] = "永遠隱藏機械戰犬傷害列",
     },
-    -- @backup158: idk if these localizations are accurate
+    -- @backup158: idk if these localizations are accurate since I wasn't involved
     option_companion_companion = {
         en = "Companion", 
         ru = "компаньон", 
@@ -702,7 +702,7 @@ local localization = {
         ["zh-tw"] = { left = "總閃擊", right = right_hand_localizations.kill_damage["zh-tw"],},
         --["pt-br"] = {left = "Total", right = right_hand_localizations.kill_damage["pt-br"]},
     },
-    -- @backup158: idk if these localizations are accurate
+    -- @backup158: idk if these localizations are accurate since I wasn't involved
     row_total_companion = {
         en = {left = "Total Companion", right = right_hand_localizations.kill_damage["en"],},
         ru = {left = "Полный компаньон", right = right_hand_localizations.kill_damage["ru"],},
