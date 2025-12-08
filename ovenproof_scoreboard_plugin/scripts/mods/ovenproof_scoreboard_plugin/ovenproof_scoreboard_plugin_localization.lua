@@ -153,23 +153,23 @@ local localization = {
     },
     separate_companion_damage_description = {
         en = "Choose which row Companion Damage counts towards. \"Companion\" is its own row, which will be hidden if one of the other options is chosen.",
-        zh = "選擇「機械戰犬傷害」要計入哪一個列。「機械戰犬」本身是一個獨立的列；若選擇其他選項，該列將會被隱藏。",
+        ["zh-tw"] = "選擇「機械戰犬傷害」要計入哪一個列。「機械戰犬」本身是一個獨立的列；若選擇其他選項，該列將會被隱藏。",
     },
     warning_companion_blitz = {
         en = "You have set Companion Damage to be tracked under Blitz Damage, but you have not enabled the Blitz Damage row. This means Companion Damage will not be visible! It will still count towards total damage.\nIf that is intentional, you can disable this warning in the Mod Options.",
-        zh = "您已將機械戰犬傷害設定為統計在爆發傷害（Blitz Damage）中，但您尚未啟用爆發傷害列。這表示機械戰犬傷害將無法顯示！但仍會計入總傷害。\n如果這是您預期的行為，您可以在模組選項中停用此警告。",
+        ["zh-tw"] = "您已將機械戰犬傷害設定為統計在爆發傷害（Blitz Damage）中，但您尚未啟用爆發傷害列。這表示機械戰犬傷害將無法顯示！但仍會計入總傷害。\n如果這是您預期的行為，您可以在模組選項中停用此警告。",
     },
     enable_companion_blitz_warning = {
         en = "Enable warning for untracked Companion Damage",
-        zh = "啟用未追蹤機械戰犬傷害的警告",
+        ["zh-tw"] = "啟用未追蹤機械戰犬傷害的警告",
     },
     enable_companion_blitz_warning_description = {
         en = "Shows warning when counting Companion Damage as Blitz Damage if there is no row displayed for Blitz Damage.",
-        zh = "當機械戰犬傷害被計為爆發傷害、但未顯示爆發傷害列時，顯示警告。",
+        ["zh-tw"] = "當機械戰犬傷害被計為爆發傷害、但未顯示爆發傷害列時，顯示警告。",
     },
     separate_companion_damage_hide_regardless = {
         en = "Always Hide Companion Damage Row",
-        zh = "永遠隱藏機械戰犬傷害列",
+        ["zh-tw"] = "永遠隱藏機械戰犬傷害列",
     },
     -- @backup158: idk if these localizations are accurate
     option_companion_companion = {
@@ -181,56 +181,56 @@ local localization = {
     },
     track_blitz_damage = {
         en = "Blitz Damage",
-        zh = "閃擊傷害",
+        ["zh-tw"] = "閃擊傷害",
     },
     track_blitz_damage_description = {
         en = "If disabled, Blitz Damage counts as Ranged Damage.",
-        zh = "若停用，閃擊傷害將被視為遠程傷害。",
+        ["zh-tw"] = "若停用，閃擊傷害將被視為遠程傷害。",
     },
     track_blitz_wr = {
         en = "Track Blitz Weakspot Rate",
-        zh = "追蹤閃擊弱點命中率",
+        ["zh-tw"] = "追蹤閃擊弱點命中率",
     },
     track_blitz_cr = {
         en = "Track Blitz Critical Strike Rate",
-        zh = "追蹤閃擊暴擊率",
+        ["zh-tw"] = "追蹤閃擊暴擊率",
     },
     attack_tracking_hitrate = {
         en = "Hitrate Calculations",
-        zh = "命中率計算",
+        ["zh-tw"] = "命中率計算",
     },
     explosions_affect_ranged_hitrate = {
         en = "Explosions affect Ranged Hitrate",
-        zh = "爆炸影響遠程命中率",
+        ["zh-tw"] = "爆炸影響遠程命中率",
     },
     explosions_affect_melee_hitrate = {
         en = "Explosions affect Melee Hitrate",
-        zh = "爆炸影響近戰命中率",
+        ["zh-tw"] = "爆炸影響近戰命中率",
     },
     defense_tracking_group = {
         en = "Defense Report Tracking",
-        zh = "防禦報告追蹤",
+        ["zh-tw"] = "防禦報告追蹤",
     },
     disabled_tracking_group = {
         en = "Track Events as a Disabled State",
-        zh = "將事件視為癱瘓狀態",
+        ["zh-tw"] = "將事件視為癱瘓狀態",
     },
     disabled_tracking_group_description = {
         en = "When enabled, entering the described state will count as getting Disabled",
-        zh = "啟用後，進入描述的狀態將被視為遭受癱瘓。",
+        ["zh-tw"] = "啟用後，進入描述的狀態將被視為遭受癱瘓。",
     },
     track_catapulted = {
         en = "Catapulted by Knockback",
-        zh = "被擊退彈飛",
+        ["zh-tw"] = "被擊退彈飛",
     },
     track_mutant_charged = {
         en = "Charged by a Mutant",
-        zh = "被變種衝撞",
+        ["zh-tw"] = "被變種衝撞",
     },
     track_warp_grabbed = {
         --en = "Grabbed by a Daemonhost",
         en = "Warp Grabbed",
-        zh = "惡魔抓取",
+        ["zh-tw"] = "惡魔抓取",
     },
     exploration_tier_0 = {
         en = "Exploration",

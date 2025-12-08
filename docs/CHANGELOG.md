@@ -2,7 +2,9 @@
 v1.9.0
 
 - Split grenade pickup messages from ammo pickup messages
-- Now there's two settings for pickups (one each for grenades and ammo)
+    - Now there's two settings for pickups
+    - one each, for grenades and ammo
+- Added `zh-tw` localizations from SyuanTsai. Thank you!
 
 # 2025-12-07
 v1.8.1
