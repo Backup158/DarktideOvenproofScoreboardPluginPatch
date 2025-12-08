@@ -1,4 +1,4 @@
-# 2025-12-XXX
+# 2025-12-07
 v1.9.0
 
 - Split grenade pickup messages from ammo pickup messages
