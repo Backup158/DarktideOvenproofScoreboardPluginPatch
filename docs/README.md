@@ -6,6 +6,8 @@ Originally it was stored in the posts on the mod page, but the project has grown
 # Installation
 I have assumed your copy of Darktide is ready to load mods.
 
+When I say "Install," I mean to use whichever method you prefer. If you don't have one, refer to the [Darktide Modding Documentation](https://dmf-docs.darkti.de/#/installing-mods) for an idea.
+
 1. Install the original [Scoreboard](https://www.nexusmods.com/warhammer40kdarktide/mods/22) mod
 2. Install this mod
 
