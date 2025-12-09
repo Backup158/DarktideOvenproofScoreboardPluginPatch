@@ -7,7 +7,13 @@ local mod = get_mod("ovenproof_scoreboard_plugin")
 -- ###############################################################################################################
 local languages = {"en","ru","zh-cn","zh-tw","pt-br",}
 -- ###############################################################################################################
--- If your language is already translated, please search through this page for "google translate" to correct those
+-- If your language is already translated:
+--      if you have time, please search through this page for "google translate" to correct those
+--          I tried to label as many of those as I could, but I didn't pay attention until recently so I'm sure I missed some
+--          if that's too tedious, please don't do it. i appreciate the help regardless!
+--      for those with missing localizations that I noticed, I put a comment with a blank line for the languages
+--          ex: `ru = "",` and `["zh-cn"] = "",
+-- Thanks for the help! - Backup158
 -- ###############################################################################################################
 
 -- ########################
@@ -463,18 +469,21 @@ local localization = {
     -- Ammo messages
     message_grenades = {
         en = "grenades",
+        -- ru = "",
         ["zh-cn"] = "手雷",
         ["zh-tw"] = "手雷",
         ["pt-br"] = "Granadas",
     },
     message_small_clip = {
         en = "ammo box",
+        -- ru = "",
         ["zh-cn"] = "小弹药罐",
         ["zh-tw"] = "小彈藥罐",
         ["pt-br"] = "Caixa de Munição",
     },
     message_large_clip = {
         en = "ammo bag",
+        -- ru = "",
         ["zh-cn"] = "大弹药包",
         ["zh-tw"] = "大彈藥包",
         ["pt-br"] = "Saco de Munição",
@@ -482,6 +491,7 @@ local localization = {
     message_ammo_no_waste = {
 		--en = " picked up %s ammo",
         en = " picked up an %s",
+        -- ru = "",
         ["zh-cn"] = "拾取了%s",
         ["zh-tw"] = "拾取了 %s",
         ["pt-br"] = " coletou %s",
@@ -489,33 +499,42 @@ local localization = {
     message_ammo_waste = {
 		--en = " picked up %s ammo, wasted %s",
         en = " picked up an %s, wasted %s ammo",
+        -- ru = "",
         ["zh-cn"] = "拾取了%s，浪费了%s弹药",
         ["zh-tw"] = "拾取了 %s，浪費了 %s 彈藥",
         ["pt-br"] = " coletou %s, desperdiçou %s munição",
     },
     message_ammo_crate = {
         en = " picked up %s ammo from an %s",
+        -- ru = "",
         ["zh-cn"] = "拾取了%s弹药，来自%s",
         ["zh-tw"] = "拾取了 %s 彈藥，來自 %s",
         ["pt-br"] = " coletou %s munição de %s",
     },
     message_ammo_crate_waste = {
         en = " picked up %s ammo from an %s, wasting %s",
+        -- ru = " ",
+        -- ["zh-cn"] = "",
+        -- ["zh-tw"] = "",
+        -- ["pt-br"] = " ",
     },
     message_ammo_crate_text = {
         en = "ammo crate",
+        -- ru = " ",
         ["zh-cn"] = "弹药箱",
         ["zh-tw"] = "彈藥箱",
         ["pt-br"] = "Caixa de Munição",
     },
     message_grenades_body = {
         en = " picked up %s",
+        -- ru = " ",
         ["zh-cn"] = "拾取了%s",
         ["zh-tw"] = "拾取了 %s",
         ["pt-br"] = " coletou %s",
     },
     message_grenades_text = {
         en = "grenades",
+        -- ru = " ",
         ["zh-cn"] = "手雷",
         ["zh-tw"] = "手雷",
         ["pt-br"] = "Granadas",
@@ -532,36 +551,42 @@ local localization = {
     },
     row_ammo_1 = {
         en = {left = "Total Ammo", right = "[ Taken | Wasted ]",},
+        -- ru = " ",
         ["zh-cn"] = {left = "总弹药", right = "[ 拾取 | 浪费 ]",},
         ["zh-tw"] = {left = "總彈藥", right = "[ 拾取 | 浪費 ]",},
         ["pt-br"] = {left = "Total Munição", right = "[Coletada | Desperdiçada]",},
     },
     row_ammo_percent = {
         en = "Taken",
+        -- ru = " ",
         ["zh-cn"] = "拾取",
         ["zh-tw"] = "拾取",
         ["pt-br"] = "Coletada",
     },
     row_ammo_wasted = {
         en = "Wasted",
+        -- ru = " ",
         ["zh-cn"] = "浪费",
         ["zh-tw"] = "浪費",
         ["pt-br"] = "Desperdiçada",
     },
     row_ammo_2 = {
         en = {left = "Total", right = "[ Grenades Taken | Crates Used ]",},
+        -- ru = " ",
         ["zh-cn"] = {left = "总", right = "[ 手雷拾取 | 弹药箱使用 ]",},
         ["zh-tw"] = {left = "總", right = "[ 手雷拾取 | 彈藥箱使用 ]",},
         ["pt-br"] = {left = "Total", right = "[Granadas Coletada | Caixas Usadas]",},
     },
     row_ammo_grenades = {
         en = "Grenades Taken",
+        -- ru = " ",
         ["zh-cn"] = "手雷拾取",
         ["zh-tw"] = "手雷拾取",
         ["pt-br"] = "Granadas Coletada",
     },
     row_ammo_crates = {
         en = "Crates Used",
+        -- ru = " ",
         ["zh-cn"] = "弹药箱使用",
         ["zh-tw"] = "彈藥箱使用",
         ["pt-br"] = "Caixas Usadas",
