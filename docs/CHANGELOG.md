@@ -1,4 +1,10 @@
 # 2025-12-07
+v1.9.1
+
+- Added machine translations from Sai
+- Added comments to help translators
+
+# 2025-12-07
 v1.9.0
 
 - Split grenade pickup messages from ammo pickup messages
