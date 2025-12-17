@@ -108,12 +108,12 @@ local localizations = {
 						["default_value"] = "offense_tier_1",
 						["options"] = offense_tier_options,
 					},
-					{	["setting_id"] = "categorize_total_companion",
+					{	["setting_id"] = "categorize_total_blitz",
 						["type"] = "dropdown",
 						["default_value"] = "offense_tier_1",
 						["options"] = offense_tier_options,
 					},
-					{	["setting_id"] = "categorize_total_blitz",
+					{	["setting_id"] = "categorize_total_companion",
 						["type"] = "dropdown",
 						["default_value"] = "offense_tier_1",
 						["options"] = offense_tier_options,
@@ -145,11 +145,12 @@ local localizations = {
 								type 			= "dropdown",
 								default_value	= "companion",
 								options = {
-									{text = "option_companion_companion", value = "companion", },
 									-- reusing localizations
 									{text = "row_melee_weakspot_rate", value = "melee", },
 									{text = "row_ranged_weakspot_rate", value = "ranged", },
 									{text = "row_blitz_weakspot_rate", value = "blitz", },
+									-- custom local
+									{text = "option_companion_companion", value = "companion", },
 								},
 								sub_widgets = {
 									create_setting_toggle("enable_companion_blitz_warning", true),
