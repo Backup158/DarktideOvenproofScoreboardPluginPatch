@@ -38,10 +38,10 @@ for _, state in pairs(mod.optional_states_disabled) do
 end
 
 local offense_tier_options = {
-	{text = "option_offense_tier_0", value = "offense_tier_0", },
-	{text = "option_offense_tier_1", value = "offense_tier_1", },
-	{text = "option_offense_tier_2", value = "offense_tier_2", },
-	{text = "option_offense_tier_3", value = "offense_tier_3", },
+	{text = "offense_tier_0", value = "offense_tier_0", },
+	{text = "offense_tier_1", value = "offense_tier_1", },
+	{text = "offense_tier_2", value = "offense_tier_2", },
+	{text = "offense_tier_3", value = "offense_tier_3", },
 }
 
 local localizations = {
