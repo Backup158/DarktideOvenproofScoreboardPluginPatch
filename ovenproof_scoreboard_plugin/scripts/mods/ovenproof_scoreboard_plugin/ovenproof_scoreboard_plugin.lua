@@ -46,10 +46,16 @@ local explosions_affect_melee_hitrate
 local grenade_messages
 local ammo_messages
 local categorizable_damage_types = { 
+	--[[
 	melee = mod:get("categorize_total_melee"), 
 	ranged = mod:get("categorize_total_ranged"), 
-	companion = mod:get("categorize_total_companion"), 
 	blitz = mod:get("categorize_total_blitz"), 
+	companion = mod:get("categorize_total_companion"), 
+	]]
+	melee = "offense_tier_1",
+	ranged = "offense_tier_1",
+	blitz = "offense_tier_1",
+	companion = "offense_tier_1",
 }
 
 local in_match
@@ -357,12 +363,22 @@ local function update_all_scoreboard_row_visibilities()
 	-- ------------
 	for damage_type, categorization in pairs(categorizable_damage_types) do
 		local new_categorization = mod:get("categorize_total_"..damage_type)
-		if not new_categorization == categorization then
+		mod:info("for "..damage_type.." from "..categorization.." to "..new_categorization)
+		if not (categorization == new_categorization) then
 			local total_x = "total_"..damage_type
+			local total_x_kills = total_x.."_kills"
+			local total_x_damage = total_x.."_damage"
+			mod:echo("changing category for "..total_x)
+			-- Getting the last character of the category
+			--	substring -1 to do that
+			--local new_group = "group_"..string_sub(new_categorization, -1)
+			
 			replace_registered_scoreboard_value(total_x, "setting", replace_row_with_value, new_categorization)
-			replace_registered_scoreboard_value(total_x.."_kills", "setting", replace_row_with_value, new_categorization)
-			replace_registered_scoreboard_value(total_x.."_damage", "setting", replace_row_with_value, new_categorization)
-
+			replace_registered_scoreboard_value(total_x_kills, "setting", replace_row_with_value, new_categorization)
+			replace_registered_scoreboard_value(total_x_damage, "setting", replace_row_with_value, new_categorization)
+			--replace_registered_scoreboard_value(total_x, "group", replace_row_with_value, new_group)
+			--replace_registered_scoreboard_value(total_x_kills, "group", replace_row_with_value, new_group)
+			--replace_registered_scoreboard_value(total_x_damage, "group", replace_row_with_value, new_group)
 			categorizable_damage_types[damage_type] = new_categorization
 		end
 	end
