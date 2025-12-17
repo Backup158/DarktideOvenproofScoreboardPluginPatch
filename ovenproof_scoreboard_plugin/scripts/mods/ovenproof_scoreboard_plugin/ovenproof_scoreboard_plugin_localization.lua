@@ -142,6 +142,13 @@ local localization = {
         ["zh-tw"] = "記分板行分類",
         ["pt-br"] = "Categorias de Linhas do scoreboard",
     },
+    custom_row_categorization = {
+        en = "Select Row Categorization",
+		--ru = "",
+		--["zh-cn"] = "",
+        --["zh-tw"] = "",
+        --["pt-br"] = "",
+    },
     -- @backup158: sai google translated these languages: ru, zh-cn, pt-br
     ammo_tracking_group = {
         en = "Ammo Tracking",

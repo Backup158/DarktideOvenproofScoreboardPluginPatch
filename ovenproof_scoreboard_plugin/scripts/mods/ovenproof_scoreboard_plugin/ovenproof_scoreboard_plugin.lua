@@ -45,6 +45,12 @@ local explosions_affect_ranged_hitrate
 local explosions_affect_melee_hitrate
 local grenade_messages
 local ammo_messages
+local categorizable_damage_types = { 
+	melee = mod:get("categorize_total_melee"), 
+	ranged = mod:get("categorize_total_ranged"), 
+	companion = mod:get("categorize_total_companion"), 
+	blitz = mod:get("categorize_total_blitz"), 
+}
 
 local in_match
 local is_playing_havoc
@@ -344,6 +350,21 @@ local function update_all_scoreboard_row_visibilities()
 		change_scoreboard_row_visibility("total_companion", true)
 	else
 		change_scoreboard_row_visibility("total_companion", false)
+	end
+
+	-- ------------
+	-- Offense Grouping
+	-- ------------
+	for damage_type, categorization in pairs(categorizable_damage_types) do
+		local new_categorization = mod:get("categorize_total_"..damage_type)
+		if not new_categorization == categorization then
+			local total_x = "total_"..damage_type
+			replace_registered_scoreboard_value(total_x, "setting", replace_row_with_value, new_categorization)
+			replace_registered_scoreboard_value(total_x.."_kills", "setting", replace_row_with_value, new_categorization)
+			replace_registered_scoreboard_value(total_x.."_damage", "setting", replace_row_with_value, new_categorization)
+
+			categorizable_damage_types[damage_type] = new_categorization
+		end
 	end
 end
 

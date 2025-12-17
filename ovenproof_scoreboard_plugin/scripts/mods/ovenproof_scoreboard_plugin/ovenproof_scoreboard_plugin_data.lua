@@ -37,6 +37,13 @@ for _, state in pairs(mod.optional_states_disabled) do
 	optional_states_disabled_widgets[#optional_states_disabled_widgets + 1] = create_setting_toggle("track_"..state, false)
 end
 
+local offense_tier_options = {
+	{text = "offense_tier_0", value = "offense_tier_0", },
+	{text = "offense_tier_1", value = "offense_tier_1", },
+	{text = "offense_tier_2", value = "offense_tier_2", },
+	{text = "offense_tier_3", value = "offense_tier_3", },
+}
+
 local localizations = {
 	name = mod:localize("mod_title"),
 	description = mod:localize("mod_description"),
@@ -85,6 +92,31 @@ local localizations = {
 					{	["setting_id"] = "bottom_padding",
 						["type"] = "checkbox",
 						["default_value"] = true,
+					},
+				},
+			},
+			{	setting_id 		= "custom_row_categorization",
+				type 			= "group",
+				sub_widgets		= {
+					{	["setting_id"] = "categorize_total_melee",
+						["type"] = "dropdown",
+						["default_value"] = "offense_tier_1",
+						["options"] = offense_tier_options,
+					},
+					{	["setting_id"] = "categorize_total_ranged",
+						["type"] = "dropdown",
+						["default_value"] = "offense_tier_1",
+						["options"] = offense_tier_options,
+					},
+					{	["setting_id"] = "categorize_total_companion",
+						["type"] = "dropdown",
+						["default_value"] = "offense_tier_1",
+						["options"] = offense_tier_options,
+					},
+					{	["setting_id"] = "categorize_total_blitz",
+						["type"] = "dropdown",
+						["default_value"] = "offense_tier_1",
+						["options"] = offense_tier_options,
 					},
 				},
 			},
