@@ -1038,6 +1038,11 @@ local localization = {
     },
 }
 
+localization["option_offense_tier_0"] = localization["offense_tier_0"]
+localization["option_offense_tier_1"] = localization["offense_tier_1"]
+localization["option_offense_tier_2"] = localization["offense_tier_2"]
+localization["option_offense_tier_3"] = localization["offense_tier_3"]
+
 for k_loc, v_loc in pairs(localization) do
     for k_lang, v_lang in pairs(languages) do
         if v_loc[v_lang] then
