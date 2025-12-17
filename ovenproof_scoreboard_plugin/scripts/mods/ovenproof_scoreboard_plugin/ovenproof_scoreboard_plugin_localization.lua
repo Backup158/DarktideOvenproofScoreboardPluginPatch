@@ -149,6 +149,35 @@ local localization = {
         --["zh-tw"] = "",
         --["pt-br"] = "",
     },
+    -- @backup158: I copied some values from the row_total areas. I left them commented out since I don't know if that's appropriate for this context
+    categorize_total_melee = {
+        en = "Categorize Total Melee",
+		--ru = " Всего в Ближнем бою",
+		--["zh-cn"] = "总近战",
+        --["zh-tw"] = "總近戰",
+        --["pt-br"] = " Total Melee",
+    },
+    categorize_total_ranged = {
+        en = "Categorize Total Ranged",
+		--ru = " Всего в Дальнем бою",
+		--["zh-cn"] = "总远程",
+        --["zh-tw"] = "總遠程",
+        --["pt-br"] = " Total Distância",
+    },
+    categorize_total_companion = {
+        en = "Categorize Total Companion",
+		--ru = " Всего ",
+		--["zh-cn"] = "完全伴侣",
+        --["zh-tw"] = "完全伴侶",
+        --["pt-br"] = " Total ",
+    },
+    categorize_total_blitz = {
+        en = "Categorize Total Blitz",
+		--ru = " Всего ",
+		--["zh-cn"] = "总",
+        --["zh-tw"] = "總閃擊",
+        --["pt-br"] = " Total ",
+    },
     -- @backup158: sai google translated these languages: ru, zh-cn, pt-br
     ammo_tracking_group = {
         en = "Ammo Tracking",
@@ -156,14 +185,6 @@ local localization = {
         ["zh-cn"] = "弹药追踪",
         ["zh-tw"] = "彈藥追蹤",
 		["pt-br"] = "Rastreamento de munição",
-    },
-    -- @backup158: sai google translated these languages: ru, zh-cn, pt-br
-    track_ammo_crate_waste = {
-        en = "Track Ammo Crate waste",
-		ru = "Отходы ящиков с боеприпасами для треков",
-        ["zh-cn"] = "弹药箱废弃物",
-        ["zh-tw"] = "追蹤彈藥箱浪費",
-		["pt-br"] = "Desperdício de caixa de munição",
     },
     -- @backup158: sai google translated these languages: ru, zh-cn, pt-br
     track_ammo_crate_waste = {
