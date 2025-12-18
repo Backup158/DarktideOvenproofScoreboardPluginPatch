@@ -45,18 +45,18 @@ local explosions_affect_ranged_hitrate
 local explosions_affect_melee_hitrate
 local grenade_messages
 local ammo_messages
+--[[
 local categorizable_damage_types = { 
-	--[[
-	melee = mod:get("categorize_total_melee"), 
-	ranged = mod:get("categorize_total_ranged"), 
-	blitz = mod:get("categorize_total_blitz"), 
-	companion = mod:get("categorize_total_companion"), 
-	]]
+	--melee = mod:get("categorize_total_melee"), 
+	--ranged = mod:get("categorize_total_ranged"), 
+	--blitz = mod:get("categorize_total_blitz"), 
+	--companion = mod:get("categorize_total_companion"), 
 	melee = "offense_tier_1",
 	ranged = "offense_tier_1",
 	blitz = "offense_tier_1",
 	companion = "offense_tier_1",
 }
+]]
 
 local in_match
 local is_playing_havoc
@@ -68,9 +68,8 @@ mod.ammunition_pickup_modifier = 1
 -- ########################
 -- Data
 -- ########################
-local scoreboard_rows = mod:io_dofile("ovenproof_scoreboard_plugin/scripts/mods/ovenproof_scoreboard_plugin/scoreboard_rows")
-
-local data_tables = mod:io_dofile("ovenproof_scoreboard_plugin/scripts/mods/ovenproof_scoreboard_plugin/data_tables")
+mod:io_dofile("ovenproof_scoreboard_plugin/scripts/mods/ovenproof_scoreboard_plugin/scoreboard_rows")
+mod:io_dofile("ovenproof_scoreboard_plugin/scripts/mods/ovenproof_scoreboard_plugin/data_tables")
 
 local mod_melee_lessers = mod.melee_lessers
 local mod_ranged_lessers = mod.ranged_lessers
@@ -333,6 +332,7 @@ local function update_all_scoreboard_row_visibilities()
 	change_scoreboard_row_visibility("total_critical_rates_with_blitz", blitz_cr)
 	]]
 	-- @backup158: TODO figure out how to change the kerning. right now the invisible column is still accounted for in terms of spacing, so it gets off center
+	--		Can't just remove and readd, since that messes up the order
 	if not blitz_wr then
 		replace_registered_scoreboard_value("total_weakspot_rates", "text", replace_row_with_value, "row_total_weakspot_rates")
 		replace_registered_scoreboard_value("total_weakspot_rates", "summary", replace_value_within_row_table, "blitz_wr")
@@ -360,7 +360,15 @@ local function update_all_scoreboard_row_visibilities()
 
 	-- ------------
 	-- Offense Grouping
+	-- @backup158: This *should* be working, but it's not
+	--	from dumping the tables (which causes a deadlock since it's so chunky lol), i can see the summary values changed
+	--  	however, the changes do not appear in game
+	--  everything is supposed to be in group_1, so not that
+	--  Trying to replace directly here without mod:get, still nope
+	--  Replacing with mod:get in scoreboard_rows.lua: Nope
+	--  Replacing directly in scoreboard_rows.lua: NOPE???? HOW????
 	-- ------------
+	--[[
 	for damage_type, categorization in pairs(categorizable_damage_types) do
 		local new_categorization = mod:get("categorize_total_"..damage_type)
 		mod:info("for "..damage_type.." from "..categorization.." to "..new_categorization)
@@ -381,7 +389,10 @@ local function update_all_scoreboard_row_visibilities()
 			--replace_registered_scoreboard_value(total_x_damage, "group", replace_row_with_value, new_group)
 			categorizable_damage_types[damage_type] = new_categorization
 		end
-	end
+	end]]
+	--replace_registered_scoreboard_value("total_melee", "setting", replace_row_with_value, "offense_tier_3")
+	--replace_registered_scoreboard_value("total_melee_damage", "setting", replace_row_with_value, "offense_tier_3")
+	--replace_registered_scoreboard_value("total_melee_kills", "setting", replace_row_with_value, "offense_tier_3")
 end
 
 local function set_locals_for_settings()
