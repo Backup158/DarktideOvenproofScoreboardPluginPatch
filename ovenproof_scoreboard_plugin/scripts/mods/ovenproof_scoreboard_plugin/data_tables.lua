@@ -174,7 +174,11 @@ mod.electrocution_damage_profiles = {
     "psyker_smite_kill",
 }
 mod.toxin_damage_profiles = {
-    "toxin_variant_3",	
+    "toxin_variant_1",	
+    "toxin_variant_2",	
+    "toxin_variant_3",
+    "horde_mode_self_propagating_toxin", -- hordes_buff_broker_tox_grenade_applies_self_propagating_toxin applies a toxin that's this?
+    --"broker_toxin_stacks_stun_interval", -- stun only?
 }
 mod.environmental_damage_profiles = {
     "barrel_explosion",
