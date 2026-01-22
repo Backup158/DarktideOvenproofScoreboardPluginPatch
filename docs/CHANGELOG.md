@@ -1,3 +1,8 @@
+# 2025-12-28
+v1.9.2
+
+- Missing tox damage type from horde spreading
+
 # 2025-12-07
 v1.9.1
 
