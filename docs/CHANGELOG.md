@@ -1,7 +1,12 @@
+# 2026-03-11
+Uploaded v1.9.2
+
+...
+
 # 2025-12-28
 v1.9.2
 
-- Missing tox damage type from horde spreading
+- Missing tox damage type from horde spreading (`horde_mode_self_propagating_toxin`)
 
 # 2025-12-07
 v1.9.1
