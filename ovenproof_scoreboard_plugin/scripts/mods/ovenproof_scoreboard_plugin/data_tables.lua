@@ -47,6 +47,7 @@ mod.disablers = {
     "cultist_mutant",
     "cultist_mutant_mutator",
     "renegade_netgunner",
+    "chaos_armored_hound",
 }
 mod.bosses = {
     "chaos_beast_of_nurgle",
