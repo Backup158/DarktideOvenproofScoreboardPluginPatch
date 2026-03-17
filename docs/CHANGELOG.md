@@ -1,3 +1,11 @@
+# 2026-03-17
+v1.10.0
+Beyond the Hive
+
+- Added new enemy types
+    - Armoured Pox Hound (`chaos_armored_hound`) specialist
+    - Ogryn Hound Master (``) boss
+
 # 2026-03-11
 Uploaded v1.9.2
 
