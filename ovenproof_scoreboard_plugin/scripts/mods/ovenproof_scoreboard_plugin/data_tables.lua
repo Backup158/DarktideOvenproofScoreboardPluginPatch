@@ -60,7 +60,7 @@ mod.bosses = {
     "renegade_twin_captain_two",
     "cultist_captain",
     "chaos_mutator_daemonhost",
-    "chaos_armored_plague_ogryn",
+    "chaos_ogryn_houndmaster",
 }
 mod.skip = {
     "chaos_mutator_ritualist",
