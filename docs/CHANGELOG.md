@@ -5,6 +5,7 @@ Beyond the Hive
 - Added new enemy types
     - Armoured Pox Hound (`chaos_armored_hound`) specialist
     - Ogryn Hound Master (`chaos_ogryn_houndmaster`) boss
+- Added additional text to error messages, which tell you how to disable them
 
 # 2026-03-11
 Uploaded v1.9.2
