@@ -65,6 +65,7 @@ mod.bosses = {
 mod.skip = {
     "chaos_mutator_ritualist",
     "cultist_ritualist",
+    -- what the fuck is "nurgle_flies",
 }
 -- ------------
 -- Damage Types
