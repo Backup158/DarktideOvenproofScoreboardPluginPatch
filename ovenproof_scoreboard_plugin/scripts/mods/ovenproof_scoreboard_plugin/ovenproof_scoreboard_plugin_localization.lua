@@ -136,7 +136,7 @@ local localization = {
     },
     -- @backup158: human translators need to review: ru, zh-cn, zh-tw, pt-br
     warning_chat_debug_messages = {
-        en = "To disable this message, go to Mod Options --> OvenProof Scoreboard Plugin --> Disable error messages",
+        en = "To disable this message, go to Mod Options --> OvenProof Scoreboard Plugin --> Disable \"Enable error messages\"",
         -- ru = "",
 		-- ["zh-cn"] = "",
         -- ["zh-tw"] = "",
