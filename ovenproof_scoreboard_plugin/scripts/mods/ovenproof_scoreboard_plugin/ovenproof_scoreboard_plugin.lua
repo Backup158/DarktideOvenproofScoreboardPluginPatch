@@ -118,7 +118,7 @@ local tracked_disabled_players_for_players = {}
 -- ############
 local function echo_or_info_message_based_on_debug(message)
 	if debug_messages_enabled then
-		mod:echo(message.."\n"..mod.localize("warning_chat_debug_messages"))
+		mod:echo(message.."\n"..mod:localize("warning_chat_debug_messages"))
 	else
 		mod:info(message)
 	end
@@ -1019,6 +1019,7 @@ function mod.on_all_mods_loaded()
 					end
 					]]
 					if table_array_contains(mod_melee_lessers, breed_or_nil.name) then
+						echo_or_info_message_based_on_debug("nya")
 						scoreboard:update_stat("total_lesser_damage", account_id, actual_damage)
 						scoreboard:update_stat("melee_lesser_damage", account_id, actual_damage)
 						if attack_result == "died" then
