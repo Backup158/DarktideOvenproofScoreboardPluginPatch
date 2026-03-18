@@ -31,6 +31,7 @@ local string_sub = string.sub
 local table = table
 local table_array_contains = table.array_contains
 -- TODO what about color text?
+local mod_localize = mod:localize()
 
 -- #######
 -- Mod Locals
@@ -118,7 +119,7 @@ local tracked_disabled_players_for_players = {}
 -- ############
 local function echo_or_info_message_based_on_debug(message)
 	if debug_messages_enabled then
-		mod:echo(message.."\n"..mod:localize("warning_chat_debug_messages"))
+		mod:echo(message.."\n"..mod_localize("warning_chat_debug_messages"))
 	else
 		mod:info(message)
 	end
@@ -413,7 +414,7 @@ local function set_locals_for_settings()
 	and (separate_companion_damage.base == "blitz")
 	and not track_blitz_damage
 	then
-		mod:warning(mod:localize("warning_companion_blitz"))
+		mod:warning(mod_localize("warning_companion_blitz"))
 	end
 end
 
@@ -426,7 +427,7 @@ function mod.on_setting_changed(setting_id)
 	-- Scoreboard can't be disabled mid-game
 	scoreboard = get_mod("scoreboard")
 	if not scoreboard then
-		mod:error(mod:localize("error_scoreboard_missing"))
+		mod:error(mod_localize("error_scoreboard_missing"))
 		return
 	end
 	]]
@@ -438,7 +439,7 @@ end
 function mod.on_all_mods_loaded()
 	scoreboard = get_mod("scoreboard")
 	if not scoreboard then
-		mod:error(mod:localize("error_scoreboard_missing"))
+		mod:error(mod_localize("error_scoreboard_missing"))
 		return
 	end
 
@@ -513,8 +514,8 @@ function mod.on_all_mods_loaded()
 					elseif interaction_type == "grenade" then
 						scoreboard:update_stat("ammo_grenades", account_id, 1)
 						if grenade_messages then
-							local text = TextUtilities.apply_color_to_text(mod:localize("message_grenades_text"), color)
-							local message = mod:localize("message_grenades_body", text)
+							local text = TextUtilities.apply_color_to_text(mod_localize("message_grenades_text"), color)
+							local message = mod_localize("message_grenades_body", text)
 							Managers.event:trigger("event_combat_feed_kill", unit, message)
 						end
 					elseif interaction_type == "ammunition" then
@@ -562,14 +563,14 @@ function mod.on_all_mods_loaded()
 							scoreboard:update_stat("ammo_percent", account_id, pickup_pct)
 							scoreboard:update_stat("ammo_wasted_percent", account_id, wasted_pct)
 							if ammo_messages then
-								local pickup_text = TextUtilities.apply_color_to_text(mod:localize("message_"..ammo), color)
+								local pickup_text = TextUtilities.apply_color_to_text(mod_localize("message_"..ammo), color)
 								local displayed_waste = math_max(1, math_round(wasted_pct))
 								local wasted_text = TextUtilities.apply_color_to_text(tostring(displayed_waste).."%", color)
 								local message = ""
 								if wasted == 0 then
-									message = mod:localize("message_ammo_no_waste", pickup_text)
+									message = mod_localize("message_ammo_no_waste", pickup_text)
 								else
-									message = mod:localize("message_ammo_waste", pickup_text, wasted_text)
+									message = mod_localize("message_ammo_waste", pickup_text, wasted_text)
 								end
 								Managers.event:trigger("event_combat_feed_kill", unit, message)
 							end
@@ -587,16 +588,16 @@ function mod.on_all_mods_loaded()
 								-- 		Formatting for percentage of ammo picked up
 								local text_ammo_taken = TextUtilities.apply_color_to_text(tostring(math_round(pickup_pct)).."%", color)
 								-- 		Formatting for Ammo Crate name
-								local text_crate = TextUtilities.apply_color_to_text(mod:localize("message_ammo_crate_text"), color)
+								local text_crate = TextUtilities.apply_color_to_text(mod_localize("message_ammo_crate_text"), color)
 								local message = ""
 								-- Only prints waste message if that's enabled, and if there was actually waste found
 								local count_waste_for_crates = setting_is_enabled_and_check_if_havoc_only("track_ammo_crate_waste", is_playing_havoc)
 								if count_waste_for_crates and (not (wasted == 0)) then
 									local displayed_waste = math_max(1, math_round(wasted_pct))
 									local wasted_text = TextUtilities.apply_color_to_text(tostring(displayed_waste).."%", color)
-									message = mod:localize("message_ammo_crate_waste", text_ammo_taken, text_crate, wasted_text)
+									message = mod_localize("message_ammo_crate_waste", text_ammo_taken, text_crate, wasted_text)
 								else
-									message = mod:localize("message_ammo_crate", text_ammo_taken, text_crate)
+									message = mod_localize("message_ammo_crate", text_ammo_taken, text_crate)
 								end
 								-- Puts message into combat feed
 								Managers.event:trigger("event_combat_feed_kill", unit, message)
