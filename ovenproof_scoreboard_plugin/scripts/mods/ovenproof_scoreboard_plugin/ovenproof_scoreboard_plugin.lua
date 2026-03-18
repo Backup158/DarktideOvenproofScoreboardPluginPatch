@@ -118,7 +118,7 @@ local tracked_disabled_players_for_players = {}
 -- ############
 local function echo_or_info_message_based_on_debug(message)
 	if debug_messages_enabled then
-		mod:echo(message)
+		mod:echo(message.."\n"..mod.localize("warning_chat_debug_messages"))
 	else
 		mod:info(message)
 	end

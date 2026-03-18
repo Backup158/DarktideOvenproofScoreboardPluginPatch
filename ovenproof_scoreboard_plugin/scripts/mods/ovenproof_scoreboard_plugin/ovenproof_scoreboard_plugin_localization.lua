@@ -8,11 +8,11 @@ local mod = get_mod("ovenproof_scoreboard_plugin")
 local languages = {"en","ru","zh-cn","zh-tw","pt-br",}
 -- ###############################################################################################################
 -- If your language is already translated:
---      if you have time, please search through this page for "google translate" to correct those
---          I tried to label as many of those as I could, but I didn't pay attention until recently so I'm sure I missed some
---          if that's too tedious, please don't do it. i appreciate the help regardless!
---      for those with missing localizations that I noticed, I put a comment with a blank line for the languages
---          ex: `ru = "",` and `["zh-cn"] = "",
+--      If you have time, please search through this page for "google translate" to correct those
+--          I tried to label as many of those as I could, but I didn't pay attention until recently, so I'm sure I missed some
+--          If that's too tedious, do not feel obligated to do it. We appreciate the help regardless!
+--      For those with missing localizations that I noticed, I put a comment with a blank line for the languages
+--          ex: `ru = "",` and `["zh-cn"] = "",`
 -- Thanks for the help! - Backup158
 -- ###############################################################################################################
 
@@ -133,6 +133,14 @@ local localization = {
 		["zh-cn"] = "当使用未分类的伤害类型时，请在聊天中显示消息。请举报这些情况！",
         ["zh-tw"] = "每當使用未分類的傷害類型時，請在聊天中顯示消息。請報告這些！",
         ["pt-br"] = "Exibir mensagens no chat quando um tipo de dano não categorizado for usado. Por favor, reporte esses casos!",
+    },
+    -- @backup158: human translators need to review: ru, zh-cn, zh-tw, pt-br
+    warning_chat_debug_messages = {
+        en = "To disable this message, go to Mod Options --> OvenProof Scoreboard Plugin --> Disable error messages",
+        -- ru = "",
+		-- ["zh-cn"] = "",
+        -- ["zh-tw"] = "",
+        -- ["pt-br"] = "",
     },
     -- @backup158: sai google translated these languages: ru, zh-cn
     row_categories_group = {
