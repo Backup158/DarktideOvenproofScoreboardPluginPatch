@@ -1,3 +1,8 @@
+# 2026-03-19
+v1.11.0
+
+- Added Expeditions purchasable abilities `loc_game_mode_expedition_pickup_price_desc`
+
 # 2026-03-17
 v1.10.0
 Beyond the Hive
