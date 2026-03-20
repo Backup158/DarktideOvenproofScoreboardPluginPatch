@@ -520,94 +520,100 @@ function mod.on_all_mods_loaded()
 						end
 					elseif interaction_type == "ammunition" then
 						local ammo = mod_ammunition[self._override_contexts.ammunition.description]
-						-- Get components
-						local unit_data_extension = ScriptUnit.extension(unit, "unit_data_system")
-						local wieldable_component = unit_data_extension:read_component("slot_secondary")
-						-- Get ammo numbers
-						local current_ammo_clip = wieldable_component.current_ammunition_clip[1]
-						local max_ammo_clip = wieldable_component.max_ammunition_clip[1]
-						--[[
-						if type(current_ammo_clip) == "table" then
-							mod:echo("uwu current_ammo_clip is a table")
-							table.dump(current_ammo_clip, "uwu current_ammo_clip", 20)
-						else
-							mod:echo("uwu current_ammo_clip: "..tostring(current_ammo_clip))
-						end
-						if type(max_ammo_clip) == "table" then
-							mod:echo("uwu max ammo clip is a table")
-							table.dump(max_ammo_clip, "uwu MAX AMMO CLIP", 20)
-						else
-							mod:echo("uwu max ammo clip: "..tostring(max_ammo_clip))
-						end
-						]]
-						local current_ammo_reserve = tracked_current_ammo_for_players[unit]
-						local max_ammo_reserve = wieldable_component.max_ammunition_reserve
-						-- Calculate relevant ammo values relative to the "combined" ammo reserve, i.e. base reserve + clip
-						local current_ammo_combined = current_ammo_clip + current_ammo_reserve
-						local max_ammo_combined = max_ammo_clip + max_ammo_reserve
-						local ammo_missing = max_ammo_combined - current_ammo_combined
-						
-						-- Base pickup rate (decimal). Defaults to crate as a failsafe
-						local base_pickup_from_source = mod.ammunition_percentage[ammo] or 1
-						-- Calculating amount picked up
-						--		Ammo pickups are rounded up by the game
-						-- 		mod.mmunition_pickup_modifier to account for Havoc modifiers. set by state change check
-						local pickup = math_ceil(base_pickup_from_source * mod.ammunition_pickup_modifier * max_ammo_reserve)
 
-						local wasted = math_max(pickup - ammo_missing, 0)
-						local pickup_pct = 100 * (pickup / max_ammo_combined)
-						local wasted_pct = 100 * (wasted / max_ammo_reserve)
-						
-						-- Small boxes and Big bags
-						if ammo == "small_clip" or ammo == "large_clip" then
-							scoreboard:update_stat("ammo_percent", account_id, pickup_pct)
-							scoreboard:update_stat("ammo_wasted_percent", account_id, wasted_pct)
-							if ammo_messages then
-								local pickup_text = TextUtilities.apply_color_to_text(mod:localize("message_"..ammo), color)
-								local displayed_waste = math_max(1, math_round(wasted_pct))
-								local wasted_text = TextUtilities.apply_color_to_text(tostring(displayed_waste).."%", color)
-								local message = ""
-								if wasted == 0 then
-									message = mod:localize("message_ammo_no_waste", pickup_text)
-								else
-									message = mod:localize("message_ammo_waste", pickup_text, wasted_text)
-								end
-								Managers.event:trigger("event_combat_feed_kill", unit, message)
+						-- Expedition purchasables
+						--	rockets and stuff that we buy with Salvage
+						--  These get specifically counted as "ammunition" interactions instead of crate pickups I guess
+						--  So this check is to avoid unnecessarily calculating current ammo amounts
+						if ammo == "expedition_purchasable" then
+
+						else
+							-- Get components
+							local unit_data_extension = ScriptUnit.extension(unit, "unit_data_system")
+							local wieldable_component = unit_data_extension:read_component("slot_secondary")
+							-- Get ammo numbers
+							local current_ammo_clip = wieldable_component.current_ammunition_clip[1]
+							local max_ammo_clip = wieldable_component.max_ammunition_clip[1]
+							--[[
+							if type(current_ammo_clip) == "table" then
+								mod:echo("uwu current_ammo_clip is a table")
+								table.dump(current_ammo_clip, "uwu current_ammo_clip", 20)
+							else
+								mod:echo("uwu current_ammo_clip: "..tostring(current_ammo_clip))
 							end
-						-- Deployabla Ammo Crates
-						elseif ammo == "crate" then
-							-- Amount of Ammo Crate uses
-							scoreboard:update_stat("ammo_crates", account_id, 1)
-							-- Adding to total percentage of ammo
-							local count_crates_to_total_ammo = setting_is_enabled_and_check_if_havoc_only("track_ammo_crate_in_percentage", is_playing_havoc)
-							if count_crates_to_total_ammo then
+							if type(max_ammo_clip) == "table" then
+								mod:echo("uwu max ammo clip is a table")
+								table.dump(max_ammo_clip, "uwu MAX AMMO CLIP", 20)
+							else
+								mod:echo("uwu max ammo clip: "..tostring(max_ammo_clip))
+							end
+							]]
+							local current_ammo_reserve = tracked_current_ammo_for_players[unit]
+							local max_ammo_reserve = wieldable_component.max_ammunition_reserve
+							-- Calculate relevant ammo values relative to the "combined" ammo reserve, i.e. base reserve + clip
+							local current_ammo_combined = current_ammo_clip + current_ammo_reserve
+							local max_ammo_combined = max_ammo_clip + max_ammo_reserve
+							local ammo_missing = max_ammo_combined - current_ammo_combined
+							
+							-- Base pickup rate (decimal). Defaults to crate as a failsafe
+							local base_pickup_from_source = mod.ammunition_percentage[ammo] or 1
+							-- Calculating amount picked up
+							--		Ammo pickups are rounded up by the game
+							-- 		mod.mmunition_pickup_modifier to account for Havoc modifiers. set by state change check
+							local pickup = math_ceil(base_pickup_from_source * mod.ammunition_pickup_modifier * max_ammo_reserve)
+
+							local wasted = math_max(pickup - ammo_missing, 0)
+							local pickup_pct = 100 * (pickup / max_ammo_combined)
+							local wasted_pct = 100 * (wasted / max_ammo_reserve)
+							
+							-- Small boxes and Big bags
+							if ammo == "small_clip" or ammo == "large_clip" then
 								scoreboard:update_stat("ammo_percent", account_id, pickup_pct)
-							end
-							if ammo_messages then
-								-- Text formatting
-								-- 		Formatting for percentage of ammo picked up
-								local text_ammo_taken = TextUtilities.apply_color_to_text(tostring(math_round(pickup_pct)).."%", color)
-								-- 		Formatting for Ammo Crate name
-								local text_crate = TextUtilities.apply_color_to_text(mod:localize("message_ammo_crate_text"), color)
-								local message = ""
-								-- Only prints waste message if that's enabled, and if there was actually waste found
-								local count_waste_for_crates = setting_is_enabled_and_check_if_havoc_only("track_ammo_crate_waste", is_playing_havoc)
-								if count_waste_for_crates and (not (wasted == 0)) then
+								scoreboard:update_stat("ammo_wasted_percent", account_id, wasted_pct)
+								if ammo_messages then
+									local pickup_text = TextUtilities.apply_color_to_text(mod:localize("message_"..ammo), color)
 									local displayed_waste = math_max(1, math_round(wasted_pct))
 									local wasted_text = TextUtilities.apply_color_to_text(tostring(displayed_waste).."%", color)
-									message = mod:localize("message_ammo_crate_waste", text_ammo_taken, text_crate, wasted_text)
-								else
-									message = mod:localize("message_ammo_crate", text_ammo_taken, text_crate)
+									local message = ""
+									if wasted == 0 then
+										message = mod:localize("message_ammo_no_waste", pickup_text)
+									else
+										message = mod:localize("message_ammo_waste", pickup_text, wasted_text)
+									end
+									Managers.event:trigger("event_combat_feed_kill", unit, message)
 								end
-								-- Puts message into combat feed
-								Managers.event:trigger("event_combat_feed_kill", unit, message)
+							-- Deployabla Ammo Crates
+							elseif ammo == "crate" then
+								-- Amount of Ammo Crate uses
+								scoreboard:update_stat("ammo_crates", account_id, 1)
+								-- Adding to total percentage of ammo
+								local count_crates_to_total_ammo = setting_is_enabled_and_check_if_havoc_only("track_ammo_crate_in_percentage", is_playing_havoc)
+								if count_crates_to_total_ammo then
+									scoreboard:update_stat("ammo_percent", account_id, pickup_pct)
+								end
+								if ammo_messages then
+									-- Text formatting
+									-- 		Formatting for percentage of ammo picked up
+									local text_ammo_taken = TextUtilities.apply_color_to_text(tostring(math_round(pickup_pct)).."%", color)
+									-- 		Formatting for Ammo Crate name
+									local text_crate = TextUtilities.apply_color_to_text(mod:localize("message_ammo_crate_text"), color)
+									local message = ""
+									-- Only prints waste message if that's enabled, and if there was actually waste found
+									local count_waste_for_crates = setting_is_enabled_and_check_if_havoc_only("track_ammo_crate_waste", is_playing_havoc)
+									if count_waste_for_crates and (not (wasted == 0)) then
+										local displayed_waste = math_max(1, math_round(wasted_pct))
+										local wasted_text = TextUtilities.apply_color_to_text(tostring(displayed_waste).."%", color)
+										message = mod:localize("message_ammo_crate_waste", text_ammo_taken, text_crate, wasted_text)
+									else
+										message = mod:localize("message_ammo_crate", text_ammo_taken, text_crate)
+									end
+									-- Puts message into combat feed
+									Managers.event:trigger("event_combat_feed_kill", unit, message)
+								end
+							else
+								local uncategorized_ammo_pickup_message = "Uncategorized ammo pickup! It is: "..tostring(ammo.."\nName: "..tostring(self._override_contexts.ammunition.description))
+								echo_or_info_message_based_on_debug(uncategorized_ammo_pickup_message)
 							end
-						elseif ammo == "expedition_purchasable" then
-							
-						else
-							local uncategorized_ammo_pickup_message = "Uncategorized ammo pickup! It is: "..tostring(ammo.."\nName: "..tostring(self._override_contexts.ammunition.description))
-							echo_or_info_message_based_on_debug(uncategorized_ammo_pickup_message)
-						end
 					end
 				end
 			end
