@@ -602,8 +602,10 @@ function mod.on_all_mods_loaded()
 								-- Puts message into combat feed
 								Managers.event:trigger("event_combat_feed_kill", unit, message)
 							end
+						elseif ammo == "expedition_purchasable" then
+							
 						else
-							local uncategorized_ammo_pickup_message = "Uncategorized ammo pickup! It is: "..tostring(ammo)
+							local uncategorized_ammo_pickup_message = "Uncategorized ammo pickup! It is: "..tostring(ammo.."\nName: "..tostring(self._override_contexts.ammunition.description))
 							echo_or_info_message_based_on_debug(uncategorized_ammo_pickup_message)
 						end
 					end
