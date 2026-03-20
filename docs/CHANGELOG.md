@@ -1,4 +1,10 @@
 # 2026-03-19
+v1.10.2
+
+- Fixed syntax error
+- Renamed purchasable to `expedition_pocketable`
+
+# 2026-03-19
 v1.10.1
 
 - Added Expeditions purchasable abilities `loc_game_mode_expedition_pickup_price_desc`
