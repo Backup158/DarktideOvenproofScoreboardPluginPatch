@@ -228,7 +228,7 @@ mod.ammunition = {
     loc_pickup_consumable_small_grenade_01 = "grenades",
     -- Expeditions
     --  These count as Ammunition
-    loc_game_mode_expedition_pickup_price_desc = "expedition_purchasable",
+    loc_game_mode_expedition_pickup_price_desc = "expedition_pocketable",
 }
 -- scripts/settings/pickup/pickups/consumable large_clip_pickup and small_clip_pickup
 mod.ammunition_percentage = {

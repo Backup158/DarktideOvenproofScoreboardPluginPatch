@@ -525,7 +525,7 @@ function mod.on_all_mods_loaded()
 						--	rockets and stuff that we buy with Salvage
 						--  These get specifically counted as "ammunition" interactions instead of crate pickups I guess
 						--  So this check is to avoid unnecessarily calculating current ammo amounts
-						if ammo == "expedition_purchasable" then
+						if ammo == "expedition_pocketable" then
 							-- nyaaa
 						else
 							-- Get components
