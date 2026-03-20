@@ -526,7 +526,7 @@ function mod.on_all_mods_loaded()
 						--  These get specifically counted as "ammunition" interactions instead of crate pickups I guess
 						--  So this check is to avoid unnecessarily calculating current ammo amounts
 						if ammo == "expedition_purchasable" then
-
+							-- nyaaa
 						else
 							-- Get components
 							local unit_data_extension = ScriptUnit.extension(unit, "unit_data_system")
@@ -613,7 +613,8 @@ function mod.on_all_mods_loaded()
 							else
 								local uncategorized_ammo_pickup_message = "Uncategorized ammo pickup! It is: "..tostring(ammo.."\nName: "..tostring(self._override_contexts.ammunition.description))
 								echo_or_info_message_based_on_debug(uncategorized_ammo_pickup_message)
-							end
+							end -- Close If chain: ammo identification
+						end -- Close If: ammo is expedition pocketable
 					end
 				end
 			end
