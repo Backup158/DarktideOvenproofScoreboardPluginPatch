@@ -238,3 +238,16 @@ mod.ammunition_percentage = {
     -- large_clip = LargeClipPickup.ammunition_percentage,
     crate = 1,
 }
+-- Same as above
+--  Found by going into @scripts/components/pickup_spawner.lua
+mod.expedition_salvage = {
+    loc_expeditions_pickup_currency_quality_low = "expedition_currency_small_tier_1",
+    loc_expeditions_pickup_currency_quality_medium = "expedition_currency_small_tier_2",
+}
+-- Tech-remnants
+mod.expedition_loot = {
+    loc_expeditions_pickup_loot_player_drop = "expedition_loot_player_drop",
+    loc_expeditions_pickup_loot_quality_low = "expedition_loot_small_tier_1",
+    loc_expeditions_pickup_loot_quality_medium = "expedition_loot_small_tier_2",
+    loc_expeditions_pickup_loot_quality_high = "expedition_loot_small_tier_2",
+}
