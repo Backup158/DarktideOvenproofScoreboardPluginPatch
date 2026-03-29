@@ -98,7 +98,7 @@ local mod_environmental_damage_profiles = mod.environmental_damage_profiles
 
 local mod_states_disabled = mod.states_disabled
 local mod_optional_states_disabled = mod.optional_states_disabled
-local mod_forge_material = mod.forge_material
+-- local mod_forge_material = mod.forge_material
 local mod_ammunition = mod.ammunition
 local mod_ammunition_percentage = mod.ammunition_percentage
 
