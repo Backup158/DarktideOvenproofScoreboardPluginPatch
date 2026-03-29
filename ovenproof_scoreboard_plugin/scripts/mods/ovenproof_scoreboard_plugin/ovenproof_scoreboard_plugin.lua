@@ -615,6 +615,8 @@ function mod.on_all_mods_loaded()
 								echo_or_info_message_based_on_debug(uncategorized_ammo_pickup_message)
 							end -- Close If chain: ammo identification
 						end -- Close If: ammo is expedition pocketable
+					else
+						-- mod:echo("InteracteeExtension stopped: "..interaction_type)
 					end
 				end
 			end
