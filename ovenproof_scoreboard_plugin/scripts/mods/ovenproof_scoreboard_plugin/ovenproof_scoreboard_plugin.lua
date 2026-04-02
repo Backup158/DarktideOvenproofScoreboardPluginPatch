@@ -640,9 +640,12 @@ function mod.on_all_mods_loaded()
 						-- @Backup158: Hey, it's the magic numbers I've been taught to not use!
 						-- This was a lazy way to allow a dropdown without checking string values, or creating tables all willy nilly
 						if mod:get("exploration_track_currency") > 0 then
-							local currency_localization = self._override_contexts.expeditions_currency.description
-							local currency_table = mod_expeditions_currency[currency_localization]
-							local currency_amount = currency_table.amount or 0
+							local currency_description = self._override_contexts.expeditions_currency.description
+							local currency_table = mod_expeditions_currency[currency_description]
+							local currency_amount
+							if currency_table then 
+								currency_amount = currency_table.amount or 0
+							end
 
 							scoreboard:update_stat("total_expeditions_currency_pickups", account_id, currency_amount)
 							if mod:get("exploration_track_currency") == 2 then
@@ -653,8 +656,8 @@ function mod.on_all_mods_loaded()
 					-- Expeditions Tech-Remnants
 					elseif interaction_type == "expeditions_loot" then
 						if mod:get("exploration_track_loot") > 0 then
-							local loot_localization = self._override_contexts.expeditions_loot.description
-							local loot_table = mod_expeditions_loot[loot_localization]
+							local loot_description = self._override_contexts.expeditions_loot.description
+							local loot_table = mod_expeditions_loot[loot_description]
 							local loot_amount = loot_table.amount or 0
 
 							scoreboard:update_stat("total_expeditions_loot_pickups", account_id, loot_amount)
