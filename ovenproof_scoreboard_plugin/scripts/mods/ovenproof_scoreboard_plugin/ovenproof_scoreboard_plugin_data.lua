@@ -132,13 +132,13 @@ local localizations = {
 								["options"] 		= {
 									{	["text"]	= "options_exploration_track_option_false",
 										["value"]	= 0,
-									}
+									},
 									{	["text"]	= "options_exploration_track_option_alone",
 										["value"]	= 1,
-									}
+									},
 									{	["text"]	= "options_exploration_track_option_materials",
 										["value"]	= 2,
-									}
+									},
 								},
 							},
 							{	["setting_id"] 		= "exploration_track_loot",
@@ -147,13 +147,13 @@ local localizations = {
 								["options"] 		= {
 									{	["text"]	= "options_exploration_track_option_false",
 										["value"]	= 0,
-									}
+									},
 									{	["text"]	= "options_exploration_track_option_alone",
 										["value"]	= 1,
-									}
+									},
 									{	["text"]	= "options_exploration_track_option_materials",
 										["value"]	= 2,
-									}
+									},
 								},
 							},
 						},
