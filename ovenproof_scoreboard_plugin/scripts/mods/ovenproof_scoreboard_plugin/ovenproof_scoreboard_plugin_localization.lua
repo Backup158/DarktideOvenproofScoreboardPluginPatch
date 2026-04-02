@@ -653,6 +653,20 @@ local localization = {
         ["zh-tw"] = "總材料拾取",
         ["pt-br"] = "Total de Materiais Coletados",
     },
+    row_total_expeditions_currency_pickups = {
+        en = "Total Salvage",
+        --ru = "",
+        --["zh-cn"] = "",
+        --["zh-tw"] = "",
+        --["pt-br"] = "",
+    },
+    row_total_expeditions_loot_pickups = {
+        en = "Total Tech-Remnants",
+        --ru = "",
+        --["zh-cn"] = "",
+        --["zh-tw"] = "",
+        --["pt-br"] = "",
+    },
     row_ammo_1 = {
         en = {left = "Total Ammo", right = "[ Taken | Wasted ]",},
         -- ru = " ",
