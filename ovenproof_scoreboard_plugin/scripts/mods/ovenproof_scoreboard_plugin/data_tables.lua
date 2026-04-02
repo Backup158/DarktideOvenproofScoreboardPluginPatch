@@ -255,18 +255,18 @@ mod.expeditions_loot = {
     -- When a Disabler steals your stuff
     loc_expeditions_pickup_loot_player_drop = {
         id = "expedition_loot_player_drop",
-        amount = 20,
+        amount = 0,
     },
     loc_expeditions_pickup_loot_quality_low = {
         id = "expedition_loot_small_tier_1",
-        amount = 5,
+        amount = 10,
     },
     loc_expeditions_pickup_loot_quality_medium = {
         id = "expedition_loot_small_tier_2",
-        amount = 10,
+        amount = 25,
     },
     loc_expeditions_pickup_loot_quality_high = {
         id = "expedition_loot_small_tier_2",
-        amount = 25,
+        amount = 50,
     },
 }
