@@ -120,6 +120,46 @@ local localizations = {
 					},
 				},
 			},
+			{	setting_id 		= "exploration_tracking_group",
+				type 			= "group",
+				sub_widgets		= {
+					{	setting_id 		= "exploration_tracking_expeditions_pickups",
+						type 			= "group",
+						sub_widgets = {
+							{	["setting_id"] 		= "exploration_track_currency",
+								["type"] 			= "dropdown",
+								["default_value"] 	= 0,
+								["options"] 		= {
+									{	["text"]	= "options_exploration_track_option_false",
+										["value"]	= 0,
+									}
+									{	["text"]	= "options_exploration_track_option_alone",
+										["value"]	= 1,
+									}
+									{	["text"]	= "options_exploration_track_option_materials",
+										["value"]	= 2,
+									}
+								},
+							},
+							{	["setting_id"] 		= "exploration_track_loot",
+								["type"] 			= "dropdown",
+								["default_value"] 	= 0,
+								["options"] 		= {
+									{	["text"]	= "options_exploration_track_option_false",
+										["value"]	= 0,
+									}
+									{	["text"]	= "options_exploration_track_option_alone",
+										["value"]	= 1,
+									}
+									{	["text"]	= "options_exploration_track_option_materials",
+										["value"]	= 2,
+									}
+								},
+							},
+						},
+					},
+				},
+			},
 			{	setting_id 		= "ammo_tracking_group",
 				type 			= "group",
 				sub_widgets		= {

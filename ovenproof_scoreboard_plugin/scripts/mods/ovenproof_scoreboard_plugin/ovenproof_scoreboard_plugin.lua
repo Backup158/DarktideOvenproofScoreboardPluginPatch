@@ -46,6 +46,8 @@ local explosions_affect_ranged_hitrate
 local explosions_affect_melee_hitrate
 local grenade_messages
 local ammo_messages
+local expeditions_currency_pickups
+local expeditions_loot_pickups
 --[[
 local categorizable_damage_types = { 
 	--melee = mod:get("categorize_total_melee"), 
@@ -394,6 +396,20 @@ local function update_all_scoreboard_row_visibilities()
 	--replace_registered_scoreboard_value("total_melee", "setting", replace_row_with_value, "offense_tier_3")
 	--replace_registered_scoreboard_value("total_melee_damage", "setting", replace_row_with_value, "offense_tier_3")
 	--replace_registered_scoreboard_value("total_melee_kills", "setting", replace_row_with_value, "offense_tier_3")
+
+	-- ------------
+	-- Expeditions Pickup Classification
+	-- ------------
+	if not (expeditions_currency_pickups == 1) then
+		change_scoreboard_row_visibility("total_expeditions_currency_pickups", false)
+	else
+		change_scoreboard_row_visibility("total_expeditions_currency_pickups", true)
+	end
+	if not (expeditions_loot_pickups == 1)then
+		change_scoreboard_row_visibility("total_expeditions_loot_pickups", false)
+	else
+		change_scoreboard_row_visibility("total_expeditions_loot_pickups", true)
+	end
 end
 
 local function set_locals_for_settings()
@@ -408,6 +424,8 @@ local function set_locals_for_settings()
 	separate_companion_damage.damage = "total_"..separate_companion_damage.base.."_damage"
 	grenade_messages = mod:get("grenade_messages")
 	ammo_messages = mod:get("ammo_messages")
+	expeditions_currency_pickups = mod:get("exploration_track_currency")
+	expeditions_loot_pickups = mod:get("exploration_loot_loot")
 
 	-- Error check for companion damage row
 	if mod:get("enable_companion_blitz_warning")
@@ -615,6 +633,25 @@ function mod.on_all_mods_loaded()
 								echo_or_info_message_based_on_debug(uncategorized_ammo_pickup_message)
 							end -- Close If chain: ammo identification
 						end -- Close If: ammo is expedition pocketable
+					-- Expeditions Salvage
+					elseif interaction_type == "expeditions_currency" then
+						-- @Backup158: Hey, it's the magic numbers I've been taught to not use!
+						-- This was a lazy way to allow a dropdown without checking string values, or creating tables all willy nilly
+						if mod:get("exploration_track_currency") > 0 then
+							scoreboard:update_stat("total_expeditions_currency_pickups", account_id, 1)
+							if mod:get("exploration_track_currency") == 2 then
+								-- This will be inaccurate if you toggle it midgame, but if you do that then uh... go fuck yourself
+								scoreboard:update_stat("total_material_pickups", account_id, 1)
+							end
+						end
+					-- Expeditions Tech-Remnants
+					elseif interaction_type == "expeditions_loot" then
+						if mod:get("exploration_track_loot") > 0 then
+							scoreboard:update_stat("total_expeditions_loot_pickups", account_id, 1)
+							if mod:get("exploration_track_loot") == 2 then
+								scoreboard:update_stat("total_material_pickups", account_id, 1)
+							end
+						end
 					else
 						-- mod:echo("InteracteeExtension stopped: "..interaction_type)
 					end
@@ -1014,6 +1051,7 @@ function mod.on_all_mods_loaded()
 					-- Categorizing which enemy was damaged
 					-- ------------------------
 					--[[
+					-- @Backup158
 					-- TODO maybe this could be a switch
 					-- 	eh that doesn't really work since you can't match the case exactly
 					-- 	and looping would require string operations, which is worse for performance for no real gain
