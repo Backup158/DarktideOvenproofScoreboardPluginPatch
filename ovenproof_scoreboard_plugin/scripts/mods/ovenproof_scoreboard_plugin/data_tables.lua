@@ -240,7 +240,7 @@ mod.ammunition_percentage = {
 }
 -- Same as above
 --  Found by going into @scripts/components/pickup_spawner.lua
-mod.expedition_salvage = {
+mod.expeditions_currency = {
     loc_expeditions_pickup_currency_quality_low = {
         id = "expedition_currency_small_tier_1",
         amount = 5,
@@ -251,7 +251,7 @@ mod.expedition_salvage = {
     },
 }
 -- Tech-remnants
-mod.expedition_loot = {
+mod.expeditions_loot = {
     loc_expeditions_pickup_loot_player_drop = {
         id = "expedition_loot_player_drop",
         amount = 0,
