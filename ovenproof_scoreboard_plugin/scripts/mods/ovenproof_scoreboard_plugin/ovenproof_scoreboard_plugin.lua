@@ -425,7 +425,7 @@ local function set_locals_for_settings()
 	grenade_messages = mod:get("grenade_messages")
 	ammo_messages = mod:get("ammo_messages")
 	expeditions_currency_pickups = mod:get("exploration_track_currency")
-	expeditions_loot_pickups = mod:get("exploration_loot_loot")
+	expeditions_loot_pickups = mod:get("exploration_track_loot")
 
 	-- Error check for companion damage row
 	if mod:get("enable_companion_blitz_warning")
