@@ -267,6 +267,6 @@ mod.expeditions_loot = {
     },
     loc_expeditions_pickup_loot_quality_high = {
         id = "expedition_loot_small_tier_2",
-        amount = 15,
+        amount = 25,
     },
 }
