@@ -657,6 +657,8 @@ function mod.on_all_mods_loaded()
 					elseif interaction_type == "expeditions_loot" then
 						if mod:get("exploration_track_loot") > 0 then
 							local loot_description = self._override_contexts.expeditions_loot.description
+							if loot_description == "loc_expeditions_pickup_loot_player_drop" then mod:echo("meow. player drop pickup! :3c") end
+							mod:echo("Picked up: "..loot_description)
 							local loot_table = mod_expeditions_loot[loot_description]
 							local loot_amount = loot_table.amount or 0
 
