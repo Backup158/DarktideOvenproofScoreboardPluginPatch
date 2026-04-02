@@ -635,6 +635,7 @@ function mod.on_all_mods_loaded()
 						end -- Close If: ammo is expedition pocketable
 					-- Expeditions Salvage
 					elseif interaction_type == "expeditions_currency" then
+						table.dump(self._override_contexts, "meow OVERRIDE CONTEXTS", 15)
 						-- @Backup158: Hey, it's the magic numbers I've been taught to not use!
 						-- This was a lazy way to allow a dropdown without checking string values, or creating tables all willy nilly
 						if mod:get("exploration_track_currency") > 0 then
@@ -646,6 +647,7 @@ function mod.on_all_mods_loaded()
 						end
 					-- Expeditions Tech-Remnants
 					elseif interaction_type == "expeditions_loot" then
+						table.dump(self._override_contexts, "meow OVERRIDE CONTEXTS", 15)
 						if mod:get("exploration_track_loot") > 0 then
 							scoreboard:update_stat("total_expeditions_loot_pickups", account_id, 1)
 							if mod:get("exploration_track_loot") == 2 then
