@@ -252,9 +252,10 @@ mod.expeditions_currency = {
 }
 -- Tech-remnants
 mod.expeditions_loot = {
+    -- When a Disabler steals your stuff
     loc_expeditions_pickup_loot_player_drop = {
         id = "expedition_loot_player_drop",
-        amount = 0,
+        amount = 20,
     },
     loc_expeditions_pickup_loot_quality_low = {
         id = "expedition_loot_small_tier_1",
