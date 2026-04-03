@@ -642,7 +642,7 @@ function mod.on_all_mods_loaded()
 						if mod:get("exploration_track_currency") > 0 then
 							local currency_description = self._override_contexts.expeditions_currency.description
 							local currency_table = mod_expeditions_currency[currency_description]
-							local currency_amount
+							local currency_amount = 0
 							if currency_table then 
 								currency_amount = currency_table.amount or 0
 							end
@@ -657,10 +657,14 @@ function mod.on_all_mods_loaded()
 					elseif interaction_type == "expeditions_loot" then
 						if mod:get("exploration_track_loot") > 0 then
 							local loot_description = self._override_contexts.expeditions_loot.description
-							if loot_description == "loc_expeditions_pickup_loot_player_drop" then mod:echo("meow. player drop pickup! :3c") end
-							mod:echo("Picked up: "..loot_description)
+							-- if loot_description == "loc_expeditions_pickup_loot_player_drop" then mod:echo("meow. player drop pickup! :3c") end
 							local loot_table = mod_expeditions_loot[loot_description]
-							local loot_amount = loot_table.amount or 0
+							local loot_amount = 0
+							if loot_table then
+								loot_amount = loot_table.amount or 0
+							else
+								echo_or_info_message_based_on_debug("Picked up: "..loot_description)
+							end
 
 							scoreboard:update_stat("total_expeditions_loot_pickups", account_id, loot_amount)
 							if mod:get("exploration_track_loot") == 2 then
