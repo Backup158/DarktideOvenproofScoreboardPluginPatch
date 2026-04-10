@@ -459,6 +459,12 @@ function mod.on_setting_changed(setting_id)
 		return
 	end
 	]]
+	-- @Backup158: Ugly manual check for data tables.
+	if setting_id == "exploration_player_loot_value" then
+		mod.expeditions_loot["loc_expeditions_pickup_loot_player_drop"]["amount"] = mod:get(setting_id)
+		-- Refresh cache
+		mod_expeditions_loot = mod.expeditions_loot
+	end
 end
 
 -- ############

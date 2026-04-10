@@ -258,7 +258,7 @@ mod.expeditions_loot = {
     --  Drop from killing a boss
     loc_expeditions_pickup_loot_player_drop = {
         id = "expedition_loot_player_drop",
-        amount = 0,
+        amount = mod:get("exploration_player_loot_value") or 0,
     },
     loc_expeditions_pickup_loot_quality_low = {
         id = "expedition_loot_small_tier_1",
