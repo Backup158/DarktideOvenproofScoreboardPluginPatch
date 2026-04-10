@@ -63,6 +63,7 @@ local categorizable_damage_types = {
 
 local in_match
 local is_playing_havoc
+local is_playing_expeditions
 local scoreboard
 -- ammo pickup given as a percentage, such as 0.85
 -- @backup158: when not global, it had issues being the correct values when changed by havoc
@@ -1183,6 +1184,16 @@ function mod.on_game_state_changed(status, state_name)
 			mod:info("Havoc ammo modifier: "..tostring(mod.ammunition_pickup_modifier))
 		else
 			mod.ammunition_pickup_modifier = 1 
+		end
+		
+		-- local expeditions_extension = Managers.state.game_mode:game_mode():extension("expedition") -- does not work
+		-- local Expedition = class("Expedition") -- happens every time
+		local game_mode_name = Managers.state.game_mode:game_mode_name()
+		if game_mode_name == "expedition" then
+			mod:echo("playing EXPEDITIONS!")
+			is_playing_expeditions = true
+		else
+			is_playing_expeditions = false
 		end
 	else
 		in_match = false
