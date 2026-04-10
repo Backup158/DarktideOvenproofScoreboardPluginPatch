@@ -1,3 +1,12 @@
+# 2026-04-10
+v1.11.0
+- Added options to track pickups from Expeditions
+    - `expeditions_currency`: Salvage
+    - `expeditions_loot`: Tech-Remnants
+- Included options for how to count each Expeditions pickup (Not at all, in their own row, or as part of Materials pickups)
+- Included options to only display the Expeditions pickup rows when playing Expeditions
+- Included options to choose how to treat player loot drops from Expeditions
+
 # 2026-03-19
 v1.10.2
 
