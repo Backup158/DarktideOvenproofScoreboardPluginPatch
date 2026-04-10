@@ -61,9 +61,9 @@ local categorizable_damage_types = {
 }
 ]]
 
-local in_match
-local is_playing_havoc
-local is_playing_expeditions =
+local in_match = false
+local is_playing_havoc = false
+local is_playing_expeditions = false
 local scoreboard
 -- ammo pickup given as a percentage, such as 0.85
 -- @backup158: when not global, it had issues being the correct values when changed by havoc
