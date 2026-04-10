@@ -1195,6 +1195,7 @@ function mod.on_game_state_changed(status, state_name)
 		
 		-- local expeditions_extension = Managers.state.game_mode:game_mode():extension("expedition") -- does not work
 		-- local Expedition = class("Expedition") -- happens every time
+		-- @Backup158: It seems this game mode check doesn't work for Havoc, since the game code still uses the old way (shown above)
 		local game_mode_name = Managers.state.game_mode:game_mode_name()
 		if game_mode_name == "expedition" then
 			mod:echo("playing EXPEDITIONS!")
