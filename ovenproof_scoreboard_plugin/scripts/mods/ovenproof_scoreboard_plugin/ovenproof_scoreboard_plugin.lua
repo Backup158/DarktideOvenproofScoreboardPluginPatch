@@ -63,7 +63,7 @@ local categorizable_damage_types = {
 
 local in_match
 local is_playing_havoc
-local is_playing_expeditions
+local is_playing_expeditions =
 local scoreboard
 -- ammo pickup given as a percentage, such as 0.85
 -- @backup158: when not global, it had issues being the correct values when changed by havoc
@@ -403,12 +403,19 @@ local function update_all_scoreboard_row_visibilities()
 	-- ------------
 	-- Expeditions Pickup Classification
 	-- ------------
-	if not (expeditions_currency_pickups == 1) then
+	local currency_only_in_expeditions = mod:get("exploration_show_currency_only_in_expeditions")
+	-- @Backup158: Technically this misses the case where you track as materials, and someone picks up Salvage while not in Expeditions. Since that's impossible AFAIK, this will be good enough.
+	if (not (expeditions_currency_pickups == 1)) or 
+		(currency_only_in_expeditions and (not is_playing_expeditions))
+	then
 		change_scoreboard_row_visibility("total_expeditions_currency_pickups", false)
 	else
 		change_scoreboard_row_visibility("total_expeditions_currency_pickups", true)
 	end
-	if not (expeditions_loot_pickups == 1)then
+	local loot_only_in_expeditions = mod:get("exploration_show_loot_only_in_expeditions")
+	if (not (expeditions_loot_pickups == 1)) or
+		(loot_only_in_expeditions and (not is_playing_expeditions))
+	then
 		change_scoreboard_row_visibility("total_expeditions_loot_pickups", false)
 	else
 		change_scoreboard_row_visibility("total_expeditions_loot_pickups", true)
