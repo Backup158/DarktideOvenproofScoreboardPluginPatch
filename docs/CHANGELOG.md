@@ -1,6 +1,7 @@
-# 2026-
-v1.
+# 2026-04-11
+v1.11.1
 - Fixed localization from categorizing damage type rows (the `<<>>` around the options)
+- Fixed debug message for expeditions appearing
 
 # 2026-04-10
 v1.11.0
