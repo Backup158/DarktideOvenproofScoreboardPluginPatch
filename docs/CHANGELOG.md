@@ -1,3 +1,7 @@
+# 2026-
+v1.
+- Fixed localization from categorizing damage type rows (the `<<>>` around the options)
+
 # 2026-04-10
 v1.11.0
 - Added options to track pickups from Expeditions
