@@ -55,7 +55,7 @@ end
 -- ########################
 -- Widgets
 -- ########################
-local localizations = {
+local data_and_widgets = {
 	name = mod:localize("mod_title"),
 	description = mod:localize("mod_description"),
 	is_togglable = false,
@@ -257,4 +257,4 @@ local localizations = {
 	}, -- closes all mod options
 }
 
-return localizations
+return data_and_widgets
