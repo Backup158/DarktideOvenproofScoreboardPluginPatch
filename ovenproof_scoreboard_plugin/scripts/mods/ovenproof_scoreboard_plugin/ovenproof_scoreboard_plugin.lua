@@ -1204,7 +1204,7 @@ function mod.on_game_state_changed(status, state_name)
 		-- @Backup158: It seems this game mode check doesn't work for Havoc, since the game code still uses the old way (shown above)
 		local game_mode_name = Managers.state.game_mode:game_mode_name()
 		if game_mode_name == "expedition" then
-			mod:echo("playing EXPEDITIONS!")
+			-- mod:echo("playing EXPEDITIONS!")
 			is_playing_expeditions = true
 		else
 			is_playing_expeditions = false
