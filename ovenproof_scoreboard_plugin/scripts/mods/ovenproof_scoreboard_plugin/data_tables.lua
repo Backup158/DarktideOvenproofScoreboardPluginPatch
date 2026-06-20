@@ -162,6 +162,7 @@ mod.burning_damage_profiles ={
     "liquid_area_fire_burning_barrel",
     "liquid_area_fire_burning",
     --"flamer_assault", -- Flaming shots from PBB. False bug report: this just uses "burning"
+    "phosphor_burning",
 }
 mod.warpfire_damage_profiles ={
     "warpfire",

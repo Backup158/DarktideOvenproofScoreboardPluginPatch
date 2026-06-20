@@ -1,3 +1,10 @@
+# 2026-06-20
+v1.12.0
+Skitussy
+
+I fully expect more things to be necessary but we know about this one, at least.
+- Added Skitarii phosphor burn to burning
+
 # 2026-04-11
 v1.11.1
 - Fixed localization from categorizing damage type rows (the `<<>>` around the options)
