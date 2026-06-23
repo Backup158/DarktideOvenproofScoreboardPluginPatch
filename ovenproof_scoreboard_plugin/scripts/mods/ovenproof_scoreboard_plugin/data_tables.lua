@@ -196,6 +196,7 @@ mod.environmental_damage_profiles = {
     "default",
     "poxwalker_explosion",
     "poxwalker_explosion_close",
+    "poxwalker_bomber_instakill",
 }
 
 -- ------------
