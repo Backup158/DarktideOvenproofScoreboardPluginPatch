@@ -3,6 +3,10 @@ v1.13.2
 
 - The previous fix didn't actually work lol
 - Also added `arc_rifle_arc_chain_lightning_link_damage`
+- Added these damage types into existing categories
+    - arc rifle: ranged
+    - discharge: blitz (falls back to ranged if not tracking it)
+    - arc maul lightning: melee
 
 # 2026-06-23
 v1.13.1
