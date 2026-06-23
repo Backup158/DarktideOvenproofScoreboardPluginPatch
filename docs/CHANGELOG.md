@@ -1,4 +1,11 @@
 # 2026-06-23
+v1.13.1
+
+- Forgot some shock damage types
+    - `powermaul_p3_arc_chain_lightning_link_damage`
+    - `cryptic_discharge_shock_damage`
+
+# 2026-06-23
 v1.13.0
 Skitussy
 - Added new vanguard enemies to the horde category (`melee_lessers`)
