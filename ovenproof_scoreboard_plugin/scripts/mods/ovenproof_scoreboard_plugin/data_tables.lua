@@ -82,6 +82,7 @@ mod.melee_damage_profiles ={
     "powermaul_p2_stun_interval",
     "powermaul_p2_stun_interval_basic",
     "powermaul_shield_block_special",
+    "powermaul_p3_arc_chain_lightning_link_damage", -- Skitarii arc maul jumps
 }
 mod.ranged_attack_types ={
     "ranged",
@@ -95,6 +96,7 @@ mod.ranged_damage_profiles ={
     "psyker_smite_kill",
     "psyker_heavy_swings_shock", -- Psyker Smite on heavies and Remote Detonation on dog?
     "missile_launcher_knockback", -- Hives Cum backblast
+    "arc_rifle_arc_chain_lightning_link_damage", -- Skitarii arc rifle jumps
 }
 mod.blitz_attack_types ={
 	"psyker_test",
@@ -140,6 +142,7 @@ mod.blitz_damage_profiles ={
 	"broker_missile_launcher_explosion",
 	"broker_missile_launcher_impact",
 	"missile_launcher_knockback",
+    "cryptic_discharge_shock_damage", -- Skitarii voltage overload thing
 }
 -- Dog damage doesn't count as melee/ranged for penances
 --	but the shock bomb collar counts for puncture, which is covered by "explosion" being in ranged_attack_types
