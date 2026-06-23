@@ -1,3 +1,10 @@
+# 2026-06-23
+v1.13.0
+Skitussy
+- Added new vanguard enemies to the horde category (`melee_lessers`)
+    - `cultist_vanguard`
+    - `renegade_vanguard`
+
 # 2026-06-20
 v1.12.0
 Skitussy

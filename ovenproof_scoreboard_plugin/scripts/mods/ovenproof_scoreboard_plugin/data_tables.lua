@@ -11,6 +11,8 @@ mod.melee_lessers = {
     "chaos_armored_infected",
     "chaos_mutated_poxwalker",
     "chaos_lesser_mutated_poxwalker",
+    "cultist_vanguard",
+    "renegade_vanguard",
 }
 mod.ranged_lessers = {
     "cultist_assault",
@@ -162,7 +164,7 @@ mod.burning_damage_profiles ={
     "liquid_area_fire_burning_barrel",
     "liquid_area_fire_burning",
     --"flamer_assault", -- Flaming shots from PBB. False bug report: this just uses "burning"
-    "phosphor_burning",
+    "phosphor_burning", -- phosphor burns from pistol and servo skull blitz. can't distinguish between the two so here it goes.
 }
 mod.warpfire_damage_profiles ={
     "warpfire",
