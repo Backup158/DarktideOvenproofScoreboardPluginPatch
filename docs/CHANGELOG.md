@@ -1,4 +1,10 @@
 # 2026-06-23
+v1.13.2
+
+- The previous fix didn't actually work lol
+- Also added `arc_rifle_arc_chain_lightning_link_damage`
+
+# 2026-06-23
 v1.13.1
 
 - Forgot some shock damage types

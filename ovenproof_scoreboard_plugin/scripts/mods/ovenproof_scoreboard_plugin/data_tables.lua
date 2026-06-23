@@ -181,6 +181,7 @@ mod.electrocution_damage_profiles = {
     -- skitussy
     "powermaul_p3_arc_chain_lightning_link_damage",
     "cryptic_discharge_shock_damage",
+    "arc_rifle_arc_chain_lightning_link_damage",
 }
 mod.toxin_damage_profiles = {
     "toxin_variant_1",	
