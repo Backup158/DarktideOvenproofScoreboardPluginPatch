@@ -251,6 +251,10 @@ local data_and_widgets = {
 						type 			= "group",
 						sub_widgets		= optional_states_disabled_widgets,
 					},
+					{	setting_id 		= "option_hide_friendly_fire",
+						type 			= "checkbox",
+						default_value	= false,
+					},
 				},
 			},
 		}, -- closes all widgets

@@ -512,6 +512,22 @@ local localization = {
         ["zh-tw"] = "惡魔抓取",
 		["pt-br"] = "Agarrado pelo Warp",
     },
+    option_hide_friendly_fire = {
+        en = "Hide Friendly Fire Rows",
+		-- ru = "", 
+        -- ["zh-cn"] = "",
+        -- ["zh-tw"] = "",
+		-- ["pt-br"] = "",
+    },
+    option_hide_friendly_fire_description = {
+        en = "Hides the friendly fire damage row and the allied shots blocked row. These are part of the Defense category.",
+		-- ru = "", 
+        -- ["zh-cn"] = "",
+        -- ["zh-tw"] = "",
+		-- ["pt-br"] = "",
+    },
+    -- -----------
+    -- Row Categories
     exploration_tier_0 = {
         en = "Exploration",
         ru = "Исследование",

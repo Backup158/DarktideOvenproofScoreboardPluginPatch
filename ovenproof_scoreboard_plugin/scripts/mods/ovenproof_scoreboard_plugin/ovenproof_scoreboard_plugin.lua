@@ -401,6 +401,21 @@ local function update_all_scoreboard_row_visibilities()
 	--replace_registered_scoreboard_value("total_melee_kills", "setting", replace_row_with_value, "offense_tier_3")
 
 	-- ------------
+	-- Defense
+	-- ------------
+	-- Hiding friendly fire damage
+	if mod:get("option_hide_friendly_fire") then
+		change_scoreboard_row_visibility("total_friendly", false)
+		change_scoreboard_row_visibility("friendly_damage", false)
+		change_scoreboard_row_visibility("friendly_shots_blocked", false)
+	else
+		-- this is the default, but I need this here to work without a restart/reload
+		change_scoreboard_row_visibility("total_friendly", true)
+		change_scoreboard_row_visibility("friendly_damage", true)
+		change_scoreboard_row_visibility("friendly_shots_blocked", true)
+	end
+
+	-- ------------
 	-- Expeditions Pickup Classification
 	-- ------------
 	local currency_only_in_expeditions = mod:get("exploration_show_currency_only_in_expeditions")

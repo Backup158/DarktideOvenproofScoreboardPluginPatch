@@ -5,6 +5,7 @@ Skitussy
     - `cultist_vanguard`
     - `renegade_vanguard`
 - Added poxburster shove damage (when it's inactive but then gets pushed, `poxwalker_bomber_instakill`) to environmental damage
+- Added toggles to hide friendly fire damage, so you can still have the other Defense rows active
 
 # 2026-06-20
 v1.12.0
