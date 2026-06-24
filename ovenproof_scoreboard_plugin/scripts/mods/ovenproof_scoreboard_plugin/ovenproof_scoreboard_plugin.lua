@@ -781,8 +781,9 @@ function mod.on_all_mods_loaded()
 			local unit = self._interactor_unit
 			if unit then
 				local player = Managers.player:player_by_unit(unit)
+				mod:echo("interaction - unit: "..tostring(unit).."; type: "..type)
 				if player then
-					--mod:echo("interaction - player "..player:name()..", type: "..type)
+					mod:echo("interaction - player "..player:name()..", type: "..type)
 					local account_id = player:account_id() or player:name()
 					if type == "pull_up" or type == "remove_net" then
 						scoreboard:update_stat("total_operatives_helped", account_id, 1)
