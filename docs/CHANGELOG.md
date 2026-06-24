@@ -1,4 +1,9 @@
 # 2026-06-23
+v1.13.3
+
+- Added `arc_grenade_chain_jump_damage`: blitz (falls back to ranged if not tracking it)
+
+# 2026-06-23
 v1.13.2
 
 - The previous fix didn't actually work lol
