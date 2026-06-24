@@ -1,4 +1,10 @@
 # 2026-06-23
+v1.13.4
+
+- Added `cryptic_discharge_weapon_shock`: blitz (falls back to ranged if not tracking it)
+- Added `discharge_chain_jump_damage`: ranged
+
+# 2026-06-23
 v1.13.3
 
 - Added `arc_grenade_chain_jump_damage`: blitz (falls back to ranged if not tracking it)

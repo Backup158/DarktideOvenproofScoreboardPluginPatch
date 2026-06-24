@@ -98,6 +98,8 @@ mod.ranged_damage_profiles ={
     "missile_launcher_knockback", -- Hives Cum backblast
     "arc_rifle_arc_chain_lightning_link_damage", -- Skitarii arc rifle jumps
     "cryptic_discharge_shock_damage", -- Skitarii voltage overload thing. Putting it here as a fallback for if not tracking blitz
+    "cryptic_discharge_weapon_shock", 
+    "discharge_chain_jump_damage",
     "arc_grenade_chain_jump_damage", -- Skitarii Arc Grenade. Putting it here as a fallback for if not tracking blitz
 }
 mod.blitz_attack_types ={
@@ -145,6 +147,8 @@ mod.blitz_damage_profiles ={
 	"broker_missile_launcher_impact",
 	"missile_launcher_knockback",
     "cryptic_discharge_shock_damage", -- Skitarii voltage overload thing
+    "cryptic_discharge_weapon_shock", -- Skitussy overload arc
+    "discharge_chain_jump_damage",
     "arc_grenade_chain_jump_damage", -- Skitarii Arc Grenade
 }
 -- Dog damage doesn't count as melee/ranged for penances
