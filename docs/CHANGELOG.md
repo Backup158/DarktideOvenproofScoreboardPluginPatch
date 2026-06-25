@@ -1,4 +1,4 @@
-# 2026-06-23
+# 2026-06-25
 v1.13.5
 
 - Fixed Servo Skull damage not being caught by the Companion damage row, when that's enabled
@@ -11,13 +11,13 @@ v1.13.5
 - Fixed incorrect mod name being used in the instructions to disable error messages
 - Removed the debug message I forgot about lol
 
-# 2026-06-23
+# 2026-06-25
 v1.13.4
 
 - Added `cryptic_discharge_weapon_shock`: blitz (falls back to ranged if not tracking it)
 - Added `discharge_chain_jump_damage`: ranged
 
-# 2026-06-23
+# 2026-06-24
 v1.13.3
 
 - Added `arc_grenade_chain_jump_damage`: blitz (falls back to ranged if not tracking it)
