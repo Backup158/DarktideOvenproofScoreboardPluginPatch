@@ -7,6 +7,7 @@ v1.13.5
         - `improved_companion_servo_skull_lasgun_killshot`
         - `companion_servo_skull_flamer`
     - Moved the companion damage check to before ranged damage, since this would count both
+- Fixed incorrect mod name being used in the instructions to disable error messages
 
 # 2026-06-23
 v1.13.4
