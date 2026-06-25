@@ -7,7 +7,9 @@ v1.13.5
         - `improved_companion_servo_skull_lasgun_killshot`
         - `companion_servo_skull_flamer`
     - Moved the companion damage check to before ranged damage, since this would count both
+- Added Arc Maul lightning (`chain_lightning_killing_blow`): melee. I fully expect this to become a problem in the future
 - Fixed incorrect mod name being used in the instructions to disable error messages
+- Removed the debug message I forgot about lol
 
 # 2026-06-23
 v1.13.4

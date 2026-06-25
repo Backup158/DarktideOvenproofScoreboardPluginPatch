@@ -83,6 +83,7 @@ mod.melee_damage_profiles ={
     "powermaul_p2_stun_interval_basic",
     "powermaul_shield_block_special",
     "powermaul_p3_arc_chain_lightning_link_damage", -- Skitarii arc maul jumps
+    "chain_lightning_killing_blow",
 }
 mod.ranged_attack_types ={
     "ranged",
@@ -196,6 +197,7 @@ mod.electrocution_damage_profiles = {
     "powermaul_p3_arc_chain_lightning_link_damage",
     "cryptic_discharge_shock_damage",
     "arc_rifle_arc_chain_lightning_link_damage",
+    "chain_lightning_killing_blow",
 }
 mod.toxin_damage_profiles = {
     "toxin_variant_1",	

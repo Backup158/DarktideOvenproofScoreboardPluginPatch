@@ -776,18 +776,12 @@ function mod.on_all_mods_loaded()
 	--	Player Interactions
 	-- ############
 	mod:hook(CLASS.PlayerInteracteeExtension, "stopped", function(func, self, result, ...)
-		local uwu_type = type
 		local type = self:interaction_type() or ""
 		if result == interaction_results.success then
 			local unit = self._interactor_unit
 			if unit then
 				local player = Managers.player:player_by_unit(unit)
-
-				mod:echo("interaction - unit: "..tostring(unit).."; type: "..type)
-				if uwu_type(unit) == "table" then mod:dump(unit, "unit interaction uwu. Type: "..type, 15) end
-
 				if player then
-					mod:echo("interaction - player "..player:name()..", type: "..type)
 					local account_id = player:account_id() or player:name()
 					if type == "pull_up" or type == "remove_net" then
 						scoreboard:update_stat("total_operatives_helped", account_id, 1)
