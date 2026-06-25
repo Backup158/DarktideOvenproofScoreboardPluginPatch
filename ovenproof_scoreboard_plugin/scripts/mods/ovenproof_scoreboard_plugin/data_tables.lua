@@ -162,6 +162,10 @@ mod.companion_damage_profiles ={
     -- "adamant_companion_ogryn_pounce",
     -- "adamant_companion_monster_pounce",
     "shockmaul_stun_interval_damage", -- shock maul electrocution and Arbites dog shocks
+    -- Skitussy Skull
+    "default_companion_servo_skull_lasgun_killshot",
+    "improved_companion_servo_skull_lasgun_killshot",
+    "companion_servo_skull_flamer",
 }
 
 mod.bleeding_damage_profiles ={

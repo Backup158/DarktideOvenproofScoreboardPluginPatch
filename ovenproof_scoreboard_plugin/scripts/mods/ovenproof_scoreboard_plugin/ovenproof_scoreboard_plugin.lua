@@ -36,7 +36,7 @@ local table_array_contains = table.array_contains
 -- #######
 -- Mod Locals
 -- #######
-mod.version = "1.13.3"
+mod.version = "1.13.5"
 local debug_messages_enabled
 local separate_companion_damage = {}
 local track_blitz_damage
@@ -776,12 +776,16 @@ function mod.on_all_mods_loaded()
 	--	Player Interactions
 	-- ############
 	mod:hook(CLASS.PlayerInteracteeExtension, "stopped", function(func, self, result, ...)
+		local uwu_type = type
 		local type = self:interaction_type() or ""
 		if result == interaction_results.success then
 			local unit = self._interactor_unit
 			if unit then
 				local player = Managers.player:player_by_unit(unit)
+
 				mod:echo("interaction - unit: "..tostring(unit).."; type: "..type)
+				if uwu_type(unit) == "table" then mod:dump(unit, "unit interaction uwu. Type: "..type, 15) end
+
 				if player then
 					mod:echo("interaction - player "..player:name()..", type: "..type)
 					local account_id = player:account_id() or player:name()
@@ -939,6 +943,19 @@ function mod.on_all_mods_loaded()
 							mod:replace_key_to_edit("blitz_cr", account_id, self._blitz_rate[account_id].cr)
 						end
 					-- ------------
+					--	Companion
+					--  After Skitarii released, companion overlaps with ranged too
+					-- ------------
+					elseif table_array_contains(mod_companion_attack_types, attack_type) or table_array_contains(mod_companion_damage_profiles, damage_profile.name) then
+						-- Crit and Weakspot rates don't matter
+		
+						-- By default, uses its own companion row, which reads: total_companion_damage and total_companion_kills
+						scoreboard:update_stat(separate_companion_damage.damage, account_id, actual_damage)
+
+						if attack_result == "died" then
+							scoreboard:update_stat(separate_companion_damage.kills, account_id, 1)
+						end
+					-- ------------
 					--	Ranged
 					-- ------------
 					elseif table_array_contains(mod_ranged_attack_types, attack_type) or table_array_contains(mod_ranged_damage_profiles, damage_profile.name) then
@@ -973,18 +990,6 @@ function mod.on_all_mods_loaded()
 						
 						mod:replace_key_to_edit("ranged_cr", account_id, self._ranged_rate[account_id].cr)
 						mod:replace_key_to_edit("ranged_wr", account_id, self._ranged_rate[account_id].wr)
-					-- ------------
-					--	Companion
-					-- ------------
-					elseif table_array_contains(mod_companion_attack_types, attack_type) or table_array_contains(mod_companion_damage_profiles, damage_profile.name) then
-						-- Crit and Weakspot rates don't matter
-		
-						-- By default, uses its own companion row, which reads: total_companion_damage and total_companion_kills
-						scoreboard:update_stat(separate_companion_damage.damage, account_id, actual_damage)
-
-						if attack_result == "died" then
-							scoreboard:update_stat(separate_companion_damage.kills, account_id, 1)
-						end
 					-- ------------
 					--	Bleed
 					-- ------------

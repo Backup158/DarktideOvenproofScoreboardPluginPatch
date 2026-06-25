@@ -1,4 +1,14 @@
 # 2026-06-23
+v1.13.5
+
+- Fixed Servo Skull damage not being caught by the Companion damage row, when that's enabled
+    - Added these damage types to companion
+        - `default_companion_servo_skull_lasgun_killshot`
+        - `improved_companion_servo_skull_lasgun_killshot`
+        - `companion_servo_skull_flamer`
+    - Moved the companion damage check to before ranged damage, since this would count both
+
+# 2026-06-23
 v1.13.4
 
 - Added `cryptic_discharge_weapon_shock`: blitz (falls back to ranged if not tracking it)
