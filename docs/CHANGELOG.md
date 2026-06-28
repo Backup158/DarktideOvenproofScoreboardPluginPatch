@@ -1,3 +1,7 @@
+# 2026-06-26
+v1.13.6
+- Added Integrated Refraction Emitter's Voltaic Resistance (`force_field_chain_jump_damage`): Blitz, fallback to Ranged
+
 # 2026-06-25
 v1.13.5
 

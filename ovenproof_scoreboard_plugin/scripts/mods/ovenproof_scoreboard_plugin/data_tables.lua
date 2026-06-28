@@ -102,6 +102,7 @@ mod.ranged_damage_profiles ={
     "cryptic_discharge_weapon_shock", 
     "discharge_chain_jump_damage",
     "arc_grenade_chain_jump_damage", -- Skitarii Arc Grenade. Putting it here as a fallback for if not tracking blitz
+    "force_field_chain_jump_damage", -- Skitarii Integrated Refraction Emitter with Voltaic Resistance. Fallback if not tracking Blitz
 }
 mod.blitz_attack_types ={
 	"psyker_test",
@@ -151,6 +152,7 @@ mod.blitz_damage_profiles ={
     "cryptic_discharge_weapon_shock", -- Skitussy overload arc
     "discharge_chain_jump_damage",
     "arc_grenade_chain_jump_damage", -- Skitarii Arc Grenade
+    "force_field_chain_jump_damage", -- Skitarii Integrated Refraction Emitter with Voltaic Resistance
 }
 -- Dog damage doesn't count as melee/ranged for penances
 --	but the shock bomb collar counts for puncture, which is covered by "explosion" being in ranged_attack_types
@@ -198,6 +200,7 @@ mod.electrocution_damage_profiles = {
     "cryptic_discharge_shock_damage",
     "arc_rifle_arc_chain_lightning_link_damage",
     "chain_lightning_killing_blow",
+    "force_field_chain_jump_damage", -- Skitarii Integrated Refraction Emitter with Voltaic Resistance
 }
 mod.toxin_damage_profiles = {
     "toxin_variant_1",	
