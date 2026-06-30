@@ -12,7 +12,7 @@ return {
 	require = {
 		"scoreboard"
 	},
-	version = "1.13.6",
+	version = "1.13.7",
 
 	packages = {},
 }
