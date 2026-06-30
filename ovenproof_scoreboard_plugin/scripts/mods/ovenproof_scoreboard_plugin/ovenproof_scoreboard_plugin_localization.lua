@@ -16,6 +16,13 @@ local languages = {"en","ru","zh-cn","zh-tw","pt-br",}
 -- Thanks for the help! - Backup158
 -- ###############################################################################################################
 
+-- ###############################################################################################################
+-- zh-tw Localization maintenance note:
+-- For zh-tw updates, use the latest translation glossary as the source of truth:
+-- https://github.com/SyuanTsai/Warhammer-40-000-DARKTIDE-Mods/blob/main/Referneces/Translation.md
+-- Preserve existing context-specific translations when the glossary contains multiple valid terms.
+-- ###############################################################################################################
+
 -- ########################
 -- Data
 -- ########################
