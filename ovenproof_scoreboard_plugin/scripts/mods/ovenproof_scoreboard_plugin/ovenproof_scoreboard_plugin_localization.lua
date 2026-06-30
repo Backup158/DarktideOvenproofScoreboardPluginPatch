@@ -140,6 +140,7 @@ local localization = {
     -- @backup158: human translators need to review: ru, zh-cn, zh-tw, pt-br
     warning_chat_debug_messages = {
         en = "To disable this message, go to Mod Options --> OvenProof's Scoreboard --> Disable \"Enable error messages\"",
+        ["zh-tw"] = "要停用此訊息，請前往 Mod 選項 --> OvenProof 記分板插件 --> 停用「啟用錯誤訊息」",
         -- ru = "",
 		-- ["zh-cn"] = "",
         -- ["zh-tw"] = "",
@@ -158,6 +159,7 @@ local localization = {
     },
     custom_row_categorization = {
         en = "Select Row Categorization",
+        ["zh-tw"] = "選擇行分類",
 		--ru = "",
 		--["zh-cn"] = "",
         --["zh-tw"] = "",
@@ -166,6 +168,7 @@ local localization = {
     -- @backup158: I copied some values from the row_total areas. I left them commented out since I don't know if that's appropriate for this context
     categorize_total_melee = {
         en = "Categorize Total Melee",
+        ["zh-tw"] = "分類總近戰",
 		--ru = " Всего в Ближнем бою",
 		--["zh-cn"] = "总近战",
         --["zh-tw"] = "總近戰",
@@ -173,6 +176,7 @@ local localization = {
     },
     categorize_total_ranged = {
         en = "Categorize Total Ranged",
+        ["zh-tw"] = "分類總遠程",
 		--ru = " Всего в Дальнем бою",
 		--["zh-cn"] = "总远程",
         --["zh-tw"] = "總遠程",
@@ -180,6 +184,7 @@ local localization = {
     },
     categorize_total_companion = {
         en = "Categorize Total Companion",
+        ["zh-tw"] = "分類總電子獒犬",
 		--ru = " Всего ",
 		--["zh-cn"] = "完全伴侣",
         --["zh-tw"] = "完全伴侶",
@@ -187,6 +192,7 @@ local localization = {
     },
     categorize_total_blitz = {
         en = "Categorize Total Blitz",
+        ["zh-tw"] = "分類總閃擊",
 		--ru = " Всего ",
 		--["zh-cn"] = "总",
         --["zh-tw"] = "總閃擊",
@@ -197,6 +203,7 @@ local localization = {
     -- --------
     exploration_tracking_group = {
         en = "Tracking for the Expeditions Game Mode",
+        ["zh-tw"] = "遠征模式啟用記分板",
 		--ru = "",
         --["zh-cn"] = "",
         --["zh-tw"] = "",
@@ -204,6 +211,7 @@ local localization = {
     },
     exploration_tracking_expeditions_pickups = {
         en = "Track Expeditions Pickups",
+        ["zh-tw"] = "追蹤遠征模式的拾取",
 		--ru = "",
         --["zh-cn"] = "",
         --["zh-tw"] = "",
@@ -211,6 +219,7 @@ local localization = {
     },
     exploration_track_currency = {
         en = "Track Salvage",
+        ["zh-tw"] = "追蹤打撈物資",
 		--ru = "",
         --["zh-cn"] = "",
         --["zh-tw"] = "",
@@ -218,6 +227,7 @@ local localization = {
     },
     exploration_show_currency_only_in_expeditions = {
         en = "Only show Salvage row when playing Expeditions",
+        ["zh-tw"] = "只有在玩遠征模式時才顯示打撈物資列",
 		--ru = "",
         --["zh-cn"] = "",
         --["zh-tw"] = "",
@@ -225,6 +235,7 @@ local localization = {
     },
     exploration_track_loot = {
         en = "Track Tech-Remnants",
+        ["zh-tw"] = "追蹤科技殘骸",
 		--ru = "",
         --["zh-cn"] = "",
         --["zh-tw"] = "",
@@ -232,6 +243,7 @@ local localization = {
     },
     exploration_show_loot_only_in_expeditions = {
         en = "Only show Tech-Remnants row when playing Expeditions",
+        ["zh-tw"] = "只有在玩遠征模式時才顯示科技殘骸列",
 		--ru = "",
         --["zh-cn"] = "",
         --["zh-tw"] = "",
@@ -253,6 +265,7 @@ local localization = {
     },
     options_exploration_track_option_materials = {
         en = "True (count as materials pickup)",
+        ["zh-tw"] = "True（計入物資拾取）",
 		--ru = "",
         --["zh-cn"] = "",
         --["zh-tw"] = "",
@@ -260,6 +273,7 @@ local localization = {
     },
     exploration_player_loot_value = {
         en = "Tech-Remnants for player drop pickups",
+        ["zh-tw"] = "玩家掉落拾取的科技殘骸",
         --ru = "",
         --["zh-cn"] = "",
         --["zh-tw"] = "",
@@ -267,6 +281,7 @@ local localization = {
     },
     exploration_player_loot_value_description = {
         en = "These are the the little box drops, which are used for player death, disabler theft, and boss kill rewards. Each of these situations have different values, but they use the same name without a way to distinguish them.",
+        ["zh-tw"] = "這些是小箱子掉落，用於玩家死亡、禁用器盜竊和首領擊殺獎勵。每種情況的數值不同，但它們使用相同的名稱，無法區分。",
         --ru = "",
         --["zh-cn"] = "",
         --["zh-tw"] = "",
@@ -274,6 +289,7 @@ local localization = {
     },
     exploration_player_loot_value_none = {
         en = "Ignore it (0)",
+        ["zh-tw"] = "忽略（0）",
         --ru = "",
         --["zh-cn"] = "",
         --["zh-tw"] = "",
@@ -281,6 +297,7 @@ local localization = {
     },
     exploration_player_loot_value_disabler = {
         en = "Use disabler theft value (25)",
+        ["zh-tw"] = "使用禁用器盜竊數值（25）",
         --ru = "",
         --["zh-cn"] = "",
         --["zh-tw"] = "",
@@ -288,6 +305,7 @@ local localization = {
     },
     exploration_player_loot_value_boss = {
         en = "Use boss kill value (100)",
+        ["zh-tw"] = "使用首領擊殺數值（100）",
         --ru = "",
         --["zh-cn"] = "",
         --["zh-tw"] = "",
@@ -682,6 +700,7 @@ local localization = {
     },
     message_ammo_crate_waste = {
         en = " picked up %s ammo from an %s, wasting %s",
+        ["zh-tw"] = "拾取了 %s 彈藥，來自 %s，浪費了 %s",
         -- ru = " ",
         -- ["zh-cn"] = "",
         -- ["zh-tw"] = "",
@@ -720,6 +739,7 @@ local localization = {
     },
     row_total_expeditions_currency_pickups = {
         en = "Total Salvage",
+        ["zh-tw"] = "總打撈物資",
         --ru = "",
         --["zh-cn"] = "",
         --["zh-tw"] = "",
@@ -727,6 +747,7 @@ local localization = {
     },
     row_total_expeditions_loot_pickups = {
         en = "Total Tech-Remnants",
+        ["zh-tw"] = "總科技殘骸",
         --ru = "",
         --["zh-cn"] = "",
         --["zh-tw"] = "",
