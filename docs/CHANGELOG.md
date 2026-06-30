@@ -1,3 +1,114 @@
+# 2026-06-26
+v1.13.6
+- Added Integrated Refraction Emitter's Voltaic Resistance (`force_field_chain_jump_damage`): Blitz, fallback to Ranged
+
+# 2026-06-25
+v1.13.5
+
+- Fixed Servo Skull damage not being caught by the Companion damage row, when that's enabled
+    - Added these damage types to companion
+        - `default_companion_servo_skull_lasgun_killshot`
+        - `improved_companion_servo_skull_lasgun_killshot`
+        - `companion_servo_skull_flamer`
+    - Moved the companion damage check to before ranged damage, since this would count both
+- Added Arc Maul lightning (`chain_lightning_killing_blow`): melee. I fully expect this to become a problem in the future
+- Fixed incorrect mod name being used in the instructions to disable error messages
+- Removed the debug message I forgot about lol
+
+# 2026-06-25
+v1.13.4
+
+- Added `cryptic_discharge_weapon_shock`: blitz (falls back to ranged if not tracking it)
+- Added `discharge_chain_jump_damage`: ranged
+
+# 2026-06-24
+v1.13.3
+
+- Added `arc_grenade_chain_jump_damage`: blitz (falls back to ranged if not tracking it)
+
+# 2026-06-23
+v1.13.2
+
+- The previous fix didn't actually work lol
+- Also added `arc_rifle_arc_chain_lightning_link_damage`
+- Added these damage types into existing categories
+    - arc rifle: ranged
+    - discharge: blitz (falls back to ranged if not tracking it)
+    - arc maul lightning: melee
+
+# 2026-06-23
+v1.13.1
+
+- Forgot some shock damage types
+    - `powermaul_p3_arc_chain_lightning_link_damage`
+    - `cryptic_discharge_shock_damage`
+
+# 2026-06-23
+v1.13.0
+Skitussy
+- Added new vanguard enemies to the horde category (`melee_lessers`)
+    - `cultist_vanguard`
+    - `renegade_vanguard`
+- Added poxburster shove damage (when it's inactive but then gets pushed, `poxwalker_bomber_instakill`) to environmental damage
+- Added toggles to hide friendly fire damage, so you can still have the other Defense rows active
+
+# 2026-06-20
+v1.12.0
+Skitussy
+
+I fully expect more things to be necessary but we know about this one, at least.
+- Added Skitarii phosphor burn to burning
+
+# 2026-04-11
+v1.11.1
+- Fixed localization from categorizing damage type rows (the `<<>>` around the options)
+- Fixed debug message for expeditions appearing
+
+# 2026-04-10
+v1.11.0
+- Added options to track pickups from Expeditions
+    - `expeditions_currency`: Salvage
+    - `expeditions_loot`: Tech-Remnants
+- Included options for how to count each Expeditions pickup (Not at all, in their own row, or as part of Materials pickups)
+- Included options to only display the Expeditions pickup rows when playing Expeditions
+- Included options to choose how to treat player loot drops from Expeditions (`expedition_loot_player_drop`)
+
+# 2026-03-19
+v1.10.2
+
+- Fixed syntax error
+- Renamed purchasable to `expedition_pocketable`
+
+# 2026-03-19
+v1.10.1
+
+- Added Expeditions purchasable abilities `loc_game_mode_expedition_pickup_price_desc`
+
+# 2026-03-17
+v1.10.0
+Beyond the Hive
+
+- Added new enemy types
+    - Armoured Pox Hound (`chaos_armored_hound`) specialist
+    - Ogryn Hound Master (`chaos_ogryn_houndmaster`) boss
+- Added additional text to error messages, which tell you how to disable them
+
+# 2026-03-11
+Uploaded v1.9.2
+
+...
+
+# 2025-12-28
+v1.9.2
+
+- Missing tox damage type from horde spreading (`horde_mode_self_propagating_toxin`)
+
+# 2025-12-07
+v1.9.1
+
+- Added machine translations from Sai
+- Added comments to help translators
+
 # 2025-12-07
 v1.9.0
 

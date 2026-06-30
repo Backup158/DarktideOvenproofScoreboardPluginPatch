@@ -31,11 +31,12 @@ local string_sub = string.sub
 local table = table
 local table_array_contains = table.array_contains
 -- TODO what about color text?
+-- local mod_localize = mod:localize() -- @Backup158: Yeah so this just crashes
 
 -- #######
 -- Mod Locals
 -- #######
-mod.version = "1.9.0"
+mod.version = "1.13.6"
 local debug_messages_enabled
 local separate_companion_damage = {}
 local track_blitz_damage
@@ -45,9 +46,24 @@ local explosions_affect_ranged_hitrate
 local explosions_affect_melee_hitrate
 local grenade_messages
 local ammo_messages
+local expeditions_currency_pickups
+local expeditions_loot_pickups
+--[[
+local categorizable_damage_types = { 
+	--melee = mod:get("categorize_total_melee"), 
+	--ranged = mod:get("categorize_total_ranged"), 
+	--blitz = mod:get("categorize_total_blitz"), 
+	--companion = mod:get("categorize_total_companion"), 
+	melee = "offense_tier_1",
+	ranged = "offense_tier_1",
+	blitz = "offense_tier_1",
+	companion = "offense_tier_1",
+}
+]]
 
-local in_match
-local is_playing_havoc
+local in_match = false
+local is_playing_havoc = false
+local is_playing_expeditions = false
 local scoreboard
 -- ammo pickup given as a percentage, such as 0.85
 -- @backup158: when not global, it had issues being the correct values when changed by havoc
@@ -56,9 +72,8 @@ mod.ammunition_pickup_modifier = 1
 -- ########################
 -- Data
 -- ########################
-local scoreboard_rows = mod:io_dofile("ovenproof_scoreboard_plugin/scripts/mods/ovenproof_scoreboard_plugin/scoreboard_rows")
-
-local data_tables = mod:io_dofile("ovenproof_scoreboard_plugin/scripts/mods/ovenproof_scoreboard_plugin/data_tables")
+mod:io_dofile("ovenproof_scoreboard_plugin/scripts/mods/ovenproof_scoreboard_plugin/scoreboard_rows")
+mod:io_dofile("ovenproof_scoreboard_plugin/scripts/mods/ovenproof_scoreboard_plugin/data_tables")
 
 local mod_melee_lessers = mod.melee_lessers
 local mod_ranged_lessers = mod.ranged_lessers
@@ -86,9 +101,11 @@ local mod_environmental_damage_profiles = mod.environmental_damage_profiles
 
 local mod_states_disabled = mod.states_disabled
 local mod_optional_states_disabled = mod.optional_states_disabled
-local mod_forge_material = mod.forge_material
+-- local mod_forge_material = mod.forge_material
 local mod_ammunition = mod.ammunition
 local mod_ammunition_percentage = mod.ammunition_percentage
+local mod_expeditions_currency = mod.expeditions_currency
+local mod_expeditions_loot = mod.expeditions_loot
 
 -- Setup tables for tracking later
 -- 		to count ammo wasted
@@ -107,7 +124,7 @@ local tracked_disabled_players_for_players = {}
 -- ############
 local function echo_or_info_message_based_on_debug(message)
 	if debug_messages_enabled then
-		mod:echo(message)
+		mod:echo(message.."\n"..mod:localize("warning_chat_debug_messages"))
 	else
 		mod:info(message)
 	end
@@ -321,6 +338,7 @@ local function update_all_scoreboard_row_visibilities()
 	change_scoreboard_row_visibility("total_critical_rates_with_blitz", blitz_cr)
 	]]
 	-- @backup158: TODO figure out how to change the kerning. right now the invisible column is still accounted for in terms of spacing, so it gets off center
+	--		Can't just remove and readd, since that messes up the order
 	if not blitz_wr then
 		replace_registered_scoreboard_value("total_weakspot_rates", "text", replace_row_with_value, "row_total_weakspot_rates")
 		replace_registered_scoreboard_value("total_weakspot_rates", "summary", replace_value_within_row_table, "blitz_wr")
@@ -345,6 +363,78 @@ local function update_all_scoreboard_row_visibilities()
 	else
 		change_scoreboard_row_visibility("total_companion", false)
 	end
+
+	-- ------------
+	-- Offense Grouping
+	-- @backup158: This *should* be working, but it's not
+	--	from dumping the tables (which causes a deadlock since it's so chunky lol), i can see the summary values changed
+	--  	however, the changes do not appear in game
+	--  everything is supposed to be in group_1, so not that
+	--  Trying to replace directly here without mod:get, still nope
+	--  Replacing with mod:get in scoreboard_rows.lua: Nope
+	--  Replacing directly in scoreboard_rows.lua: NOPE???? HOW????
+	-- ------------
+	--[[
+	for damage_type, categorization in pairs(categorizable_damage_types) do
+		local new_categorization = mod:get("categorize_total_"..damage_type)
+		mod:info("for "..damage_type.." from "..categorization.." to "..new_categorization)
+		if not (categorization == new_categorization) then
+			local total_x = "total_"..damage_type
+			local total_x_kills = total_x.."_kills"
+			local total_x_damage = total_x.."_damage"
+			mod:echo("changing category for "..total_x)
+			-- Getting the last character of the category
+			--	substring -1 to do that
+			--local new_group = "group_"..string_sub(new_categorization, -1)
+			
+			replace_registered_scoreboard_value(total_x, "setting", replace_row_with_value, new_categorization)
+			replace_registered_scoreboard_value(total_x_kills, "setting", replace_row_with_value, new_categorization)
+			replace_registered_scoreboard_value(total_x_damage, "setting", replace_row_with_value, new_categorization)
+			--replace_registered_scoreboard_value(total_x, "group", replace_row_with_value, new_group)
+			--replace_registered_scoreboard_value(total_x_kills, "group", replace_row_with_value, new_group)
+			--replace_registered_scoreboard_value(total_x_damage, "group", replace_row_with_value, new_group)
+			categorizable_damage_types[damage_type] = new_categorization
+		end
+	end]]
+	--replace_registered_scoreboard_value("total_melee", "setting", replace_row_with_value, "offense_tier_3")
+	--replace_registered_scoreboard_value("total_melee_damage", "setting", replace_row_with_value, "offense_tier_3")
+	--replace_registered_scoreboard_value("total_melee_kills", "setting", replace_row_with_value, "offense_tier_3")
+
+	-- ------------
+	-- Defense
+	-- ------------
+	-- Hiding friendly fire damage
+	if mod:get("option_hide_friendly_fire") then
+		change_scoreboard_row_visibility("total_friendly", false)
+		change_scoreboard_row_visibility("friendly_damage", false)
+		change_scoreboard_row_visibility("friendly_shots_blocked", false)
+	else
+		-- this is the default, but I need this here to work without a restart/reload
+		change_scoreboard_row_visibility("total_friendly", true)
+		change_scoreboard_row_visibility("friendly_damage", true)
+		change_scoreboard_row_visibility("friendly_shots_blocked", true)
+	end
+
+	-- ------------
+	-- Expeditions Pickup Classification
+	-- ------------
+	local currency_only_in_expeditions = mod:get("exploration_show_currency_only_in_expeditions")
+	-- @Backup158: Technically this misses the case where you track as materials, and someone picks up Salvage while not in Expeditions. Since that's impossible AFAIK, this will be good enough.
+	if (not (expeditions_currency_pickups == 1)) or 
+		(currency_only_in_expeditions and (not is_playing_expeditions))
+	then
+		change_scoreboard_row_visibility("total_expeditions_currency_pickups", false)
+	else
+		change_scoreboard_row_visibility("total_expeditions_currency_pickups", true)
+	end
+	local loot_only_in_expeditions = mod:get("exploration_show_loot_only_in_expeditions")
+	if (not (expeditions_loot_pickups == 1)) or
+		(loot_only_in_expeditions and (not is_playing_expeditions))
+	then
+		change_scoreboard_row_visibility("total_expeditions_loot_pickups", false)
+	else
+		change_scoreboard_row_visibility("total_expeditions_loot_pickups", true)
+	end
 end
 
 local function set_locals_for_settings()
@@ -359,6 +449,8 @@ local function set_locals_for_settings()
 	separate_companion_damage.damage = "total_"..separate_companion_damage.base.."_damage"
 	grenade_messages = mod:get("grenade_messages")
 	ammo_messages = mod:get("ammo_messages")
+	expeditions_currency_pickups = mod:get("exploration_track_currency")
+	expeditions_loot_pickups = mod:get("exploration_track_loot")
 
 	-- Error check for companion damage row
 	if mod:get("enable_companion_blitz_warning")
@@ -382,6 +474,12 @@ function mod.on_setting_changed(setting_id)
 		return
 	end
 	]]
+	-- @Backup158: Ugly manual check for data tables.
+	if setting_id == "exploration_player_loot_value" then
+		mod.expeditions_loot["loc_expeditions_pickup_loot_player_drop"]["amount"] = mod:get(setting_id)
+		-- Refresh cache
+		mod_expeditions_loot = mod.expeditions_loot
+	end
 end
 
 -- ############
@@ -471,92 +569,139 @@ function mod.on_all_mods_loaded()
 						end
 					elseif interaction_type == "ammunition" then
 						local ammo = mod_ammunition[self._override_contexts.ammunition.description]
-						-- Get components
-						local unit_data_extension = ScriptUnit.extension(unit, "unit_data_system")
-						local wieldable_component = unit_data_extension:read_component("slot_secondary")
-						-- Get ammo numbers
-						local current_ammo_clip = wieldable_component.current_ammunition_clip[1]
-						local max_ammo_clip = wieldable_component.max_ammunition_clip[1]
-						--[[
-						if type(current_ammo_clip) == "table" then
-							mod:echo("uwu current_ammo_clip is a table")
-							table.dump(current_ammo_clip, "uwu current_ammo_clip", 20)
-						else
-							mod:echo("uwu current_ammo_clip: "..tostring(current_ammo_clip))
-						end
-						if type(max_ammo_clip) == "table" then
-							mod:echo("uwu max ammo clip is a table")
-							table.dump(max_ammo_clip, "uwu MAX AMMO CLIP", 20)
-						else
-							mod:echo("uwu max ammo clip: "..tostring(max_ammo_clip))
-						end
-						]]
-						local current_ammo_reserve = tracked_current_ammo_for_players[unit]
-						local max_ammo_reserve = wieldable_component.max_ammunition_reserve
-						-- Calculate relevant ammo values relative to the "combined" ammo reserve, i.e. base reserve + clip
-						local current_ammo_combined = current_ammo_clip + current_ammo_reserve
-						local max_ammo_combined = max_ammo_clip + max_ammo_reserve
-						local ammo_missing = max_ammo_combined - current_ammo_combined
-						
-						-- Base pickup rate (decimal). Defaults to crate as a failsafe
-						local base_pickup_from_source = mod.ammunition_percentage[ammo] or 1
-						-- Calculating amount picked up
-						--		Ammo pickups are rounded up by the game
-						-- 		mod.mmunition_pickup_modifier to account for Havoc modifiers. set by state change check
-						local pickup = math_ceil(base_pickup_from_source * mod.ammunition_pickup_modifier * max_ammo_reserve)
 
-						local wasted = math_max(pickup - ammo_missing, 0)
-						local pickup_pct = 100 * (pickup / max_ammo_combined)
-						local wasted_pct = 100 * (wasted / max_ammo_reserve)
-						
-						-- Small boxes and Big bags
-						if ammo == "small_clip" or ammo == "large_clip" then
-							scoreboard:update_stat("ammo_percent", account_id, pickup_pct)
-							scoreboard:update_stat("ammo_wasted_percent", account_id, wasted_pct)
-							if ammo_messages then
-								local pickup_text = TextUtilities.apply_color_to_text(mod:localize("message_"..ammo), color)
-								local displayed_waste = math_max(1, math_round(wasted_pct))
-								local wasted_text = TextUtilities.apply_color_to_text(tostring(displayed_waste).."%", color)
-								local message = ""
-								if wasted == 0 then
-									message = mod:localize("message_ammo_no_waste", pickup_text)
-								else
-									message = mod:localize("message_ammo_waste", pickup_text, wasted_text)
-								end
-								Managers.event:trigger("event_combat_feed_kill", unit, message)
+						-- Expedition purchasables
+						--	rockets and stuff that we buy with Salvage
+						--  These get specifically counted as "ammunition" interactions instead of crate pickups I guess
+						--  So this check is to avoid unnecessarily calculating current ammo amounts
+						if ammo == "expedition_pocketable" then
+							-- nyaaa
+						else
+							-- Get components
+							local unit_data_extension = ScriptUnit.extension(unit, "unit_data_system")
+							local wieldable_component = unit_data_extension:read_component("slot_secondary")
+							-- Get ammo numbers
+							local current_ammo_clip = wieldable_component.current_ammunition_clip[1]
+							local max_ammo_clip = wieldable_component.max_ammunition_clip[1]
+							--[[
+							if type(current_ammo_clip) == "table" then
+								mod:echo("uwu current_ammo_clip is a table")
+								table.dump(current_ammo_clip, "uwu current_ammo_clip", 20)
+							else
+								mod:echo("uwu current_ammo_clip: "..tostring(current_ammo_clip))
 							end
-						-- Deployabla Ammo Crates
-						elseif ammo == "crate" then
-							-- Amount of Ammo Crate uses
-							scoreboard:update_stat("ammo_crates", account_id, 1)
-							-- Adding to total percentage of ammo
-							local count_crates_to_total_ammo = setting_is_enabled_and_check_if_havoc_only("track_ammo_crate_in_percentage", is_playing_havoc)
-							if count_crates_to_total_ammo then
+							if type(max_ammo_clip) == "table" then
+								mod:echo("uwu max ammo clip is a table")
+								table.dump(max_ammo_clip, "uwu MAX AMMO CLIP", 20)
+							else
+								mod:echo("uwu max ammo clip: "..tostring(max_ammo_clip))
+							end
+							]]
+							local current_ammo_reserve = tracked_current_ammo_for_players[unit]
+							local max_ammo_reserve = wieldable_component.max_ammunition_reserve
+							-- Calculate relevant ammo values relative to the "combined" ammo reserve, i.e. base reserve + clip
+							local current_ammo_combined = current_ammo_clip + current_ammo_reserve
+							local max_ammo_combined = max_ammo_clip + max_ammo_reserve
+							local ammo_missing = max_ammo_combined - current_ammo_combined
+							
+							-- Base pickup rate (decimal). Defaults to crate as a failsafe
+							local base_pickup_from_source = mod.ammunition_percentage[ammo] or 1
+							-- Calculating amount picked up
+							--		Ammo pickups are rounded up by the game
+							-- 		mod.mmunition_pickup_modifier to account for Havoc modifiers. set by state change check
+							local pickup = math_ceil(base_pickup_from_source * mod.ammunition_pickup_modifier * max_ammo_reserve)
+
+							local wasted = math_max(pickup - ammo_missing, 0)
+							local pickup_pct = 100 * (pickup / max_ammo_combined)
+							local wasted_pct = 100 * (wasted / max_ammo_reserve)
+							
+							-- Small boxes and Big bags
+							if ammo == "small_clip" or ammo == "large_clip" then
 								scoreboard:update_stat("ammo_percent", account_id, pickup_pct)
-							end
-							if ammo_messages then
-								-- Text formatting
-								-- 		Formatting for percentage of ammo picked up
-								local text_ammo_taken = TextUtilities.apply_color_to_text(tostring(math_round(pickup_pct)).."%", color)
-								-- 		Formatting for Ammo Crate name
-								local text_crate = TextUtilities.apply_color_to_text(mod:localize("message_ammo_crate_text"), color)
-								local message = ""
-								-- Only prints waste message if that's enabled, and if there was actually waste found
-								local count_waste_for_crates = setting_is_enabled_and_check_if_havoc_only("track_ammo_crate_waste", is_playing_havoc)
-								if count_waste_for_crates and (not (wasted == 0)) then
+								scoreboard:update_stat("ammo_wasted_percent", account_id, wasted_pct)
+								if ammo_messages then
+									local pickup_text = TextUtilities.apply_color_to_text(mod:localize("message_"..ammo), color)
 									local displayed_waste = math_max(1, math_round(wasted_pct))
 									local wasted_text = TextUtilities.apply_color_to_text(tostring(displayed_waste).."%", color)
-									message = mod:localize("message_ammo_crate_waste", text_ammo_taken, text_crate, wasted_text)
-								else
-									message = mod:localize("message_ammo_crate", text_ammo_taken, text_crate)
+									local message = ""
+									if wasted == 0 then
+										message = mod:localize("message_ammo_no_waste", pickup_text)
+									else
+										message = mod:localize("message_ammo_waste", pickup_text, wasted_text)
+									end
+									Managers.event:trigger("event_combat_feed_kill", unit, message)
 								end
-								-- Puts message into combat feed
-								Managers.event:trigger("event_combat_feed_kill", unit, message)
+							-- Deployabla Ammo Crates
+							elseif ammo == "crate" then
+								-- Amount of Ammo Crate uses
+								scoreboard:update_stat("ammo_crates", account_id, 1)
+								-- Adding to total percentage of ammo
+								local count_crates_to_total_ammo = setting_is_enabled_and_check_if_havoc_only("track_ammo_crate_in_percentage", is_playing_havoc)
+								if count_crates_to_total_ammo then
+									scoreboard:update_stat("ammo_percent", account_id, pickup_pct)
+								end
+								if ammo_messages then
+									-- Text formatting
+									-- 		Formatting for percentage of ammo picked up
+									local text_ammo_taken = TextUtilities.apply_color_to_text(tostring(math_round(pickup_pct)).."%", color)
+									-- 		Formatting for Ammo Crate name
+									local text_crate = TextUtilities.apply_color_to_text(mod:localize("message_ammo_crate_text"), color)
+									local message = ""
+									-- Only prints waste message if that's enabled, and if there was actually waste found
+									local count_waste_for_crates = setting_is_enabled_and_check_if_havoc_only("track_ammo_crate_waste", is_playing_havoc)
+									if count_waste_for_crates and (not (wasted == 0)) then
+										local displayed_waste = math_max(1, math_round(wasted_pct))
+										local wasted_text = TextUtilities.apply_color_to_text(tostring(displayed_waste).."%", color)
+										message = mod:localize("message_ammo_crate_waste", text_ammo_taken, text_crate, wasted_text)
+									else
+										message = mod:localize("message_ammo_crate", text_ammo_taken, text_crate)
+									end
+									-- Puts message into combat feed
+									Managers.event:trigger("event_combat_feed_kill", unit, message)
+								end
+							else
+								local uncategorized_ammo_pickup_message = "Uncategorized ammo pickup! It is: "..tostring(ammo.."\nName: "..tostring(self._override_contexts.ammunition.description))
+								echo_or_info_message_based_on_debug(uncategorized_ammo_pickup_message)
+							end -- Close If chain: ammo identification
+						end -- Close If: ammo is expedition pocketable
+					-- Expeditions Salvage
+					elseif interaction_type == "expeditions_currency" then
+						-- @Backup158: Hey, it's the magic numbers I've been taught to not use!
+						-- This was a lazy way to allow a dropdown without checking string values, or creating tables all willy nilly
+						if mod:get("exploration_track_currency") > 0 then
+							local currency_description = self._override_contexts.expeditions_currency.description
+							local currency_table = mod_expeditions_currency[currency_description]
+							local currency_amount = 0
+							if currency_table then 
+								currency_amount = currency_table.amount or 0
 							end
-						else
-							local uncategorized_ammo_pickup_message = "Uncategorized ammo pickup! It is: "..tostring(ammo)
-							echo_or_info_message_based_on_debug(uncategorized_ammo_pickup_message)
+
+							scoreboard:update_stat("total_expeditions_currency_pickups", account_id, currency_amount)
+							if mod:get("exploration_track_currency") == 2 then
+								-- This will be inaccurate if you toggle it midgame, but if you do that then uh... go fuck yourself
+								scoreboard:update_stat("total_material_pickups", account_id, 1)
+							end
 						end
+					-- Expeditions Tech-Remnants
+					elseif interaction_type == "expeditions_loot" then
+						if mod:get("exploration_track_loot") > 0 then
+							local loot_description = self._override_contexts.expeditions_loot.description
+							-- if loot_description == "loc_expeditions_pickup_loot_player_drop" then mod:echo("meow. player drop pickup! :3c") end
+							local loot_table = mod_expeditions_loot[loot_description]
+							local loot_amount = 0
+							if loot_table then
+								loot_amount = loot_table.amount or 0
+							else
+								echo_or_info_message_based_on_debug("Picked up: "..loot_description)
+							end
+
+							scoreboard:update_stat("total_expeditions_loot_pickups", account_id, loot_amount)
+							if mod:get("exploration_track_loot") == 2 then
+								scoreboard:update_stat("total_material_pickups", account_id, 1)
+							end
+						end
+					else
+						-- mod:echo("InteracteeExtension stopped: "..interaction_type)
 					end
 				end
 			end
@@ -637,7 +782,6 @@ function mod.on_all_mods_loaded()
 			if unit then
 				local player = Managers.player:player_by_unit(unit)
 				if player then
-					--mod:echo("interaction - player "..player:name()..", type: "..type)
 					local account_id = player:account_id() or player:name()
 					if type == "pull_up" or type == "remove_net" then
 						scoreboard:update_stat("total_operatives_helped", account_id, 1)
@@ -793,6 +937,19 @@ function mod.on_all_mods_loaded()
 							mod:replace_key_to_edit("blitz_cr", account_id, self._blitz_rate[account_id].cr)
 						end
 					-- ------------
+					--	Companion
+					--  After Skitarii released, companion overlaps with ranged too
+					-- ------------
+					elseif table_array_contains(mod_companion_attack_types, attack_type) or table_array_contains(mod_companion_damage_profiles, damage_profile.name) then
+						-- Crit and Weakspot rates don't matter
+		
+						-- By default, uses its own companion row, which reads: total_companion_damage and total_companion_kills
+						scoreboard:update_stat(separate_companion_damage.damage, account_id, actual_damage)
+
+						if attack_result == "died" then
+							scoreboard:update_stat(separate_companion_damage.kills, account_id, 1)
+						end
+					-- ------------
 					--	Ranged
 					-- ------------
 					elseif table_array_contains(mod_ranged_attack_types, attack_type) or table_array_contains(mod_ranged_damage_profiles, damage_profile.name) then
@@ -827,18 +984,6 @@ function mod.on_all_mods_loaded()
 						
 						mod:replace_key_to_edit("ranged_cr", account_id, self._ranged_rate[account_id].cr)
 						mod:replace_key_to_edit("ranged_wr", account_id, self._ranged_rate[account_id].wr)
-					-- ------------
-					--	Companion
-					-- ------------
-					elseif table_array_contains(mod_companion_attack_types, attack_type) or table_array_contains(mod_companion_damage_profiles, damage_profile.name) then
-						-- Crit and Weakspot rates don't matter
-		
-						-- By default, uses its own companion row, which reads: total_companion_damage and total_companion_kills
-						scoreboard:update_stat(separate_companion_damage.damage, account_id, actual_damage)
-
-						if attack_result == "died" then
-							scoreboard:update_stat(separate_companion_damage.kills, account_id, 1)
-						end
 					-- ------------
 					--	Bleed
 					-- ------------
@@ -954,6 +1099,7 @@ function mod.on_all_mods_loaded()
 					-- Categorizing which enemy was damaged
 					-- ------------------------
 					--[[
+					-- @Backup158
 					-- TODO maybe this could be a switch
 					-- 	eh that doesn't really work since you can't match the case exactly
 					-- 	and looping would require string operations, which is worse for performance for no real gain
@@ -1066,6 +1212,17 @@ function mod.on_game_state_changed(status, state_name)
 			mod:info("Havoc ammo modifier: "..tostring(mod.ammunition_pickup_modifier))
 		else
 			mod.ammunition_pickup_modifier = 1 
+		end
+		
+		-- local expeditions_extension = Managers.state.game_mode:game_mode():extension("expedition") -- does not work
+		-- local Expedition = class("Expedition") -- happens every time
+		-- @Backup158: It seems this game mode check doesn't work for Havoc, since the game code still uses the old way (shown above)
+		local game_mode_name = Managers.state.game_mode:game_mode_name()
+		if game_mode_name == "expedition" then
+			-- mod:echo("playing EXPEDITIONS!")
+			is_playing_expeditions = true
+		else
+			is_playing_expeditions = false
 		end
 	else
 		in_match = false
