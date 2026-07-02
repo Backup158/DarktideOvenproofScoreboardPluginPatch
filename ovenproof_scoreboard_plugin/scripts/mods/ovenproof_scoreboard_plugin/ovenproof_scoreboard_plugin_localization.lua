@@ -16,6 +16,13 @@ local languages = {"en","ru","zh-cn","zh-tw","pt-br",}
 -- Thanks for the help! - Backup158
 -- ###############################################################################################################
 
+-- ###############################################################################################################
+-- zh-tw Localization maintenance note:
+-- For zh-tw updates, use the latest translation glossary as the source of truth:
+-- https://github.com/SyuanTsai/Warhammer-40-000-DARKTIDE-Mods/blob/main/Referneces/Translation.md
+-- Preserve existing context-specific translations when the glossary contains multiple valid terms.
+-- ###############################################################################################################
+
 -- ########################
 -- Data
 -- ########################
@@ -140,9 +147,9 @@ local localization = {
     -- @backup158: human translators need to review: ru, zh-tw, pt-br
     warning_chat_debug_messages = {
         en = "To disable this message, go to Mod Options --> OvenProof's Scoreboard --> Disable \"Enable error messages\"",
+        ["zh-tw"] = "要停用此訊息，請前往 Mod 選項 --> OvenProof 記分板插件 --> 停用「啟用錯誤訊息」",
         -- ru = "",
 		-- ["zh-cn"] = "",
-        -- ["zh-tw"] = "",
         -- ["pt-br"] = "",
     },
     -- --------
@@ -158,38 +165,38 @@ local localization = {
     },
     custom_row_categorization = {
         en = "Select Row Categorization",
+        ["zh-tw"] = "選擇行分類",
 		--ru = "",
 		--["zh-cn"] = "",
-        --["zh-tw"] = "",
         --["pt-br"] = "",
     },
     -- @backup158: I copied some values from the row_total areas. I left them commented out since I don't know if that's appropriate for this context
     categorize_total_melee = {
         en = "Categorize Total Melee",
+        ["zh-tw"] = "分類總近戰",
 		--ru = " Всего в Ближнем бою",
 		--["zh-cn"] = "总近战",
-        --["zh-tw"] = "總近戰",
         --["pt-br"] = " Total Melee",
     },
     categorize_total_ranged = {
         en = "Categorize Total Ranged",
+        ["zh-tw"] = "分類總遠程",
 		--ru = " Всего в Дальнем бою",
 		--["zh-cn"] = "总远程",
-        --["zh-tw"] = "總遠程",
         --["pt-br"] = " Total Distância",
     },
     categorize_total_companion = {
         en = "Categorize Total Companion",
+        ["zh-tw"] = "分類總電子獒犬",
 		--ru = " Всего ",
 		--["zh-cn"] = "完全伴侣",
-        --["zh-tw"] = "完全伴侶",
         --["pt-br"] = " Total ",
     },
     categorize_total_blitz = {
         en = "Categorize Total Blitz",
+        ["zh-tw"] = "分類總閃擊",
 		--ru = " Всего ",
 		--["zh-cn"] = "总",
-        --["zh-tw"] = "總閃擊",
         --["pt-br"] = " Total ",
     },
     -- --------
@@ -199,6 +206,7 @@ local localization = {
         en = "Tracking for the Expeditions Game Mode",
         --ru = "",
         ["zh-cn"] = "远征模式追踪设置",
+        ["zh-tw"] = "遠征模式啟用記分板",
         --["zh-tw"] = "",
         --["pt-br"] = "",
     },
@@ -206,35 +214,35 @@ local localization = {
         en = "Track Expeditions Pickups",
         --ru = "",
         ["zh-cn"] = "追踪远征模式拾取物",
-        --["zh-tw"] = "",
+        ["zh-tw"] = "追蹤遠征模式的拾取",
         --["pt-br"] = "",
     },
     exploration_track_currency = {
         en = "Track Salvage",
         --ru = "",
         ["zh-cn"] = "追踪打捞物资",
-        --["zh-tw"] = "",
+        ["zh-tw"] = "追蹤打撈物資",
         --["pt-br"] = "",
     },
     exploration_show_currency_only_in_expeditions = {
         en = "Only show Salvage row when playing Expeditions",
         --ru = "",
         ["zh-cn"] = "仅在远征模式显示打捞物资",
-        --["zh-tw"] = "",
+        ["zh-tw"] = "只有在玩遠征模式時才顯示打撈物資列",
         --["pt-br"] = "",
     },
     exploration_track_loot = {
         en = "Track Tech-Remnants",
         --ru = "",
         ["zh-cn"] = "追踪科技残片",
-        --["zh-tw"] = "",
+        ["zh-tw"] = "追蹤科技殘骸",
         --["pt-br"] = "",
     },
     exploration_show_loot_only_in_expeditions = {
         en = "Only show Tech-Remnants row when playing Expeditions",
         --ru = "",
         ["zh-cn"] = "仅在远征模式显示科技残片",
-        --["zh-tw"] = "",
+        ["zh-tw"] = "只有在玩遠征模式時才顯示科技殘骸列",
         --["pt-br"] = "",
     },
     options_exploration_track_option_false = {
@@ -255,42 +263,43 @@ local localization = {
         en = "True (count as materials pickup)",
         --ru = "",
         ["zh-cn"] = "开启（计入材料拾取）",
+        ["zh-tw"] = "True（計入物資拾取）",
         --["zh-tw"] = "",
         --["pt-br"] = "",
     },
     exploration_player_loot_value = {
         en = "Tech-Remnants for player drop pickups",
+        ["zh-tw"] = "玩家掉落拾取的科技殘骸",
         --ru = "",
         ["zh-cn"] = "玩家掉落箱的科技残片数值",
-        --["zh-tw"] = "",
         --["pt-br"] = "",
     },
     exploration_player_loot_value_description = {
         en = "These are the the little box drops, which are used for player death, disabler theft, and boss kill rewards. Each of these situations have different values, but they use the same name without a way to distinguish them.",
+        ["zh-tw"] = "這些是小箱子掉落，用於玩家死亡、禁用器盜竊和首領擊殺獎勵。每種情況的數值不同，但它們使用相同的名稱，無法區分。",
         --ru = "",
         ["zh-cn"] = "指小型掉落箱，用于玩家死亡、牵制怪窃取、BOSS击杀奖励。这些场景数值不同，但名称一致无法区分。",
-        --["zh-tw"] = "",
         --["pt-br"] = "",
     },
     exploration_player_loot_value_none = {
         en = "Ignore it (0)",
+        ["zh-tw"] = "忽略（0）",
         --ru = "",
         ["zh-cn"] = "忽略（0）",
-        --["zh-tw"] = "",
         --["pt-br"] = "",
     },
     exploration_player_loot_value_disabler = {
         en = "Use disabler theft value (25)",
+        ["zh-tw"] = "使用禁用器盜竊數值（25）",
         --ru = "",
         ["zh-cn"] = "使用牵制怪窃取数值（25）",
-        --["zh-tw"] = "",
         --["pt-br"] = "",
     },
     exploration_player_loot_value_boss = {
         en = "Use boss kill value (100)",
+        ["zh-tw"] = "使用首領擊殺數值（100）",
         --ru = "",
         ["zh-cn"] = "使用BOSS击杀数值（100）",
-        --["zh-tw"] = "",
         --["pt-br"] = "",
     },
     -- --------
@@ -351,17 +360,17 @@ local localization = {
     -- @backup158: sai google translated these languages: ru, pt-br
     separate_companion_damage = {
         en = "Companion Damage",
-		ru = "Использовать отдельные строки",
-        ["zh-cn"] = "同伴伤害",
+		    ru = "Использовать отдельные строки",
+        ["zh-tw"] = "電子獒犬傷害",
         ["zh-tw"] = "機械戰犬傷害",
-		["pt-br"] = "Dano do Companheiro",
+		    ["pt-br"] = "Dano do Companheiro",
     },
     -- @backup158: sai google translated these languages: ru, pt-br
     separate_companion_damage_description = {
         en = "Choose which row Companion Damage counts towards. \"Companion\" is its own row, which will be hidden if one of the other options is chosen.",
 		ru = "Выберите, в какой строке учитывается урон от компаньонов. «Компаньон» — это отдельная строка, которая будет скрыта, если выбран один из других вариантов.",
         ["zh-cn"] = "选择伙伴伤害计入哪一行。“伙伴”单独占一行，如果选择其他选项，该行将被隐藏。",
-        ["zh-tw"] = "選擇「機械戰犬傷害」要計入哪一個列。「機械戰犬」本身是一個獨立的列；若選擇其他選項，該列將會被隱藏。",
+        ["zh-tw"] = "選擇「電子獒犬傷害」要計入哪一個列。「電子獒犬」本身是一個獨立的列；若選擇其他選項，該列將會被隱藏。",
 		["pt-br"] = "Escolha em qual linha o dano causado pelo companheiro será contabilizado. \"Companheiro\" é uma linha separada, que ficará oculta se uma das outras opções for selecionada.",
     },
     -- @backup158: sai google translated these languages: ru, pt-br
@@ -369,7 +378,7 @@ local localization = {
         en = "You have set Companion Damage to be tracked under Blitz Damage, but you have not enabled the Blitz Damage row. This means Companion Damage will not be visible! It will still count towards total damage.\nIf that is intentional, you can disable this warning in the Mod Options.",
 		ru = "Вы включили отслеживание урона от напарников в разделе «Урон от напарников», но не включили строку «Урон от напарников». Это означает, что урон от напарников не будет отображаться! Он всё равно будет учитываться в общем уроне.\nЕсли это сделано намеренно, вы можете отключить это предупреждение в настройках мода.",
         ["zh-cn"] = "您已将同伴伤害设置为在闪电战伤害下追踪，但您尚未启用闪电战伤害行。这意味着同伴伤害将不可见！但它仍会计入总伤害。\n如果您有意如此，可以在模组选项中禁用此警告。",
-        ["zh-tw"] = "您已將機械戰犬傷害設定為統計在爆發傷害（Blitz Damage）中，但您尚未啟用爆發傷害列。這表示機械戰犬傷害將無法顯示！但仍會計入總傷害。\n如果這是您預期的行為，您可以在模組選項中停用此警告。",
+        ["zh-tw"] = "您已將電子獒犬傷害設定為統計在爆發傷害（Blitz Damage）中，但您尚未啟用爆發傷害列。這表示電子獒犬傷害將無法顯示！但仍會計入總傷害。\n如果這是您預期的行為，您可以在模組選項中停用此警告。",
 		["pt-br"] = "Você configurou o Dano de Companheiro para ser rastreado em Dano de Ataque Relâmpago, mas não habilitou a linha Dano de Ataque Relâmpago. Isso significa que o Dano de Companheiro não será visível! Ele ainda será contabilizado no dano total.\nSe isso for intencional, você pode desativar este aviso nas Opções do Mod.",
     },
     -- @backup158: sai google translated these languages: ru, pt-br
@@ -377,7 +386,7 @@ local localization = {
         en = "Enable warning for untracked Companion Damage",
 		ru = "Включить предупреждение о неотслеживаемом повреждении компаньона",
         ["zh-cn"] = "启用未追踪同伴伤害的警告",
-        ["zh-tw"] = "啟用未追蹤機械戰犬傷害的警告",
+        ["zh-tw"] = "啟用未追蹤電子獒犬傷害的警告",
 		["pt-br"] = "Ativar aviso para danos não rastreados em companheiros.",
     },
     -- @backup158: sai google translated these languages: ru, pt-br
@@ -385,7 +394,7 @@ local localization = {
         en = "Shows warning when counting Companion Damage as Blitz Damage if there is no row displayed for Blitz Damage.",
 		ru = "Выводит предупреждение при подсчете урона от компаньонов как урона от блица, если для урона от блица не отображается строка.",
         ["zh-cn"] = "如果闪电战伤害没有显示行，则在将同伴伤害计入闪电战伤害时显示警告。",
-        ["zh-tw"] = "當機械戰犬傷害被計為爆發傷害、但未顯示爆發傷害列時，顯示警告。",
+        ["zh-tw"] = "當電子獒犬傷害被計為爆發傷害、但未顯示爆發傷害列時，顯示警告。",
 		["pt-br"] = "Exibe um aviso ao contabilizar o dano de companheiro como dano de ataque relâmpago se não houver uma linha exibida para dano de Blitz.",
     },
     -- @backup158: sai google translated these languages: ru, pt-br
@@ -393,7 +402,7 @@ local localization = {
         en = "Always Hide Companion Damage Row",
 		ru = "Всегда скрывать строку урона компаньона",
         ["zh-cn"] = "始终隐藏同伴伤害行",
-        ["zh-tw"] = "永遠隱藏機械戰犬傷害列",
+        ["zh-tw"] = "永遠隱藏電子獒犬傷害列",
 		["pt-br"] = "Sempre oculte a linha de dano do companheiro",
     },
     -- @backup158: idk if these localizations are accurate since I wasn't involved
@@ -401,7 +410,7 @@ local localization = {
         en = "Companion", 
         ru = "компаньон", 
         ["zh-cn"] = "伴侣", 
-        ["zh-tw"] = "機械戰犬", 
+        ["zh-tw"] = "電子獒犬", 
         ["pt-br"] = "Companheiro", 
     },
     -- @backup158: sai google translated these languages: ru, pt-br
@@ -516,14 +525,14 @@ local localization = {
         en = "Hide Friendly Fire Rows",
 		-- ru = "", 
         ["zh-cn"] = "屏蔽友伤数据栏",
-        -- ["zh-tw"] = "",
+        ["zh-tw"] = "不顯示友軍傷害",
 		-- ["pt-br"] = "",
     },
     option_hide_friendly_fire_description = {
         en = "Hides the friendly fire damage row and the allied shots blocked row. These are part of the Defense category.",
 		-- ru = "", 
         ["zh-cn"] = "隐藏友军伤害数据与友军子弹阻挡数据，两项数据均归属防御分类。",
-        -- ["zh-tw"] = "",
+        ["zh-tw"] = "隱藏友軍傷害與子彈阻擋(防禦分類)",
 		-- ["pt-br"] = "",
     },
     -- -----------
@@ -682,9 +691,9 @@ local localization = {
     },
     message_ammo_crate_waste = {
         en = " picked up %s ammo from an %s, wasting %s",
+        ["zh-tw"] = "拾取了 %s 彈藥，來自 %s，浪費了 %s",
         -- ru = " ",
         ["zh-cn"] = "从%s中拾取了%s弹药，浪费了%s",
-        -- ["zh-tw"] = "",
         -- ["pt-br"] = " ",
     },
     message_ammo_crate_text = {
@@ -720,16 +729,16 @@ local localization = {
     },
     row_total_expeditions_currency_pickups = {
         en = "Total Salvage",
+        ["zh-tw"] = "總打撈物資",
         --ru = "",
         ["zh-cn"] = "打捞物资总计",
-        --["zh-tw"] = "",
         --["pt-br"] = "",
     },
     row_total_expeditions_loot_pickups = {
         en = "Total Tech-Remnants",
+        ["zh-tw"] = "總科技殘骸",
         --ru = "",
         ["zh-cn"] = "科技残片总计",
-        --["zh-tw"] = "",
         --["pt-br"] = "",
     },
     row_ammo_1 = {
@@ -894,9 +903,9 @@ local localization = {
     },
     row_total_weakspot_rates_with_blitz = {
         en = {left = "Weakspot Rate", right = "[ Melee | Ranged | Blitz ]",},
+        ["zh-tw"] = { left = "弱點命中率", right = "[ 近戰 | 遠程 | 閃擊 ]",},
         --ru = {left = "Уязвимые места", right = "[Ближний/Дальний/]",},
         ["zh-cn"] = {left = "弱点命中率", right = "[ 近战 | 远程 | ]",},
-        --["zh-tw"] = { left = "弱點命中率", right = "[ 近戰 | 遠程 | ]",},
         --["pt-br"] = {left = "Ponto Fracos", right = "[Corpo a Corpo | Distância | ]",},
     },
     row_melee_weakspot_rate = {
@@ -915,9 +924,9 @@ local localization = {
     },
     row_blitz_weakspot_rate = {
         en = "Blitz",
+        ["zh-tw"] = "閃擊",
         --ru = "",
         ["zh-cn"] = "闪击",
-        ["zh-tw"] = "閃擊",
         --["pt-br"] = "",
     },
     --[[
@@ -934,9 +943,9 @@ local localization = {
     },
     row_total_critical_rates_with_blitz = {
         en = {left = "Critical Rate", right = "[ Melee | Ranged | Blitz ]",},
+        ["zh-tw"] = { left = "爆擊率", right = "[ 近戰  |  遠程  |  閃擊 ]",},
         -- ru = {left = "Крит. удары", right = "[Ближний/Дальний/]",},
         ["zh-cn"] = {left = "暴击率", right = "[ 近战 | 远程 | ]",},
-        ["zh-tw"] = { left = "爆擊率", right = "[ 近戰  |  遠程  |  閃擊 ]",},
         -- ["pt-br"] = {left = "Taxa Crítica", right = "[Corpo a Corpo | Distância | ]",},
     },
     row_melee_critical_rate = {
@@ -955,9 +964,9 @@ local localization = {
     },
     row_blitz_critical_rate = {
         en = "Blitz",
+        ["zh-tw"] = "閃擊",
         --ru = "",
         ["zh-cn"] = "闪击",
-        ["zh-tw"] = "閃擊",
         --["pt-br"] = "",
     },
     -- @backup158: do toxins even crit? i dont think i need to count this
@@ -1033,9 +1042,9 @@ local localization = {
     },
     row_total_blitz = {
         en = {left = "Total Blitz", right = right_hand_localizations.kill_damage["en"],},
+        ["zh-tw"] = { left = "總閃擊", right = right_hand_localizations.kill_damage["zh-tw"],},
         --ru = {left = "Всего", right = right_hand_localizations.kill_damage["ru"],},
         ["zh-cn"] = {left = "总闪击", right = right_hand_localizations.kill_damage["zh-cn"],},
-        ["zh-tw"] = { left = "總閃擊", right = right_hand_localizations.kill_damage["zh-tw"],},
         --["pt-br"] = {left = "Total", right = right_hand_localizations.kill_damage["pt-br"]},
     },
     -- @backup158: idk if these localizations are accurate since I wasn't involved
