@@ -1,3 +1,6 @@
+# 1.13.7 - 2026-06-30
+- Updated `zh-cn` localization. Thanks DingXiang223!
+
 # 2026-06-26
 v1.13.6
 - Added Integrated Refraction Emitter's Voltaic Resistance (`force_field_chain_jump_damage`): Blitz, fallback to Ranged
