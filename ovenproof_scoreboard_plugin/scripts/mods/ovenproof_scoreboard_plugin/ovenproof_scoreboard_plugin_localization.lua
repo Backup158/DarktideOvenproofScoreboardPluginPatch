@@ -151,8 +151,8 @@ local localization = {
     -- @backup158: Machine translation used. Verification required:
     --  Please verify: ru
     warning_chat_debug_messages = {
-        ["zh-tw"] = "若要停用此訊息，請前往 Mod 選項 --> OvenProof 記分板MOD --> 停用「啟用錯誤訊息」",
         en = "To disable this message, go to Mod Options --> OvenProof's Scoreboard --> Disable \"Enable error messages\"",
+        ["zh-tw"] = "要停用此訊息，請前往 Mod 選項 --> OvenProof 記分板插件 --> 停用「啟用錯誤訊息」",
         -- ru = "",
 		-- ["zh-cn"] = "",
         -- ["pt-br"] = "",
@@ -179,28 +179,28 @@ local localization = {
     -- @backup158: I copied some values from the row_total areas. I left them commented out since I don't know if that's appropriate for this context
     categorize_total_melee = {
         en = "Categorize Total Melee",
-        ["zh-tw"] = "分類「總近戰」列",
+        ["zh-tw"] = "分類總近戰",
 		--ru = " Всего в Ближнем бою",
 		--["zh-cn"] = "总近战",
         --["pt-br"] = " Total Melee",
     },
     categorize_total_ranged = {
         en = "Categorize Total Ranged",
-        ["zh-tw"] = "分類「總遠程」列",
+        ["zh-tw"] = "分類總遠程",
 		--ru = " Всего в Дальнем бою",
 		--["zh-cn"] = "总远程",
         --["pt-br"] = " Total Distância",
     },
     categorize_total_companion = {
         en = "Categorize Total Companion",
-        ["zh-tw"] = "分類「總電子獒犬」列",
+        ["zh-tw"] = "分類總電子獒犬",
 		--ru = " Всего ",
 		--["zh-cn"] = "完全伴侣",
         --["pt-br"] = " Total ",
     },
     categorize_total_blitz = {
         en = "Categorize Total Blitz",
-        ["zh-tw"] = "分類「總閃擊」列",
+        ["zh-tw"] = "分類總閃擊",
 		--ru = " Всего ",
 		--["zh-cn"] = "总",
         --["pt-br"] = " Total ",
@@ -210,9 +210,9 @@ local localization = {
     -- --------
     exploration_tracking_group = {
         en = "Tracking for the Expeditions Game Mode",
-        ["zh-tw"] = "遠征模式追蹤",
         --ru = "",
         ["zh-cn"] = "远征模式追踪设置",
+        ["zh-tw"] = "遠征模式啟用記分板",
         --["pt-br"] = "",
     },
     exploration_tracking_expeditions_pickups = {
@@ -252,28 +252,28 @@ local localization = {
     },
     options_exploration_track_option_false = {
         en = "False",
-        ["zh-tw"] = "關",
         --ru = "",
         ["zh-cn"] = "关闭",
+        ["zh-tw"] = "關",
         --["pt-br"] = "",
     },
     options_exploration_track_option_alone = {
         en = "True",
-        ["zh-tw"] = "開",
         --ru = "",
         ["zh-cn"] = "开启",
+        ["zh-tw"] = "開",
         --["pt-br"] = "",
     },
     options_exploration_track_option_materials = {
         en = "True (count as materials pickup)",
-        ["zh-tw"] = "是（計為物資拾取）",
         --ru = "",
         ["zh-cn"] = "开启（计入材料拾取）",
+        ["zh-tw"] = "開(計入物資拾取)",
         --["pt-br"] = "",
     },
     exploration_player_loot_value = {
         en = "Tech-Remnants for player drop pickups",
-        ["zh-tw"] = "玩家掉落拾取物的科技殘骸",
+        ["zh-tw"] = "玩家掉落拾取的科技殘骸",
         --ru = "",
         ["zh-cn"] = "玩家掉落箱的科技残片数值",
         --["pt-br"] = "",
@@ -657,6 +657,7 @@ local localization = {
         en = "Only when playing Havoc",
 		ru = "Только при игре в Havoc",
         ["zh-cn"] = "只有在玩 Havoc 时才会出现",
+        ["zh-tw"] = "只有在玩浩劫時才會出現",
         ["pt-br"] = "Somente ao jogar Havoc",
     },
     -- Scoreboard Row Text
