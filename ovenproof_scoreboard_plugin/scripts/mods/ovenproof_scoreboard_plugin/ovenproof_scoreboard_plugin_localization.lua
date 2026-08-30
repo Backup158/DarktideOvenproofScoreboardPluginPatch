@@ -193,7 +193,7 @@ local localization = {
     },
     categorize_total_companion = {
         en = "Categorize Total Companion",
-        ["zh-tw"] = "分類總電子獒犬",
+        ["zh-tw"] = "分類總支援單位",
 		--ru = " Всего ",
 		--["zh-cn"] = "完全伴侣",
         --["pt-br"] = " Total ",
@@ -373,7 +373,7 @@ local localization = {
         en = "Companion Damage",
 		ru = "Использовать отдельные строки",
         ["zh-cn"] = "同伴伤害",
-        ["zh-tw"] = "電子獒犬傷害",
+        ["zh-tw"] = "支援單位傷害",
 		["pt-br"] = "Dano do Companheiro",
     },
     -- @backup158: Machine translation used. Verification required:
@@ -382,7 +382,7 @@ local localization = {
         en = "Choose which row Companion Damage counts towards. \"Companion\" is its own row, which will be hidden if one of the other options is chosen.",
 		ru = "Выберите, в какой строке учитывается урон от компаньонов. «Компаньон» — это отдельная строка, которая будет скрыта, если выбран один из других вариантов.",
         ["zh-cn"] = "选择伙伴伤害计入哪一行。“伙伴”单独占一行，如果选择其他选项，该行将被隐藏。",
-        ["zh-tw"] = "選擇「電子獒犬傷害」要計入哪一個列。「電子獒犬」本身是一個獨立的列；若選擇其他選項，該列將會被隱藏。",
+        ["zh-tw"] = "選擇「支援單位」要計入哪一個列。「支援單位」本身是一個獨立的列；若選擇其他選項，該列將會被隱藏。",
 		["pt-br"] = "Escolha em qual linha o dano causado pelo companheiro será contabilizado. \"Companheiro\" é uma linha separada, que ficará oculta se uma das outras opções for selecionada.",
     },
     -- @backup158: Machine translation used. Verification required:
@@ -391,7 +391,7 @@ local localization = {
         en = "You have set Companion Damage to be tracked under Blitz Damage, but you have not enabled the Blitz Damage row. This means Companion Damage will not be visible! It will still count towards total damage.\nIf that is intentional, you can disable this warning in the Mod Options.",
 		ru = "Вы включили отслеживание урона от напарников в разделе «Урон от напарников», но не включили строку «Урон от напарников». Это означает, что урон от напарников не будет отображаться! Он всё равно будет учитываться в общем уроне.\nЕсли это сделано намеренно, вы можете отключить это предупреждение в настройках мода.",
         ["zh-cn"] = "您已将同伴伤害设置为在闪电战伤害下追踪，但您尚未启用闪电战伤害行。这意味着同伴伤害将不可见！但它仍会计入总伤害。\n如果您有意如此，可以在模组选项中禁用此警告。",
-        ["zh-tw"] = "您已將電子獒犬傷害設定為統計在閃擊傷害中，但尚未啟用閃擊傷害列。這表示電子獒犬傷害將不會顯示，但仍會計入總傷害。\n如果這是預期行為，可以在模組選項中停用此警告。",
+        ["zh-tw"] = "您已將支援單位傷害設定為統計在閃擊傷害中，但尚未啟用閃擊傷害列。這表示支援單位傷害將不會顯示，但仍會計入總傷害。\n如果這是預期行為，可以在模組選項中停用此警告。",
 		["pt-br"] = "Você configurou o Dano de Companheiro para ser rastreado em Dano de Ataque Relâmpago, mas não habilitou a linha Dano de Ataque Relâmpago. Isso significa que o Dano de Companheiro não será visível! Ele ainda será contabilizado no dano total.\nSe isso for intencional, você pode desativar este aviso nas Opções do Mod.",
     },
     -- @backup158: Machine translation used. Verification required:
@@ -400,7 +400,7 @@ local localization = {
         en = "Enable warning for untracked Companion Damage",
 		ru = "Включить предупреждение о неотслеживаемом повреждении компаньона",
         ["zh-cn"] = "启用未追踪同伴伤害的警告",
-        ["zh-tw"] = "啟用未追蹤電子獒犬傷害的警告",
+        ["zh-tw"] = "啟用未追蹤支援單位傷害的警告",
 		["pt-br"] = "Ativar aviso para danos não rastreados em companheiros.",
     },
     -- @backup158: Machine translation used. Verification required:
@@ -409,7 +409,7 @@ local localization = {
         en = "Shows warning when counting Companion Damage as Blitz Damage if there is no row displayed for Blitz Damage.",
 		ru = "Выводит предупреждение при подсчете урона от компаньонов как урона от блица, если для урона от блица не отображается строка.",
         ["zh-cn"] = "如果闪电战伤害没有显示行，则在将同伴伤害计入闪电战伤害时显示警告。",
-        ["zh-tw"] = "當電子獒犬傷害被計為閃擊傷害、但未顯示閃擊傷害列時，顯示警告。",
+        ["zh-tw"] = "當支援單位傷害被計為閃擊傷害、但未顯示閃擊傷害列時，顯示警告。",
 		["pt-br"] = "Exibe um aviso ao contabilizar o dano de companheiro como dano de ataque relâmpago se não houver uma linha exibida para dano de Blitz.",
     },
     -- @backup158: Machine translation used. Verification required:
@@ -418,7 +418,7 @@ local localization = {
         en = "Always Hide Companion Damage Row",
 		ru = "Всегда скрывать строку урона компаньона",
         ["zh-cn"] = "始终隐藏同伴伤害行",
-        ["zh-tw"] = "永遠隱藏電子獒犬傷害列",
+        ["zh-tw"] = "永遠隱藏支援單位傷害列",
 		["pt-br"] = "Sempre oculte a linha de dano do companheiro",
     },
     -- @backup158: idk if these localizations are accurate since I wasn't involved
@@ -426,7 +426,7 @@ local localization = {
         en = "Companion", 
         ru = "компаньон", 
         ["zh-cn"] = "伴侣", 
-        ["zh-tw"] = "電子獒犬", 
+        ["zh-tw"] = "支援單位", 
         ["pt-br"] = "Companheiro", 
     },
     -- @backup158: Machine translation used. Verification required:
@@ -1082,7 +1082,7 @@ local localization = {
     row_total_companion = {
         en = {left = "Total Companion", right = right_hand_localizations.kill_damage["en"],},
         ru = {left = "Полный компаньон", right = right_hand_localizations.kill_damage["ru"],},
-        ["zh-tw"] = { left = "總電子獒犬", right = right_hand_localizations.kill_damage["zh-tw"],},
+        ["zh-tw"] = { left = "支援單位", right = right_hand_localizations.kill_damage["zh-tw"],},
         ["zh-cn"] = {left = "完全同伴", right = right_hand_localizations.kill_damage["zh-cn"],},
         ["pt-br"] = {left = "Total Companheiro", right = right_hand_localizations.kill_damage["pt-br"]},
     },
