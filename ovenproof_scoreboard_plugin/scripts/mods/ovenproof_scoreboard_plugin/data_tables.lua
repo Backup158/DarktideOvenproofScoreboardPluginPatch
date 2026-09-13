@@ -242,10 +242,10 @@ mod.states_disabled = {
 }
 -- Put into an array to keep the order in the mod options (this is used by the xxx_data.lua)
 mod.optional_states_disabled = {
-    [1] = "catapulted", -- YEET (from knockback)
-    [2] = "mutant_charged",
-    [3] = "warp_grabbed", -- Daemonhost execution
-    -- @backup158: game also counts hogtied and knocked_down but I'm not even considering those as possibilities for players to want to track
+    ["catapulted"] = true, -- YEET (from knockback)
+    ["mutant_charged"] = true,
+    ["warp_grabbed"] = true, -- Daemonhost execution
+    -- @Backup158: game also counts hogtied and knocked_down but I'm not even considering those as possibilities for disabled, since those would just double count downed and killed
 }
 mod.forge_material = {
     loc_pickup_small_metal = "small_metal",

@@ -48,7 +48,7 @@ end
 
 -- Automatically premaking widgets for tracking optional disabled states
 local optional_states_disabled_widgets = {}
-for _, state in pairs(mod.optional_states_disabled) do
+for state, _ in pairs(mod.optional_states_disabled) do
 	optional_states_disabled_widgets[#optional_states_disabled_widgets + 1] = create_setting_toggle("track_"..state, false)
 end
 
