@@ -1114,7 +1114,9 @@ function mod.on_all_mods_loaded()
 				local breed_or_nil = unit_data_extension and unit_data_extension:breed()
 				local target_is_minion = breed_or_nil and Breed.is_minion(breed_or_nil)
 
-				-- only when hitting an npc (only enemies can be damaged by you)
+				-- Updates stats depending on what the target type
+				-- 	Minion is effectively enemies, since friendly minions can't get damaged by you
+				--  Player is player
 				if target_is_minion then
 					local unit_health_extension = ScriptUnit.has_extension(attacked_unit, "health_system")
 					local damage_taken = unit_health_extension and unit_health_extension:damage_taken()
@@ -1461,6 +1463,7 @@ function mod.on_all_mods_loaded()
 				end
 			end
 			
+			-- Friendly fire typically has 0 damage done
 			if attack_result == "friendly_fire" then
 				-- Note: I had one singular instance where I crashed from trying to index target_is_player when it was nil,
 				-- so I added a check for that, even though it only happened once. Better safe than sorry, eh? -Vatinas
