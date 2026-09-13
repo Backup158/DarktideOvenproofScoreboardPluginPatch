@@ -2,6 +2,9 @@
 ## Fixed
 - Updated `zh-tw` localization. Thanks SyuanTsai!
 - Optional disabled states not being tracked properly
+- Attack report tracker was checking things before validating if that was necessary
+    - Minor performance optimization, but every little bit counts when it runs on every single attack
+    
 
 # 1.13.8 - 2026-08-13
 ## Fixed
