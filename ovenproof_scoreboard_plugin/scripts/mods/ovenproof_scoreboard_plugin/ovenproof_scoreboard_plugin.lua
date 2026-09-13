@@ -1103,12 +1103,13 @@ function mod.on_all_mods_loaded()
 		local player = attacking_unit and player_from_unit(attacking_unit)
 		-- Only check damage if done by a player. @Backup158: Could there be a check for companion that can be associated with the player?
 		if player then
-			local Breed = scoreboard:original_require("scripts/utilities/breed")
 			local target_is_player = attacked_unit and player_from_unit(attacked_unit)
-			local actual_damage
-			local account_id = player:account_id() or player:name()
 			
 			if damage > 0 then			
+				local Breed = scoreboard:original_require("scripts/utilities/breed")
+				local actual_damage
+				local account_id = player:account_id() or player:name()
+
 				local unit_data_extension = ScriptUnit.has_extension(attacked_unit, "unit_data_system")
 				local breed_or_nil = unit_data_extension and unit_data_extension:breed()
 				local target_is_minion = breed_or_nil and Breed.is_minion(breed_or_nil)
