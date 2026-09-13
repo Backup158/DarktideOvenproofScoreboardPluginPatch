@@ -1516,6 +1516,7 @@ function mod.on_game_state_changed(status, state_name)
 	else
 		in_match = false
 		is_playing_havoc = false
+		is_playing_expeditions = false
 	end
 
 	update_all_scoreboard_row_visibilities()
