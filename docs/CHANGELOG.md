@@ -4,7 +4,11 @@
 - Optional disabled states not being tracked properly
 - Attack report tracker was checking things before validating if that was necessary
     - Minor performance optimization, but every little bit counts when it runs on every single attack
-    
+    - It was grabbing things from Scoreboard and calculating some account IDs
+- Removed dead code
+    - `tracked_interaction_units_for_players`
+    - It was getting updated on every interaction, but nothing ever used it
+    - Let's save the time and memory
 
 # 1.13.8 - 2026-08-13
 ## Fixed

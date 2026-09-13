@@ -111,7 +111,7 @@ local mod_expeditions_loot = mod.expeditions_loot
 -- 		to count ammo wasted
 local tracked_current_ammo_for_players = {}
 -- 		to see who's interacting
-local tracked_interaction_units_for_players = {}
+-- local tracked_interaction_units_for_players = {}
 --		to see who's disabled (and for when they get freed)
 local tracked_disabled_players_for_players = {}
 
@@ -533,8 +533,8 @@ function mod.on_all_mods_loaded()
 	-- Interactions Started?
 	-- ############
 	mod:hook(CLASS.InteracteeExtension, "started", function(func, self, interactor_unit, ...)
-
-		tracked_interaction_units_for_players[self._unit] = interactor_unit
+		-- @Backup158: Wait I never see this get used?
+		-- tracked_interaction_units_for_players[self._unit] = interactor_unit
 
 		-- Ammunition
 		local unit_data_extension = ScriptUnit.extension(interactor_unit, "unit_data_system")
