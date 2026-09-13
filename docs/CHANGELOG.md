@@ -1,3 +1,8 @@
+# 1.13.9 - 2026-09-13
+## Fixed
+- Updated `zh-tw` localization. Thanks SyuanTsai!
+- Optional disabled states not being tracked properly
+
 # 1.13.8 - 2026-08-13
 ## Fixed
 - Added arc grenade extra arc, `cryptic_arc_grenade_shock_damage`: Blitz, fallback to Ranged
