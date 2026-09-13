@@ -5,6 +5,8 @@ local mod = get_mod("ovenproof_scoreboard_plugin")
 -- ########################
 local table = table
 local table_clone = table.clone
+local table_insert = table.insert
+local table_sort = table.sort
 local data_tables = mod:io_dofile("ovenproof_scoreboard_plugin/scripts/mods/ovenproof_scoreboard_plugin/data_tables")
 
 local offense_tier_options = {
@@ -46,10 +48,18 @@ end
 --	table_address[#table_address + 1] = widget_table
 --end
 
--- Automatically premaking widgets for tracking optional disabled states
+-- Creating widgets for tracking optional disabled states
+-- Since it's originally stored as a hash, convert it to a sorted array, so the widget can be consistently in alphabetical order
 local optional_states_disabled_widgets = {}
+-- Convert to sorted array
 for state, _ in pairs(mod.optional_states_disabled) do
-	optional_states_disabled_widgets[#optional_states_disabled_widgets + 1] = create_setting_toggle("track_"..state, false)
+	table_insert(optional_states_disabled_widgets, state)
+end
+table_sort(optional_states_disabled_widgets)
+-- Convert sorted array of strings to sorted array of widgets
+for i = 1, #optional_states_disabled_widgets do
+	local state = optional_states_disabled_widgets[i]
+	optional_states_disabled_widgets[i] = create_setting_toggle("track_"..state, false)
 end
 
 -- ########################
