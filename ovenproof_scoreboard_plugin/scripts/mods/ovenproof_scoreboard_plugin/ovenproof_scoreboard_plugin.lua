@@ -718,7 +718,7 @@ function mod.on_all_mods_loaded()
 	--	Player State
 	-- ############
 	mod:hook(CLASS.PlayerHuskHealthExtension, "fixed_update", function(func, self, unit, dt, t, ...)
-		local Breed = scoreboard:original_require("scripts/utilities/breed")
+		-- local Breed = scoreboard:original_require("scripts/utilities/breed")
 		if unit then
 			local player = Managers.player:player_by_unit(unit)
 			if player then		
@@ -732,7 +732,7 @@ function mod.on_all_mods_loaded()
 				local disabled_character_state_component = unit_data_extension:read_component("disabled_character_state")
 				if disabled_character_state_component then
 					local is_disabled = disabled_character_state_component.is_disabled
-					local is_pounced = is_disabled and disabled_character_state_component.disabling_type == "pounced"
+					-- local is_pounced = is_disabled and disabled_character_state_component.disabling_type == "pounced"
 					local disabling_unit = disabled_character_state_component.disabling_unit
 					
 					if is_disabled and disabling_unit then
