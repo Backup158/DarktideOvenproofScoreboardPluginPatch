@@ -1482,15 +1482,21 @@ end
 -- 	Entering a match
 -- ############
 function mod.on_game_state_changed(status, state_name)
-	-- think this means "entering gameplay" from "hub"
+	-- @Backup158: think this means "entering gameplay" from "hub"
 	if state_name == "GameplayStateRun" and status == "enter" and Managers.state.mission:mission().name ~= "hub_ship" then
 		in_match = true
+
+		-- Check if match is Havoc
+		-- Needed to set the ammunition pickup modifier
+		-- 1. In a normal match, it is 1
+		-- 2. In a Havoc match...
+		--		When there's an actual modifier, it's an actual value [0.85, 0.4]
+		-- 		At lower ranks, the modifier is 1 but it's not actually written as the modifier value
 		local havoc_extension = Managers.state.game_mode:game_mode():extension("havoc")
 		-- is_playing_havoc = Managers.state.difficulty:get_parsed_havoc_data()
 		if havoc_extension then
 			is_playing_havoc = true
-			-- adding fallback 
-			-- havoc modifier goes from 0.85-0.4, but lower ranks just use 1
+			-- Fallback for low ranks
 			mod.ammunition_pickup_modifier = havoc_extension:get_modifier_value("ammo_pickup_modifier") or 1
 			mod:info("Havoc ammo modifier: "..tostring(mod.ammunition_pickup_modifier))
 		else
