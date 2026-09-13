@@ -1100,13 +1100,12 @@ function mod.on_all_mods_loaded()
 	--	Attack reports
 	-- ############
 	mod:hook(CLASS.AttackReportManager, "add_attack_result", function(func, self, damage_profile, attacked_unit, attacking_unit, attack_direction, hit_world_position, hit_weakspot, damage, attack_result, attack_type, damage_efficiency, is_critical_strike, ...)
-		local Breed = scoreboard:original_require("scripts/utilities/breed")
 		local player = attacking_unit and player_from_unit(attacking_unit)
-		local target_is_player = attacked_unit and player_from_unit(attacked_unit)
-		local actual_damage
-		
 		-- Only check damage if done by a player. @Backup158: Could there be a check for companion that can be associated with the player?
 		if player then
+			local Breed = scoreboard:original_require("scripts/utilities/breed")
+			local target_is_player = attacked_unit and player_from_unit(attacked_unit)
+			local actual_damage
 			local account_id = player:account_id() or player:name()
 			
 			if damage > 0 then			
