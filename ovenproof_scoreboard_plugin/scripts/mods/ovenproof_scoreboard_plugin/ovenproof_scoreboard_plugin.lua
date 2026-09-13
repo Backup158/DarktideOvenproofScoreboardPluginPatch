@@ -36,7 +36,7 @@ local table_array_contains = table.array_contains
 -- #######
 -- Mod Locals
 -- #######
-mod.version = "1.13.8"
+mod.version = "1.13.9"
 local debug_messages_enabled
 local separate_companion_damage = {}
 local track_blitz_damage
@@ -1105,7 +1105,7 @@ function mod.on_all_mods_loaded()
 		local target_is_player = attacked_unit and player_from_unit(attacked_unit)
 		local actual_damage
 		
-		-- only add damage if done by a player. could there be a check for companion that can be associated with the player?
+		-- Only check damage if done by a player. @Backup158: Could there be a check for companion that can be associated with the player?
 		if player then
 			local account_id = player:account_id() or player:name()
 			
