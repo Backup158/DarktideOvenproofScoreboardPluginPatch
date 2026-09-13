@@ -1493,7 +1493,7 @@ function mod.on_game_state_changed(status, state_name)
 		--		When there's an actual modifier, it's an actual value [0.85, 0.4]
 		-- 		At lower ranks, the modifier is 1 but it's not actually written as the modifier value
 		local havoc_extension = Managers.state.game_mode:game_mode():extension("havoc")
-		-- is_playing_havoc = Managers.state.difficulty:get_parsed_havoc_data()
+		-- is_playing_havoc = Managers.state.difficulty:get_parsed_havoc_data() -- No longer works
 		if havoc_extension then
 			is_playing_havoc = true
 			-- Fallback for low ranks
