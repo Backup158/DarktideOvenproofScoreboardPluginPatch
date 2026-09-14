@@ -1,6 +1,7 @@
 # 1.13.10 - 2026-09-13
 ## Added
 - Row `"damage_done_taken_ratio"`
+    - Row is hidden by default; turn it on in the Mod Options
     - Categorized under Fun Stuff
     - Calculates (total_damage / total_damage_taken)
 ## Fixed
