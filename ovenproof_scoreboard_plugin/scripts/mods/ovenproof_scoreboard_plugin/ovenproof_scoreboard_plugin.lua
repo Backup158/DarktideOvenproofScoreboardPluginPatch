@@ -207,16 +207,20 @@ end
 -- ############
 mod.replace_key_to_edit = function(self, row_name, account_id, value)
 	local row = scoreboard:get_scoreboard_row(row_name)
+	-- mod:info("Replace key to edit: "..row_name)
 	if row then
 		-- local validation = row.validation
 		if tonumber(value) then
+			-- mod:info(">> Value is number: "..value)
 			local value = value and math_max(0, value) or 0
+			-- mod:info(">> Updated value: "..tostring(value))
 			row.data = row.data or {}
 			row.data[account_id] = row.data[account_id] or {}			
 			row.data[account_id].value = value
 			row.data[account_id].score = value
 			row.data[account_id].text = nil
 		else
+			-- mod:info(">> Value is not number: "..tostring(value))
 			row.data = row.data or {}
 			row.data[account_id] = row.data[account_id] or {}
 			row.data[account_id].text = value
@@ -1184,9 +1188,8 @@ function mod.on_all_mods_loaded()
 
 					if actual_damage > self._attack_report_tracker[account_id].highest_single_hit then
 						self._attack_report_tracker[account_id].highest_single_hit = actual_damage
-						-- @Backup158: This used to update using `damage` but... that just seems weird to do given the context? All the checks here are for `actual_damage` so I don't know why it'd go back to using `damage`
-						-- The only difference is that single damage would've included overkill
-						mod:replace_row_text_and_value("highest_single_hit", account_id, math_floor(actual_damage))
+						-- @Backup158: actual_damage is the same as damage
+						mod:replace_row_text_and_value("highest_single_hit", account_id, math_floor(damage))
 					end
 					
 					if actual_damage == max_health then
