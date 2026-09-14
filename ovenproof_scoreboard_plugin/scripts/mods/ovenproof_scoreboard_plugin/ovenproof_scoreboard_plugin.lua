@@ -321,6 +321,7 @@ mod.calculate_damage_done_taken_ratio = function(self, account_id, row_name_of_s
 		else
 			local new_ratio = new_total_damage_done / new_total_damage_taken
 			local new_ratio_string = tostring(new_ratio)
+			-- mod:echo(">> New ratio: "..new_ratio_string)
 			mod:replace_row_text_and_value("damage_done_taken_ratio", account_id, new_ratio_string)
 		end
 	end
