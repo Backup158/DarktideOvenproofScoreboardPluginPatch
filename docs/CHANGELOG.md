@@ -1,4 +1,4 @@
-# 1.13.10 - 2026-09-13
+# 1.14.0 - 2026-09-13
 ## Added
 - Row `"damage_done_taken_ratio"`
     - Row is hidden by default; turn it on in the Mod Options
