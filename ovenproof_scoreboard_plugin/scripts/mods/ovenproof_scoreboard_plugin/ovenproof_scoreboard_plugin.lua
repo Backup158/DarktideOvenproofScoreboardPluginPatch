@@ -1159,6 +1159,7 @@ function mod.on_all_mods_loaded()
 
 					if actual_damage > self._attack_report_tracker[account_id].highest_single_hit then
 						self._attack_report_tracker[account_id].highest_single_hit = actual_damage
+						mod:replace_key_to_edit("highest_single_hit", account_id, math_floor(actual_damage))
 						mod:replace_row_text("highest_single_hit", account_id, math_floor(damage))
 					end
 					

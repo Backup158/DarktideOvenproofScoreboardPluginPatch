@@ -25,6 +25,7 @@ To the people who found fixes, including but not limited to:
 - Tunnfisk
 - Gruberix
 - syllogism
+- kmcc049
 
 To the localizers:
 - Russian: xsSplater

@@ -1,3 +1,9 @@
+# 1.13.10 - 2026-09-13
+## Fixed
+- Row "highest_single_hit" not updating internally for exported scoreboards [\[ISSUE #6\]](https://github.com/Backup158/DarktideOvenproofScoreboardPluginPatch/issues/6)
+    - The text value displayed on the scoreboard updates
+    - But internally, the numerical value is always reset to 0 by 
+
 # 1.13.9 - 2026-09-13
 ## Fixed
 - Updated `zh-tw` localization. Thanks SyuanTsai!
