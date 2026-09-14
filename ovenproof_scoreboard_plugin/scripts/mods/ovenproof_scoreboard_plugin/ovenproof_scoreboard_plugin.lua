@@ -309,8 +309,13 @@ mod.calculate_damage_done_taken_ratio = function(self, account_id, row_name_of_s
 	end
 
 	if new_total_damage_done and new_total_damage_taken then
-		local new_ratio = new_total_damage_done / new_total_damage_taken
-		mod:replace_row_text_and_value("damage_done_taken_ratio", account_id, new_ratio)
+		if new_total_damage_taken == 0 then
+			-- Private Char Map: Fire icon. U+E020
+			mod:replace_row_text_and_value("damage_done_taken_ratio", account_id, "")
+		else
+			local new_ratio = new_total_damage_done / new_total_damage_taken
+			mod:replace_row_text_and_value("damage_done_taken_ratio", account_id, new_ratio)
+		end
 	end
 
 end
