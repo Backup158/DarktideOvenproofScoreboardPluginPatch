@@ -1184,7 +1184,9 @@ function mod.on_all_mods_loaded()
 
 					if actual_damage > self._attack_report_tracker[account_id].highest_single_hit then
 						self._attack_report_tracker[account_id].highest_single_hit = actual_damage
-						mod:replace_row_text_and_value("highest_single_hit", account_id, math_floor(damage))
+						-- @Backup158: This used to update using `damage` but... that just seems weird to do given the context? All the checks here are for `actual_damage` so I don't know why it'd go back to using `damage`
+						-- The only difference is that single damage would've included overkill
+						mod:replace_row_text_and_value("highest_single_hit", account_id, math_floor(actual_damage))
 					end
 					
 					if actual_damage == max_health then
