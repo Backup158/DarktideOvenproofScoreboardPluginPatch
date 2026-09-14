@@ -756,10 +756,13 @@ function mod.on_all_mods_loaded()
 					end
 					self._player_state_tracker[account_id].state = player_state
 					if mod_states_disabled[player_state] then
+						-- mod:echo("uwu Typical disabled state: "..player_state.." caught account: "..account_id.." ("..tostring(player:name())..")")
 						scoreboard:update_stat("total_times_disabled", account_id, 1)
 					-- optionally tracks these disabled states, if enabled
 					elseif mod_optional_states_disabled[player_state] then
+						-- mod:echo("uwu Optional state: "..player_state.." caught account: "..account_id.." ("..tostring(player:name())..")")
 						if mod:get("track_"..player_state) then
+							-- mod:echo(">> Tracking that optional state: "..player_state)
 							scoreboard:update_stat("total_times_disabled", account_id, 1)
 						end
 					elseif player_state == "knocked_down" then
