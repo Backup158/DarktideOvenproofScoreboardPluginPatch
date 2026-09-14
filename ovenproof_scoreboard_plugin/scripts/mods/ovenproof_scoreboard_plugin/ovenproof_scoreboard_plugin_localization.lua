@@ -564,6 +564,32 @@ local localization = {
         ["zh-cn"] = "隐藏友军伤害数据与友军子弹阻挡数据，两项数据均归属防御分类。",
 		-- ["pt-br"] = "",
     },
+    -- @Backup158: Machine translation used
+    --  Please verify: de
+    --  Please verify: es
+    --  Please verify: fr
+    --  Please verify: it
+    --  Please verify: ja
+    --  Please verify: ko
+    --  Please verify: pl
+    --  Please verify: pt-br
+    --  Please verify: ru
+    --  Please verify: zh-cn
+    --  Please verify: zh-tw
+    option_hide_damage_done_taken_ratio = {
+        ["de"] = "Zeile für Schadensverhältnis verursacht/erlitten ausblenden",
+        ["en"] = "Hide Damage Done/Taken Ratio Row",
+        ["es"] = "Ocultar fila de proporción de daño causado/recibido",
+        ["fr"] = "Masquer la ligne du ratio dégâts infligés/subis",
+        ["it"] = "Nascondi riga rapporto danni inflitti/subiti",
+        ["ja"] = "与ダメージ/被ダメージ比率の行を非表示にする",
+        ["ko"] = "입힌/받은 피해 비율 행 숨기기",
+        ["pl"] = "Ukryj wiersz stosunku zadanych/otrzymanych obrażeń",
+        ["pt-br"] = "Ocultar linha da proporção de dano causado/recebido",
+        ["ru"] = "Скрыть строку соотношения нанесённого/полученного урона",
+        ["zh-ch"] = "隐藏造成/受到伤害比例行",
+        ["zh-tw"] = "隱藏造成／受到傷害比例列",
+    },
     -- -----------
     -- Row Categories
     exploration_tier_0 = {

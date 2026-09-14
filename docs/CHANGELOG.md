@@ -1,4 +1,8 @@
 # 1.13.10 - 2026-09-13
+## Added
+- Row `"damage_done_taken_ratio"`
+    - Categorized under Fun Stuff
+    - Calculates (total_damage / total_damage_taken)
 ## Fixed
 - Row `"highest_single_hit"` not updating internally for exported scoreboards [\[ISSUE #6\]](https://github.com/Backup158/DarktideOvenproofScoreboardPluginPatch/issues/6)
     - The text value displayed on the scoreboard updates

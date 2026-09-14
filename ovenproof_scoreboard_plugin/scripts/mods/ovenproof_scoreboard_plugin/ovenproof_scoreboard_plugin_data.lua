@@ -109,6 +109,12 @@ local data_and_widgets = {
 					{	["setting_id"] = "fun_stuff_01",
 						["type"] = "checkbox",
 						["default_value"] = true,
+						["sub_widgets"]	= {
+							{	setting_id 		= "option_hide_damage_done_taken_ratio",
+								type 			= "checkbox",
+								default_value	= true,
+							},
+						},
 					},
 					{	["setting_id"] = "bottom_padding",
 						["type"] = "checkbox",
