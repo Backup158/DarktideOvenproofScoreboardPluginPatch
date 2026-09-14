@@ -1,12 +1,8 @@
 # 1.13.10 - 2026-09-13
 ## Fixed
-- Row "highest_single_hit" not updating internally for exported scoreboards [\[ISSUE #6\]](https://github.com/Backup158/DarktideOvenproofScoreboardPluginPatch/issues/6)
+- Row `"highest_single_hit"` not updating internally for exported scoreboards [\[ISSUE #6\]](https://github.com/Backup158/DarktideOvenproofScoreboardPluginPatch/issues/6)
     - The text value displayed on the scoreboard updates
     - But internally, the numerical value is always reset to 0 by 
-## Changed
-- Row "highest_single_hit" uses `actual_damage` instead of `damage`
-    - This is a change from how the original plugin worked
-    - The check is for if the new `actual_damage` is greater than the previous `actual_damage`, but would use `damage` for the scoreboard value, which seems like a bug to me
 
 # 1.13.9 - 2026-09-13
 ## Fixed
