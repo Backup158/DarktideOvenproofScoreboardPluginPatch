@@ -470,6 +470,17 @@ local function update_all_scoreboard_row_visibilities()
 	end
 
 	-- ------------
+	-- Fun Stuff
+	-- ------------
+	-- Hiding damage done/taken ratio
+	if mod:get("option_hide_damage_done_taken_ratio") then
+		-- this is the default, but I need this here to work without a restart/reload
+		change_scoreboard_row_visibility("damage_done_taken_ratio", false)
+	else
+		change_scoreboard_row_visibility("damage_done_taken_ratio", true)
+	end
+
+	-- ------------
 	-- Expeditions Pickup Classification
 	-- ------------
 	local currency_only_in_expeditions = mod:get("exploration_show_currency_only_in_expeditions")
