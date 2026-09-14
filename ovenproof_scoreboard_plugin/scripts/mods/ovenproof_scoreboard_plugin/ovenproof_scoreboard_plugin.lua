@@ -203,7 +203,7 @@ end
 ]]
 
 -- ############
--- Replace entire value in scoreboard
+-- Replace entire value in scoreboard, but not text
 -- ############
 mod.replace_key_to_edit = function(self, row_name, account_id, value)
 	local row = scoreboard:get_scoreboard_row(row_name)
@@ -216,6 +216,31 @@ mod.replace_key_to_edit = function(self, row_name, account_id, value)
 			row.data[account_id].value = value
 			row.data[account_id].score = value
 			row.data[account_id].text = nil
+		else
+			row.data = row.data or {}
+			row.data[account_id] = row.data[account_id] or {}
+			row.data[account_id].text = value
+			row.data[account_id].value = 0
+			row.data[account_id].score = 0
+		end
+	end
+end
+
+-- ############
+-- Replace entire value and text in scoreboard
+-- ############
+mod.replace_row_text_and_value = function(self, row_name, account_id, value)
+	local row = scoreboard:get_scoreboard_row(row_name)
+	if row then
+		-- local validation = row.validation
+		local value_as_number = tonumber(value)
+		if value_as_number then
+			local value = value and math_max(0, value) or 0
+			row.data = row.data or {}
+			row.data[account_id] = row.data[account_id] or {}			
+			row.data[account_id].value = value_as_number
+			row.data[account_id].score = value_as_number
+			row.data[account_id].text = value
 		else
 			row.data = row.data or {}
 			row.data[account_id] = row.data[account_id] or {}
@@ -1159,8 +1184,7 @@ function mod.on_all_mods_loaded()
 
 					if actual_damage > self._attack_report_tracker[account_id].highest_single_hit then
 						self._attack_report_tracker[account_id].highest_single_hit = actual_damage
-						mod:replace_key_to_edit("highest_single_hit", account_id, math_floor(actual_damage))
-						mod:replace_row_text("highest_single_hit", account_id, math_floor(damage))
+						mod:replace_row_text_and_value("highest_single_hit", account_id, math_floor(damage))
 					end
 					
 					if actual_damage == max_health then
