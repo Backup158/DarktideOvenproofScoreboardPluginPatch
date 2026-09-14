@@ -288,9 +288,11 @@ end
 -- Calculate Damage Done/Taken Ratio
 -- ############
 mod.calculate_damage_done_taken_ratio = function(self, account_id, row_name_of_shortcut, given_total_value_as_shortcut)
-	local new_total_damage_taken
 	local new_total_damage_done
+	local new_total_damage_taken
 	local other_row
+
+	-- mod:info("Updating damage done/taken ratio")
 
 	if row_name_of_shortcut == "total_damage" then
 		other_row = scoreboard:get_scoreboard_row("total_damage_taken")
@@ -309,12 +311,17 @@ mod.calculate_damage_done_taken_ratio = function(self, account_id, row_name_of_s
 	end
 
 	if new_total_damage_done and new_total_damage_taken then
+		-- mod:info("Confirmed: Updating damage done/taken ratio")
+		new_total_damage_done = tonumber(new_total_damage_done)
+		new_total_damage_taken = tonumber(new_total_damage_taken)
 		if new_total_damage_taken == 0 then
+			-- mod:info(">> no damage taken yet")
 			-- Private Char Map: Fire icon. U+E020
 			mod:replace_row_text_and_value("damage_done_taken_ratio", account_id, "")
 		else
 			local new_ratio = new_total_damage_done / new_total_damage_taken
-			mod:replace_row_text_and_value("damage_done_taken_ratio", account_id, new_ratio)
+			local new_ratio_string = tostring(new_ratio)
+			mod:replace_row_text_and_value("damage_done_taken_ratio", account_id, new_ratio_string)
 		end
 	end
 
