@@ -24,9 +24,11 @@ local math_round = math.round
 
 local tonumber = tonumber
 local tostring = tostring
+
 local string = string
 local string_len = string.len
 local string_sub = string.sub
+local string_format = string.format
 
 local table = table
 local table_array_contains = table.array_contains
@@ -320,8 +322,9 @@ mod.calculate_damage_done_taken_ratio = function(self, account_id, row_name_of_s
 			mod:replace_row_text_and_value("damage_done_taken_ratio", account_id, "")
 		else
 			local new_ratio = new_total_damage_done / new_total_damage_taken
-			local new_ratio_string = tostring(new_ratio)
-			-- mod:echo(">> New ratio: "..new_ratio_string)
+			-- Convert to string, then Format string to truncate decimal points
+			local new_ratio_string = string_format("%.3f", tostring(new_ratio))
+			-- mod:echo(">> New ratio: "..new_ratio_string.." - "..account_id)
 			mod:replace_row_text_and_value("damage_done_taken_ratio", account_id, new_ratio_string)
 		end
 	end
