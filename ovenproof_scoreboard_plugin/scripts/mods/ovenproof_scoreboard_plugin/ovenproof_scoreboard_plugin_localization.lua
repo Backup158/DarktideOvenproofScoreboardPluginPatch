@@ -550,19 +550,53 @@ local localization = {
         ["zh-tw"] = "惡魔抓取",
 		["pt-br"] = "Agarrado pelo Warp",
     },
+    -- @Backup158: Machine translation used
+    --  Please verify: de
+    --  Please verify: es
+    --  Please verify: fr
+    --  Please verify: it
+    --  Please verify: ja
+    --  Please verify: ko
+    --  Please verify: pl
+    --  Please verify: pt-br
+    --  Please verify: ru
     option_hide_friendly_fire = {
         en = "Hide Friendly Fire Rows",
-        ["zh-tw"] = "隱藏友軍傷害列",
-		-- ru = "", 
+        ["de"] = "Eigene Beschusszeilen ausblenden",
+        ["es"] = "Ocultar filas de fuego amigo",
+        ["fr"] = "Masquer les lignes de tir ami",
+        ["it"] = "Nascondi righe fuoco amico",
+        ["jp"] = "フレンドリーファイア行を非表示にする",
+        ["ko"] = "아군 오사 행 숨기기",
+        ["pl"] = "Ukryj wiersze ostrzału sojuszniczego",
+        ["pt-br"] = "Ocultar linhas de fogo amigo",
+        ["ru"] = "Скрыть строки дружественного огня",
         ["zh-cn"] = "屏蔽友伤数据栏",
-		-- ["pt-br"] = "",
+        ["zh-tw"] = "隱藏友軍傷害列",
     },
+    -- @Backup158: Machine translation used
+    --  Please verify: de
+    --  Please verify: es
+    --  Please verify: fr
+    --  Please verify: it
+    --  Please verify: ja
+    --  Please verify: ko
+    --  Please verify: pl
+    --  Please verify: pt-br
+    --  Please verify: ru
     option_hide_friendly_fire_description = {
         en = "Hides the friendly fire damage row and the allied shots blocked row. These are part of the Defense category.",
+        ["de"] = "Blendet die Zeile für Freundschaftsfeuerschaden und die Zeile für blockierte verbündete Schüsse aus. Diese gehören zur Verteidigungskategorie.",
+        ["es"] = "Oculta la fila de daño por fuego amigo y la fila de disparos aliados bloqueados. Estas forman parte de la categoría de Defensa.",
+        ["fr"] = "Masque la ligne des dégâts par tir ami et la ligne des tirs alliés bloqués. Elles font partie de la catégorie Défense.",
+        ["it"] = "Nasconde la riga dei danni da fuoco amico e la riga dei colpi alleati bloccati. Queste fanno parte della categoria Difesa.",
+        ["ja"] = "フレンドリーファイアによるダメージの行と、ブロックした味方の射撃の行を非表示にします。これらは防御カテゴリの一部です。",
+        ["ko"] = "아군 오사 피해 행과 차단된 아군 사격 행을 숨깁니다. 이들은 방어 범주에 속합니다.",
+        ["pl"] = "Ukrywa wiersz obrażeń od ostrzału sojuszniczego oraz wiersz zablokowanych strzałów sojuszników. Są one częścią kategorii Obrona.",
+        ["pt-br"] = "Oculta a linha de dano por fogo amigo e a linha de disparos aliados bloqueados. Elas fazem parte da categoria Defesa.",
+        ["ru"] = "Скрывает строку урона от дружественного огня и строку заблокированных выстрелов союзников. Они относятся к категории «Защита».",
         ["zh-tw"] = "隱藏友軍傷害列和阻擋盟軍射擊列。這些是防禦類別的一部分。",
-		-- ru = "", 
         ["zh-cn"] = "隐藏友军伤害数据与友军子弹阻挡数据，两项数据均归属防御分类。",
-		-- ["pt-br"] = "",
     },
     -- @Backup158: Machine translation used
     --  Please verify: de
