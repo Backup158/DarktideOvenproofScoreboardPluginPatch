@@ -190,17 +190,8 @@ mod.set_blank_rows = function (self, account_id)
 		mod:replace_key_to_edit("blank_"..i, account_id, "\u{200A}")
 	end
 	mod:replace_key_to_edit("highest_single_hit", account_id, "\u{200A}0\u{200A}")
+	mod:replace_key_to_edit("damage_done_taken_ratio", account_id, "\u{200A}0\u{200A}")
 end
-
--- ############
--- Add Damage Taken/Done Ratio
--- this may not be possible since the original mod makes rows only increase or decrease in value
--- ############
---[[
-mod.add_damage_taken_done_ratio = function(self, account_id)
-
-end
-]]
 
 -- ############
 -- Replace entire value in scoreboard, but not text
@@ -291,6 +282,37 @@ end
 local function setting_is_enabled_and_check_if_havoc_only(main_setting, is_playing_havoc)
 	local only_in_havoc = mod:get(main_setting.."_only_in_havoc")
 	return mod:get(main_setting) and ((not only_in_havoc) or (only_in_havoc and is_playing_havoc))
+end
+
+-- ############
+-- Calculate Damage Done/Taken Ratio
+-- ############
+mod.calculate_damage_done_taken_ratio = function(self, account_id, row_name_of_shortcut, given_total_value_as_shortcut)
+	local new_total_damage_taken
+	local new_total_damage_done
+	local other_row
+
+	if row_name_of_shortcut == "total_damage" then
+		other_row = scoreboard:get_scoreboard_row("total_damage_taken")
+		if other_row and other_row.data and other_row.data[account_id] then
+			new_total_damage_done = given_total_value_as_shortcut
+			new_total_damage_taken = other_row.data[account_id].value
+		end
+	elseif row_name_of_shortcut == "total_damage_taken" then
+		other_row = scoreboard:get_scoreboard_row("total_damage")
+		if other_row and other_row.data and other_row.data[account_id] then
+			new_total_damage_done = other_row.data[account_id].value
+			new_total_damage_taken = given_total_value_as_shortcut
+		end
+	else
+		mod:info("I messed up calling damage done/taken ratio. Called row "..tostring(row_name_of_shortcut))
+	end
+
+	if new_total_damage_done and new_total_damage_taken then
+		local new_ratio = new_total_damage_done / new_total_damage_taken
+		mod:replace_row_text_and_value("damage_done_taken_ratio", account_id, new_ratio)
+	end
+
 end
 
 -- ########################
@@ -542,7 +564,7 @@ function mod.on_all_mods_loaded()
 	-- 	Runs on opening and every tick while it's open
 	-- ######
 	mod:hook(CLASS.HudElementTacticalOverlay, "_draw_widgets", function(func, self, dt, t, input_service, ui_renderer, render_settings, ...)
-		mod:add_damage_taken_done_ratio()
+		mod:add_damage_done_taken_ratio()
 		--mod:echo("IF YOU SEE THIS YELL AT ME: tactical overlay widgets")
 		func(self, dt, t, input_service, ui_renderer, render_settings, ...)
 		-- base mod hooks onto this first, but executes after the original function
@@ -551,7 +573,7 @@ function mod.on_all_mods_loaded()
 	-- Before game end
 	-- ######
 	mod:hook(CLASS.EndView, "on_enter", function(func, self)
-		mod:add_damage_taken_done_ratio()
+		mod:add_damage_done_taken_ratio()
 		--mod:echo("IF YOU SEE THIS YELL AT ME: entering end view")
 		func(self)
 		-- base mod hooks onto this first, but executes after the original function
@@ -755,6 +777,7 @@ function mod.on_all_mods_loaded()
 				local player_state = self._character_state_read_component.state_name
 				if self._damage and self._damage > 0 then
 					scoreboard:update_stat("total_damage_taken", account_id, self._damage)
+					mod:calculate_damage_done_taken_ratio(account_id, "total_damage_taken", self._damage)
 				end
 				
 				local unit_data_extension = ScriptUnit.extension(unit, "unit_data_system")
@@ -1177,6 +1200,7 @@ function mod.on_all_mods_loaded()
 					end
 					
 					scoreboard:update_stat("total_damage", account_id, actual_damage)
+					mod:calculate_damage_done_taken_ratio(account_id, "total_damage", actual_damage)
 					
 					-- ------------------------
 					-- Updating Fun Stuff

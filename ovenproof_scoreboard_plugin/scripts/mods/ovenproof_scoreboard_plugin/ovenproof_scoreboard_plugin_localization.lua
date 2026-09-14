@@ -1222,6 +1222,32 @@ local localization = {
         ["zh-tw"] = "最高單次傷害",
         ["pt-br"] = "Maior Dano de Um Único Golpe",
     },
+    -- @Backup158: Machine translation used
+    --  Please verify: de
+    --  Please verify: es
+    --  Please verify: fr
+    --  Please verify: it
+    --  Please verify: ja
+    --  Please verify: ko
+    --  Please verify: pl
+    --  Please verify: pt-br
+    --  Please verify: ru
+    --  Please verify: zh-cn
+    --  Please verify: zh-tw
+    row_damage_done_taken_ratio = {
+        ["de"] = "Verhältnis von verursachtem zu erlittenem Schaden",  
+        ["en"] = "Damage done/taken ratio",  
+        ["es"] = "Proporción de daño infligido/recibido",  
+        ["fr"] = "Ratio de dégâts infligés/subis",  
+        ["it"] = "Rapporto danni inflitti/subiti",  
+        ["ja"] = "与えたダメージ/受けたダメージの比率",  
+        ["ko"] = "가한 피해/받은 피해 비율",  
+        ["pl"] = "Stosunek zadanych/otrzymanych obrażeń",  
+        ["pt-br"] = "Proporção de dano causado/recebido",  
+        ["ru"] = "Соотношение нанесённого/полученного урона",  
+        ["zh-cn"] = "造成伤害/承受伤害比率",  
+        ["zh-tw"] = "造成傷害/承受傷害比率",
+    },
     -- Rows: Blank
     --  @backup158: btw you don't need to add localizations to these. it defaults to english if you don't have one (and they're all the same so it's fine)
     row_blank = {
