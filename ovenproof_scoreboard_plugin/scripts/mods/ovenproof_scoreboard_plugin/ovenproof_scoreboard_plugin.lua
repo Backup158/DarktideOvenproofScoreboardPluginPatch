@@ -343,14 +343,20 @@ local function replace_registered_scoreboard_value(row_name, key_to_edit, functi
 
 	-- @backup158: ok anyone reading this is about to be horrified
 	-- like why tf am i doing this O(N) when I could use a key access for constant time
-	-- scoreboard only runs with arrays for itself and the plugins, and adds the plugins to itself
-	-- adding a key messes up the order sorting, so my rows ended up at the bottom every time
-	for i = 1, #(scoreboard.registered_scoreboard_rows) do
-		local row = scoreboard.registered_scoreboard_rows[i]
-		if row.name == row_name then
-			function_to_use(row, key_to_edit, other_parameters)
-		end
-	end
+	-- 	scoreboard only runs with arrays for itself and the plugins, and adds the plugins to itself
+	-- 	adding a key messes up the order sorting, so my rows ended up at the bottom every time
+	-- I considered making a local lookup cache, where I'd map name-index pairs
+	--  Tests show that going scoreboard.registered_scoreboard_rows[3] would be nil
+	-- for i = 1, #(scoreboard.registered_scoreboard_rows) do
+	-- 	local row = scoreboard.registered_scoreboard_rows[i]
+	-- 	if row.name == row_name then
+	-- 		function_to_use(row, key_to_edit, other_parameters)
+	-- 	end
+	-- end
+
+	-- Get_scoreboard_row already runs this search natively
+	local row = scoreboard:get_scoreboard_row(row_name)
+	function_to_use(row, key_to_edit, other_parameters)
 end
 
 local replace_row_with_value = function(row, key_to_edit, value)
