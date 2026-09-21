@@ -38,7 +38,6 @@ local table_array_contains = table.array_contains
 -- #######
 -- Mod Locals
 -- #######
-mod.version = "1.14.0"
 local debug_messages_enabled
 local separate_companion_damage = {}
 local track_blitz_damage
@@ -570,7 +569,6 @@ function mod.on_all_mods_loaded()
 	end
 
 	set_locals_for_settings()
-	mod:info("Version "..mod.version.." loaded uwu nya :3")
 
 	-- ################################################
 	-- HOOKS
