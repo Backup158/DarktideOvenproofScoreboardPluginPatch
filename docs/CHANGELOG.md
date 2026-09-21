@@ -8,7 +8,7 @@
 - Row `"highest_single_hit"` not updating internally for exported scoreboards [\[ISSUE #6\]](https://github.com/Backup158/DarktideOvenproofScoreboardPluginPatch/issues/6)
     - The text value displayed on the scoreboard updates
     - But internally, the numerical value is always reset to 0 by 
-# Developer
+## Developer
 - Removed version logging
     - DMF does this natively now
     - The only purpose was to make sure users had this mod updated, and if the DMF logging is not in the log, I think it's safe to assume they just need to update everything
