@@ -63,6 +63,8 @@ mod.bosses = {
     ["cultist_captain"] = true,
     ["chaos_mutator_daemonhost"] = true,
     ["chaos_ogryn_houndmaster"] = true,
+    ["renegade_wizard"] = true,
+    ["chaos_daemonhost_torment"] = true,
 }
 mod.skip = {
     ["chaos_mutator_ritualist"] = true,

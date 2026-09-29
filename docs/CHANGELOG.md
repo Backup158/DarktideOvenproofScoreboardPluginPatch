@@ -1,9 +1,12 @@
-# 1.14.0 - 2026-09-13
+# 1.14.0 - 2026-09-29 - Depths of the Damned
 ## Added
 - Row `"damage_done_taken_ratio"`
     - Row is hidden by default; turn it on in the Mod Options
     - Categorized under Fun Stuff
     - Calculates (total_damage / total_damage_taken)
+- New bosses
+    - renegade_wizard
+    - chaos_daemonhost_torment
 ## Fixed
 - Row `"highest_single_hit"` not updating internally for exported scoreboards [\[ISSUE #6\]](https://github.com/Backup158/DarktideOvenproofScoreboardPluginPatch/issues/6)
     - The text value displayed on the scoreboard updates
