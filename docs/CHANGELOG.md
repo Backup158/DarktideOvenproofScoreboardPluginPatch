@@ -1,3 +1,7 @@
+# 1.14.1 - 2026-09-30
+## Fixed
+- Missed `flamer_assault` from Unkillable
+
 # 1.14.0 - 2026-09-29 - Depths of the Damned
 ## Added
 - Row `"damage_done_taken_ratio"`

@@ -185,7 +185,7 @@ mod.burning_damage_profiles = {
     ["flame_grenade_liquid_area_fire_burning"] = true,
     ["liquid_area_fire_burning_barrel"] = true,
     ["liquid_area_fire_burning"] = true,
-    --"flamer_assault"] = true, -- Flaming shots from PBB. False bug report: this just uses "burning"
+    ["flamer_assault"] = true, -- Zealot unkillable burn stacks. This was reported as PBB a year ago but that actually just uses "burning" (zealot_resist_death_fire). I also see it as an explosive knockback thing generally
     ["phosphor_burning"] = true, -- phosphor burns from pistol and servo skull blitz. can't distinguish between the two so here it goes.
 }
 mod.warpfire_damage_profiles = {
